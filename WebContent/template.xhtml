@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<h:outputStylesheet library="css" name="template.css" />
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+	<div class="wrapper">
+
+		<div class="box header">
+			<ui:insert name="header">
+
+			</ui:insert>
+		</div>
+
+		<div class="box sidebar">
+			<ui:insert name="sidebar">
+
+			</ui:insert>
+
+		</div>
+		<div class="box content">
+			<br />
+			<ui:insert name="conteudo">
+			</ui:insert>
+			<br /> <br /> <br />
+
+		</div>
+		<br /> <br /> <br /> <br />
+		<div class="box footer" style="text-align: center;">
+			<h:outputText value="2020 - Todos os direitos reservados." />
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+</h:body>
+</html>
