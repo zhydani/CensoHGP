@@ -27,19 +27,16 @@
 		<div class="row justify-content-md-center">
 			<div class="col-md-10 col-md-auto login-box">
 				<h:messages styleClass="alert alert-danger hmessages" />
-				<!-- <div class="logo-box">
-					<h4 class="text-center pt-5 wdi-red font-weight-bold">LOGO</h4>
-				</div> -->
-				<h4 class="text-center font-weight-bold mb-3">LOGO AQUI</h4>
 
-
+				<div class="logo-box">
+					<h4 class="text-center pt-5 wdi-red font-weight-bold">Logo</h4>
+				</div>
+				
 				<h:form>
-
 					<div class="form-row">
 						<div class="col-md-12 ui-g-12 ui-md-6">
 							<div class="ui-inputgroup mt-2 d-flex justify-content-center">
-								<span class="ui-inputgroup-addon px-2"> <i
-									class="pi pi-user"
+								<span class="ui-inputgroup-addon px-2"> <i class="pi pi-user"
 									style="color: rgb(80, 80, 80); font-size: 2.5em"></i>
 								</span><input id="j_idt128" name="j_idt128" type="text"
 									placeholder="Matrícula"
@@ -51,8 +48,7 @@
 						<div class="col-md-12 ui-g-12 ui-md-6">
 							<div>
 								<div class="ui-inputgroup d-flex justify-content-center">
-									<span class="ui-inputgroup-addon px-2 "> <i
-										class="pi pi-key"
+									<span class="ui-inputgroup-addon px-2 "> <i class="pi pi-lock"
 										style="color: rgb(80, 80, 80); font-size: 2.5em"></i>
 									</span> <input id="senha" name="senha" type="password"
 										placeholder="Senha"
@@ -61,7 +57,7 @@
 										data-toggle="password" />
 									<div>
 										<span id="showPassword" onclick="showPassword()"
-											class="MostrarSenha text-muted">Mostrar</span>
+											class="MostrarSenha">Mostrar</span>
 									</div>
 
 								</div>
@@ -71,17 +67,17 @@
 
 
 					</div>
-					<div class="form-row d-flex justify-content-between my-3">
+					<div class="form-row d-flex justify-content-between mt-4">
 
-						<div class="pt-3">
-							<p:commandButton styleClass="btn btn-login text text-dark"
-								value="Recuperar acesso" action="#{loginController.recuperar()}" />
+						<div class="pt-2">
+							<p:link class="badge text text-dark" value="Recuperar acesso">
 
-
+							</p:link>
 						</div>
 
 						<div>
-							<h:commandButton value="Entrar" styleClass="btn btn-lg btn-login"
+							<h:commandButton value="Entrar"
+								styleClass="btn btn-lg btn-login"
 								action="#{loginController.logar()}" />
 
 						</div>

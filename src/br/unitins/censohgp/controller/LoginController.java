@@ -6,8 +6,10 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class LoginController {
-	@SuppressWarnings("static-access")
-	public String logar() {
+//	private Usuario usuario;
+//
+//	@SuppressWarnings("static-access")
+//	public String logar() {
 //		UsuarioDAO dao = new UsuarioDAO();
 //		String hashSenha = Util.hashSHA256(getUsuario().getSenha());
 //		Usuario usuario = dao.login(getUsuario().getLogin(), hashSenha);
@@ -22,21 +24,21 @@ public class LoginController {
 //				Session.getInstance().setAttribute("usuarioLogado", usuario);
 //				return "menusu.xhtml?faces-redirect=true";
 //			}
-
+//
 //		}
 //		Util.addMessageError("Usuário ou Senha Inválido.");
-		return null;
+//		return null;
+//	}
+//
+	public String recuperar() {
+		return "recuperacao.xhtml?faces-redirect=true";
+
 	}
-
-	public String cadastrar() {
-		return "usuario.xhtml?faces-redirect=true";
-
-	}
-
-	public void limpar() {
+//
+//	public void limpar() {
 //		setUsuario(new Usuario());
-//		usuario = new Usuario();
-	}
+////		usuario = new Usuario();
+//	}
 //
 //	public Usuario getUsuario() {
 //		if (usuario == null)
@@ -47,5 +49,4 @@ public class LoginController {
 //	public void setUsuario(Usuario usuario) {
 //		this.usuario = usuario;
 //	}
-
 }
