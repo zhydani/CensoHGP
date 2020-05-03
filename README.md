@@ -35,3 +35,8 @@ vir a ocorrer e facilidade de gerenciamento dos departamentos.
 ## Objetivo geral
 Automatizar os processos de controle de entrada, saída e incidentes dos pacientes
 dentro do Hospital Geral de Palmas no Tocantins.
+
+# Tecnologias utilizadas
+* Eclipse 2020-03
+* Java SE Development Kit 13
+* Apache Tomcat 9
