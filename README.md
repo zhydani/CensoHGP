@@ -1,6 +1,6 @@
 # CensoHGP
 
-# Tecnologias utilizadas
+## Tecnologias utilizadas
 * Eclipse 2020-03
 * Java SE Development Kit 13
 * Apache Tomcat 9
