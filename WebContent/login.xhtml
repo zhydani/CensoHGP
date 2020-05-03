@@ -30,29 +30,50 @@
 				<!-- <div class="logo-box">
 					<h4 class="text-center pt-5 wdi-red font-weight-bold">LOGO</h4>
 				</div> -->
-				<h4 class="text-center font-weight-bold mb-3">LOGO AQUI</h4>
+				<h4 class="text-center font-weight-bold mb-5">LOGO AQUI</h4>
 
 
 				<h:form>
 					<div class="form-row">
-						<div class="col-md-12">
-							<h:outputLabel style="margin-bottom:0;" value="Matrícula:"
-								styleClass="wdi-red" />
-							<h:inputText styleClass="form-control form-control-lg mb-3"
-								value="#{loginController.usuario.matricula}" />
+
+
+						<div class="col-md-12 input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-laranja"><i
+									class="pi pi-user" style="font-size: 2em; color: #fff;"></i></span>
+							</div>
+							<h:inputText styleClass="form-control form-control-lg"
+								value="#{loginController.usuario.matricula}">
+								<f:passThroughAttribute name="placeholder" value="Matrícula" />
+							</h:inputText>
 						</div>
-						<div class="col-md-12">
-							<h:outputLabel style="margin-bottom:0;" value="Senha:"
-								styleClass="wdi-red" />
+
+
+						<div class="col-md-12 input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-laranja"><i
+									class="pi pi-key" style="font-size: 2em; color: #fff;"></i></span>
+							</div>
 							<input id="senha" name="senha" type="password"
-								class="form-control form-control-lg mb-4"
-								value="#{loginController.usuario.senha}" />
+								class="form-control form-control-lg"
+								value="#{loginController.usuario.senha}" placeholder="Senha" />
 							<span id="showPassword" onclick="showPassword()"
 								class="MostrarSenha text-muted">Mostrar</span>
 						</div>
-						<h:commandButton value="Logar"
-							styleClass="btn btn-lg btn-block btn-login"
-							action="#{loginController.logar()}" />
+
+						<div class="col-md-12 input-group form-group mt-3">
+							<h:commandButton value="Logar"
+								styleClass="btn btn-lg btn-block btn-login"
+								action="#{loginController.logar()}" />
+						</div>
+
+						<div class="col-md-12 text-center">
+							<p>
+								Esqueceu a senha? <a href="#">Recuperar acesso</a>
+							</p>
+
+						</div>
+
 
 					</div>
 				</h:form>

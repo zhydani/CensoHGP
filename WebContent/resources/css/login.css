@@ -5,6 +5,11 @@ body {
 	background-repeat: no-repeat;
 }
 
+.bg-laranja{
+	background: #da8300 !important;	
+}
+
+
 .logo-box {
 	background: #192455;
 	height: 30%;
