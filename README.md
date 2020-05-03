@@ -1,10 +1,10 @@
 # CensoHGP
 
 ## Tecnologias utilizadas
-* Eclipse 2020-03
-* Java SE Development Kit 13
-* Apache Tomcat 9
-* PostgreSQL 12
+* [Eclipse 2020-03](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2020-03/R/eclipse-jee-2020-03-R-incubation-win32-x86_64.zip)
+* [Java SE Development Kit 13](https://www.oracle.com/java/technologies/javase-jdk13-downloads.html)
+* [Apache Tomcat 9](https://tomcat.apache.org/download-90.cgi)
+* [PostgreSQL 12](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
 * Heroku
 
 ## Introdução
