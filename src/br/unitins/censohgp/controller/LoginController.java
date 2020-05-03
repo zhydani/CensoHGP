@@ -3,10 +3,12 @@ package br.unitins.censohgp.controller;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import br.unitins.censohgp.model.Usuario;
+
 @Named
 @RequestScoped
 public class LoginController {
-//	private Usuario usuario;
+	private Usuario usuario;
 //
 //	@SuppressWarnings("static-access")
 //	public String logar() {
@@ -40,13 +42,13 @@ public class LoginController {
 ////		usuario = new Usuario();
 //	}
 //
-//	public Usuario getUsuario() {
-//		if (usuario == null)
-//			usuario = new Usuario();
-//		return usuario;
-//	}
-//
-//	public void setUsuario(Usuario usuario) {
-//		this.usuario = usuario;
-//	}
+	public Usuario getUsuario() {
+		if (usuario == null)
+			usuario = new Usuario();
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

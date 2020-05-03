@@ -1,47 +1,95 @@
-<!DOCTYPE HTML>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-
-
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<h:outputStylesheet library="css" name="template.css" />
-	<meta charset="utf-8" name="viewport"
-		content="width=device-width, initial-scale=1"
-		http-equiv="X-UA-Conpatible" />
-	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<title>CensoHGP | Administrador</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<!-- Bootstrap CSS -->
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<!-- Costumize CSS -->
+	<h:outputStylesheet library="css" name="template.css" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{resource['images/icon.png']}" />
 </h:head>
 <h:body>
-	<div class="wrapper">
+	<h:form id="form">
+		<table width="100%">
+			<tr>
 
-		<div class="box header">
-			<ui:insert name="header">
+				<td valign="top" class="bg-dark mt-0 text-white wrapper"
+					id="sidebar"><ui:insert name="menu">
 
-			</ui:insert>
-		</div>
+						<nav id="sidebar">
+						<div class="sidebar-header ">
+							<h3 class="font-weight-bold">Menu</h3>
+						</div>
 
-		<div class="box sidebar">
-			<ui:insert name="sidebar">
+						<ul class="list-unstyled components">
+							<h:panelGrid columns="3">
+								<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+									library="images" name="usu.png" />
 
-			</ui:insert>
+								<h:form>
+									<h:outputLabel
+										value=" #{templateController.usuarioLogado.nome}"
+										class="font-weight-bold mb-3" />
 
-		</div>
-		<div class="box content">
-			<br />
-			<ui:insert name="conteudo">
-			</ui:insert>
-			<br /> <br /> <br />
+								</h:form>
 
-		</div>
-		<br /> <br /> <br /> <br />
-		<div class="box footer" style="text-align: center;">
-			<h:outputText value="2020 - Todos os direitos reservados." />
-		</div>
-	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+							</h:panelGrid>
+							<li class="active"><a href="menu.xhtml">Início</a></li>
+							<li><a href="buscariusuario.xhtml" data-toggle="collapse"
+								aria-expanded="false">Buscar Usuário</a></li>
+							<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
+							<li><a href="cadastrardepartamento.xhtml">Cadastrar Departamento</a></li>
+							<li><a href="buscardepartamento.xhtml">Buscar Departamento</a></li>
+							<li><h:commandLink value="Sair"
+									action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+
+
+						</ul>
+
+
+						</nav>
+					</ui:insert></td>
+
+
+			</tr>
+
+			<tr>
+				<td colspan="2" align="center" class="mar"><ui:insert
+						name="cabecalho">
+						<h:form>
+							<div class="navbar navbar-dark bg-navbar navbar-expand">
+								<div class="container collapse navbar-collapse">
+
+									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
+									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+
+									</ul>
+
+								</div>
+							</div>
+						</h:form>
+					</ui:insert></td>
+			</tr>
+
+			
+		</table>
+	</h:form>
+
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
 </h:body>
 </html>

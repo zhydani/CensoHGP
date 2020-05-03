@@ -25,7 +25,7 @@
 	<!-- Container -->
 	<div class="container d-flex justify-content-center mt-5 ">
 		<div class="row justify-content-md-center">
-			<div class="col-md-10 col-md-auto login-box">
+			<div class="col-md-6 col-md-auto login-box">
 				<h:messages styleClass="alert alert-danger hmessages" />
 				<!-- <div class="logo-box">
 					<h4 class="text-center pt-5 wdi-red font-weight-bold">LOGO</h4>
@@ -34,57 +34,25 @@
 
 
 				<h:form>
-
 					<div class="form-row">
-						<div class="col-md-12 ui-g-12 ui-md-6">
-							<div class="ui-inputgroup mt-2 d-flex justify-content-center">
-								<span class="ui-inputgroup-addon px-2"> <i
-									class="pi pi-user"
-									style="color: rgb(80, 80, 80); font-size: 2.5em"></i>
-								</span><input id="j_idt128" name="j_idt128" type="text"
-									placeholder="Matrícula"
-									class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all col-10"
-									role="textbox" aria-disabled="false" aria-readonly="false" />
-							</div>
+						<div class="col-md-12">
+							<h:outputLabel style="margin-bottom:0;" value="Matrícula:"
+								styleClass="wdi-red" />
+							<h:inputText styleClass="form-control form-control-lg mb-3"
+								value="#{loginController.usuario.matricula}" />
 						</div>
-
-						<div class="col-md-12 ui-g-12 ui-md-6">
-							<div>
-								<div class="ui-inputgroup d-flex justify-content-center">
-									<span class="ui-inputgroup-addon px-2 "> <i
-										class="pi pi-key"
-										style="color: rgb(80, 80, 80); font-size: 2.5em"></i>
-									</span> <input id="senha" name="senha" type="password"
-										placeholder="Senha"
-										class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all col-10"
-										role="textbox" aria-disabled="false" aria-readonly="false"
-										data-toggle="password" />
-									<div>
-										<span id="showPassword" onclick="showPassword()"
-											class="MostrarSenha text-muted">Mostrar</span>
-									</div>
-
-								</div>
-							</div>
-
+						<div class="col-md-12">
+							<h:outputLabel style="margin-bottom:0;" value="Senha:"
+								styleClass="wdi-red" />
+							<input id="senha" name="senha" type="password"
+								class="form-control form-control-lg mb-4"
+								value="#{loginController.usuario.senha}" />
+							<span id="showPassword" onclick="showPassword()"
+								class="MostrarSenha text-muted">Mostrar</span>
 						</div>
-
-
-					</div>
-					<div class="form-row d-flex justify-content-between my-3">
-
-						<div class="pt-3">
-							<p:commandButton styleClass="btn btn-login text text-dark"
-								value="Recuperar acesso" action="#{loginController.recuperar()}" />
-
-
-						</div>
-
-						<div>
-							<h:commandButton value="Entrar" styleClass="btn btn-lg btn-login"
-								action="#{loginController.logar()}" />
-
-						</div>
+						<h:commandButton value="Logar"
+							styleClass="btn btn-lg btn-block btn-login"
+							action="#{loginController.logar()}" />
 
 					</div>
 				</h:form>
