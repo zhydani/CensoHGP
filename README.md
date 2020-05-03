@@ -1,4 +1,10 @@
 # CensoHGP
+
+# Tecnologias utilizadas
+* Eclipse 2020-03
+* Java SE Development Kit 13
+* Apache Tomcat 9
+
 ## Introdução
   No estado do Tocantins, o Hospital Geral de Palmas (HGP) apresentou a necessidade
 de um software para auxiliar no controle de transferência de pacientes. Com isto, manteve
@@ -36,7 +42,4 @@ vir a ocorrer e facilidade de gerenciamento dos departamentos.
 Automatizar os processos de controle de entrada, saída e incidentes dos pacientes
 dentro do Hospital Geral de Palmas no Tocantins.
 
-# Tecnologias utilizadas
-* Eclipse 2020-03
-* Java SE Development Kit 13
-* Apache Tomcat 9
+
