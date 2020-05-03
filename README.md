@@ -5,6 +5,7 @@
 * Java SE Development Kit 13
 * Apache Tomcat 9
 * PostgreSQL 12
+* Heroku
 
 ## Introdução
   No estado do Tocantins, o Hospital Geral de Palmas (HGP) apresentou a necessidade
