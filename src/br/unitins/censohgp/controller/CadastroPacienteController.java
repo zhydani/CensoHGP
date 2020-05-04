@@ -6,14 +6,18 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import br.unitins.censohgp.dao.CidadeDepartamentoDAO;
 import br.unitins.censohgp.dao.DAO;
 import br.unitins.censohgp.dao.PacienteDAO;
+import br.unitins.censohgp.dao.SituacaoDAO;
 import br.unitins.censohgp.application.Util;
+import br.unitins.censohgp.model.CidadeDepartamento;
 import br.unitins.censohgp.model.Paciente;
-import br.unitins.censohgp.model.SituacaoPaciente;
+import br.unitins.censohgp.model.Situacao;
 import br.unitins.censohgp.model.TipoSexo;
 
 @Named
@@ -23,8 +27,11 @@ public class CadastroPacienteController implements Serializable {
 	private static final long serialVersionUID = -3687442881189379368L;
 
 		private Paciente paciente;
+		private CidadeDepartamento situacaoSelecionado;
 		
 		private List<Paciente> listaPaciente;
+		private List<SelectItem> listaSituacao;
+
 		
 		public CadastroPacienteController() {
 			Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -42,7 +49,7 @@ public class CadastroPacienteController implements Serializable {
 			return listaPaciente;
 		}
 		
-		// METODO QUE REDIRECIONA PARA PAGINA DE EDIï¿½ï¿½O
+		// METODO QUE REDIRECIONA PARA PAGINA DE EDIÇÃO
 		public String ver(int id) throws SQLException {
 			PacienteDAO dao = new PacienteDAO();
 			Paciente paciente = dao.findById(id);
@@ -127,11 +134,14 @@ public class CadastroPacienteController implements Serializable {
 //				return false;
 //			}
 			return true;
+
 		}
 
+		
 		public Paciente getPaciente() {
 			if (paciente == null) {
 				paciente = new Paciente();
+				paciente.setSituacao(new Situacao());
 			}
 			return paciente;
 		}
@@ -147,8 +157,32 @@ public class CadastroPacienteController implements Serializable {
 		public TipoSexo[] getListaTipoSexo() {
 			return TipoSexo.values();
 		}
-		public SituacaoPaciente[] getListaSituacao() {
-			return SituacaoPaciente.values();
+		public List<SelectItem> getListaSituacao() {
+			if(listaSituacao == null) {
+				listaSituacao = new ArrayList<SelectItem>();
+				
+				DAO<Situacao> dao = new SituacaoDAO();
+				List<Situacao> situacaoLista = dao.findAll();
+				
+				if(situacaoLista != null && !situacaoLista.isEmpty()) {
+					SelectItem item;
+					  
+					for (Situacao situacao : situacaoLista) {
+						item = new SelectItem(situacao, situacao.getNome());
+						listaSituacao.add(item);
+					}
+				}
+			}
+			
+			return listaSituacao;
+		}
+
+		public CidadeDepartamento getSituacaoSelecionado() {
+			return situacaoSelecionado;
+		}
+
+		public void setSituacaoSelecionado(CidadeDepartamento situacaoSelecionado) {
+			this.situacaoSelecionado = situacaoSelecionado;
 		}
 		
 	}

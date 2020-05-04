@@ -58,7 +58,7 @@ public class DepartamentoController implements Serializable {
 		return listaDepartamento;
 	}
 
-	// METODO QUE REDIRECIONA PARA PAGINA DE EDIï¿½ï¿½O
+	// METODO QUE REDIRECIONA PARA PAGINA DE EDIÇÃO
 	public String ver(int id) throws SQLException {
 		DepartamentoDAO dao = new DepartamentoDAO();
 		Departamento departamento = dao.findId(id);
@@ -162,7 +162,7 @@ public class DepartamentoController implements Serializable {
 			DAO<EstadoDepartamento> dao = new EstadoDepartamentoDAO();
 			List<EstadoDepartamento> listaEstado = dao.findAll();
 			
-			if(listaEstado != null && listaEstado.isEmpty()) {
+			if(listaEstado != null && !listaEstado.isEmpty()) {
 				SelectItem item;
 				  
 				for (EstadoDepartamento estado : listaEstado) {
@@ -197,7 +197,7 @@ public class DepartamentoController implements Serializable {
 			DAO<CidadeDepartamento> dao = new CidadeDepartamentoDAO();
 			List<CidadeDepartamento> listaCidade = dao.findAll();
 			
-			if(listaCidade != null && listaCidade.isEmpty()) {
+			if(listaCidade != null && !listaCidade.isEmpty()) {
 				SelectItem item;
 				  
 				for (CidadeDepartamento cidade : listaCidade) {

@@ -24,7 +24,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 		}
 		
 		public DepartamentoDAO() {
-			// tchÃª papai ... cria uma nova conexao
+			// tchê papai ... cria uma nova conexao
 			super(null);
 		}
 		
