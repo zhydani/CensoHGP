@@ -10,13 +10,11 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import br.unitins.censohgp.dao.CidadeDepartamentoDAO;
 import br.unitins.censohgp.dao.DAO;
 import br.unitins.censohgp.dao.PacienteDAO;
 import br.unitins.censohgp.dao.SexoDAO;
 import br.unitins.censohgp.dao.SituacaoDAO;
 import br.unitins.censohgp.application.Util;
-import br.unitins.censohgp.model.CidadeDepartamento;
 import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Situacao;
 import br.unitins.censohgp.model.Sexo;
@@ -28,8 +26,8 @@ public class CadastroPacienteController implements Serializable {
 	private static final long serialVersionUID = -3687442881189379368L;
 
 		private Paciente paciente;
-		private CidadeDepartamento situacaoSelecionado;
-		private CidadeDepartamento sexoSelecionado;
+		private Situacao situacaoSelecionado;
+		private Sexo sexoSelecionado;
 		
 		private List<Paciente> listaPaciente;
 		private List<SelectItem> listaSexo;
@@ -198,12 +196,20 @@ public class CadastroPacienteController implements Serializable {
 			return listasituacao;
 		}
 
-		public CidadeDepartamento getSituacaoSelecionado() {
+		public Situacao getSituacaoSelecionado() {
 			return situacaoSelecionado;
 		}
 
-		public void setSituacaoSelecionado(CidadeDepartamento situacaoSelecionado) {
+		public void setSituacaoSelecionado(Situacao situacaoSelecionado) {
 			this.situacaoSelecionado = situacaoSelecionado;
 		}
-		
+
+		public Sexo getSexoSelecionado() {
+			return sexoSelecionado;
+		}
+
+		public void setSexoSelecionado(Sexo sexoSelecionado) {
+			this.sexoSelecionado = sexoSelecionado;
+		}
+
 	}

@@ -11,6 +11,7 @@
 		content="width=device-width, initial-scale=1"
 		http-equiv="X-UA-Conpatible" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="style.css" />
 
 </h:head>
 
@@ -20,88 +21,105 @@
 		<h:messages infoStyle="color:green" warnStyle="color:orange"
 			errorStyle="color:red" />
 
-
 		<h:form id="formPrincipal">
-			<br />
+
 			<h:panelGrid columns="2">
 				<h:outputText style="font-weight: bold; font-size:24px;"
 					value="Cadastrar Paciente" />
 				<h:graphicImage style="width:100px; padding: 35px;"
 					library="imagens" name="icone.png"></h:graphicImage>
 			</h:panelGrid>
-			<h:panelGrid id="panelPrincipal" columns="2">
-				<h:outputLabel style="font-weight: bold;" value="Nome: " />
-				<h:inputText id="inputNome"
-					value="#{cadastroPacienteController.paciente.nome}" />
+			<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px;">
+				<h:panelGrid columns="3" cellpadding="5">
+					<h:panelGrid columns="2">
+						<h:outputLabel style="font-weight: bold;" value="Nome: " />
+						<h:inputText id="inputNome"
+							value="#{cadastroPacienteController.paciente.nome}" />
+						<h:outputLabel style="font-weight: bold;" value="CPF: " />
+						<h:inputText id="inpuCpf"
+							value="#{cadastroPacienteController.paciente.cpf}"
+							requiredMessage="O campo cpf não pode ser nulo.">
+						</h:inputText>
+						<h:message for="inputCpf" style="color:red" />
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:outputLabel style="font-weight: bold;" value="RG: " />
+						<h:inputText value="#{cadastroPacienteController.paciente.rg}" />
 
-				<h:outputLabel style="font-weight: bold;" value="CPF: " />
-				<h:panelGrid columns="2">
-					<h:inputText id="inpuCpf"
-						value="#{cadastroPacienteController.paciente.cpf}"
-						requiredMessage="O campo cpf não pode ser nulo.">
-					</h:inputText>
-					<h:message for="inputCpf" style="color:red" />
+						<h:outputLabel style="font-weight: bold;" value="Nome da Mãe: " />
+						<h:inputText
+							value="#{cadastroPacienteController.paciente.nomeMae}" />
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:outputLabel style="font-weight: bold;"
+							value="Data de Nascimento: " />
+						<h:inputText
+							value="#{cadastroPacienteController.paciente.dataNascimento}">
+							<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+						</h:inputText>
+
+
+						<h:outputLabel style="font-weight: bold;"
+							value="Sexo do paciente: " />
+						<h:selectOneMenu class="btn btn-secondary"
+							value="#{cadastroPacienateController.paciente.sexo.nome}">
+							<f:selectItem itemLabel="Selecione o sexo" />
+							<f:selectItems value="#{cadastroPacienteController.listaSexo}"
+								var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
+						</h:selectOneMenu>
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p:fieldset legend="Complementos"
+				style="margin-bottom:20px;whidth: 100px;">
+				<h:panelGrid columns="3" cellpadding="5">
+
+					<h:panelGrid columns="2">
+						<h:outputLabel style="font-weight: bold;"
+							value="Número do Prontuário: " />
+						<h:inputText
+							value="#{cadastroPacienteController.paciente.numeroProntuario}" />
+						<h:outputLabel style="font-weight: bold;" value="Usuario ativo: " />
+						<h:selectBooleanCheckbox id="checkAtivo"
+							value="#{cadastroPacienteController.paciente.ativo}" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+						<h:outputLabel style="font-weight: bold;"
+							value="Situação do paciente: " />
+						<h:selectOneMenu class="btn btn-secondary"
+							value="#{cadastroPacienteController.paciente.situacao.nome}">
+							<f:selectItem itemLabel="Selecione uma situação" />
+							<f:selectItems
+								value="#{cadastroPacienteController.listaSituacao}" var="obj"
+								itemValue="#{obj}" itemLabel="#{obj.label}" />
+						</h:selectOneMenu>
+
+						<h:outputLabel style="font-weight: bold;" value="Observações: " />
+						<h:inputTextarea style="heigth: 50px; width: 180px;"
+							value="#{cadastroPacienteController.paciente.observacao}" />
+					</h:panelGrid>
 				</h:panelGrid>
 
-				<h:outputLabel style="font-weight: bold;" value="RG: " />
-				<h:inputText value="#{cadastroPacienteController.paciente.rg}" />
+				<h:panelGrid style="position: relative; top: 50px;" id="panelBotoes"
+					columns="4">
+					<h:commandButton value="Incluir" class="btn btn-secondary"
+						disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
+						action="#{cadastroPacienteController.incluir}">
+						<f:ajax render="formPrincipal" execute="panelPrincipal"
+							resetValues="true" />
+					</h:commandButton>
+					<h:commandButton value="Cancelar " class="btn btn-secondary"
+						action="#{cadastroPacienteController.alterar}">
+						<f:ajax render="formPrincipal messages" execute="formPrincipal" />
+					</h:commandButton>
 
-				<h:outputLabel style="font-weight: bold;"
-					value="Data de Nascimento: " />
-				<h:inputText
-					value="#{cadastroPacienteController.paciente.dataNascimento}">
-					<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
-				</h:inputText>
+				</h:panelGrid>
 
-				<h:outputLabel style="font-weight: bold;"
-					value="Número do Prontuário: " />
-				<h:inputText
-					value="#{cadastroPacienteController.paciente.numeroProntuario}" />
-				<h:outputLabel style="font-weight: bold;" value="Nome da Mãe: " />
-				<h:inputText value="#{cadastroPacienteController.paciente.nomeMae}" />
+			</p:fieldset>
 
-				<h:outputLabel style="font-weight: bold;"
-					value="Situação do paciente: " />
-				<h:selectOneMenu class="btn btn-secondary"
-					value="#{cadastroPacienteController.paciente.situacao.nome}">
-					<f:selectItem itemLabel="Selecione uma situação" />
-					<f:selectItems value="#{cadastroPacienteController.listaSituacao}"
-						var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
-				</h:selectOneMenu>
-
-				<h:outputLabel style="font-weight: bold;" value="Sexo do paciente: " />
-				<h:selectOneMenu class="btn btn-secondary"
-					value="#{cadastroPacienateController.paciente.sexo.nome}">
-					<f:selectItem itemLabel="Selecione o sexo" />
-					<f:selectItems value="#{cadastroPacienteController.listaSexo}"
-						var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
-				</h:selectOneMenu>
-
-				<h:outputLabel style="font-weight: bold;" value="Usuario ativo: " />
-				<h:selectBooleanCheckbox id="checkAtivo"
-					value="#{cadastroPacienteController.paciente.ativo}" />
-
-				<h:outputLabel style="font-weight: bold;" value="Observações: " />
-				<h:inputTextarea style="heigth: 50px; width: 180px;"
-					value="#{cadastroPacienteController.paciente.observacao}" />
-			</h:panelGrid>
-			<h:panelGrid style="position: relative; top: 50px;" id="panelBotoes"
-				columns="4">
-				<h:commandButton value="Incluir" class="btn btn-secondary"
-					disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
-					action="#{cadastroPacienteController.incluir}">
-					<f:ajax render="formPrincipal" execute="panelPrincipal"
-						resetValues="true" />
-				</h:commandButton>
-				<h:commandButton value="Cancelar " class="btn btn-secondary"
-					action="#{cadastroPacienteController.alterar}">
-					<f:ajax render="formPrincipal messages" execute="formPrincipal" />
-				</h:commandButton>
-
-			</h:panelGrid>
 		</h:form>
-
-
 	</center>
 </h:body>
 </html>
