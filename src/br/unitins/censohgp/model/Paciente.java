@@ -11,7 +11,7 @@ public class Paciente {
 	private Situacao situacao;
 	private Boolean ativo = Boolean.TRUE;
 	private String nomeMae;
-	private TipoSexo tipoSexo;
+	private Sexo sexo;
 	private LocalDate dataNascimento;
 	private String observacao;
 	private Integer idlocalTransferencia;
@@ -25,7 +25,7 @@ public class Paciente {
 	
 
 	public Paciente(Integer idpaciente, String nome, String cpf, String rg, Situacao situacao, Boolean ativo,
-			String nomeMae, TipoSexo tipoSexo, LocalDate dataNascimento, String observacao,
+			String nomeMae, Sexo tipoSexo, LocalDate dataNascimento, String observacao,
 			Integer idlocalTransferencia, String numeroProntuario) {
 		super();
 		this.idpaciente = idpaciente;
@@ -35,7 +35,7 @@ public class Paciente {
 		this.situacao = situacao;
 		this.ativo = ativo;
 		this.nomeMae = nomeMae;
-		this.tipoSexo = tipoSexo;
+		this.sexo = tipoSexo;
 		this.dataNascimento = dataNascimento;
 		this.observacao = observacao;
 		this.idlocalTransferencia = idlocalTransferencia;
@@ -72,7 +72,7 @@ public class Paciente {
 		result = prime * result + ((observacao == null) ? 0 : observacao.hashCode());
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
 		result = prime * result + ((situacao == null) ? 0 : situacao.hashCode());
-		result = prime * result + ((tipoSexo == null) ? 0 : tipoSexo.hashCode());
+		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
 		return result;
 	}
 
@@ -141,7 +141,7 @@ public class Paciente {
 				return false;
 		} else if (!situacao.equals(other.situacao))
 			return false;
-		if (tipoSexo != other.tipoSexo)
+		if (sexo != other.sexo)
 			return false;
 		return true;
 	}
@@ -217,13 +217,13 @@ public class Paciente {
 	}
 
 
-	public TipoSexo getTipoSexo() {
-		return tipoSexo;
+	public Sexo getSexo() {
+		return sexo;
 	}
 
 
-	public void setTipoSexo(TipoSexo tipoSexo) {
-		this.tipoSexo = tipoSexo;
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
 	}
 
 

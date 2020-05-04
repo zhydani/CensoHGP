@@ -13,12 +13,13 @@ import javax.inject.Named;
 import br.unitins.censohgp.dao.CidadeDepartamentoDAO;
 import br.unitins.censohgp.dao.DAO;
 import br.unitins.censohgp.dao.PacienteDAO;
+import br.unitins.censohgp.dao.SexoDAO;
 import br.unitins.censohgp.dao.SituacaoDAO;
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.model.CidadeDepartamento;
 import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Situacao;
-import br.unitins.censohgp.model.TipoSexo;
+import br.unitins.censohgp.model.Sexo;
 
 @Named
 @ViewScoped
@@ -28,9 +29,11 @@ public class CadastroPacienteController implements Serializable {
 
 		private Paciente paciente;
 		private CidadeDepartamento situacaoSelecionado;
+		private CidadeDepartamento sexoSelecionado;
 		
 		private List<Paciente> listaPaciente;
-		private List<SelectItem> listaSituacao;
+		private List<SelectItem> listaSexo;
+		private List<SelectItem> listasituacao;
 
 		
 		public CadastroPacienteController() {
@@ -154,12 +157,30 @@ public class CadastroPacienteController implements Serializable {
 			paciente = null;
 		}
 		
-		public TipoSexo[] getListaTipoSexo() {
-			return TipoSexo.values();
+		
+		public List<SelectItem> getListaSexo() {
+			if(listaSexo == null) {
+				listaSexo = new ArrayList<SelectItem>();
+				
+				DAO<Sexo> dao = new SexoDAO();
+				List<Sexo> sexoLista = dao.findAll();
+				
+				if(sexoLista != null && !sexoLista.isEmpty()) {
+					SelectItem item;
+					
+					for (Sexo sexo : sexoLista) {
+						item = new SelectItem(sexo, sexo.getNome());
+						listaSexo.add(item);
+					}
+				}
+			}
+			
+			return listaSexo;
 		}
+
 		public List<SelectItem> getListaSituacao() {
-			if(listaSituacao == null) {
-				listaSituacao = new ArrayList<SelectItem>();
+			if(listasituacao == null) {
+				listasituacao = new ArrayList<SelectItem>();
 				
 				DAO<Situacao> dao = new SituacaoDAO();
 				List<Situacao> situacaoLista = dao.findAll();
@@ -169,12 +190,12 @@ public class CadastroPacienteController implements Serializable {
 					  
 					for (Situacao situacao : situacaoLista) {
 						item = new SelectItem(situacao, situacao.getNome());
-						listaSituacao.add(item);
+						listasituacao.add(item);
 					}
 				}
 			}
 			
-			return listaSituacao;
+			return listasituacao;
 		}
 
 		public CidadeDepartamento getSituacaoSelecionado() {

@@ -21,7 +21,6 @@ import br.unitins.censohgp.model.Departamento;
 import br.unitins.censohgp.model.EstadoDepartamento;
 import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.StatusDepartamento;
-import br.unitins.censohgp.model.TipoSexo;
 
 @Named
 @ViewScoped

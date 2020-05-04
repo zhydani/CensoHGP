@@ -11,7 +11,7 @@ import java.util.List;
 
 import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Situacao;
-import br.unitins.censohgp.model.TipoSexo;
+import br.unitins.censohgp.model.Sexo;
 
 public class PacienteDAO extends DAO<Paciente>{
 
@@ -31,7 +31,7 @@ public class PacienteDAO extends DAO<Paciente>{
 		PreparedStatement stat = conn.prepareStatement(
 				"INSERT INTO " +
 						" paciente " +
-						" ( nome, cpf, rg, ativo, nome_mae, tipo_sexo, data_nascimento, observacao, numero_prontuario) " +
+						" ( nome, cpf, rg, ativo, nome_mae, data_nascimento, observacao, numero_prontuario) " +
 						" VALUES " +
 						" (?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 
@@ -40,19 +40,11 @@ public class PacienteDAO extends DAO<Paciente>{
 		stat.setString(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setString(5, paciente.getNomeMae());
-		stat.setInt(6, paciente.getTipoSexo().getValue());
 		Date date = Date.valueOf(paciente.getDataNascimento());
-		stat.setDate(7, date);
-		stat.setString(8, paciente.getObservacao());
-		stat.setString(9, paciente.getNumeroProntuario());
+		stat.setDate(6, date);
+		stat.setString(7, paciente.getObservacao());
+		stat.setString(8, paciente.getNumeroProntuario());
 		stat.execute();
-
-		ResultSet rs = stat.getGeneratedKeys();
-		rs.next();
-		
-		paciente.getSituacao().setIdsituacao(rs.getInt("idsituacao"));
-		SituacaoDAO dao = new SituacaoDAO(conn);
-		dao.create(paciente.getSituacao());
 		
 	}
 
@@ -67,7 +59,6 @@ public class PacienteDAO extends DAO<Paciente>{
 						+ " rg = ?,"
 						+ " ativo = ?,"
 						+ " nome_mae = ?,"
-						+ " tipo_sexo = ?,"
 						+ " data_nascimento = ?,"
 						+ " observacao = ?,"
 						+ " numero_prontuario = ?, " 
@@ -80,20 +71,12 @@ public class PacienteDAO extends DAO<Paciente>{
 		stat.setString(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setString(5, paciente.getNomeMae());
-		stat.setInt(6, paciente.getTipoSexo().getValue());
 		Date date = Date.valueOf(paciente.getDataNascimento());
-		stat.setDate(7, date);
-		stat.setString(8, paciente.getObservacao());
-		stat.setString(9, paciente.getNumeroProntuario());
-		stat.setInt(11, paciente.getIdpaciente());
+		stat.setDate(6, date);
+		stat.setString(7, paciente.getObservacao());
+		stat.setString(8, paciente.getNumeroProntuario());
+		stat.setInt(9, paciente.getIdpaciente());
 		stat.execute();
-		
-		ResultSet rs = stat.getGeneratedKeys();
-		rs.next();
-		
-		paciente.getSituacao().setIdsituacao(rs.getInt("idsituacao"));
-		SituacaoDAO dao = new SituacaoDAO(conn);
-		dao.create(paciente.getSituacao());
 
 	}
 
@@ -126,7 +109,6 @@ public class PacienteDAO extends DAO<Paciente>{
 							+ " rg,"
 							+ " ativo,"
 							+ " nome_mae,"
-							+ " tipo_sexo,"
 							+ " data_nascimento,"
 							+ " observacao,"
 							+ " numero_prontuario, " 
@@ -149,15 +131,9 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
-				paciente.setTipoSexo(TipoSexo.valueOf(rs.getInt("tipo_sexo")));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
-
-				SituacaoDAO dao = new SituacaoDAO(conn);
-				paciente.setSituacao(dao.findById(paciente.getIdpaciente()));
-				if (paciente.getSituacao() == null)
-					paciente.setSituacao(new Situacao());
 				
 				listaPaciente.add(paciente);
 
@@ -191,7 +167,6 @@ public class PacienteDAO extends DAO<Paciente>{
 							+ " rg,"
 							+ " ativo,"
 							+ " nome_mae,"
-							+ " tipo_sexo,"
 							+ " idsituacao,"
 							+ " data_nascimento,"
 							+ " observacao,"
@@ -211,16 +186,9 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
-				paciente.setTipoSexo(TipoSexo.valueOf(rs.getInt("tipo_sexo")));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
-
-				SituacaoDAO dao = new SituacaoDAO(conn);
-				paciente.setSituacao(dao.findById(paciente.getIdpaciente()));
-				if (paciente.getSituacao() == null)
-					paciente.setSituacao(new Situacao());
-
 				
 				listaPaciente.add(paciente);
 
@@ -250,7 +218,6 @@ public class PacienteDAO extends DAO<Paciente>{
 							+ " rg,"
 							+ " ativo,"
 							+ " nome_mae,"
-							+ " tipo_sexo,"
 							+ " idsituacao,"
 							+ " data_nascimento,"
 							+ " observacao,"
@@ -273,16 +240,10 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
-				paciente.setTipoSexo(TipoSexo.valueOf(rs.getInt("tipo_sexo")));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 
-				SituacaoDAO dao = new SituacaoDAO(conn);
-				paciente.setSituacao(dao.findById(paciente.getIdpaciente()));
-				if (paciente.getSituacao() == null)
-					paciente.setSituacao(new Situacao());
-			
 			}
 
 

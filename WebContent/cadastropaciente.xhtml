@@ -59,21 +59,24 @@
 					value="#{cadastroPacienteController.paciente.numeroProntuario}" />
 				<h:outputLabel style="font-weight: bold;" value="Nome da Mãe: " />
 				<h:inputText value="#{cadastroPacienteController.paciente.nomeMae}" />
+
 				<h:outputLabel style="font-weight: bold;"
 					value="Situação do paciente: " />
 				<h:selectOneMenu class="btn btn-secondary"
 					value="#{cadastroPacienteController.paciente.situacao.nome}">
 					<f:selectItem itemLabel="Selecione uma situação" />
-					<f:selectItems  value="#{cadastroPacienteController.listaSituacao}" var="obj"
-						itemValue="#{obj}" itemLabel="#{obj.label}" />
+					<f:selectItems value="#{cadastroPacienteController.listaSituacao}"
+						var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
 				</h:selectOneMenu>
-				<h:outputLabel style="font-weight: bold;" value="Sexo: " />
+
+				<h:outputLabel style="font-weight: bold;" value="Sexo do paciente: " />
 				<h:selectOneMenu class="btn btn-secondary"
-					value="#{cadastroPacienteController.paciente.tipoSexo}">
-					<f:selectItem itemLabel="Selecione ...." />
-					<f:selectItems value="#{cadastroPacienteController.listaTipoSexo}"
-						var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}" />
+					value="#{cadastroPacienateController.paciente.sexo.nome}">
+					<f:selectItem itemLabel="Selecione o sexo" />
+					<f:selectItems value="#{cadastroPacienteController.listaSexo}"
+						var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
 				</h:selectOneMenu>
+
 				<h:outputLabel style="font-weight: bold;" value="Usuario ativo: " />
 				<h:selectBooleanCheckbox id="checkAtivo"
 					value="#{cadastroPacienteController.paciente.ativo}" />
