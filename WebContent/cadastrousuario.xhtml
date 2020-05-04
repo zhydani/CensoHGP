@@ -105,6 +105,13 @@
 												styleClass="form-control pr-5 mr-5" />
 										</h:panelGrid>
 
+										<h:panelGrid columns="1" class="mr-2">
+											<h:outputLabel value="Matrícula " class="font-weight-bold" />
+											<h:inputText
+												value="#{cadastroUsuarioController.usuario.matricula}"
+												styleClass="form-control pr-5 mr-5" />
+										</h:panelGrid>
+
 										<h:panelGrid columns="1" class="mx-2">
 											<h:outputLabel value="Tipo " class="font-weight-bold" />
 											<h:selectOneMenu
@@ -117,28 +124,11 @@
 											</h:selectOneMenu>
 										</h:panelGrid>
 
-
-
-
-
-
-
-
-
-
 									</h:panelGrid>
 
-									<h:panelGrid columns="5" class="mb-5">
-										<h:panelGrid columns="1" class=" mt-4">
-											<h:outputLabel value="Matrícula " class="font-weight-bold" />
-											<h:inputText
-												value="#{cadastroUsuarioController.usuario.matricula}"
-												styleClass="form-control pr-5 mr-5" />
-										</h:panelGrid>
+									<h:panelGrid columns="3" class="mb-5">
 
-
-
-										<h:panelGrid columns="1" class="mx-2 mt-4">
+										<h:panelGrid columns="1" class="mr-2 mt-4">
 											<h:outputLabel value="E-mail " class="font-weight-bold" />
 											<h:inputText
 												value="#{cadastroUsuarioController.usuario.email}"
@@ -160,17 +150,18 @@
 
 										<h:panelGrid columns="1" class="mr-2 mt-4">
 											<h:outputLabel value="Senha " class="font-weight-bold" />
-											<h:inputSecret value="#{cadastroUsuarioController.usuario.senha}"
+											<h:inputSecret
+												value="#{cadastroUsuarioController.usuario.senha}"
 												styleClass="form-control pr-5 mr-5" maxlength="60" size="60" />
 										</h:panelGrid>
 
 
 
-										
+
 
 									</h:panelGrid>
 
-							
+
 
 								</h:panelGrid>
 								<left class="mt-5"> <h:panelGrid id="panelBotoes"
