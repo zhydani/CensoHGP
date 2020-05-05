@@ -28,8 +28,8 @@ public class CadastroPacienteController implements Serializable {
 	private static final long serialVersionUID = -3687442881189379368L;
 
 		private Paciente paciente;
-		private CidadeDepartamento situacaoSelecionado;
-		private CidadeDepartamento sexoSelecionado;
+		private Situacao situacaoSelecionado;
+		private Sexo sexoSelecionado;
 		
 		private List<Paciente> listaPaciente;
 		private List<SelectItem> listaSexo;
@@ -68,6 +68,24 @@ public class CadastroPacienteController implements Serializable {
 				// faz a inclusao no banco de dados
 				try {
 					dao.create(getPaciente());
+					dao.getConnection().commit();
+					Util.addMessageInfo("Inclusão realizada com sucesso.");
+					limpar();
+					listaPaciente = null;
+				} catch (SQLException e) {
+					dao.rollbackConnection();
+					dao.closeConnection();
+					Util.addMessageInfo("Erro ao incluir o Usuário no Banco de Dados.");
+					e.printStackTrace();
+				}
+			}
+		}
+		public void incluir2() {
+			if (validarDados()) {
+				PacienteDAO dao = new PacienteDAO();
+				// faz a inclusao no banco de dados
+				try {
+					dao.createP(situacaoSelecionado.getIdsituacao());
 					dao.getConnection().commit();
 					Util.addMessageInfo("Inclusão realizada com sucesso.");
 					limpar();
@@ -198,12 +216,20 @@ public class CadastroPacienteController implements Serializable {
 			return listasituacao;
 		}
 
-		public CidadeDepartamento getSituacaoSelecionado() {
+		public Situacao getSituacaoSelecionado() {
 			return situacaoSelecionado;
 		}
 
-		public void setSituacaoSelecionado(CidadeDepartamento situacaoSelecionado) {
+		public void setSituacaoSelecionado(Situacao situacaoSelecionado) {
 			this.situacaoSelecionado = situacaoSelecionado;
 		}
-		
+
+		public Sexo getSexoSelecionado() {
+			return sexoSelecionado;
+		}
+
+		public void setSexoSelecionado(Sexo sexoSelecionado) {
+			this.sexoSelecionado = sexoSelecionado;
+		}
+
 	}

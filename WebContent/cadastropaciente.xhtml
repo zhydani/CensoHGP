@@ -63,7 +63,7 @@
 				<h:outputLabel style="font-weight: bold;"
 					value="Situação do paciente: " />
 				<h:selectOneMenu class="btn btn-secondary"
-					value="#{cadastroPacienteController.paciente.situacao.nome}">
+					value="#{cadastroPacienteController.situacaoSelecionado.idsituacao}">
 					<f:selectItem itemLabel="Selecione uma situação" />
 					<f:selectItems value="#{cadastroPacienteController.listaSituacao}"
 						var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
@@ -89,7 +89,7 @@
 				columns="4">
 				<h:commandButton value="Incluir" class="btn btn-secondary"
 					disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
-					action="#{cadastroPacienteController.incluir}">
+					action="#{cadastroPacienteController.incluir2(situacaoSelecionado)}">
 					<f:ajax render="formPrincipal" execute="panelPrincipal"
 						resetValues="true" />
 				</h:commandButton>
