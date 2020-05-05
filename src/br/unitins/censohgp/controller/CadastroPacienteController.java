@@ -10,13 +10,11 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import br.unitins.censohgp.dao.CidadeDepartamentoDAO;
 import br.unitins.censohgp.dao.DAO;
 import br.unitins.censohgp.dao.PacienteDAO;
 import br.unitins.censohgp.dao.SexoDAO;
 import br.unitins.censohgp.dao.SituacaoDAO;
 import br.unitins.censohgp.application.Util;
-import br.unitins.censohgp.model.CidadeDepartamento;
 import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Situacao;
 import br.unitins.censohgp.model.Sexo;
