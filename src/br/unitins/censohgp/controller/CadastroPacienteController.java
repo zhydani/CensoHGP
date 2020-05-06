@@ -78,6 +78,24 @@ public class CadastroPacienteController implements Serializable {
 				}
 			}
 		}
+		public void incluir2() {
+			if (validarDados()) {
+				PacienteDAO dao = new PacienteDAO();
+				// faz a inclusao no banco de dados
+				try {
+					dao.createP(situacaoSelecionado.getIdsituacao());
+					dao.getConnection().commit();
+					Util.addMessageInfo("Inclusão realizada com sucesso.");
+					limpar();
+					listaPaciente = null;
+				} catch (SQLException e) {
+					dao.rollbackConnection();
+					dao.closeConnection();
+					Util.addMessageInfo("Erro ao incluir o Usuário no Banco de Dados.");
+					e.printStackTrace();
+				}
+			}
+		}
 		
 		public void alterar() {
 			if (validarDados()) {

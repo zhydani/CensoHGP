@@ -50,19 +50,19 @@ body{
      list-style: none;
      padding: 0;
  }
- .alert .glyphicon{
-     display:table-cell;
+ fieldset{
+ border:  2px solid black;
+ border-radius: 10px;
+ margin: 50px;
  }
- .alert div,
- .alert span{
-     padding-left: 5px;
-     display:table-cell;
- }
- #container {
-     margin-left: 20px;
-     margin-right: 20px;
- }
- fildset{
- width: 300px;
- height: 250px;
- }
+.ui-fieldset .ui-state-default {
+    background: LightSlateGray;
+    color: white;
+}
+.ui-fieldset legend {
+	font-size: 14px;
+	height: 40px;
+	width: 145px;
+	align-self: center;
+}
+

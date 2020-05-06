@@ -47,6 +47,31 @@ public class PacienteDAO extends DAO<Paciente>{
 		stat.execute();
 		
 	}
+	
+	public void createP(int idsituacao) throws SQLException {
+		
+		Connection  conn = getConnection();
+		
+		PreparedStatement stat = conn.prepareStatement(
+				"INSERT INTO " +
+						" paciente " +
+						" ( nome, cpf, rg, idsituacao_paciente ativo, nome_mae, data_nascimento, observacao, numero_prontuario) " +
+						" VALUES " +
+						" (?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
+		Paciente paciente = new Paciente();
+		stat.setString(1, paciente.getNome());
+		stat.setString(2, paciente.getCpf());
+		stat.setString(3, paciente.getRg());
+		stat.setInt(4, idsituacao);
+		stat.setBoolean(5, paciente.getAtivo());
+		stat.setString(6, paciente.getNomeMae());
+		Date date = Date.valueOf(paciente.getDataNascimento());
+		stat.setDate(7, date);
+		stat.setString(8, paciente.getObservacao());
+		stat.setString(9, paciente.getNumeroProntuario());
+		stat.execute();
+		
+	}
 
 	@Override
 	public void update(Paciente paciente) throws SQLException {

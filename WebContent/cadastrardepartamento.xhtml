@@ -5,86 +5,81 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head>
-	<meta charset="utf-8" name="viewport"
-		content="width=device-width, initial-scale=1"
-		http-equiv="X-UA-Conpatible" />
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-
-</h:head>
-
-<h:body style="background-color:LightSteelBlue;">
-	<center>
-		<h:messages infoStyle="color:green" warnStyle="color:orange"
-			errorStyle="color:red" />
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+		<center>
+			<h:messages infoStyle="color:green" warnStyle="color:orange"
+				errorStyle="color:red" />
 
 
-		<h:form id="formPrincipal">
-			<br />
-			<h:panelGrid columns="2">
-				<h:outputText style="font-weight: bold; font-size:24px;"
-					value="Cadastrar Departamento" />
-				<h:graphicImage style="width:100px; padding: 35px;"
-					library="imagens" name="icone.png"></h:graphicImage>
-			</h:panelGrid>
-			<h:panelGrid id="panelPrincipal" columns="2">
-				<h:outputLabel style="font-weight: bold;"
-					value="Nome do Departamento: " />
-				<h:inputText id="inputNome"
-					value="#{departamentoController.departamento.nomeDepartamento}" />
-
-				<h:outputLabel style="font-weight: bold;" value="Nome do Hospital: " />
+			<h:form id="formPrincipal">
+				<br />
 				<h:panelGrid columns="2">
-					<h:inputText id="inpuHospital"
-						value="#{departamentoController.departamento.nomeHospital}">
-					</h:inputText>
+					<h:outputText style="font-weight: bold; font-size:24px;"
+						value="Cadastrar Departamento" />
+					<h:graphicImage style="width:100px; padding: 35px;"
+						library="imagens" name="icone.png"></h:graphicImage>
 				</h:panelGrid>
+				<h:panelGrid id="panelPrincipal" columns="2">
+					<h:outputLabel style="font-weight: bold;"
+						value="Nome do Departamento: " />
+					<h:inputText id="inputNome"
+						value="#{departamentoController.departamento.nomeDepartamento}" />
 
-				<h:outputLabel style="font-weight: bold;"
-					value="Numeros de Leitos: " />
-				<h:inputText
-					value="#{departamentoController.departamento.numeroLeitos}" />
+					<h:outputLabel style="font-weight: bold;"
+						value="Nome do Hospital: " />
+					<h:panelGrid columns="2">
+						<h:inputText id="inpuHospital"
+							value="#{departamentoController.departamento.nomeHospital}">
+						</h:inputText>
+					</h:panelGrid>
 
-				<h:outputLabel style="font-weight: bold;" value="Estados: " />
-				<h:selectOneMenu class="btn btn-secondary"
-					value="#{departamentoController.estadoSelecionado}">
-					<f:selectItem itemLabel="Selecione o Estado" />
-					<f:selectItems value="#{departamentoController.listaEstados}" />
-				</h:selectOneMenu>
-				<h:outputLabel style="font-weight: bold;" value="Cidades: " />
-				<h:selectOneMenu class="btn btn-secondary"
-					value="#{departamentoController.cidadeSelecionado}">
-					<f:selectItem itemLabel="Selecione a Cidade" />
-					<f:selectItems value="#{departamentoController.listaCidades}" />
-				</h:selectOneMenu>
-				<h:outputLabel style="font-weight: bold;" value="Status: " />
-				<h:selectOneMenu class="btn btn-secondary"
-					value="#{departamentoController.departamento.ativo}">
-					<f:selectItem itemLabel="Selecione ...." />
-					<f:selectItems value="#{departamentoController.listaStatusDepartamento}"
-						var="status" itemLabel="#{status.label}" itemValue="#{status}" />
-				</h:selectOneMenu>
+					<h:outputLabel style="font-weight: bold;"
+						value="Numeros de Leitos: " />
+					<h:inputText
+						value="#{departamentoController.departamento.numeroLeitos}" />
 
-
-			</h:panelGrid>
-			<h:panelGrid style="position: relative; top: 50px;" id="panelBotoes"
-				columns="4">
-				<h:commandButton value="Incluir" class="btn btn-secondary"
-					disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
-					action="#{cadastroPacienteController.incluir()}">
-					<f:ajax render="formPrincipal" execute="panelPrincipal"
-						resetValues="true" />
-				</h:commandButton>
-				<h:commandButton value="Cancelar " class="btn btn-secondary"
-					action="#{cadastroPacienteController.alterar()}">
-					<f:ajax render="formPrincipal messages" execute="formPrincipal" />
-				</h:commandButton>
-
-			</h:panelGrid>
-		</h:form>
+					<h:outputLabel style="font-weight: bold;" value="Estados: " />
+					<h:selectOneMenu class="btn btn-secondary"
+						value="#{departamentoController.estadoSelecionado}">
+						<f:selectItem itemLabel="Selecione o Estado" />
+						<f:selectItems value="#{departamentoController.listaEstados}" />
+					</h:selectOneMenu>
+					<h:outputLabel style="font-weight: bold;" value="Cidades: " />
+					<h:selectOneMenu class="btn btn-secondary"
+						value="#{departamentoController.cidadeSelecionado}">
+						<f:selectItem itemLabel="Selecione a Cidade" />
+						<f:selectItems value="#{departamentoController.listaCidades}" />
+					</h:selectOneMenu>
+					<h:outputLabel style="font-weight: bold;" value="Status: " />
+					<h:selectOneMenu class="btn btn-secondary"
+						value="#{departamentoController.departamento.ativo}">
+						<f:selectItem itemLabel="Selecione ...." />
+						<f:selectItems
+							value="#{departamentoController.listaStatusDepartamento}"
+							var="status" itemLabel="#{status.label}" itemValue="#{status}" />
+					</h:selectOneMenu>
 
 
-	</center>
+				</h:panelGrid>
+				<h:panelGrid style="position: relative; top: 50px;" id="panelBotoes"
+					columns="4">
+					<h:commandButton value="Incluir" class="btn btn-secondary"
+						disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
+						action="#{cadastroPacienteController.incluir()}">
+						<f:ajax render="formPrincipal" execute="panelPrincipal"
+							resetValues="true" />
+					</h:commandButton>
+					<h:commandButton value="Cancelar " class="btn btn-secondary"
+						action="#{cadastroPacienteController.alterar()}">
+						<f:ajax render="formPrincipal messages" execute="formPrincipal" />
+					</h:commandButton>
 
-</h:body>
+				</h:panelGrid>
+			</h:form>
+
+
+		</center>
+	</ui:define>
+</ui:composition>
 </html>
