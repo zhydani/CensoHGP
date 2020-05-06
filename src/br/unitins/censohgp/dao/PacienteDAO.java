@@ -95,7 +95,7 @@ public class PacienteDAO extends DAO<Paciente>{
 
 	}
 	
-	public List<Paciente> findByNome(String nome) {
+	public List<Paciente> findByNomeMae(String nomeMae) {
 		Connection conn = getConnection();
 		if (conn == null) 
 			return null;
@@ -116,6 +116,62 @@ public class PacienteDAO extends DAO<Paciente>{
 							"  FROM " +
 							"  paciente " +			
 							"WHERE " +
+					"  nome_mae ilike ? ");
+
+			stat.setString(1, nomeMae == null ? "%" : "%"+nomeMae+"%");
+			ResultSet rs = stat.executeQuery();
+
+			List<Paciente> listaPaciente = new ArrayList<Paciente>();
+
+			while(rs.next()) {
+				Paciente paciente = new Paciente();
+				paciente.setIdpaciente(rs.getInt("idpaciente"));
+				paciente.setNome(rs.getString("nome"));
+				paciente.setCpf(rs.getString("cpf"));
+				paciente.setRg(rs.getString("rg"));
+				paciente.setAtivo(rs.getBoolean("ativo"));
+				paciente.setNomeMae(rs.getString("nome_mae"));
+				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+				paciente.setObservacao(rs.getString("observacao"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
+				
+				listaPaciente.add(paciente);
+
+				
+
+			}			 			
+
+			if (listaPaciente.isEmpty())
+				return null;
+			return listaPaciente;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Paciente> findByNome(String nome) {
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+							" idpaciente, "
+							+ " nome, "
+							+ " cpf, "
+							+ " rg, "
+							+ " ativo, "
+							+ " nome_mae, "
+							+ " data_nascimento, "
+							+ " observacao, "
+							+ " numero_prontuario, " 
+							+ "  idsituacao " +
+							"  FROM " +
+							"  paciente " +			
+							" WHERE " +
 					"  nome ilike ? ");
 
 			stat.setString(1, nome == null ? "%" : "%"+nome+"%");
@@ -150,8 +206,119 @@ public class PacienteDAO extends DAO<Paciente>{
 		}
 		return null;
 	}
+	
+	public List<Paciente> findByCodigo(String codigo) {
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
 
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+							" idpaciente, "
+							+ "nome,"
+							+ " cpf,"
+							+ " rg,"
+							+ " ativo,"
+							+ " nome_mae,"
+							+ " data_nascimento,"
+							+ " observacao,"
+							+ " numero_prontuario, " 
+							+ "  idsituacao  " +
+							"  FROM " +
+							"  paciente " +			
+							"WHERE " +
+					"  numero_prontuario ilike ? ");
 
+			stat.setString(1, codigo == null ? "%" : "%"+codigo+"%");
+			ResultSet rs = stat.executeQuery();
+
+			List<Paciente> listaPaciente = new ArrayList<Paciente>();
+
+			while(rs.next()) {
+				Paciente paciente = new Paciente();
+				paciente.setIdpaciente(rs.getInt("idpaciente"));
+				paciente.setNome(rs.getString("nome"));
+				paciente.setCpf(rs.getString("cpf"));
+				paciente.setRg(rs.getString("rg"));
+				paciente.setAtivo(rs.getBoolean("ativo"));
+				paciente.setNomeMae(rs.getString("nome_mae"));
+				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+				paciente.setObservacao(rs.getString("observacao"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
+				
+				listaPaciente.add(paciente);
+
+				
+
+			}			 			
+
+			if (listaPaciente.isEmpty())
+				return null;
+			return listaPaciente;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Paciente> findByCpf(String cpf) {
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+							" idpaciente, "
+							+ "nome,"
+							+ " cpf,"
+							+ " rg,"
+							+ " ativo,"
+							+ " nome_mae,"
+							+ " data_nascimento,"
+							+ " observacao,"
+							+ " numero_prontuario, " 
+							+ "  idsituacao  " +
+							"  FROM " +
+							"  paciente " +			
+							"WHERE " +
+					"  cpf ilike ? ");
+
+			stat.setString(1, cpf == null ? "%" : "%"+cpf+"%");
+			ResultSet rs = stat.executeQuery();
+
+			List<Paciente> listaPaciente = new ArrayList<Paciente>();
+
+			while(rs.next()) {
+				Paciente paciente = new Paciente();
+				paciente.setIdpaciente(rs.getInt("idpaciente"));
+				paciente.setNome(rs.getString("nome"));
+				paciente.setCpf(rs.getString("cpf"));
+				paciente.setRg(rs.getString("rg"));
+				paciente.setAtivo(rs.getBoolean("ativo"));
+				paciente.setNomeMae(rs.getString("nome_mae"));
+				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+				paciente.setObservacao(rs.getString("observacao"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
+				
+				listaPaciente.add(paciente);
+
+				
+
+			}			 			
+
+			if (listaPaciente.isEmpty())
+				return null;
+			return listaPaciente;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@Override
 	public List<Paciente> findAll() {
 		Connection conn = getConnection();
