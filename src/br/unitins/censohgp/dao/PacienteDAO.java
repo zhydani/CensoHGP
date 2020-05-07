@@ -31,7 +31,7 @@ public class PacienteDAO extends DAO<Paciente>{
 		PreparedStatement stat = conn.prepareStatement(
 				"INSERT INTO " +
 						" paciente " +
-						" ( nome, cpf, rg, ativo, nome_mae, data_nascimento, observacao, numero_prontuario) " +
+						" ( nome, cpf , rg , ativo , nome_mae, data_nascimento , observacao , numero_prontuario ) " +
 						" VALUES " +
 						" (?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 
@@ -48,14 +48,14 @@ public class PacienteDAO extends DAO<Paciente>{
 		
 	}
 	
-	public void createP(int idsituacao) throws SQLException {
+	public void create(int idsituacao) throws SQLException {
 		
 		Connection  conn = getConnection();
 		
 		PreparedStatement stat = conn.prepareStatement(
 				"INSERT INTO " +
 						" paciente " +
-						" ( nome, cpf, rg, idsituacao_paciente ativo, nome_mae, data_nascimento, observacao, numero_prontuario) " +
+						" ( nome , cpf, rg , idsituacao_paciente , ativo, nome_mae , data_nascimento , observacao , numero_prontuario ) " +
 						" VALUES " +
 						" (?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 		Paciente paciente = new Paciente();
@@ -79,13 +79,13 @@ public class PacienteDAO extends DAO<Paciente>{
 
 		PreparedStatement stat = conn.prepareStatement(
 				"UPDATE paciente SET " +
-						"  nome = ?,"
-						+ " cpf = ?,"
-						+ " rg = ?,"
-						+ " ativo = ?,"
-						+ " nome_mae = ?,"
-						+ " data_nascimento = ?,"
-						+ " observacao = ?,"
+						"  nome = ?, "
+						+ " cpf = ?, "
+						+ " rg = ?, "
+						+ " ativo = ?, "
+						+ " nome_mae = ?, "
+						+ " data_nascimento = ?, "
+						+ " observacao = ?, "
 						+ " numero_prontuario = ?, " 
 						+ " idsituacao = ? " +
 						" WHERE " +
@@ -129,17 +129,17 @@ public class PacienteDAO extends DAO<Paciente>{
 			PreparedStatement stat = conn.prepareStatement(
 					"SELECT " +
 							" idpaciente, "
-							+ "nome,"
-							+ " cpf,"
-							+ " rg,"
-							+ " ativo,"
-							+ " nome_mae,"
-							+ " data_nascimento,"
-							+ " observacao,"
+							+ " nome, "
+							+ " cpf, "
+							+ " rg, "
+							+ " ativo, "
+							+ " nome_mae, "
+							+ " data_nascimento, "
+							+ " observacao, "
 							+ " numero_prontuario, " 
-							+ "  idsituacao  " +
+							+ " idsituacao  " +
 							"  FROM " +
-							"  paciente " +			
+							" public.paciente " +			
 							"WHERE " +
 					"  nome ilike ? ");
 
@@ -187,17 +187,17 @@ public class PacienteDAO extends DAO<Paciente>{
 			PreparedStatement stat = conn.prepareStatement(
 					"SELECT " +
 							" idpaciente, "
-							+ "nome,"
-							+ " cpf,"
-							+ " rg,"
-							+ " ativo,"
-							+ " nome_mae,"
-							+ " idsituacao,"
-							+ " data_nascimento,"
-							+ " observacao,"
+							+ " nome, "
+							+ " cpf, "
+							+ " rg, "
+							+ " ativo, "
+							+ " nome_mae, "
+							+ " idsituacao, "
+							+ " data_nascimento, "
+							+ " observacao, "
 							+ " numero_prontuario  " +
-							"FROM " +
-							"  paciente ");
+							" FROM " +
+							"public.paciente ");
 
 			ResultSet rs = stat.executeQuery();
 
@@ -238,14 +238,14 @@ public class PacienteDAO extends DAO<Paciente>{
 			PreparedStatement stat = conn.prepareStatement(
 					"SELECT " +
 							" idpaciente, "
-							+ " nome,"
-							+ " cpf,"
-							+ " rg,"
-							+ " ativo,"
-							+ " nome_mae,"
-							+ " idsituacao,"
-							+ " data_nascimento,"
-							+ " observacao,"
+							+ " nome, "
+							+ " cpf, "
+							+ " rg, "
+							+ " ativo, "
+							+ " nome_mae, "
+							+ " idsituacao, "
+							+ " data_nascimento, "
+							+ " observacao, "
 							+ " numero_prontuario " +
 							" FROM " +
 							"  paciente "

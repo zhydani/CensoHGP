@@ -20,6 +20,7 @@ public class BuscaPacienteController implements Serializable {
 	private static final long serialVersionUID = -9042867479794257960L;
 	private String nome;
 	private Paciente paciente;
+
 	private List<Paciente> listaPaciente = null;
 
 	public Paciente getPaciente() {
@@ -38,16 +39,25 @@ public class BuscaPacienteController implements Serializable {
 		this.nome = nome;
 	}
 
-	public void buscar(String nome) {
-		listaPaciente = null;
+//	public String buscar(String nome) {
+//		PacienteDAO dao = new PacienteDAO();
+//		Paciente paciente = (Paciente) dao.findByNome(nome);
+//		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+//		flash.put("pacienteFlash", paciente);
+//
+//		return "listabuscapaciente.xhtml?faces-redirect=true";
+//	}
 
+	public void buscar() {
+		listaPaciente = null;
+		System.out.println("oi");
 	}
 
 	public String editar(int id) {
 		PacienteDAO dao = new PacienteDAO();
-		Paciente paciente = dao.findById(id);
+		paciente = dao.findById(id);
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-		flash.put("pacienteFlash", paciente);
+		flash.put("pacientefFlash", paciente);
 
 		return "cadastropaciente.xhtml?faces-redirect=true";
 	}

@@ -83,7 +83,7 @@ public class CadastroPacienteController implements Serializable {
 				PacienteDAO dao = new PacienteDAO();
 				// faz a inclusao no banco de dados
 				try {
-					dao.createP(situacaoSelecionado.getIdsituacao());
+					dao.create(situacaoSelecionado.getIdsituacao());
 					dao.getConnection().commit();
 					Util.addMessageInfo("Inclusão realizada com sucesso.");
 					limpar();
