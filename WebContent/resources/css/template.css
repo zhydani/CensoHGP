@@ -6,12 +6,12 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 	background-repeat: no-repeat;*/
-	background-color: #ced8ff;
+	background-color: #fff;
 	color: #fff;
 }
 
 .bg-navbar {
-	background: #da8300 !important;
+	background: #1946b4 !important;
 }
 
 .mar {
@@ -25,8 +25,7 @@ a, a:hover, a:focus {
 }
 
 .navbar {
-	padding: 15px 10px;
-	background: #fff;
+	padding: 10px 10px;
 	border: none;
 	border-radius: 0;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -152,3 +151,17 @@ a.article, a.article:hover {
  /* .button-menu{
 	text-shadow: 0px 0px 2px #000000;
 } */
+
+
+.footer {
+	grid-area: footer;
+	background: #ff9600;
+	height: 72px;
+	text-align: center;
+	vertical-align: middle;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: fixed;
+	
+}
