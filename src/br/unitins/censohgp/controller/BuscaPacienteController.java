@@ -104,7 +104,4 @@ public class BuscaPacienteController implements Serializable {
 //		return "true";
 //	}
 
-	public Tipo[] getListaTipo() {
-		return Tipo.values();
-	}
 }
