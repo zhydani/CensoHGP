@@ -104,120 +104,118 @@
 								<h:messages id="messages" infoStyle="color:green"
 									warnStyle="color:orange" errorStyle="color:red"
 									globalOnly="false" />
-								<h:panelGrid id="panelPrincipal" columns="1"
-									class="d-flex justify-content-center">
 
-									<h3 class="text-center mb-5">Cadastro de Usuário</h3>
-									<!-- <hr class="pb-3"></hr> -->
-
-									<h:panelGrid columns="1"
-										class="mr-2  d-flex justify-content-center">
-
-										<h:inputText id="name"
-											value="#{cadastroUsuarioController.usuario.nome}"
-											styleClass="form-control mb-3 d-flex justify-content-center"
-											size="67">
-											<f:passThroughAttribute name="placeholder" value="Nome" />
-										</h:inputText>
-									</h:panelGrid>
+								<div class="card text-center">
+									<div class="card-header">Cadastro de Usuário</div>
+									<div class="card-body mt-3 mx-5">
+										<h:panelGrid id="panelPrincipal" columns="1"
+											class="d-flex justify-content-center">
 
 
 
+											<h:panelGrid columns="1"
+												class="d-flex justify-content-center mb-4">
+
+												<h:inputText id="name"
+													value="#{cadastroUsuarioController.usuario.nome}"
+													styleClass="form-control pr-3 d-flex justify-content-center"
+													size="72">
+													<f:passThroughAttribute name="placeholder" value="Nome" />
+												</h:inputText>
+											</h:panelGrid>
 
 
-									<h:panelGrid columns="2" class="d-flex justify-content-center">
-										<h:panelGrid columns="1" class="mr-2">
-											<h:inputText
-												value="#{cadastroUsuarioController.usuario.matricula}"
-												styleClass="form-control pr-5 mr-5" size="21">
-												<f:passThroughAttribute name="placeholder" value="Matrícula" />
-											</h:inputText>
+
+
+
+											<h:panelGrid columns="2"
+												class="d-flex justify-content-center mb-4">
+												<h:panelGrid columns="1" class="mr-4">
+													<h:inputText
+														value="#{cadastroUsuarioController.usuario.matricula}"
+														styleClass="form-control" size="33">
+														<f:passThroughAttribute name="placeholder"
+															value="Matrícula" />
+													</h:inputText>
+												</h:panelGrid>
+
+												<h:panelGrid columns="1">
+													<h:inputText
+														value="#{cadastroUsuarioController.usuario.email}"
+														requiredMessage="O campo login não pode ser nulo."
+														styleClass="form-control" size="32">
+														<f:passThroughAttribute name="placeholder" value="E-mail" />
+													</h:inputText>
+												</h:panelGrid>
+
+
+											</h:panelGrid>
+
+											<h:panelGrid columns="2"
+												class=" d-flex justify-content-center mb-3">
+
+												<h:panelGrid columns="1" class="mr-4">
+													<h:inputSecret
+														value="#{cadastroUsuarioController.usuario.senha}"
+														styleClass="form-control" size="33">
+														<f:passThroughAttribute name="placeholder" value="Senha" />
+													</h:inputSecret>
+												</h:panelGrid>
+
+
+												<h:panelGrid columns="1">
+													<h:inputSecret
+														value="#{cadastroUsuarioController.usuario.senha}"
+														styleClass="form-control" size="32">
+														<f:passThroughAttribute name="placeholder"
+															value="Confirmar Senha" />
+													</h:inputSecret>
+												</h:panelGrid>
+
+											</h:panelGrid>
+
+											<h:panelGrid columns="2" class="mx-2 form-group">
+												<h:outputLabel value="Tipo: "
+													class="font-weight-bold mr-5 mt-1" />
+												<h:selectOneMenu
+													value="#{cadastroUsuarioController.usuario.tipo}"
+													styleClass="form-control pr-5 mr-5">
+													<f:selectItem itemLabel="Selecione ...." />
+													<f:selectItems
+														value="#{cadastroUsuarioController.listaTipo}" var="tipo"
+														itemLabel="#{tipo.label}" itemValue="#{tipo}" />
+												</h:selectOneMenu>
+											</h:panelGrid>
+
 										</h:panelGrid>
+										<div class="mt-2 d-flex justify-content-end">
+											<h:panelGrid id="panelBotoes" columns="4">
 
-										<h:panelGrid columns="1" class="mr-2">
-											<h:inputText
-												value="#{cadastroUsuarioController.usuario.email}"
-												requiredMessage="O campo login não pode ser nulo."
-												styleClass="form-control pr-5 mr-5">
-												<f:passThroughAttribute name="placeholder" value="E-mail" />
-											</h:inputText>
-										</h:panelGrid>
+												<h:commandButton value="Incluir"
+													disabled="#{heroiController.heroi.id != null}"
+													actionListener="#{heroiController.incluir()}"
+													class="btn btn-azul mr-3">
+													<f:ajax render="formPrincipal" execute="panelPrincipal"
+														resetValues="true" />
 
+												</h:commandButton>
 
-									</h:panelGrid>
-
-									<h:panelGrid columns="2"
-										class=" d-flex justify-content-center mb-3 mt-3">
-
-										<h:panelGrid columns="1" class="mr-2">
-											<h:inputSecret
-												value="#{cadastroUsuarioController.usuario.senha}"
-												styleClass="form-control pr-5 mr-5" size="21">
-												<f:passThroughAttribute name="placeholder" value="Senha" />
-											</h:inputSecret>
-										</h:panelGrid>
-
-
-										<h:panelGrid columns="1" class="mr-2">
-											<h:inputSecret
-												value="#{cadastroUsuarioController.usuario.senha}"
-												styleClass="form-control pr-5 mr-5">
-												<f:passThroughAttribute name="placeholder"
-													value="Confirmar Senha" />
-											</h:inputSecret>
-										</h:panelGrid>
-
-									</h:panelGrid>
-
-									<h:panelGrid columns="2" class="mx-2 form-group">
-										<h:outputLabel value="Tipo: "
-											class="font-weight-bold mr-5 mt-1" />
-										<h:selectOneMenu
-											value="#{cadastroUsuarioController.usuario.tipo}"
-											styleClass="form-control pr-5 mr-5">
-											<f:selectItem itemLabel="Selecione ...." />
-											<f:selectItems value="#{cadastroUsuarioController.listaTipo}"
-												var="tipo" itemLabel="#{tipo.label}" itemValue="#{tipo}" />
-										</h:selectOneMenu>
-									</h:panelGrid>
-
-								</h:panelGrid>
-								<div class="mt-3 d-flex justify-content-start">
-									<h:panelGrid id="panelBotoes" columns="4">
-
-										<h:commandButton value="Incluir"
-											disabled="#{heroiController.heroi.id != null}"
-											actionListener="#{heroiController.incluir()}"
-											class="btn btn-success mr-3">
-											<f:ajax render="formPrincipal" execute="panelPrincipal"
-												resetValues="true" />
-
-										</h:commandButton>
-
-										<h:commandButton value="Limpar"
-											action="#{heroiController.limpar()}"
-											class="btn btn-info mr-3">
-											<f:ajax render="formPrincipal" execute="@this" />
-										</h:commandButton>
-										<h:commandButton value="Alterar"
-											disabled="#{heroiController.heroi.id == null}"
-											actionListener="#{heroiController.alterar()}"
-											class="btn btn-warning mr-3">
-											<f:ajax render="formPrincipal messages"
-												execute="formPrincipal" />
-										</h:commandButton>
-
-										<h:commandButton value="Excluir"
-											disabled="#{heroiController.heroi.id == null}"
-											actionListener="#{heroiController.excluir()}"
-											class="btn btn-danger mr-3">
-											<f:ajax render="@all" execute="@this" />
-										</h:commandButton>
+												<h:commandButton value="Excluir"
+													disabled="#{heroiController.heroi.id == null}"
+													actionListener="#{heroiController.excluir()}"
+													class="btn btn-amarelo">
+													<f:ajax render="@all" execute="@this" />
+												</h:commandButton>
 
 
 
-									</h:panelGrid>
+											</h:panelGrid>
+										</div>
+									</div>
+
 								</div>
+
+
 							</h:form>
 						</div>
 
@@ -229,8 +227,9 @@
 		</table>
 	</h:form>
 
-	<div class="box footer pt-4" style="text-align: center;">
-		<h:outputText value="2020 - Todos os direitos reservados."/>
+	<div class="box footer pt-4 font-weight-lighter "
+		style="text-align: center;">
+		<h:outputText value="2020 - Todos os direitos reservados." />
 	</div>
 
 	<script>

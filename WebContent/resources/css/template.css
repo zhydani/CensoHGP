@@ -28,7 +28,7 @@ a, a:hover, a:focus {
 	padding: 10px 10px;
 	border: none;
 	border-radius: 0;
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-btn {
@@ -148,10 +148,20 @@ a.article, a.article:hover {
 	width: 100%;
 }
 
- /* .button-menu{
+/* .button-menu{
 	text-shadow: 0px 0px 2px #000000;
 } */
+.btn-azul {
+	background: #1946b4;
+	color: #fff;
+	width: 120px;
+}
 
+.btn-amarelo {
+	background: #ff9600;
+	color: #fff;
+	width: 120px;
+}
 
 .footer {
 	grid-area: footer;
@@ -163,5 +173,4 @@ a.article, a.article:hover {
 	left: 0;
 	right: 0;
 	position: fixed;
-	
 }
