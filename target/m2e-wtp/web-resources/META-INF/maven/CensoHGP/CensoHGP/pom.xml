@@ -8,7 +8,11 @@
 	<packaging>war</packaging>
 	<dependencies>
 
-
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>3.6</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.glassfish/javax.faces -->
 		<dependency>
 			<groupId>org.glassfish</groupId>

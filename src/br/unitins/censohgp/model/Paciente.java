@@ -6,27 +6,28 @@ public class Paciente {
 
 	private Integer idpaciente;
 	private String nome;
-	private String cpf;
-	private String rg;
+	private int cpf;
+	private int rg;
 	private Situacao situacao;
 	private Boolean ativo = Boolean.TRUE;
 	private String nomeMae;
 	private Sexo sexo;
 	private LocalDate dataNascimento;
 	private String observacao;
-	private Integer idlocalTransferencia;
-	private String numeroProntuario;
+	private Departamento idlocalTransferencia;
+	private int numeroProntuario;
+	private Precaucao precaucao;
+	
 	
 	public Paciente() {
 		
 		super();
 		
 	}
-	
 
-	public Paciente(Integer idpaciente, String nome, String cpf, String rg, Situacao situacao, Boolean ativo,
-			String nomeMae, Sexo tipoSexo, LocalDate dataNascimento, String observacao,
-			Integer idlocalTransferencia, String numeroProntuario) {
+	public Paciente(Integer idpaciente, String nome, int cpf, int rg, Situacao situacao, Boolean ativo, String nomeMae,
+			Sexo sexo, LocalDate dataNascimento, String observacao, Departamento idlocalTransferencia, int numeroProntuario,
+			Precaucao precaucao) {
 		super();
 		this.idpaciente = idpaciente;
 		this.nome = nome;
@@ -35,12 +36,18 @@ public class Paciente {
 		this.situacao = situacao;
 		this.ativo = ativo;
 		this.nomeMae = nomeMae;
-		this.sexo = tipoSexo;
+		this.sexo = sexo;
 		this.dataNascimento = dataNascimento;
 		this.observacao = observacao;
 		this.idlocalTransferencia = idlocalTransferencia;
 		this.numeroProntuario = numeroProntuario;
+		this.precaucao = precaucao;
 	}
+
+
+
+
+
 
 
 	@Override
@@ -58,26 +65,6 @@ public class Paciente {
 
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
-		result = prime * result + ((idlocalTransferencia == null) ? 0 : idlocalTransferencia.hashCode());
-		result = prime * result + ((idpaciente == null) ? 0 : idpaciente.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((nomeMae == null) ? 0 : nomeMae.hashCode());
-		result = prime * result + ((numeroProntuario == null) ? 0 : numeroProntuario.hashCode());
-		result = prime * result + ((observacao == null) ? 0 : observacao.hashCode());
-		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
-		result = prime * result + ((situacao == null) ? 0 : situacao.hashCode());
-		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
-		return result;
-	}
-
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -91,10 +78,7 @@ public class Paciente {
 				return false;
 		} else if (!ativo.equals(other.ativo))
 			return false;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
+		if (cpf != other.cpf)
 			return false;
 		if (dataNascimento == null) {
 			if (other.dataNascimento != null)
@@ -121,40 +105,45 @@ public class Paciente {
 				return false;
 		} else if (!nomeMae.equals(other.nomeMae))
 			return false;
-		if (numeroProntuario == null) {
-			if (other.numeroProntuario != null)
-				return false;
-		} else if (!numeroProntuario.equals(other.numeroProntuario))
+		if (numeroProntuario != other.numeroProntuario)
 			return false;
 		if (observacao == null) {
 			if (other.observacao != null)
 				return false;
 		} else if (!observacao.equals(other.observacao))
 			return false;
-		if (rg == null) {
-			if (other.rg != null)
+		if (precaucao == null) {
+			if (other.precaucao != null)
 				return false;
-		} else if (!rg.equals(other.rg))
+		} else if (!precaucao.equals(other.precaucao))
+			return false;
+		if (rg != other.rg)
+			return false;
+		if (sexo == null) {
+			if (other.sexo != null)
+				return false;
+		} else if (!sexo.equals(other.sexo))
 			return false;
 		if (situacao == null) {
 			if (other.situacao != null)
 				return false;
 		} else if (!situacao.equals(other.situacao))
 			return false;
-		if (sexo != other.sexo)
-			return false;
 		return true;
 	}
-
 
 	public Integer getIdpaciente() {
 		return idpaciente;
 	}
 
-
 	public void setIdpaciente(Integer idpaciente) {
 		this.idpaciente = idpaciente;
 	}
+
+
+
+
+
 
 
 	public String getNome() {
@@ -162,29 +151,59 @@ public class Paciente {
 	}
 
 
+
+
+
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
 
-	public String getCpf() {
+
+
+
+
+
+	public int getCpf() {
 		return cpf;
 	}
 
 
-	public void setCpf(String cpf) {
+
+
+
+
+
+	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
 
 
-	public String getRg() {
+
+
+
+
+
+	public int getRg() {
 		return rg;
 	}
 
 
-	public void setRg(String rg) {
+
+
+
+
+
+	public void setRg(int rg) {
 		this.rg = rg;
 	}
+
+
+
+
+
 
 
 	public Situacao getSituacao() {
@@ -192,9 +211,19 @@ public class Paciente {
 	}
 
 
+
+
+
+
+
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
+
+
+
+
+
 
 
 	public Boolean getAtivo() {
@@ -202,9 +231,19 @@ public class Paciente {
 	}
 
 
+
+
+
+
+
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
+
+
+
+
+
 
 
 	public String getNomeMae() {
@@ -212,9 +251,19 @@ public class Paciente {
 	}
 
 
+
+
+
+
+
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
 	}
+
+
+
+
+
 
 
 	public Sexo getSexo() {
@@ -222,9 +271,19 @@ public class Paciente {
 	}
 
 
+
+
+
+
+
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
+
+
+
+
+
 
 
 	public LocalDate getDataNascimento() {
@@ -232,9 +291,19 @@ public class Paciente {
 	}
 
 
+
+
+
+
+
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
+
+
+
+
 
 
 	public String getObservacao() {
@@ -242,29 +311,75 @@ public class Paciente {
 	}
 
 
+
+
+
+
+
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
 
 
-	public Integer getIdlocalTransferencia() {
+
+
+
+
+
+	public Departamento getIdlocalTransferencia() {
 		return idlocalTransferencia;
 	}
 
 
-	public void setIdlocalTransferencia(Integer idlocalTransferencia) {
+
+
+
+
+
+	public void setIdlocalTransferencia(Departamento idlocalTransferencia) {
 		this.idlocalTransferencia = idlocalTransferencia;
 	}
 
 
-	public String getNumeroProntuario() {
+
+
+
+
+
+	public int getNumeroProntuario() {
 		return numeroProntuario;
 	}
 
 
-	public void setNumeroProntuario(String numeroProntuario) {
+
+
+
+
+
+	public void setNumeroProntuario(int numeroProntuario) {
 		this.numeroProntuario = numeroProntuario;
 	}
+
+
+
+
+
+
+
+	public Precaucao getPrecaucao() {
+		return precaucao;
+	}
+
+
+
+
+
+
+
+	public void setPrecaucao(Precaucao precaucao) {
+		this.precaucao = precaucao;
+	}
+
 
 		
 }

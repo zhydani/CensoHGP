@@ -13,6 +13,10 @@ public class CidadeDepartamento {
 		this.idcidade = idcidade;
 		this.cidade = cidade;
 	}
+	@Override
+	public String toString() {
+	    return String.format("idcidade", getIdcidade());
+	}
 	
 	@Override
 	public CidadeDepartamento clone() {

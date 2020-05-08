@@ -18,6 +18,11 @@ public class Situacao {
 	}
 
 	@Override
+	public String toString() {
+	    return String.format("idsituacao", getIdsituacao());
+	}
+	
+	@Override
 	public Situacao clone() {
 		
 		try {

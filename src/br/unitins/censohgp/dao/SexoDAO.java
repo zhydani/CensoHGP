@@ -45,10 +45,10 @@ public class SexoDAO extends DAO<Sexo> {
 		try {
 			PreparedStatement stat = conn.prepareStatement(
 					"SELECT " +
-							" idsexo, " +
+							" idgenero, " +
 							" nome  " +
 							" FROM " +
-					"  public.tipo_sexo ");
+					"  public.genero ");
 
 			ResultSet rs = stat.executeQuery();
 
@@ -56,7 +56,7 @@ public class SexoDAO extends DAO<Sexo> {
 
 			while(rs.next()) {
 				Sexo sexo = new Sexo();
-				sexo.setIdsexo(rs.getInt("idsexo"));
+				sexo.setIdsexo(rs.getInt("idgenero"));
 				sexo.setNome(rs.getString("nome"));
 
 				listaSexo.add(sexo);
@@ -71,38 +71,6 @@ public class SexoDAO extends DAO<Sexo> {
 			e.printStackTrace();
 		}
 		return null;	
-	}
-
-	public Sexo findById(Integer id) {
-		Connection conn = getConnection();
-
-		try {
-			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " +
-							"  idsexo, " +
-							"  nome  " +
-							"  FROM " +
-							"  public.tipo_sexo " +
-					"WHERE idsexo = ? ");
-
-			stat.setInt(1, id);
-
-			ResultSet rs = stat.executeQuery();
-
-			Sexo sexo = null;
-
-			if(rs.next()) {
-				sexo = new Sexo();
-				sexo.setIdsexo(rs.getInt("idsexo"));
-				sexo.setNome(rs.getString("nome"));
-			}
-
-			return sexo;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }

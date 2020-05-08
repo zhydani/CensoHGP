@@ -41,15 +41,17 @@
 
 					<h:outputLabel style="font-weight: bold;" value="Estados: " />
 					<h:selectOneMenu class="btn btn-secondary"
-						value="#{departamentoController.estadoSelecionado}">
+						value="#{departamentoController.departamento.estado}">
 						<f:selectItem itemLabel="Selecione o Estado" />
-						<f:selectItems value="#{departamentoController.listaEstados}" />
+						<f:selectItems value="#{departamentoController.listaEstados}" 
+						var="obj"  itemValue="#{obj}" itemLabel="#{obj.label}"/>
 					</h:selectOneMenu>
 					<h:outputLabel style="font-weight: bold;" value="Cidades: " />
 					<h:selectOneMenu class="btn btn-secondary"
-						value="#{departamentoController.cidadeSelecionado}">
+						value="#{departamentoController.departamento.cidade}">
 						<f:selectItem itemLabel="Selecione a Cidade" />
-						<f:selectItems value="#{departamentoController.listaCidades}" />
+						<f:selectItems value="#{departamentoController.listaCidades}"
+						var="obj"  itemValue="#{obj}" itemLabel="#{obj.label}" />
 					</h:selectOneMenu>
 					<h:outputLabel style="font-weight: bold;" value="Status: " />
 					<h:selectOneMenu class="btn btn-secondary"
@@ -67,12 +69,9 @@
 					<h:commandButton value="Incluir" class="btn btn-secondary"
 						disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
 						action="#{cadastroPacienteController.incluir()}">
-						<f:ajax render="formPrincipal" execute="panelPrincipal"
-							resetValues="true" />
 					</h:commandButton>
 					<h:commandButton value="Cancelar " class="btn btn-secondary"
 						action="#{cadastroPacienteController.alterar()}">
-						<f:ajax render="formPrincipal messages" execute="formPrincipal" />
 					</h:commandButton>
 
 				</h:panelGrid>

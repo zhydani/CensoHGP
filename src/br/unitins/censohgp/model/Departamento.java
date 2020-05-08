@@ -38,19 +38,9 @@ public class Departamento {
 		return null;
 		
 	}
-
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
-		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result + ((idlocalTransferencia == null) ? 0 : idlocalTransferencia.hashCode());
-		result = prime * result + ((nomeDepartamento == null) ? 0 : nomeDepartamento.hashCode());
-		result = prime * result + ((nomeHospital == null) ? 0 : nomeHospital.hashCode());
-		result = prime * result + numeroLeitos;
-		return result;
+	public String toString() {
+	    return String.format("idlocal_transferencia", getIdlocalTransferencia());
 	}
 
 	@Override
