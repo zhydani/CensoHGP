@@ -32,8 +32,6 @@ public class CadastroPacienteController implements Serializable {
 	 */
 	private static final long serialVersionUID = -6710627767346612233L;
 		private Paciente paciente;
-		private Situacao situacaoSelecionado;
-		private Sexo sexoSelecionado;
 		
 		private List<Paciente> listaPaciente;
 		private List<SelectItem> listaSexo;
@@ -75,6 +73,8 @@ public class CadastroPacienteController implements Serializable {
 					dao.create(getPaciente());
 					dao.getConnection().commit();
 					Util.addMessageInfo("Inclusão realizada com sucesso.");
+					limpar();
+					listaPaciente = null;
 				} catch (SQLException e) {
 					dao.rollbackConnection();
 					dao.closeConnection();
@@ -218,23 +218,4 @@ public class CadastroPacienteController implements Serializable {
 			
 			return listadepartamento;
 		}
-
-
-
-		public Situacao getSituacaoSelecionado() {
-			return situacaoSelecionado;
-		}
-
-		public void setSituacaoSelecionado(Situacao situacaoSelecionado) {
-			this.situacaoSelecionado = situacaoSelecionado;
-		}
-
-		public Sexo getSexoSelecionado() {
-			return sexoSelecionado;
-		}
-
-		public void setSexoSelecionado(Sexo sexoSelecionado) {
-			this.sexoSelecionado = sexoSelecionado;
-		}
-
 	}
