@@ -76,10 +76,6 @@ public class DepartamentoDAO extends DAO<Departamento> {
 
 			Connection  conn = getConnection();
 
-			CidadeDepartamentoDAO dao = new CidadeDepartamentoDAO(conn);
-			dao.delete(id);
-			EstadoDepartamentoDAO dao1 = new EstadoDepartamentoDAO(conn);
-			dao1.delete(id);
 			
 			PreparedStatement stat = conn.prepareStatement(
 					"DELETE FROM public.departamento WHERE idlocal_transferencia = ?");
@@ -116,18 +112,6 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
 					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
 					departamento.setAtivo(StatusDepartamento.valueOf((rs.getInt("ativo"))));
-					
-					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);
-					departamento.setCidade(dep.findById(departamento.getIdlocalTransferencia()));
-					if (departamento.getCidade() == null)
-						departamento.setCidade(new CidadeDepartamento());
-
-					EstadoDepartamentoDAO depa = new EstadoDepartamentoDAO(conn);
-					departamento.setEstado(depa.findById(departamento.getIdlocalTransferencia()));
-					if (departamento.getEstado() == null)
-						departamento.setEstado(new EstadoDepartamento());
-
-					
 					
 					listaDepartamento.add(departamento);
 				}
@@ -173,15 +157,6 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
 					departamento.setAtivo(StatusDepartamento.valueOf((rs.getInt("ativo"))));
 					
-					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);
-					departamento.setCidade(dep.findById(departamento.getIdlocalTransferencia()));
-					if (departamento.getCidade() == null)
-						departamento.setCidade(new CidadeDepartamento());
-
-					EstadoDepartamentoDAO depa = new EstadoDepartamentoDAO(conn);
-					departamento.setEstado(depa.findById(departamento.getIdlocalTransferencia()));
-					if (departamento.getEstado() == null)
-						departamento.setEstado(new EstadoDepartamento());
 					
 				}
 				
