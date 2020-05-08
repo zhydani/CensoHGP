@@ -53,16 +53,18 @@ body{
  fieldset{
  border:  2px solid black;
  border-radius: 10px;
- margin: 50px;
+ margin-left: 70px;
+ margin-right: 70px;
+ margin: 30px;
  }
 .ui-fieldset .ui-state-default {
-    background: LightSlateGray;
+    background: DarkSalmon	;
     color: white;
 }
 .ui-fieldset legend {
-	font-size: 14px;
+	font-size: 12px;
 	height: 40px;
-	width: 145px;
+	width: 155px;
 	align-self: center;
 }
 

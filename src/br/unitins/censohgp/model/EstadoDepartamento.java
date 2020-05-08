@@ -14,6 +14,11 @@ public class EstadoDepartamento {
 	}
 	
 	@Override
+	public String toString() {
+	    return String.format("idestado", getIdestado());
+	}
+	
+	@Override
 	public EstadoDepartamento clone() {
 		
 		try {

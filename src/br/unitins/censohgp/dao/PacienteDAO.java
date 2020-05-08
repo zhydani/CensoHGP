@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.unitins.censohgp.model.Paciente;
-import br.unitins.censohgp.model.Situacao;
-import br.unitins.censohgp.model.Sexo;
+import br.unitins.censohgp.model.Precaucao;
 
 public class PacienteDAO extends DAO<Paciente>{
 
@@ -31,46 +30,35 @@ public class PacienteDAO extends DAO<Paciente>{
 		PreparedStatement stat = conn.prepareStatement(
 				"INSERT INTO " +
 						" paciente " +
-						" ( nome, cpf, rg, ativo, nome_mae, data_nascimento, observacao, numero_prontuario) " +
+						" ( nome, cpf, rg, ativo, idsituacao, idgenero, nome_mae, data_nascimento, observacao, numero_prontuario, idlocal_transferencia ) " +
 						" VALUES " +
-						" (?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
+						" (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 
 		stat.setString(1, paciente.getNome());
-		stat.setString(2, paciente.getCpf());
-		stat.setString(3, paciente.getRg());
+		stat.setInt(2, paciente.getCpf());
+		stat.setInt(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
-		stat.setString(5, paciente.getNomeMae());
+		stat.setInt(5, paciente.getSituacao().getIdsituacao());
+		stat.setInt(6, paciente.getSexo().getIdsexo());
+		stat.setString(7, paciente.getNomeMae());
 		Date date = Date.valueOf(paciente.getDataNascimento());
-		stat.setDate(6, date);
-		stat.setString(7, paciente.getObservacao());
-		stat.setString(8, paciente.getNumeroProntuario());
+		stat.setDate(8, date);
+		stat.setString(9, paciente.getObservacao());
+		stat.setInt(10, paciente.getNumeroProntuario());
+		stat.setInt(11, paciente.getIdlocalTransferencia().getIdlocalTransferencia());
+		
 		stat.execute();
-		
-	}
-	
-	public void createP(int idsituacao) throws SQLException {
-		
-		Connection  conn = getConnection();
-		
-		PreparedStatement stat = conn.prepareStatement(
-				"INSERT INTO " +
-						" paciente " +
-						" ( nome, cpf, rg, idsituacao_paciente ativo, nome_mae, data_nascimento, observacao, numero_prontuario) " +
-						" VALUES " +
-						" (?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
-		Paciente paciente = new Paciente();
-		stat.setString(1, paciente.getNome());
-		stat.setString(2, paciente.getCpf());
-		stat.setString(3, paciente.getRg());
-		stat.setInt(4, idsituacao);
-		stat.setBoolean(5, paciente.getAtivo());
-		stat.setString(6, paciente.getNomeMae());
-		Date date = Date.valueOf(paciente.getDataNascimento());
-		stat.setDate(7, date);
-		stat.setString(8, paciente.getObservacao());
-		stat.setString(9, paciente.getNumeroProntuario());
-		stat.execute();
-		
+
+		// obtendo o id gerado pela tabela do banco de dados
+		ResultSet rs = stat.getGeneratedKeys();
+		rs.next();
+		Integer value = rs.getInt("idpaciente");
+
+		paciente.getPrecaucao().setIdprecaucao(value);
+		PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+		dao.create(paciente.getPrecaucao());
+
+
 	}
 
 	@Override
@@ -90,16 +78,16 @@ public class PacienteDAO extends DAO<Paciente>{
 						+ " idsituacao = ? " +
 						" WHERE " +
 				" idpaciente = ? ");
-		
+
 		stat.setString(1, paciente.getNome());
-		stat.setString(2, paciente.getCpf());
-		stat.setString(3, paciente.getRg());
+		stat.setInt(2, paciente.getCpf());
+		stat.setInt(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setString(5, paciente.getNomeMae());
 		Date date = Date.valueOf(paciente.getDataNascimento());
 		stat.setDate(6, date);
 		stat.setString(7, paciente.getObservacao());
-		stat.setString(8, paciente.getNumeroProntuario());
+		stat.setInt(8, paciente.getNumeroProntuario());
 		stat.setInt(9, paciente.getIdpaciente());
 		stat.execute();
 
@@ -110,16 +98,16 @@ public class PacienteDAO extends DAO<Paciente>{
 
 		Connection conn = getConnection();
 
-		SituacaoDAO dao = new SituacaoDAO(conn);
+		PrecaucaoDAO dao = new PrecaucaoDAO(conn);
 		dao.delete(id);
-		
+
 		PreparedStatement stat = conn.prepareStatement("DELETE FROM public.paciente WHERE idpaciente = ?");
 		stat.setInt(1, id);
 
 		stat.execute();
 
 	}
-	
+
 	public List<Paciente> findByNome(String nome) {
 		Connection conn = getConnection();
 		if (conn == null) 
@@ -152,17 +140,24 @@ public class PacienteDAO extends DAO<Paciente>{
 				Paciente paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getString("rg"));
+				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
-				
+				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+
+				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
+				// caso o retorno do telefone seja nulo, instanciar um telefone
+				if (paciente.getPrecaucao() == null)
+					paciente.setPrecaucao(new Precaucao());
+
+
 				listaPaciente.add(paciente);
 
-				
+
 
 			}			 			
 
@@ -197,7 +192,7 @@ public class PacienteDAO extends DAO<Paciente>{
 							+ " observacao,"
 							+ " numero_prontuario  " +
 							"FROM " +
-							"  paciente ");
+					"  paciente ");
 
 			ResultSet rs = stat.executeQuery();
 
@@ -207,14 +202,20 @@ public class PacienteDAO extends DAO<Paciente>{
 				Paciente paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getString("rg"));
+				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
-				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+				paciente.setDataNascimento(rs.getDate("data_nascimento") == null ? null : (rs.getDate("data_nascimento").toLocalDate()));
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
-				
+				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+
+				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
+				// caso o retorno do telefone seja nulo, instanciar um telefone
+				if (paciente.getPrecaucao() == null)
+					paciente.setPrecaucao(new Precaucao());
+
 				listaPaciente.add(paciente);
 
 			}			 			
@@ -261,13 +262,19 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getString("rg"));
+				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
+				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+
+				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
+				// caso o retorno do telefone seja nulo, instanciar um telefone
+				if (paciente.getPrecaucao() == null)
+					paciente.setPrecaucao(new Precaucao());
 
 			}
 

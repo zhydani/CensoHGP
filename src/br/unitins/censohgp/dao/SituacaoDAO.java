@@ -23,15 +23,6 @@ public class SituacaoDAO extends DAO<Situacao>{
 
 				@Override
 				public void create(Situacao entity) throws SQLException {
-					Connection conn = getConnection();
-
-					PreparedStatement stat = conn.prepareStatement(
-							"INSERT INTO " + " public.situacao_paciente " + " ( idsituacao, nome ) " + "VALUES " + " ( ?, ? ) ");
-					stat.setInt(1, entity.getIdsituacao());
-					stat.setString(2, entity.getNome());
-
-					stat.execute();
-					stat.close();
 
 				}
 
@@ -42,14 +33,6 @@ public class SituacaoDAO extends DAO<Situacao>{
 
 				@Override
 				public void delete(int id) throws SQLException {
-					Connection conn = getConnection();
-
-					PreparedStatement stat = conn.prepareStatement(
-							"DELETE FROM public.situacao_paciente WHERE idsituacao =  ?");
-					stat.setInt(1, id);
-
-					stat.execute();
-					stat.close();
 				}
 
 				@Override
@@ -64,7 +47,7 @@ public class SituacaoDAO extends DAO<Situacao>{
 										" idsituacao, " +
 										" nome  " +
 										" FROM " +
-										"  public.situacao_paciente ");
+										"  situacao_paciente ");
 
 						ResultSet rs = stat.executeQuery();
 
@@ -87,38 +70,6 @@ public class SituacaoDAO extends DAO<Situacao>{
 						e.printStackTrace();
 					}
 					return null;	
-				}
-				
-				public Situacao findById(Integer id) {
-					Connection conn = getConnection();
-					
-					try {
-						PreparedStatement stat = conn.prepareStatement(
-								"SELECT " +
-								"  idsituacao, " +
-								"  nome  " +
-								"  FROM " +
-								"  public.situacao_paciente " +
-								"WHERE idsituacao = ? ");
-						
-						stat.setInt(1, id);
-						
-						ResultSet rs = stat.executeQuery();
-						
-						Situacao situacao = null;
-						
-						if(rs.next()) {
-							situacao = new Situacao();
-							situacao.setIdsituacao(rs.getInt("idsituacao"));
-							situacao.setNome(rs.getString("nome"));
-						}
-						
-						return situacao;
-					
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					return null;
 				}
 
 }

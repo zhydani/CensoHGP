@@ -36,8 +36,8 @@ public class DepartamentoDAO extends DAO<Departamento> {
 				
 			PreparedStatement stat = conn.prepareStatement(
 					"INSERT INTO " +
-				    "public.departamento " +
-				    " (nomehospital, numeroleitos, nomedepartamento, ativo) " +
+				    " public.departamento " +
+				    " (nome_hospital, numero_leitos, nome_departamento, ativo) " +
 					"VALUES " +
 				    " (?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 			stat.setString(1, dep.getNomeHospital());
@@ -46,18 +46,6 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			stat.setInt(4, dep.getAtivo().getValue());
 			
 			stat.execute();
-			
-			// obtendo o id gerado pela tabela do banco de dados
-			ResultSet rs = stat.getGeneratedKeys();
-			rs.next();
-			dep.getCidade().setIdcidade(rs.getInt("idcidade"));
-			CidadeDepartamentoDAO dao = new CidadeDepartamentoDAO(conn);
-			dao.create(dep.getCidade());
-			
-			dep.getEstado().setIdestado(rs.getInt("idestado"));
-			EstadoDepartamentoDAO dao1 = new EstadoDepartamentoDAO(conn);
-			dao1.create(dep.getEstado());
-
 				
 		}
 
@@ -67,12 +55,12 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			
 			PreparedStatement stat = conn.prepareStatement(
 					"UPDATE public.departamento SET " +
-				    " nomehospital = ?, " +
-				    " numeroleitos = ?, " +
-				    " nomedepartamento = ?, " +
+				    " nome_hospital = ?, " +
+				    " numero_leitos = ?, " +
+				    " nome_departamento = ?, " +
 				    " ativo = ?, " +
 					"WHERE " +
-				    " idlocaltransferencia = ? ");
+				    " idlocal_transferencia = ? ");
 			stat.setString(1, dep.getNomeHospital());
 			stat.setInt(2, dep.getNumeroLeitos());
 			stat.setString(3, dep.getNomeDepartamento());
@@ -94,7 +82,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			dao1.delete(id);
 			
 			PreparedStatement stat = conn.prepareStatement(
-					"DELETE FROM public.departamento WHERE idlocaltransferencia = ?");
+					"DELETE FROM public.departamento WHERE idlocal_transferencia = ?");
 			stat.setInt(1, id);
 			
 			stat.execute();
@@ -111,9 +99,9 @@ public class DepartamentoDAO extends DAO<Departamento> {
 				PreparedStatement stat = conn.prepareStatement(
 						"SELECT " +
 						"  iddepartamento, " +
-						"  nomehospital, " +
-						"  numeroleitos, " +
-						"  nomedepartamento, " +
+						"  nome_hospital, " +
+						"  numero_leitos, " +
+						"  nome_departamento, " +
 						"  ativo " +
 						"FROM " +
 						"  public.departamento ");
@@ -123,10 +111,10 @@ public class DepartamentoDAO extends DAO<Departamento> {
 				
 				while(rs.next()) {
 					Departamento departamento = new Departamento();
-					departamento.setIdlocalTransferencia(rs.getInt("id"));
-					departamento.setNomeHospital(rs.getString("nomehospital"));
-					departamento.setNumeroLeitos(rs.getInt("numeroleitos"));
-					departamento.setNomeDepartamento(rs.getString("nomedepartamento"));
+					departamento.setIdlocalTransferencia(rs.getInt("iddepartamento"));
+					departamento.setNomeHospital(rs.getString("nome_hospital"));
+					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
+					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
 					departamento.setAtivo(StatusDepartamento.valueOf((rs.getInt("ativo"))));
 					
 					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);
@@ -163,13 +151,13 @@ public class DepartamentoDAO extends DAO<Departamento> {
 				PreparedStatement stat = conn.prepareStatement(
 						"SELECT " +
 								"  iddepartamento, " +
-								"  nomehospital, " +
-								"  numeroleitos, " +
-								"  nomedepartamento, " +
+								"  nome_hospital, " +
+								"  numero_leitos, " +
+								"  nome_departamento, " +
 								"  ativo " +
 								"FROM " +
 								"  public.departamento " +
-						"WHERE idlocaltransferencia = ? ");
+						"WHERE idlocal_transferencia = ? ");
 				
 				stat.setInt(1, id);
 				
@@ -179,10 +167,10 @@ public class DepartamentoDAO extends DAO<Departamento> {
 				
 				if(rs.next()) {
 					departamento = new Departamento();
-					departamento.setIdlocalTransferencia(rs.getInt("id"));
-					departamento.setNomeHospital(rs.getString("nomehospital"));
-					departamento.setNumeroLeitos(rs.getInt("numeroleitos"));
-					departamento.setNomeDepartamento(rs.getString("nomedepartamento"));
+					departamento.setIdlocalTransferencia(rs.getInt("iddepartamento"));
+					departamento.setNomeHospital(rs.getString("nome_hospital"));
+					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
+					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
 					departamento.setAtivo(StatusDepartamento.valueOf((rs.getInt("ativo"))));
 					
 					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);

@@ -16,6 +16,11 @@ public class Sexo {
 		this.idsexo = idsexo;
 		this.nome = nome;
 	}
+	
+	@Override
+	public String toString() {
+	    return String.format("idsexo", getIdsexo());
+	}
 
 	@Override
 	public Sexo clone() {
