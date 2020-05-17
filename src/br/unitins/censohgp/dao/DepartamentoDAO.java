@@ -75,7 +75,6 @@ public class DepartamentoDAO extends DAO<Departamento> {
 		public void delete(int id) throws SQLException {
 
 			Connection  conn = getConnection();
-
 			
 			PreparedStatement stat = conn.prepareStatement(
 					"DELETE FROM public.departamento WHERE idlocal_transferencia = ?");
@@ -97,8 +96,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 						"  iddepartamento, " +
 						"  nome_hospital, " +
 						"  numero_leitos, " +
-						"  nome_departamento, " +
-						"  ativo " +
+						"  nome_departamento " +
 						"FROM " +
 						"  public.departamento ");
 				ResultSet rs = stat.executeQuery();
@@ -111,7 +109,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					departamento.setNomeHospital(rs.getString("nome_hospital"));
 					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
 					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
-					departamento.setAtivo(StatusDepartamento.valueOf((rs.getInt("ativo"))));
+					
 					
 					listaDepartamento.add(departamento);
 				}
@@ -157,6 +155,15 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
 					departamento.setAtivo(StatusDepartamento.valueOf((rs.getInt("ativo"))));
 					
+					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);
+					departamento.setCidade(dep.findById(departamento.getIdlocalTransferencia()));
+					if (departamento.getCidade() == null)
+						departamento.setCidade(new CidadeDepartamento());
+
+					EstadoDepartamentoDAO depa = new EstadoDepartamentoDAO(conn);
+					departamento.setEstado(depa.findById(departamento.getIdlocalTransferencia()));
+					if (departamento.getEstado() == null)
+						departamento.setEstado(new EstadoDepartamento());
 					
 				}
 				

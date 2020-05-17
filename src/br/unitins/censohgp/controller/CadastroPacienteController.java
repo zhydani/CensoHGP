@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.model.SelectItem;
@@ -14,11 +13,13 @@ import javax.inject.Named;
 import br.unitins.censohgp.dao.DAO;
 import br.unitins.censohgp.dao.DepartamentoDAO;
 import br.unitins.censohgp.dao.PacienteDAO;
+import br.unitins.censohgp.dao.PrecaucaoDAO;
 import br.unitins.censohgp.dao.SexoDAO;
 import br.unitins.censohgp.dao.SituacaoDAO;
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.model.Departamento;
 import br.unitins.censohgp.model.Paciente;
+import br.unitins.censohgp.model.Precaucao;
 import br.unitins.censohgp.model.Situacao;
 import br.unitins.censohgp.model.Sexo;
 
@@ -37,7 +38,7 @@ public class CadastroPacienteController implements Serializable {
 		private List<SelectItem> listaSexo;
 		private List<SelectItem> listasituacao;
 		private List<SelectItem> listadepartamento;
-
+		private List<SelectItem> listaprecaucao;
 		
 		public CadastroPacienteController() {
 			Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -218,4 +219,25 @@ public class CadastroPacienteController implements Serializable {
 			
 			return listadepartamento;
 		}
+		
+		public List<SelectItem> getlistaprecaucao() {
+			if(listaprecaucao == null) {
+				listaprecaucao= new ArrayList<SelectItem>();
+				
+				DAO<Precaucao> dao = new PrecaucaoDAO();
+				List<Precaucao> precaucaoLista = dao.findAll();
+				
+				if(precaucaoLista != null && !precaucaoLista.isEmpty()) {
+					SelectItem item;
+					
+					for (Precaucao precaucao : precaucaoLista) {
+						item = new SelectItem(precaucao, precaucao.getNome());
+						listaprecaucao.add(item);
+					}
+				}
+			}
+			
+			return listaprecaucao;
+		}
+
 	}

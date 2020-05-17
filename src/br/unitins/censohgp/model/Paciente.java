@@ -1,6 +1,7 @@
 package br.unitins.censohgp.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Paciente {
 
@@ -16,7 +17,7 @@ public class Paciente {
 	private String observacao;
 	private Departamento idlocalTransferencia;
 	private int numeroProntuario;
-	private Precaucao precaucao;
+	private List<Precaucao> precaucoes;
 	
 	
 	public Paciente() {
@@ -25,9 +26,10 @@ public class Paciente {
 		
 	}
 
+
 	public Paciente(Integer idpaciente, String nome, int cpf, int rg, Situacao situacao, Boolean ativo, String nomeMae,
-			Sexo sexo, LocalDate dataNascimento, String observacao, Departamento idlocalTransferencia, int numeroProntuario,
-			Precaucao precaucao) {
+			Sexo sexo, LocalDate dataNascimento, String observacao, Departamento idlocalTransferencia,
+			int numeroProntuario, List<Precaucao> precaucoes) {
 		super();
 		this.idpaciente = idpaciente;
 		this.nome = nome;
@@ -41,8 +43,9 @@ public class Paciente {
 		this.observacao = observacao;
 		this.idlocalTransferencia = idlocalTransferencia;
 		this.numeroProntuario = numeroProntuario;
-		this.precaucao = precaucao;
+		this.precaucoes = precaucoes;
 	}
+
 
 
 
@@ -112,10 +115,10 @@ public class Paciente {
 				return false;
 		} else if (!observacao.equals(other.observacao))
 			return false;
-		if (precaucao == null) {
-			if (other.precaucao != null)
+		if (precaucoes == null) {
+			if (other.precaucoes != null)
 				return false;
-		} else if (!precaucao.equals(other.precaucao))
+		} else if (!precaucoes.equals(other.precaucoes))
 			return false;
 		if (rg != other.rg)
 			return false;
@@ -131,6 +134,7 @@ public class Paciente {
 			return false;
 		return true;
 	}
+
 
 	public Integer getIdpaciente() {
 		return idpaciente;
@@ -340,44 +344,20 @@ public class Paciente {
 		this.idlocalTransferencia = idlocalTransferencia;
 	}
 
-
-
-
-
-
-
 	public int getNumeroProntuario() {
 		return numeroProntuario;
 	}
-
-
-
-
-
-
 
 	public void setNumeroProntuario(int numeroProntuario) {
 		this.numeroProntuario = numeroProntuario;
 	}
 
-
-
-
-
-
-
-	public Precaucao getPrecaucao() {
-		return precaucao;
+	public List<Precaucao> getPrecaucoes() {
+		return precaucoes;
 	}
 
-
-
-
-
-
-
-	public void setPrecaucao(Precaucao precaucao) {
-		this.precaucao = precaucao;
+	public void setPrecaucoes(List<Precaucao> precaucoes) {
+		this.precaucoes = precaucoes;
 	}
 
 

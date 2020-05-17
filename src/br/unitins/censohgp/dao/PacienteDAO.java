@@ -24,15 +24,15 @@ public class PacienteDAO extends DAO<Paciente>{
 
 	@Override
 	public void create(Paciente paciente) throws SQLException {
-
+		int key = 0;
 		Connection  conn = getConnection();
 
 		PreparedStatement stat = conn.prepareStatement(
 				"INSERT INTO " +
 						" paciente " +
-						" ( nome, cpf, rg, ativo, idsituacao, idgenero, nome_mae, data_nascimento, observacao, numero_prontuario, idlocal_transferencia ) " +
+						" ( nome, cpf, rg, ativo, idsituacao, idgenero, nome_mae, data_nascimento, observacao, numero_prontuario, iddepartamento) " +
 						" VALUES " +
-						" (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
+						" (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 
 		stat.setString(1, paciente.getNome());
 		stat.setInt(2, paciente.getCpf());
@@ -46,18 +46,36 @@ public class PacienteDAO extends DAO<Paciente>{
 		stat.setString(9, paciente.getObservacao());
 		stat.setInt(10, paciente.getNumeroProntuario());
 		stat.setInt(11, paciente.getIdlocalTransferencia().getIdlocalTransferencia());
-		
 		stat.execute();
 
-		// obtendo o id gerado pela tabela do banco de dados
 		ResultSet rs = stat.getGeneratedKeys();
-		rs.next();
-		Integer value = rs.getInt("idpaciente");
 
-		paciente.getPrecaucao().setIdprecaucao(value);
-		PrecaucaoDAO dao = new PrecaucaoDAO(conn);
-		dao.create(paciente.getPrecaucao());
+		if (rs.next()) {
+		    key = rs.getInt(1);
+		}
+		
+		createAux( key , paciente.getPrecaucoes());
 
+
+	}
+
+	public void createAux(int id, List<Precaucao> precaucoes) throws SQLException {
+
+		Connection  conn = getConnection();
+
+		PreparedStatement stat = conn.prepareStatement(
+				"INSERT INTO " + 
+						" paciente_precaucao " +
+						" ( idpaciente, idprecaucao ) " +
+						" VALUES " +
+						" (? , ?) ", Statement.RETURN_GENERATED_KEYS);
+
+		for (Precaucao precaucao : precaucoes) {
+
+			stat.setInt(1, id );
+			stat.setInt(2, precaucao.getIdprecaucao());			
+			stat.execute();
+		}
 
 	}
 
@@ -148,11 +166,6 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
 
-				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
-				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
-				// caso o retorno do telefone seja nulo, instanciar um telefone
-				if (paciente.getPrecaucao() == null)
-					paciente.setPrecaucao(new Precaucao());
 
 
 				listaPaciente.add(paciente);
@@ -210,12 +223,6 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
 
-				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
-				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
-				// caso o retorno do telefone seja nulo, instanciar um telefone
-				if (paciente.getPrecaucao() == null)
-					paciente.setPrecaucao(new Precaucao());
-
 				listaPaciente.add(paciente);
 
 			}			 			
@@ -269,12 +276,6 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
-
-				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
-				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
-				// caso o retorno do telefone seja nulo, instanciar um telefone
-				if (paciente.getPrecaucao() == null)
-					paciente.setPrecaucao(new Precaucao());
 
 			}
 
