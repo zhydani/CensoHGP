@@ -118,7 +118,7 @@
 											<h:column>
 												<f:facet name="header">Numero Prontuario</f:facet>
 												<h:commandLink value="#{obj.numeroProntuario}"
-													action="#{buscaPacienteController.editar(obj.id)}">
+													action="#{buscaPacienteController.editar(obj.idpaciente)}">
 													<f:ajax execute="@this" render="@form" />
 												</h:commandLink>
 											</h:column>
@@ -126,7 +126,7 @@
 											<h:column>
 												<f:facet name="header">Nome</f:facet>
 												<h:commandLink value="#{obj.nome}"
-													action="#{buscaPacienteController.editar(obj.id)}">
+													action="#{cadatroPacienteController.ver(obj.idpaciente)}">
 													<f:ajax execute="@this" render="@form" />
 												</h:commandLink>
 											</h:column>
@@ -134,7 +134,7 @@
 											<h:column>
 												<f:facet name="header">Cpf</f:facet>
 												<h:commandLink value="#{obj.cpf}"
-													action="#{buscaPacienteController.editar(obj.id)}">
+													action="#{buscaPacienteController.editar(obj.idpaciente)}">
 													<f:ajax execute="@this" render="@form" />
 												</h:commandLink>
 											</h:column>
@@ -142,7 +142,7 @@
 											<h:column>
 												<f:facet name="header">RG</f:facet>
 												<h:commandLink value="#{obj.rg}"
-													action="#{buscaPacienteController.editar(obj.id)}">
+													action="#{buscaPacienteController.editar(obj.idpaciente)}">
 													<f:ajax execute="@this" render="@form" />
 												</h:commandLink>
 											</h:column>
@@ -150,7 +150,7 @@
 											<h:column>
 												<f:facet name="header">Data de Nascimento</f:facet>
 												<h:commandLink value="#{obj.dataNascimento}"
-													action="#{buscaPacienteController.editar(obj.id)}">
+													action="#{buscaPacienteController.editar(obj.idpaciente)}">
 													<f:ajax execute="@this" render="@form" />
 												</h:commandLink>
 											</h:column>
@@ -158,7 +158,7 @@
 											<h:column>
 												<f:facet name="header">Nome da Mãe</f:facet>
 												<h:commandLink value="#{obj.nomeMae}"
-													action="#{buscaPacienteController.editar(obj.id)}">
+													action="#{buscaPacienteController.editar(obj.idpaciente)}">
 													<f:ajax execute="@this" render="@form" />
 												</h:commandLink>
 											</h:column>

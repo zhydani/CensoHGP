@@ -53,7 +53,7 @@ public class PacienteDAO extends DAO<Paciente>{
 		if (rs.next()) {
 		    key = rs.getInt(1);
 		}
-		
+			
 		createAux( key , paciente.getPrecaucoes());
 
 
@@ -81,6 +81,7 @@ public class PacienteDAO extends DAO<Paciente>{
 
 	@Override
 	public void update(Paciente paciente) throws SQLException {
+		int key = 0;
 		Connection conn = getConnection();
 
 		PreparedStatement stat = conn.prepareStatement(
@@ -89,11 +90,13 @@ public class PacienteDAO extends DAO<Paciente>{
 						+ " cpf = ?,"
 						+ " rg = ?,"
 						+ " ativo = ?,"
+						+ " idsituacao = ?,"
+						+ " idgenero = ?, "
 						+ " nome_mae = ?,"
 						+ " data_nascimento = ?,"
 						+ " observacao = ?,"
-						+ " numero_prontuario = ?, " 
-						+ " idsituacao = ? " +
+						+ " numero_prontuario = ?,"
+						+ " iddepartamento = ? " + 
 						" WHERE " +
 				" idpaciente = ? ");
 
@@ -101,16 +104,46 @@ public class PacienteDAO extends DAO<Paciente>{
 		stat.setInt(2, paciente.getCpf());
 		stat.setInt(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
-		stat.setString(5, paciente.getNomeMae());
+		stat.setInt(5, paciente.getSituacao().getIdsituacao());
+		stat.setInt(6, paciente.getSexo().getIdsexo());
+		stat.setString(7, paciente.getNomeMae());
 		Date date = Date.valueOf(paciente.getDataNascimento());
-		stat.setDate(6, date);
-		stat.setString(7, paciente.getObservacao());
-		stat.setInt(8, paciente.getNumeroProntuario());
-		stat.setInt(9, paciente.getIdpaciente());
+		stat.setDate(8, date);
+		stat.setString(9, paciente.getObservacao());
+		stat.setInt(10, paciente.getNumeroProntuario());
+		stat.setInt(11, paciente.getIdlocalTransferencia().getIdlocalTransferencia());
+		stat.setInt(12, paciente.getIdpaciente());
 		stat.execute();
+
+		ResultSet rs = stat.getGeneratedKeys();
+
+		if (rs.next()) {
+		    key = rs.getInt(1);
+		}
+			
+		updateAux( key , paciente.getPrecaucoes());
 
 	}
 
+	public void updateAux(int id, List<Precaucao> precaucoes) throws SQLException {
+
+		Connection  conn = getConnection();
+
+		PreparedStatement stat = conn.prepareStatement(
+				"UPDATE paciente_precaucao SET " + 
+						" idprecaucao = ? " +
+						" WHERE " +
+						" idpaciente = ? ", Statement.RETURN_GENERATED_KEYS);
+
+		for (Precaucao precaucao : precaucoes) {
+
+			
+			stat.setInt(1, precaucao.getIdprecaucao());			
+			stat.setInt(2, id );
+			stat.execute();
+		}
+
+	}
 	@Override
 	public void delete(int id) throws SQLException {
 

@@ -63,7 +63,7 @@ public class CadastroPacienteController implements Serializable {
 			Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 			flash.put("pacienteFlash", paciente);
 			
-			return "cadastropaciente.xhtml?faces-redirect=true";
+			return "alterarpaciente.xhtml?faces-redirect=true";
 		}
 
 		public void incluir() {
