@@ -126,7 +126,7 @@
 											<h:column>
 												<f:facet name="header">Nome</f:facet>
 												<h:commandLink value="#{obj.nome}"
-													action="#{cadatroPacienteController.ver(obj.idpaciente)}">
+													action="#{buscaPacienteController.editar(obj.idpaciente)}">
 													<f:ajax execute="@this" render="@form" />
 												</h:commandLink>
 											</h:column>

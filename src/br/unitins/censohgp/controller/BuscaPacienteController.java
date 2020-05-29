@@ -1,6 +1,7 @@
 package br.unitins.censohgp.controller;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,13 +54,13 @@ public class BuscaPacienteController implements Serializable {
 		System.out.println("oi");
 	}
 
-	public String editar(int id) {
+	public String editar(int id) throws SQLException {
 		PacienteDAO dao = new PacienteDAO();
-		paciente = dao.findById(id);
+		Paciente paciente = dao.findById(id);
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-		flash.put("pacientefFlash", paciente);
-
-		return "cadastropaciente.xhtml?faces-redirect=true";
+		flash.put("pacienteFlash", paciente);
+		
+		return "alterarpaciente.xhtml?faces-redirect=true";
 	}
 
 	public List<Paciente> getListaPaciente() {

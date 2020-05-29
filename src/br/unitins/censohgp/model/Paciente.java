@@ -18,14 +18,11 @@ public class Paciente {
 	private Departamento idlocalTransferencia;
 	private int numeroProntuario;
 	private List<Precaucao> precaucoes;
-	
-	
-	public Paciente() {
-		
-		super();
-		
-	}
 
+	public Paciente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Paciente(Integer idpaciente, String nome, int cpf, int rg, Situacao situacao, Boolean ativo, String nomeMae,
 			Sexo sexo, LocalDate dataNascimento, String observacao, Departamento idlocalTransferencia,
@@ -47,12 +44,6 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
-
 	@Override
 	public Paciente clone() {
 		
@@ -65,7 +56,6 @@ public class Paciente {
 		return null;
 		
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -135,19 +125,14 @@ public class Paciente {
 		return true;
 	}
 
-
 	public Integer getIdpaciente() {
 		return idpaciente;
 	}
 
+
 	public void setIdpaciente(Integer idpaciente) {
 		this.idpaciente = idpaciente;
 	}
-
-
-
-
-
 
 
 	public String getNome() {
@@ -155,19 +140,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-
-
-
-
 
 
 	public int getCpf() {
@@ -175,19 +150,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
-
-
-
-
-
 
 
 	public int getRg() {
@@ -195,19 +160,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setRg(int rg) {
 		this.rg = rg;
 	}
-
-
-
-
-
 
 
 	public Situacao getSituacao() {
@@ -215,19 +170,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
-
-
-
-
-
 
 
 	public Boolean getAtivo() {
@@ -235,19 +180,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-
-
-
-
-
 
 
 	public String getNomeMae() {
@@ -255,19 +190,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
 	}
-
-
-
-
-
 
 
 	public Sexo getSexo() {
@@ -275,19 +200,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
-
-
-
-
-
 
 
 	public LocalDate getDataNascimento() {
@@ -295,19 +210,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
-
-
-
-
 
 
 	public String getObservacao() {
@@ -315,19 +220,9 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
-
-
-
-
 
 
 	public Departamento getIdlocalTransferencia() {
@@ -335,30 +230,30 @@ public class Paciente {
 	}
 
 
-
-
-
-
-
 	public void setIdlocalTransferencia(Departamento idlocalTransferencia) {
 		this.idlocalTransferencia = idlocalTransferencia;
 	}
+
 
 	public int getNumeroProntuario() {
 		return numeroProntuario;
 	}
 
+
 	public void setNumeroProntuario(int numeroProntuario) {
 		this.numeroProntuario = numeroProntuario;
 	}
+
 
 	public List<Precaucao> getPrecaucoes() {
 		return precaucoes;
 	}
 
+
 	public void setPrecaucoes(List<Precaucao> precaucoes) {
 		this.precaucoes = precaucoes;
 	}
+
 
 
 		

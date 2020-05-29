@@ -5,8 +5,15 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<ui:composition template="template.xhtml">
-	<ui:define name="conteudo">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="style.css" />
+
+</h:head>
+	<h:body style="background-color:LightSteelBlue;">
 		<center>
 			<h:messages infoStyle="color:green" warnStyle="color:orange"
 				errorStyle="color:red" />
@@ -79,6 +86,5 @@
 
 
 		</center>
-	</ui:define>
-</ui:composition>
+</h:body>
 </html>

@@ -9,8 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unitins.censohgp.model.Departamento;
 import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Precaucao;
+import br.unitins.censohgp.model.Sexo;
+import br.unitins.censohgp.model.Situacao;
 
 public class PacienteDAO extends DAO<Paciente>{
 
@@ -285,9 +288,11 @@ public class PacienteDAO extends DAO<Paciente>{
 							+ " ativo,"
 							+ " nome_mae,"
 							+ " idsituacao,"
+							+ " idgenero, "
 							+ " data_nascimento,"
 							+ " observacao,"
-							+ " numero_prontuario " +
+							+ " numero_prontuario,"
+							+ " iddepartamento " +
 							" FROM " +
 							"  paciente "
 							+ "  WHERE idpaciente = ? ");
@@ -306,13 +311,19 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
+				paciente.setSituacao(new Situacao());
+				paciente.getSituacao().setIdsituacao(rs.getInt("idsituacao"));
+				paciente.setSexo(new Sexo());
+				paciente.getSexo().setIdsexo(rs.getInt("idgenero"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
-
+				paciente.setIdlocalTransferencia(new Departamento());
+				paciente.getIdlocalTransferencia().setIdlocalTransferencia(rs.getInt("iddepartamento"));
 			}
 
 
+			
 			return paciente;
 
 		} catch (SQLException e) {
