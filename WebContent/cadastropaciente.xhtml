@@ -24,7 +24,7 @@
 		<center>
 
 			<h:panelGrid columns="1" id="panelPrincipal">
-				<p:fieldset legend="DADOS PESSOAIS"
+				<p:fieldset legend="Dados Pessoais"
 					style="border: 2px solid black; margin-bottom:20px;">
 
 					<h:panelGrid columns="2">
@@ -55,7 +55,7 @@
 							</h:inputText>
 							<h:outputLabel style="font-weight: bold;"
 								value="Sexo do paciente: " />
-							<h:selectOneMenu class="btn btn-secondary"
+							<h:selectOneMenu class="btn btn-dark"
 								converter="omnifaces.SelectItemsConverter"
 								value="#{cadastroPacienteController.paciente.sexo}">
 								<f:selectItem itemLabel="Selecione o sexo" />
@@ -67,9 +67,10 @@
 						</h:panelGrid>
 
 					</h:panelGrid>
+					<br />
 				</p:fieldset>
 
-				<p:fieldset legend="COMPLEMENTOS"
+				<p:fieldset legend="Complementos"
 					style="border: 2px solid black; margin-bottom:20px;">
 					<h:panelGrid columns="3">
 						<h:panelGrid columns="1">
@@ -86,7 +87,7 @@
 						<h:panelGrid columns="2">
 							<h:outputLabel style="font-weight: bold;"
 								value="Situação do paciente: " />
-							<h:selectOneMenu class="btn btn-secondary"
+							<h:selectOneMenu class="btn btn-dark"
 								converter="omnifaces.SelectItemsConverter"
 								value="#{cadastroPacienteController.paciente.situacao}">
 								<f:selectItem itemLabel="Selecione ...." />
@@ -95,7 +96,7 @@
 									itemValue="#{obj}" itemLabel="#{obj.nome}" />
 							</h:selectOneMenu>
 							<h:outputLabel style="font-weight: bold;" value="Departamento: " />
-							<h:selectOneMenu class="btn btn-secondary"
+							<h:selectOneMenu class="btn btn-dark"
 								converter="omnifaces.SelectItemsConverter"
 								value="#{cadastroPacienteController.paciente.idlocalTransferencia}">
 								<f:selectItem itemLabel="Selecione ...." />
@@ -114,24 +115,35 @@
 									itemValue="#{obj}" itemLabel="#{obj.nome}" />
 							</h:selectManyCheckbox>
 						</h:panelGrid>
+
 					</h:panelGrid>
+					<h:panelGrid style="position:absolute; right:560px; top: 800px; margin:10px;"
+						id="panelBotoes" columns="4">
+						<h:panelGrid>
+							<h:commandButton value="Incluir" class="btn btn-dark"
+								disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
+								action="#{cadastroPacienteController.incluir()}">
+								<f:ajax render="formPrincipal" execute="panelPrincipal"
+									resetValues="true" />
+							</h:commandButton>
+						</h:panelGrid>
+						<h:panelGrid></h:panelGrid>
+						<h:panelGrid></h:panelGrid>
+						<h:panelGrid>
+							<h:commandButton value="Excluir " class="btn btn-dark"
+								action="#{cadastroPacienteController.alterar}">
+								<f:ajax render="formPrincipal messages" execute="formPrincipal" />
+							</h:commandButton>
+						</h:panelGrid>
+
+					</h:panelGrid>
+					<br />
+					<br />
+					<br />
 				</p:fieldset>
 
 			</h:panelGrid>
-			<h:panelGrid style="position: relative; top: 50px;" id="panelBotoes"
-				columns="4">
-				<h:commandButton value="Incluir" class="btn btn-secondary"
-					disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
-					action="#{cadastroPacienteController.incluir()}">
-					<f:ajax render="formPrincipal" execute="panelPrincipal"
-						resetValues="true" />
-				</h:commandButton>
-				<h:commandButton value="Cancelar " class="btn btn-secondary"
-					action="#{cadastroPacienteController.alterar}">
-					<f:ajax render="formPrincipal messages" execute="formPrincipal" />
-				</h:commandButton>
 
-			</h:panelGrid>
 			<br />
 
 		</center>

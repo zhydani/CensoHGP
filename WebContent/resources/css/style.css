@@ -58,7 +58,7 @@ body{
  margin: 30px;
  }
 .ui-fieldset .ui-state-default {
-    background: DarkSalmon	;
+    background: #1946b4 !important	;
     color: white;
 }
 .ui-fieldset legend {
