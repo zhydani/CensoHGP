@@ -59,7 +59,6 @@ public class PacienteDAO extends DAO<Paciente>{
 			
 		createAux( key , paciente.getPrecaucoes());
 
-
 	}
 
 	public void createAux(int id, List<Precaucao> precaucoes) throws SQLException {
@@ -171,17 +170,17 @@ public class PacienteDAO extends DAO<Paciente>{
 			PreparedStatement stat = conn.prepareStatement(
 					"SELECT " +
 							" idpaciente, "
-							+ "nome,"
-							+ " cpf,"
-							+ " rg,"
-							+ " ativo,"
-							+ " nome_mae,"
-							+ " data_nascimento,"
-							+ " observacao,"
+							+ "nome, "
+							+ " cpf, "
+							+ " rg, "
+							+ " ativo, "
+							+ " nome_mae, "
+							+ " data_nascimento, "
+							+ " observacao, "
 							+ " numero_prontuario, " 
 							+ "  idsituacao  " +
 							"  FROM " +
-							"  paciente " +			
+							" paciente " +			
 							"WHERE " +
 					"  nome ilike ? ");
 
@@ -201,12 +200,73 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
-
-
-
+				
+//				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+//				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
+//				// caso o retorno do telefone seja nulo, instanciar um telefone
+//				if (paciente.getPrecaucao() == null)
+//					paciente.setPrecaucao(new Precaucao());
+//
 				listaPaciente.add(paciente);
 
+			}			 			
 
+			if (listaPaciente.isEmpty())
+				return null;
+			return listaPaciente;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public List<Paciente> findByNomeMae(String nomeMae) {
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+							" idpaciente, "
+							+ "nome, "
+							+ " cpf, "
+							+ " rg, "
+							+ " ativo, "
+							+ " nome_mae, "
+							+ " data_nascimento, "
+							+ " observacao, "
+							+ " numero_prontuario, " 
+							+ "  idsituacao  " +
+							"  FROM " +
+							" paciente " +			
+							"WHERE " +
+					"  nome_mae ilike ? ");
+
+			stat.setString(1, nomeMae == null ? "%" : "%"+nomeMae+"%");
+			ResultSet rs = stat.executeQuery();
+
+			List<Paciente> listaPaciente = new ArrayList<Paciente>();
+
+			while(rs.next()) {
+				Paciente paciente = new Paciente();
+				paciente.setIdpaciente(rs.getInt("idpaciente"));
+				paciente.setNome(rs.getString("nome"));
+				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setRg(rs.getInt("rg"));
+				paciente.setAtivo(rs.getBoolean("ativo"));
+				paciente.setNomeMae(rs.getString("nome_mae"));
+				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+				paciente.setObservacao(rs.getString("observacao"));
+				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				
+//				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+//				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
+//				// caso o retorno do telefone seja nulo, instanciar um telefone
+//				if (paciente.getPrecaucao() == null)
+//					paciente.setPrecaucao(new Precaucao());
+//
+				listaPaciente.add(paciente);
 
 			}			 			
 
@@ -220,7 +280,125 @@ public class PacienteDAO extends DAO<Paciente>{
 		return null;
 	}
 
+	public List<Paciente> findByCpf(String cpf) {
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
 
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+							" idpaciente, "
+							+ "nome, "
+							+ " cpf, "
+							+ " rg, "
+							+ " ativo, "
+							+ " nome_mae, "
+							+ " data_nascimento, "
+							+ " observacao, "
+							+ " numero_prontuario, " 
+							+ "  idsituacao  " +
+							"  FROM " +
+							" paciente " +			
+							"WHERE " +
+					"  cpf ilike ? ");
+
+			stat.setString(1, cpf == null ? "%" : "%"+cpf+"%");
+			ResultSet rs = stat.executeQuery();
+
+			List<Paciente> listaPaciente = new ArrayList<Paciente>();
+
+			while(rs.next()) {
+				Paciente paciente = new Paciente();
+				paciente.setIdpaciente(rs.getInt("idpaciente"));
+				paciente.setNome(rs.getString("nome"));
+				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setRg(rs.getInt("rg"));
+				paciente.setAtivo(rs.getBoolean("ativo"));
+				paciente.setNomeMae(rs.getString("nome_mae"));
+				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+				paciente.setObservacao(rs.getString("observacao"));
+				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				
+//				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+//				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
+//				// caso o retorno do telefone seja nulo, instanciar um telefone
+//				if (paciente.getPrecaucao() == null)
+//					paciente.setPrecaucao(new Precaucao());
+//
+				listaPaciente.add(paciente);
+
+			}			 			
+
+			if (listaPaciente.isEmpty())
+				return null;
+			return listaPaciente;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<Paciente> findByNumeroProntuario(String numeroProntuario) {
+		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+							" idpaciente, "
+							+ "nome, "
+							+ " cpf, "
+							+ " rg, "
+							+ " ativo, "
+							+ " nome_mae, "
+							+ " data_nascimento, "
+							+ " observacao, "
+							+ " numero_prontuario, " 
+							+ "  idsituacao  " +
+							"  FROM " +
+							" paciente " +			
+							"WHERE " +
+					"  numero_prontuario ilike ? ");
+
+			stat.setString(1, numeroProntuario == null ? "%" : "%"+numeroProntuario+"%");
+			ResultSet rs = stat.executeQuery();
+
+			List<Paciente> listaPaciente = new ArrayList<Paciente>();
+
+			while(rs.next()) {
+				Paciente paciente = new Paciente();
+				paciente.setIdpaciente(rs.getInt("idpaciente"));
+				paciente.setNome(rs.getString("nome"));
+				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setRg(rs.getInt("rg"));
+				paciente.setAtivo(rs.getBoolean("ativo"));
+				paciente.setNomeMae(rs.getString("nome_mae"));
+				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+				paciente.setObservacao(rs.getString("observacao"));
+				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				
+//				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+//				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
+//				// caso o retorno do telefone seja nulo, instanciar um telefone
+//				if (paciente.getPrecaucao() == null)
+//					paciente.setPrecaucao(new Precaucao());
+//
+				listaPaciente.add(paciente);
+
+			}			 			
+
+			if (listaPaciente.isEmpty())
+				return null;
+			return listaPaciente;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@Override
 	public List<Paciente> findAll() {
 		Connection conn = getConnection();
@@ -322,8 +500,6 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.getIdlocalTransferencia().setIdlocalTransferencia(rs.getInt("iddepartamento"));
 			}
 
-
-			
 			return paciente;
 
 		} catch (SQLException e) {

@@ -1,29 +1,29 @@
 package br.unitins.censohgp.model;
 
-public class Incidente {
-	private Integer idincidente;
+public class Procedimento {
+	private Integer idprocedimento;
 	private String nome;
 	private String descricao;
 	private boolean ativo;
 
-	public Incidente() {
+	public Procedimento() {
 		super();
 	}
 
-	public Incidente(Integer idincidente, String nome, String descricao, boolean ativo) {
+	public Procedimento(Integer idprocedimento, String nome, String descricao, boolean ativo) {
 		super();
-		this.idincidente = idincidente;
+		this.idprocedimento = idprocedimento;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.ativo = ativo;
 	}
 
-	public Integer getIdincidente() {
-		return idincidente;
+	public Integer getIdprocedimento() {
+		return idprocedimento;
 	}
 
-	public void setIdincidente(Integer idincidente) {
-		this.idincidente = idincidente;
+	public void setIdprocedimento(Integer idprocedimento) {
+		this.idprocedimento = idprocedimento;
 	}
 
 	public String getNome() {
