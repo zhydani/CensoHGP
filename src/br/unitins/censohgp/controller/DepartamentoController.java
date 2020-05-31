@@ -57,10 +57,10 @@ public class DepartamentoController implements Serializable {
 		return listaDepartamento;
 	}
 
-	// METODO QUE REDIRECIONA PARA PAGINA DE EDIÇÃO
+	// METODO QUE REDIRECIONA PARA PAGINA DE EDIï¿½ï¿½O
 	public String ver(int id) throws SQLException {
 		DepartamentoDAO dao = new DepartamentoDAO();
-		Departamento departamento = dao.findId(id);
+		Departamento departamento = dao.findById(id);
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.put("departamentoFlash", departamento);
 

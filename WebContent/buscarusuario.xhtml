@@ -7,176 +7,148 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-	<title>CensoHGP | Consulta de Usuário</title>
+	<title>CensoHGP | Consulta Usuário</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!-- Bootstrap CSS -->
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet name="primeicons/primeicons.css"
-		library="primefaces" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 	<!-- Costumize CSS -->
 	<h:outputStylesheet library="css" name="template.css" />
+	<h:outputStylesheet library="css" name="consulta.css" />
 	<h:outputStylesheet library="css" name="datatable.css" />
-	<link rel="shortcut icon" type="image/x-icon"
-		href="#{resource['images/icon.png']}" />
-
-
-
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/icon.png']}" />
 </h:head>
 <h:body>
-	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
-		class="bg-dark mt-0 text-white wrapper">
-
-
+	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar" class="bg-dark mt-0 text-white wrapper">
 		<div class="bg-dark mt-0 text-white wrapper" id="sidebar">
-
 			<nav id="sidebar">
-			<div class="sidebar-header ">
-				<h3 class="font-weight-bold">Menu</h3>
-			</div>
-
-			<ul class="list-unstyled components">
-				<h:panelGrid columns="2">
-					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
-						library="images" name="usu.png" />
-					<h:form>
-						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
-							class="font-weight-bold mb-3" />
-
-					</h:form>
-				</h:panelGrid>
-				<li><a href="menu.xhtml">Início</a></li>
-				<li><a href="buscariusuario.xhtml" data-toggle="collapse"
-					aria-expanded="false">Buscar Usuário</a></li>
-				<li class="active"><a href="cadastrousuario.xhtml">Cadastrar
-						Usuário</a></li>
-				<li><a href="cadastrardepartamento.xhtml">Cadastrar
-						Departamento</a></li>
-				<li><a href="buscardepartamento.xhtml">Buscar Departamento</a></li>
-				<li><h:commandLink value="Sair"
-						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
-
-			</ul>
-
-
+				<div class="sidebar-header ">
+					<h3 class="font-weight-bold">Menu</h3>
+				</div>
+				<ul class="list-unstyled components">
+					<h:panelGrid columns="2">
+						<h:graphicImage class="ml-2 pb-3 mr-2" width="30px" library="images" name="usu.png" />
+						<h:form>
+							<h:outputLabel value=" #{templateController.usuarioLogado.nome}" class="font-weight-bold mb-3" />
+						</h:form>
+					</h:panelGrid>
+					<li><a href="menu.xhtml">Início</a></li>
+					<li><a href="buscariusuario.xhtml" data-toggle="collapse" aria-expanded="false">Buscar Usuário</a></li>
+					<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
+					<li ><a href="cadastrar.xhtml">Cadastrar </a></li>
+					<li class="active"><a href="buscar.xhtml">Buscar </a></li>
+					<li><h:commandLink value="Sair" action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+				</ul>
 			</nav>
 		</div>
-
-
-
 	</p:sidebar>
-
+	
 	<h:form id="form">
-		<table width="100%">
-
-
+		<table width="100%" >
 			<tr>
-				<td colspan="2" align="center" class="mar"><ui:insert
-						name="cabecalho">
+				<td colspan="2" align="center" class="mar">
+					<ui:insert name="cabecalho">
 						<h:form>
-
 							<div class="navbar navbar-dark bg-navbar navbar-expand">
 								<div class="container collapse navbar-collapse">
-									<p:commandLink oncomplete="PF('sidebar1').show()"
-										styleClass="mx-3 pt-1 button-menu">
-										<span><i class="pi pi-bars"
-											style="font-size: 2.5em; color: #fff;"></i></span>
+									<p:commandLink oncomplete="PF('sidebar1').show()" styleClass="mx-3 pt-1 button-menu">
+										<span><i class="pi pi-bars" style="font-size: 2.5em; color: #fff;"></i></span>
 									</p:commandLink>
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-										<li class="nav-item"><a href="cadastrousuario.xhtml"
-											class="nav-link">Cadastrar Usuário</a></li>
-
+										<li class="nav-item"><a href="cadastrousuario.xhtml" class="nav-link">Cadastrar Usuário </a></li>
 									</ul>
-
-
 								</div>
 							</div>
 						</h:form>
-					</ui:insert></td>
+					</ui:insert>
+				</td>
 			</tr>
-
 			<tr>
-				<td valign="top"
-					class="pt-5  content active mar d-flex justify-content-center"><ui:insert
-						name="conteudo">
-						<h:panelGrid columns="1"
-							class="container d-flex justify-content-center">
-							<h:outputLabel value="Tipo de Busca: " class="font-weight-bold" />
-							<h:panelGrid columns="4" class="mb-2">
-								<h:selectOneMenu class="form-control pr-3 d-flex  mr-5">
+			
+				<td valign="top" class="pt-5  content active mar d-flex justify-content-center">
+				
+					<ui:insert name="conteudo">
+						<h:form id="formPrincipal">
+							<h:panelGrid columns="1" class="container d-flex justify-content-center">
+								<h:panelGrid columns="4" class="mb-2">
 
-									<f:selectItem itemLabel="selecione..." />
-									<f:selectItem itemLabel="Matrícula" itemValue="#" />
-									<f:selectItem itemLabel="E-mail" itemValue="#" />
+									<h:inputText value="#{buscarUsuarioController.nome}" styleClass="form-control pr-3 d-flex" size="40">
+										<f:passThroughAttribute name="placeholder" value="Digite o nome do usuário" />
+									</h:inputText>
+										
+									<h:inputText value="#{buscarUsuarioController.matricula}" styleClass="form-control pr-3 d-flex " size="40" marin-left="10">
+										<f:passThroughAttribute name="placeholder" value="Digite o número da matrícula " />
+									</h:inputText>	
+									<h:commandButton value="Buscar" actionListener="#{buscarUsuarioController.buscar()}" class="btn btn-primary mr-2 ml-3">
+										<f:ajax render="@all" execute="@form" resetValues="true" />
+									</h:commandButton>
+									
+									<h:commandButton value="Limpar" action="#{buscarUsuarioController.limpar()}" class="btn btn-warning mr-3">
+										<f:ajax render="@form" execute="@this" />
+									</h:commandButton>
+		
+								</h:panelGrid>
+								
+									<h:panelGrid columns="7" >
+										<p:dataTable value="#{buscarUsuarioController.listaUsuario}"  var="obj" rows="5"  styleClass="table"
+													
+									                 paginator="true"
+									                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									                 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
+									                 rowsPerPageTemplate="5,10,15">
+											
+												<p:column width="100px">
+													<f:facet name="header">Nome</f:facet>
+													<h:outputText value="#{obj.nome}">
+													</h:outputText>
+												</p:column>
 
-								</h:selectOneMenu>
+												<p:column>
+													<f:facet name="header">Matrícula</f:facet>
+													<h:outputText value="#{obj.matricula}">
+													</h:outputText>
+												</p:column>
+
+												<p:column>
+													<f:facet name="header">E-mail</f:facet>
+													<h:outputText value="#{obj.email}" />
+												</p:column>
 
 
-								<h:inputText value="#{buscarUsuarioController.pesquisa}"
-									styleClass="form-control pr-3 d-flex ml-2 mr-2" size="55" />
-
-								<h:commandButton value="Buscar"
-									actionListener="#{buscarUsuarioController.buscar()}"
-									class="btn btn-success mr-2 ml-3">
-									<f:ajax render="@all" execute="@form" resetValues="true" />
-								</h:commandButton>
-								<h:commandButton value="Limpar"
-									action="#{buscaPacienteController.limpar()}"
-									class="btn btn-info mr-3">
-									<f:ajax render="@form" execute="@this" />
-								</h:commandButton>
+												<p:column>
+													<h:commandLink action="#{buscarUsuarioController.editar(obj.id)}">
+														<h:graphicImage style="width: 25px" library="images" value="editar" name="botao_editar.png"/>
+														<f:ajax execute="formPrincipal:dataTable" render="formPrincipal" />
+													</h:commandLink>
+												</p:column>
+												
+												<p:column>
+												 	<h:commandLink action="#{buscarUsuarioController.excluir(obj.id)}">
+														<h:graphicImage style="width: 25px" library="images" value="editar" name="botao_excluir.png"/>
+														<f:ajax execute="formPrincipal:dataTable" render="formPrincipal" />
+													</h:commandLink>
+													
+												</p:column>
+												
+														       
+										</p:dataTable>
+											 
+										
+									</h:panelGrid>
+									
 							</h:panelGrid>
-							<div class="container d-flex justify-content-center">
-
-								<h:form id="form">
-									<p:dataTable value="#{buscarUsuarioController.listaUsuario}"
-										var="obj">
-										<p:ajax event="rowSelect" listener="#{dtLazyView.onRowSelect}"
-											oncomplete="PF('usuarioDialog').show()" />
-										<p:column headerText="Id">
-											<h:outputText value="#{obj.id}" />
-										</p:column>
-										<p:column headerText="Matrícula">
-											<h:outputText value="#{obj.matricula}" />
-										</p:column>
-										<p:column headerText="Nome">
-											<h:outputText value="#{obj.nome}" />
-										</p:column>
-										<p:column headerText="E-mail">
-											<h:outputText value="#{obj.email}" />
-										</p:column>
-										<p:column headerText="Senha">
-											<h:outputText value="#{obj.senha}" />
-										</p:column>
-										<p:column headerText="Tipo">
-											<h:outputText
-												value="#{obj.tipo ? 'administrador': 'usuario'}" />
-										</p:column>
-										<p:column style="width:35px">
-											<p:rowEditor />
-										</p:column>
-									</p:dataTable>
-								</h:form>
-							</div>
-						</h:panelGrid>
-
-					</ui:insert></td>
+							<h:messages id="messages" infoStyle="color:green" warnStyle="color:orange" errorStyle="color:red" globalOnly="false"/>
+						</h:form>
+					</ui:insert>
+				</td>
 			</tr>
 		</table>
-
-
 	</h:form>
 
-
-
-
-	<div class="box footer pt-4 font-weight-lighter "
-		style="text-align: center;">
+	<div class="box footer pt-4 font-weight-lighter " style="text-align: center;">
 		<h:outputText value="2020 - Todos os direitos reservados." />
 	</div>
 

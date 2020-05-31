@@ -13,20 +13,16 @@ import br.unitins.censohgp.model.Departamento;
 import br.unitins.censohgp.model.EstadoDepartamento;
 import br.unitins.censohgp.model.StatusDepartamento;
 public class DepartamentoDAO extends DAO<Departamento> {
-	
-
-
-
-
 		
-		public DepartamentoDAO(Connection conn) {
-			super(conn);
-		}
+	public String tipoBusca; //---Adicionado em 21/05/2020 por Iury
 		
-		public DepartamentoDAO() {
-			// tchê papai ... cria uma nova conexao
-			super(null);
-		}
+	public DepartamentoDAO(Connection conn) {
+		super(conn);
+	}
+		
+	public DepartamentoDAO() {
+		super(null);
+	}
 		
 
 		@Override
@@ -60,7 +56,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 				    " nome_departamento = ?, " +
 				    " ativo = ?, " +
 					"WHERE " +
-				    " idlocal_transferencia = ? ");
+				    " iddepartamento = ? ");
 			stat.setString(1, dep.getNomeHospital());
 			stat.setInt(2, dep.getNumeroLeitos());
 			stat.setString(3, dep.getNomeDepartamento());
@@ -72,18 +68,72 @@ public class DepartamentoDAO extends DAO<Departamento> {
 		}
 
 		@Override
-		public void delete(int id) throws SQLException {
+		public void delete(int iddepartamento) throws SQLException {
 
 			Connection  conn = getConnection();
 			
 			PreparedStatement stat = conn.prepareStatement(
-					"DELETE FROM public.departamento WHERE idlocal_transferencia = ?");
-			stat.setInt(1, id);
+					"DELETE FROM public.departamento WHERE iddepartamento = ?");
+			stat.setInt(1, iddepartamento);
 			
 			stat.execute();
 				
 		}
 
+		//---TRECHO ADICIONADO EM 21/05/2020 POR IURY	
+		//Concatenar string tipobusca para o select 
+		public static String quote(String s) {
+		    return new StringBuilder()
+		        .append('\'')
+		        .append(s)
+		        .append('\'')
+		        .toString();
+		}
+		public List<Departamento> findByName(String nomehospital, String nomedepartamento) {
+			Connection conn = getConnection();
+			if (conn == null) 
+				return null;
+			try {
+				
+				if(nomedepartamento.isEmpty()) {
+					if(nomehospital.isEmpty()) {
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento"; 
+					}else {
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where nome_hospital = " + quote(nomehospital);
+					}
+					
+				}else {
+					if(nomehospital.isEmpty()) {
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where nome_departamento = " + quote(nomedepartamento);
+					}else {
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where nome_hospital = "+quote(nomehospital)+" and nome_departamento = "+quote(nomedepartamento);
+					}		
+				}
+				PreparedStatement stat = conn.prepareStatement(tipoBusca);
+				ResultSet rs = stat.executeQuery();
+				List<Departamento> listaDepartamento = new ArrayList<Departamento>();
+				while(rs.next()) {
+					Departamento departamento = new Departamento();
+					departamento = new Departamento();
+					
+					departamento.setIdlocalTransferencia(rs.getInt("iddepartamento"));
+					departamento.setNomeHospital(rs.getString("nome_hospital"));
+					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
+					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
+					
+					listaDepartamento.add(departamento);
+				}
+				if (listaDepartamento.isEmpty())
+					return null;
+				return listaDepartamento;
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		//----FIM TRECHO ADICIONADO EM 21/05/2020 POR IURY
+		
 		@Override
 		public List<Departamento> findAll() {
 			Connection conn = getConnection();
@@ -124,7 +174,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			return null;
 		}
 
-		public Departamento findId(Integer id) {
+		public Departamento findById(Integer id) {
 			Connection conn = getConnection();
 			if (conn == null) 
 				return null;
@@ -139,7 +189,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 								"  ativo " +
 								"FROM " +
 								"  public.departamento " +
-						"WHERE idlocal_transferencia = ? ");
+						"WHERE iddepartamento = ? ");
 				
 				stat.setInt(1, id);
 				
