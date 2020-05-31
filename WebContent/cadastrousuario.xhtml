@@ -31,7 +31,7 @@
 
 			<nav id="sidebar">
 			<div class="sidebar-header ">
-				<h3 class="font-weight-bold">Administrador</h3>
+				<h3 class="font-weight-bold">Menu</h3>
 			</div>
 
 			<ul class="list-unstyled components">
@@ -97,93 +97,87 @@
 
 			<tr>
 				<td valign="top"
-					class="pt-5  content active mar d-flex justify-content-center"><ui:insert
+					class="pt-5  content active mar d-flex justify-content-start"><ui:insert
 						name="conteudo">
-						<div class="container d-flex justify-content-center">
+						<div class="container d-flex justify-content-start">
 							<h:form id="formPrincipal" class="">
 								<h:messages id="messages" infoStyle="color:green"
 									warnStyle="color:orange" errorStyle="color:red"
 									globalOnly="false" />
 
-								<div class="card text-center">
-									<div class="card-header">Cadastro de Usuário</div>
-									<div class="card-body mt-3 mx-5">
+								<div>
+									<div class="border-left mb-4 ml-3">
+										<h4 class="ml-3 py-2 font-weight-bold">Cadastro de
+											Usuário</h4>
+									</div>
+									<div class="mt-3 ml-4">
 										<h:panelGrid id="panelPrincipal" columns="1"
-											class="d-flex justify-content-center">
+											class="d-flex justify-content-start">
 
 
 
-											<h:panelGrid columns="1"
-												class="d-flex justify-content-center mb-4">
-
+											<h:panelGrid columns="1" class="text-left mb-4">
+												<h:outputLabel value="Nome " />
 												<h:inputText id="name"
 													value="#{cadastroUsuarioController.usuario.nome}"
-													styleClass="form-control pr-3 d-flex justify-content-center"
-													size="72">
-													<f:passThroughAttribute name="placeholder" value="Nome" />
-												</h:inputText>
+													styleClass="form-control pr-3 d-flex justify-content-start"
+													size="72" />
 											</h:panelGrid>
 
 
 
 
 
-											<h:panelGrid columns="2"
-												class="d-flex justify-content-center mb-4">
+											<h:panelGrid columns="2" class="text-left mb-4">
 												<h:panelGrid columns="1" class="mr-4">
+													<h:outputLabel value="Matrícula " />
 													<h:inputText
 														value="#{cadastroUsuarioController.usuario.matricula}"
-														styleClass="form-control" size="33">
-														<f:passThroughAttribute name="placeholder"
-															value="Matrícula" />
-													</h:inputText>
+														styleClass="form-control" size="33" />
 												</h:panelGrid>
 
 												<h:panelGrid columns="1">
+													<h:outputLabel value="E-mail " />
 													<h:inputText
 														value="#{cadastroUsuarioController.usuario.email}"
-														requiredMessage="O campo login não pode ser nulo."
+														requiredMessage="O campo e-mail não pode ser nulo."
 														styleClass="form-control" size="32">
-														<f:passThroughAttribute name="placeholder" value="E-mail" />
+														<f:passThroughAttribute name="placeholder"
+															value="nome@exemplo.com" />
 													</h:inputText>
 												</h:panelGrid>
 
 
 											</h:panelGrid>
 
-											<h:panelGrid columns="2"
-												class=" d-flex justify-content-center mb-3">
+											<h:panelGrid columns="2" class="text-left mb-3">
 
 												<h:panelGrid columns="1" class="mr-4">
+													<h:outputLabel value="Senha " />
 													<h:inputSecret
 														value="#{cadastroUsuarioController.usuario.senha}"
-														styleClass="form-control" size="33">
-														<f:passThroughAttribute name="placeholder" value="Senha" />
-													</h:inputSecret>
+														styleClass="form-control" size="33" />
 												</h:panelGrid>
 
 
-												<h:panelGrid columns="1">
+												<!-- <h:panelGrid columns="1">
+													<h:outputLabel value="Confirmar senha " />
 													<h:inputSecret
 														value="#{cadastroUsuarioController.usuario.senha}"
-														styleClass="form-control" size="32">
-														<f:passThroughAttribute name="placeholder"
-															value="Confirmar Senha" />
-													</h:inputSecret>
-												</h:panelGrid>
+														styleClass="form-control" size="32" />
+												</h:panelGrid> -->
 
 											</h:panelGrid>
 
+											<!-- atualizar tipo usuario -->
 											<h:panelGrid columns="2" class="mx-2 form-group">
-												<h:outputLabel value="Tipo: "
-													class="font-weight-bold mr-5 mt-1" />
-												<h:selectOneMenu
-													value="#{cadastroUsuarioController.usuario.tipo}"
-													styleClass="form-control pr-5 mr-5">
-													<f:selectItem itemLabel="Selecione ...." />
+												<h:outputLabel value="Tipo de usuário: " class="mr-5 mt-1" />
+												<h:selectOneMenu converter="omnifaces.SelectItemsConverter"
+													value="#{cadastroUsuarioController.usuario.tipo}">
+													<f:selectItem itemLabel="Selecione o tipo" />
 													<f:selectItems
-														value="#{cadastroUsuarioController.listaTipo}" var="tipo"
-														itemLabel="#{tipo.label}" itemValue="#{tipo}" />
+														value="#{cadastroUsuarioController.listaTipo}" var="obj"
+														itemValue="#{obj}" itemLabel="#{obj.nome}" />
 												</h:selectOneMenu>
 											</h:panelGrid>
 
@@ -192,8 +186,8 @@
 											<h:panelGrid id="panelBotoes" columns="4">
 
 												<h:commandButton value="Incluir"
-													disabled="#{heroiController.heroi.id != null}"
-													actionListener="#{heroiController.incluir()}"
+													disabled="#{cadastroUsuarioController.usuario.id != null}"
+													actionListener="#{cadastroUsuarioController.incluir()}"
 													class="btn btn-azul mr-3">
 													<f:ajax render="formPrincipal" execute="panelPrincipal"
 														resetValues="true" />
@@ -201,8 +195,8 @@
 												</h:commandButton>
 
 												<h:commandButton value="Excluir"
-													disabled="#{heroiController.heroi.id == null}"
-													actionListener="#{heroiController.excluir()}"
+													disabled="#{cadastroUsuarioController.usuario.id == null}"
+													actionListener="#{cadastroUsuarioController.excluir()}"
 													class="btn btn-amarelo">
 													<f:ajax render="@all" execute="@this" />
 												</h:commandButton>

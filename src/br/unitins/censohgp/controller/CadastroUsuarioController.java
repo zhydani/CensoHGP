@@ -5,12 +5,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.dao.DAO;
+import br.unitins.censohgp.dao.SexoDAO;
+import br.unitins.censohgp.dao.TipoDAO;
 import br.unitins.censohgp.dao.UsuarioDAO;
+import br.unitins.censohgp.model.Sexo;
 import br.unitins.censohgp.model.Tipo;
 import br.unitins.censohgp.model.Usuario;
 
@@ -23,6 +27,7 @@ public class CadastroUsuarioController implements Serializable {
 	private Usuario usuario;
 	private String nome;
 	private List<Usuario> listaUsuario;
+	private List<SelectItem> listaTipo;
 
 	public void pesquisar() {
 		listaUsuario = null;
@@ -51,13 +56,13 @@ public class CadastroUsuarioController implements Serializable {
 
 				dao.create(getUsuario());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Inclusão realizada com sucesso.");
+				Util.addMessageInfo("Inclusï¿½o realizada com sucesso.");
 				limpar();
 				listaUsuario = null;
 			} catch (SQLException e) {
 				dao.rollbackConnection();
 				dao.closeConnection();
-				Util.addMessageInfo("Erro ao incluir o Usuário no Banco de Dados.");
+				Util.addMessageInfo("Erro ao incluir o Usuario no Banco de Dados.");
 				e.printStackTrace();
 			}
 		}
@@ -72,13 +77,13 @@ public class CadastroUsuarioController implements Serializable {
 				getUsuario().setSenha(Util.hashSHA256(getUsuario().getSenha()));
 				dao.update(getUsuario());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Alteração realizada com sucesso.");
+				Util.addMessageInfo("Alteracao realizada com sucesso.");
 				limpar();
 				listaUsuario = null;
 			} catch (SQLException e) {
 				dao.rollbackConnection();
 				dao.closeConnection();
-				Util.addMessageInfo("Erro ao alterar o Usuário no Banco de Dados.");
+				Util.addMessageInfo("Erro ao alterar o Usuario no Banco de Dados.");
 				e.printStackTrace();
 			}
 
@@ -96,7 +101,7 @@ public class CadastroUsuarioController implements Serializable {
 		try {
 			dao.delete(usuario.getId());
 			dao.getConnection().commit();
-			Util.addMessageInfo("Exclusão realizada com sucesso.");
+			Util.addMessageInfo("Exclusao realizada com sucesso.");
 			limpar();
 			return true;
 		} catch (SQLException e) {
@@ -153,9 +158,7 @@ public class CadastroUsuarioController implements Serializable {
 		usuario = null;
 	}
 
-	public Tipo[] getListaTipo() {
-		return Tipo.values();
-	}
+	
 
 	public String login() {
 		return "login.xhtml?faces-redirect=true";
@@ -168,6 +171,30 @@ public class CadastroUsuarioController implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<SelectItem> getListaTipo() {
+		if(listaTipo == null) {
+			listaTipo = new ArrayList<SelectItem>();
+			
+			DAO<Tipo> dao = new TipoDAO();
+			List<Tipo> tipoLista = dao.findAll();
+			
+			if(tipoLista != null && !tipoLista.isEmpty()) {
+				SelectItem item;
+				
+				for (Tipo tipo : tipoLista) {
+					item = new SelectItem(tipo, tipo.getNome());
+					listaTipo.add(item);
+				}
+			}
+		}
+		
+		return listaTipo;
+	}
+
+	public void setListaTipo(List<SelectItem> listaTipo) {
+		this.listaTipo = listaTipo;
 	}
 
 }

@@ -48,10 +48,10 @@ a, a:hover, a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 #sidebar {
-	width: 280px;
+	width: 270px;
 	position: fixed;
 	top: 0;
-	left: 0;
+	left: -1px;
 	height: 100vh;
 	z-index: 999;
 	background: #202030;
@@ -174,3 +174,10 @@ a.article, a.article:hover {
 	right: 0;
 	position: fixed;
 }
+
+.div-select {
+	width: 368px; /* Tamanho final do select */
+	overflow: hidden;
+	/* Esconde o conteúdo que passar do tamanho especificado */
+}
+

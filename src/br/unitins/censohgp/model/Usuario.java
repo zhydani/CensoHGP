@@ -15,12 +15,12 @@ public class Usuario implements Cloneable {
 	@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres")
 	private String senha;
 	private String matricula;
+	private Boolean ativo = Boolean.TRUE;
 	private Tipo tipo;
 
 	public Usuario() {
 		super();
 	}
-
 
 	@Override
 	public Usuario clone() {
@@ -50,21 +50,17 @@ public class Usuario implements Cloneable {
 		return true;
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -75,56 +71,55 @@ public class Usuario implements Cloneable {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getSenha() {
 		return senha;
 	}
 
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 
 	public String getMatricula() {
 		return matricula;
 	}
 
-
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
-
-
-	public Tipo getTipo() {
-		return tipo;
-	}
-
-
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
-
 
 	public Usuario(Integer id,
 			@NotEmpty(message = "O campo Nome não pode ser vazio") @Size(max = 60, message = "O campo Nome deve conter no máximo 60 caracteres") String nome,
 			@Email String email,
 			@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres") String senha,
-			String matricula, Tipo tipo) {
+			String matricula, Boolean ativo, Tipo tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.matricula = matricula;
+		this.ativo = ativo;
 		this.tipo = tipo;
 	}
 
+	public Tipo getTipo() {
+		return tipo;
+	}
 
-	
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 }

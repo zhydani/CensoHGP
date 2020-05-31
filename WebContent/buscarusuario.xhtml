@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>CensoHGP | Consulta de Usuário</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<!-- Bootstrap CSS -->
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+	<!-- Costumize CSS -->
+	<h:outputStylesheet library="css" name="template.css" />
+	<h:outputStylesheet library="css" name="datatable.css" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{resource['images/icon.png']}" />
+
+
+
+</h:head>
+<h:body>
+	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
+		class="bg-dark mt-0 text-white wrapper">
+
+
+		<div class="bg-dark mt-0 text-white wrapper" id="sidebar">
+
+			<nav id="sidebar">
+			<div class="sidebar-header ">
+				<h3 class="font-weight-bold">Menu</h3>
+			</div>
+
+			<ul class="list-unstyled components">
+				<h:panelGrid columns="2">
+					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+						library="images" name="usu.png" />
+					<h:form>
+						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
+							class="font-weight-bold mb-3" />
+
+					</h:form>
+				</h:panelGrid>
+				<li><a href="menu.xhtml">Início</a></li>
+				<li><a href="buscariusuario.xhtml" data-toggle="collapse"
+					aria-expanded="false">Buscar Usuário</a></li>
+				<li class="active"><a href="cadastrousuario.xhtml">Cadastrar
+						Usuário</a></li>
+				<li><a href="cadastrardepartamento.xhtml">Cadastrar
+						Departamento</a></li>
+				<li><a href="buscardepartamento.xhtml">Buscar Departamento</a></li>
+				<li><h:commandLink value="Sair"
+						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+
+			</ul>
+
+
+			</nav>
+		</div>
+
+
+
+	</p:sidebar>
+
+	<h:form id="form">
+		<table width="100%">
+
+
+			<tr>
+				<td colspan="2" align="center" class="mar"><ui:insert
+						name="cabecalho">
+						<h:form>
+
+							<div class="navbar navbar-dark bg-navbar navbar-expand">
+								<div class="container collapse navbar-collapse">
+									<p:commandLink oncomplete="PF('sidebar1').show()"
+										styleClass="mx-3 pt-1 button-menu">
+										<span><i class="pi pi-bars"
+											style="font-size: 2.5em; color: #fff;"></i></span>
+									</p:commandLink>
+									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
+									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+										<li class="nav-item"><a href="cadastrousuario.xhtml"
+											class="nav-link">Cadastrar Usuário</a></li>
+
+									</ul>
+
+
+								</div>
+							</div>
+						</h:form>
+					</ui:insert></td>
+			</tr>
+
+			<tr>
+				<td valign="top"
+					class="pt-5  content active mar d-flex justify-content-center"><ui:insert
+						name="conteudo">
+						<h:panelGrid columns="1"
+							class="container d-flex justify-content-center">
+							<h:outputLabel value="Tipo de Busca: " class="font-weight-bold" />
+							<h:panelGrid columns="4" class="mb-2">
+								<h:selectOneMenu class="form-control pr-3 d-flex  mr-5">
+
+									<f:selectItem itemLabel="selecione..." />
+									<f:selectItem itemLabel="Matrícula" itemValue="#" />
+									<f:selectItem itemLabel="E-mail" itemValue="#" />
+
+								</h:selectOneMenu>
+
+
+								<h:inputText value="#{buscarUsuarioController.pesquisa}"
+									styleClass="form-control pr-3 d-flex ml-2 mr-2" size="55" />
+
+								<h:commandButton value="Buscar"
+									actionListener="#{buscarUsuarioController.buscar()}"
+									class="btn btn-success mr-2 ml-3">
+									<f:ajax render="@all" execute="@form" resetValues="true" />
+								</h:commandButton>
+								<h:commandButton value="Limpar"
+									action="#{buscaPacienteController.limpar()}"
+									class="btn btn-info mr-3">
+									<f:ajax render="@form" execute="@this" />
+								</h:commandButton>
+							</h:panelGrid>
+							<div class="container d-flex justify-content-center">
+
+								<h:form id="form">
+									<p:dataTable value="#{buscarUsuarioController.listaUsuario}"
+										var="obj">
+										<p:ajax event="rowSelect" listener="#{dtLazyView.onRowSelect}"
+											oncomplete="PF('usuarioDialog').show()" />
+										<p:column headerText="Id">
+											<h:outputText value="#{obj.id}" />
+										</p:column>
+										<p:column headerText="Matrícula">
+											<h:outputText value="#{obj.matricula}" />
+										</p:column>
+										<p:column headerText="Nome">
+											<h:outputText value="#{obj.nome}" />
+										</p:column>
+										<p:column headerText="E-mail">
+											<h:outputText value="#{obj.email}" />
+										</p:column>
+										<p:column headerText="Senha">
+											<h:outputText value="#{obj.senha}" />
+										</p:column>
+										<p:column headerText="Tipo">
+											<h:outputText
+												value="#{obj.tipo ? 'administrador': 'usuario'}" />
+										</p:column>
+										<p:column style="width:35px">
+											<p:rowEditor />
+										</p:column>
+									</p:dataTable>
+								</h:form>
+							</div>
+						</h:panelGrid>
+
+					</ui:insert></td>
+			</tr>
+		</table>
+
+
+	</h:form>
+
+
+
+
+	<div class="box footer pt-4 font-weight-lighter "
+		style="text-align: center;">
+		<h:outputText value="2020 - Todos os direitos reservados." />
+	</div>
+
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+</h:body>
+</html>
