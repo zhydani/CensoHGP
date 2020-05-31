@@ -55,7 +55,7 @@
 						Departamento</a></li>
 				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
 				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
-				<li><a href="transferencia.xhtml">Transferência de Paciente</a></li>
+				<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
 				<li><h:commandLink value="Sair"
 						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 
@@ -173,7 +173,6 @@
 
 											</h:panelGrid>
 
-											<!-- atualizar tipo usuario -->
 											<h:panelGrid columns="2" class="mx-2 form-group">
 												<h:outputLabel value="Tipo de usuário: " class="mr-5 mt-1" />
 												<h:selectOneMenu converter="omnifaces.SelectItemsConverter"
@@ -189,23 +188,23 @@
 										<div class="mt-2 d-flex justify-content-end">
 											<h:panelGrid id="panelBotoes" columns="4">
 
-												<h:commandButton value="Incluir"
-													disabled="#{cadastroUsuarioController.usuario.id != null}"
-													actionListener="#{cadastroUsuarioController.incluir()}"
-													class="btn btn-azul mr-3">
-													<f:ajax render="formPrincipal" execute="panelPrincipal"
-														resetValues="true" />
 
-												</h:commandButton>
 
 												<h:commandButton value="Excluir"
 													disabled="#{cadastroUsuarioController.usuario.id == null}"
 													actionListener="#{cadastroUsuarioController.excluir()}"
-													class="btn btn-amarelo">
+													class="btn btn-amarelo mr-3">
 													<f:ajax render="@all" execute="@this" />
 												</h:commandButton>
 
+												<h:commandButton value="Incluir"
+													disabled="#{cadastroUsuarioController.usuario.id != null}"
+													actionListener="#{cadastroUsuarioController.incluir()}"
+													class="btn btn-azul ">
+													<f:ajax render="formPrincipal" execute="panelPrincipal"
+														resetValues="true" />
 
+												</h:commandButton>
 
 											</h:panelGrid>
 										</div>

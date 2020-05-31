@@ -1,90 +1,218 @@
-<!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-	<meta charset="utf-8" name="viewport"
-		content="width=device-width, initial-scale=1"
-		http-equiv="X-UA-Conpatible" />
+	<title>CensoHGP | Cadastro de Departamento</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<!-- Bootstrap CSS -->
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="style.css" />
-
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+	<!-- Costumize CSS -->
+	<h:outputStylesheet library="css" name="template.css" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{resource['images/icon.png']}" />
 </h:head>
-	<h:body style="background-color:LightSteelBlue;">
-		<center>
-			<h:messages infoStyle="color:green" warnStyle="color:orange"
-				errorStyle="color:red" />
+<h:body>
+	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
+		class="bg-dark mt-0 text-white wrapper">
 
 
-			<h:form id="formPrincipal">
-				<br />
+		<div class="bg-dark mt-0 text-white wrapper" id="sidebar">
+
+			<nav id="sidebar">
+			<div class="sidebar-header ">
+				<h3 class="font-weight-bold">Menu</h3>
+			</div>
+
+			<ul class="list-unstyled components">
 				<h:panelGrid columns="2">
-					<h:outputText style="font-weight: bold; font-size:24px;"
-						value="Cadastrar Departamento" />
-					<h:graphicImage style="width:100px; padding: 35px;"
-						library="imagens" name="icone.png"></h:graphicImage>
+					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+						library="images" name="usu.png" />
+					<h:form>
+						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
+							class="font-weight-bold mb-3" />
+
+					</h:form>
 				</h:panelGrid>
-				<h:panelGrid id="panelPrincipal" columns="2">
-					<h:outputLabel style="font-weight: bold;"
-						value="Nome do Departamento: " />
-					<h:inputText id="inputNome"
-						value="#{departamentoController.departamento.nomeDepartamento}" />
+				<li><a href="index.xhtml">Início</a></li>
+				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
+				<li><a href="buscarusuario.xhtml" data-toggle="collapse"
+					aria-expanded="false">Buscar Usuário</a></li>
+				<li class="active"><a href="cadastrardepartamento.xhtml">Cadastrar
+						Departamento</a></li>
+				<li><a href="consultadepartamento.xhtml">Buscar
+						Departamento</a></li>
+				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
+				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
+				<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+				<li><h:commandLink value="Sair"
+						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 
-					<h:outputLabel style="font-weight: bold;"
-						value="Nome do Hospital: " />
-					<h:panelGrid columns="2">
-						<h:inputText id="inpuHospital"
-							value="#{departamentoController.departamento.nomeHospital}">
-						</h:inputText>
-					</h:panelGrid>
-
-					<h:outputLabel style="font-weight: bold;"
-						value="Numeros de Leitos: " />
-					<h:inputText
-						value="#{departamentoController.departamento.numeroLeitos}" />
-
-					<h:outputLabel style="font-weight: bold;" value="Estados: " />
-					<h:selectOneMenu class="btn btn-secondary"
-						value="#{departamentoController.departamento.estado}">
-						<f:selectItem itemLabel="Selecione o Estado" />
-						<f:selectItems value="#{departamentoController.listaEstados}" 
-						var="obj"  itemValue="#{obj}" itemLabel="#{obj.label}"/>
-					</h:selectOneMenu>
-					<h:outputLabel style="font-weight: bold;" value="Cidades: " />
-					<h:selectOneMenu class="btn btn-secondary"
-						value="#{departamentoController.departamento.cidade}">
-						<f:selectItem itemLabel="Selecione a Cidade" />
-						<f:selectItems value="#{departamentoController.listaCidades}"
-						var="obj"  itemValue="#{obj}" itemLabel="#{obj.label}" />
-					</h:selectOneMenu>
-					<h:outputLabel style="font-weight: bold;" value="Status: " />
-					<h:selectOneMenu class="btn btn-secondary"
-						value="#{departamentoController.departamento.ativo}">
-						<f:selectItem itemLabel="Selecione ...." />
-						<f:selectItems
-							value="#{departamentoController.listaStatusDepartamento}"
-							var="status" itemLabel="#{status.label}" itemValue="#{status}" />
-					</h:selectOneMenu>
+			</ul>
 
 
-				</h:panelGrid>
-				<h:panelGrid style="position: relative; top: 50px;" id="panelBotoes"
-					columns="4">
-					<h:commandButton value="Incluir" class="btn btn-secondary"
-						disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
-						action="#{cadastroPacienteController.incluir()}">
-					</h:commandButton>
-					<h:commandButton value="Cancelar " class="btn btn-secondary"
-						action="#{cadastroPacienteController.alterar()}">
-					</h:commandButton>
-
-				</h:panelGrid>
-			</h:form>
+			</nav>
+		</div>
 
 
-		</center>
+
+	</p:sidebar>
+
+	<h:form id="form">
+		<table width="100%">
+
+
+			<tr>
+				<td colspan="2" align="center" class="mar"><ui:insert
+						name="cabecalho">
+						<h:form>
+
+							<div class="navbar navbar-dark bg-navbar navbar-expand">
+								<div class="container collapse navbar-collapse">
+									<p:commandLink oncomplete="PF('sidebar1').show()"
+										styleClass="mx-3 pt-1 button-menu">
+										<span><i class="pi pi-bars"
+											style="font-size: 2.5em; color: #fff;"></i></span>
+									</p:commandLink>
+									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
+									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+										<li class="nav-item"><a href="consultadepartamento.xhtml"
+											class="nav-link">Consultar Departamentos</a></li>
+
+									</ul>
+
+								</div>
+							</div>
+						</h:form>
+					</ui:insert></td>
+			</tr>
+
+			<tr>
+				<td valign="top"
+					class="pt-5  content active mar d-flex justify-content-start"><ui:insert
+						name="conteudo">
+						<div class="container d-flex justify-content-start">
+							<h:form id="formPrincipal" class="">
+								<h:messages id="messages" infoStyle="color:green"
+									warnStyle="color:orange" errorStyle="color:red"
+									globalOnly="false" />
+
+								<div>
+									<div class="border-left mb-4 ml-3">
+										<h4 class="ml-3 py-2 font-weight-bold">Cadastro de Departamento</h4>
+									</div>
+									<div class="mt-3 ml-4">
+										<h:panelGrid id="panelPrincipal" columns="1"
+											class="d-flex justify-content-start">
+
+											<h:form id="formPrincipal">
+												<br />
+												<h:panelGrid columns="2">
+													<h:outputText style="font-weight: bold; font-size:24px;"
+														value="Cadastrar Departamento" />
+													<h:graphicImage style="width:100px; padding: 35px;"
+														library="imagens" name="icone.png"></h:graphicImage>
+												</h:panelGrid>
+												<h:panelGrid id="panelPrincipal" columns="2">
+													<h:outputLabel style="font-weight: bold;"
+														value="Nome do Departamento: " />
+													<h:inputText id="inputNome"
+														value="#{departamentoController.departamento.nomeDepartamento}" />
+
+													<h:outputLabel style="font-weight: bold;"
+														value="Nome do Hospital: " />
+													<h:panelGrid columns="2">
+														<h:inputText id="inpuHospital"
+															value="#{departamentoController.departamento.nomeHospital}">
+														</h:inputText>
+													</h:panelGrid>
+
+													<h:outputLabel style="font-weight: bold;"
+														value="Numeros de Leitos: " />
+													<h:inputText
+														value="#{departamentoController.departamento.numeroLeitos}" />
+
+													<h:outputLabel style="font-weight: bold;" value="Estados: " />
+													<h:selectOneMenu class="btn btn-secondary"
+														value="#{departamentoController.departamento.estado}">
+														<f:selectItem itemLabel="Selecione o Estado" />
+														<f:selectItems
+															value="#{departamentoController.listaEstados}" var="obj"
+															itemValue="#{obj}" itemLabel="#{obj.label}" />
+													</h:selectOneMenu>
+													<h:outputLabel style="font-weight: bold;" value="Cidades: " />
+													<h:selectOneMenu class="btn btn-secondary"
+														value="#{departamentoController.departamento.cidade}">
+														<f:selectItem itemLabel="Selecione a Cidade" />
+														<f:selectItems
+															value="#{departamentoController.listaCidades}" var="obj"
+															itemValue="#{obj}" itemLabel="#{obj.label}" />
+													</h:selectOneMenu>
+													<h:outputLabel style="font-weight: bold;" value="Status: " />
+													<h:selectOneMenu class="btn btn-secondary"
+														value="#{departamentoController.departamento.ativo}">
+														<f:selectItem itemLabel="Selecione ...." />
+														<f:selectItems
+															value="#{departamentoController.listaStatusDepartamento}"
+															var="status" itemLabel="#{status.label}"
+															itemValue="#{status}" />
+													</h:selectOneMenu>
+
+
+												</h:panelGrid>
+												<h:panelGrid style="position: relative; top: 50px;"
+													id="panelBotoes" columns="4">
+													<h:commandButton value="Incluir" class="btn btn-secondary"
+														disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
+														action="#{cadastroPacienteController.incluir()}">
+													</h:commandButton>
+													<h:commandButton value="Cancelar "
+														class="btn btn-secondary"
+														action="#{cadastroPacienteController.alterar()}">
+													</h:commandButton>
+
+												</h:panelGrid>
+											</h:form>
+
+
+										</h:panelGrid>
+
+									</div>
+
+								</div>
+
+
+							</h:form>
+						</div>
+
+
+
+
+					</ui:insert></td>
+			</tr>
+		</table>
+	</h:form>
+
+	<div class="box footer pt-4 font-weight-lighter "
+		style="text-align: center;">
+		<h:outputText value="2020 - Todos os direitos reservados." />
+	</div>
+
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
 </h:body>
 </html>
