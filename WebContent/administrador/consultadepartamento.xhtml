@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-	<title>CensoHGP | Buscar Usuário</title>
+	<title>CensoHGP | Consulta Departamento</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport"
@@ -18,7 +18,7 @@
 		library="primefaces" />
 	<!-- Costumize CSS -->
 	<h:outputStylesheet library="css" name="template.css" />
-	<h:outputStylesheet library="css" name="consulta.css" />
+	<h:outputStylesheet library="css" name="consultadepartamento.css" />
 	<h:outputStylesheet library="css" name="datatable.css" />
 	<link rel="shortcut icon" type="image/x-icon"
 		href="#{resource['images/icon.png']}" />
@@ -40,13 +40,13 @@
 							class="font-weight-bold mb-3" />
 					</h:form>
 				</h:panelGrid>
-				<li><a href="templateadministrador.xhtml">Início</a></li>
+				<li><a href="index.xhtml">Início</a></li>
 				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
-				<li class="active"><a href="buscarusuario.xhtml"
+				<li><a href="buscarusuario.xhtml"
 					data-toggle="collapse" aria-expanded="false">Buscar Usuário</a></li>
 				<li><a href="cadastrardepartamento.xhtml">Cadastrar
 						Departamento</a></li>
-				<li><a href="consultadepartamento.xhtml">Buscar
+				<li class="active"><a href="consultadepartamento.xhtml">Buscar
 						Departamento</a></li>
 				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
 				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
@@ -73,8 +73,8 @@
 									</p:commandLink>
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-										<li class="nav-item"><a href="cadastrousuario.xhtml"
-											class="nav-link">Cadastrar Usuário </a></li>
+										<li class="nav-item"><a href="cadastrardepartamento.xhtml"
+											class="nav-link">Cadastrar departamento</a></li>
 									</ul>
 								</div>
 							</div>
@@ -92,26 +92,28 @@
 								class="container d-flex justify-content-center">
 								<h:panelGrid columns="4" class="mb-2">
 
-									<h:inputText value="#{buscarUsuarioController.nome}"
+									<h:inputText
+										value="#{consultaDepartamentoController.nomeHospital}"
 										styleClass="form-control pr-3 d-flex" size="40">
 										<f:passThroughAttribute name="placeholder"
-											value="Digite o nome do usuário" />
+											value="Digite o nome do hospital" />
 									</h:inputText>
 
-									<h:inputText value="#{buscarUsuarioController.matricula}"
+									<h:inputText
+										value="#{consultaDepartamentoController.nomeDepartamento}"
 										styleClass="form-control pr-3 d-flex " size="40"
 										marin-left="10">
 										<f:passThroughAttribute name="placeholder"
-											value="Digite o número da matrícula " />
+											value="Digite o nome do departamento" />
 									</h:inputText>
 									<h:commandButton value="Buscar"
-										actionListener="#{buscarUsuarioController.buscar()}"
+										actionListener="#{consultaDepartamentoController.buscar()}"
 										class="btn btn-primary mr-2 ml-3">
 										<f:ajax render="@all" execute="@form" resetValues="true" />
 									</h:commandButton>
 
 									<h:commandButton value="Limpar"
-										action="#{buscarUsuarioController.limpar()}"
+										action="#{consultaDepartamentoController.limpar()}"
 										class="btn btn-warning mr-3">
 										<f:ajax render="@form" execute="@this" />
 									</h:commandButton>
@@ -119,33 +121,40 @@
 								</h:panelGrid>
 
 								<h:panelGrid columns="7">
-									<p:dataTable value="#{buscarUsuarioController.listaUsuario}"
+									<p:dataTable
+										value="#{consultaDepartamentoController.listaDepartamento}"
 										var="obj" rows="5" styleClass="table" paginator="true"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
 										rowsPerPageTemplate="5,10,15">
 
 										<p:column width="100px">
-											<f:facet name="header">Nome</f:facet>
-											<h:outputText value="#{obj.nome}">
+											<f:facet name="header">Hospital</f:facet>
+											<h:outputText value="#{obj.nomeHospital}">
 											</h:outputText>
 										</p:column>
 
 										<p:column>
-											<f:facet name="header">Matrícula</f:facet>
-											<h:outputText value="#{obj.matricula}">
+											<f:facet name="header">Departamento</f:facet>
+											<h:outputText value="#{obj.nomeDepartamento}">
 											</h:outputText>
 										</p:column>
 
 										<p:column>
-											<f:facet name="header">E-mail</f:facet>
-											<h:outputText value="#{obj.email}" />
+											<f:facet name="header">Nº Leitos</f:facet>
+											<h:outputText value="#{obj.numeroLeitos}" />
 										</p:column>
 
+										<p:column>
+											<f:facet name="header">Cidade</f:facet>
+										</p:column>
+										<p:column>
+											<f:facet name="header">Estado</f:facet>
+										</p:column>
 
 										<p:column>
 											<h:commandLink
-												action="#{buscarUsuarioController.editar(obj.id)}">
+												action="#{consultaDepartamentoController.editar(obj.idlocalTransferencia)}">
 												<h:graphicImage style="width: 25px" library="images"
 													value="editar" name="botao_editar.png" />
 												<f:ajax execute="formPrincipal:dataTable"
@@ -155,7 +164,7 @@
 
 										<p:column>
 											<h:commandLink
-												action="#{buscarUsuarioController.excluir(obj.id)}">
+												action="#{consultaDepartamentoController.excluir(obj.idlocalTransferencia)}">
 												<h:graphicImage style="width: 25px" library="images"
 													value="editar" name="botao_excluir.png" />
 												<f:ajax execute="formPrincipal:dataTable"
