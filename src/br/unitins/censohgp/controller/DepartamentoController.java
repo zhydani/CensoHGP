@@ -108,28 +108,29 @@ public class DepartamentoController implements Serializable {
 		}
 	}
 
-	public void excluir() {
-		if (excluir(getDepartamento()))
-			limpar();
-	}
-
-	public boolean excluir(Departamento dep) {
-		DAO<Paciente> dao = new PacienteDAO();
-		// faz a exclusao no banco de dados
-		try {
-			dao.delete(getDepartamento().getIdlocalTransferencia());
-			dao.getConnection().commit();
-			Util.addMessageInfo("Exclusão realizada com sucesso.");
-			return true;
-		} catch (SQLException e) {
-			dao.rollbackConnection();
-			Util.addMessageInfo("Erro ao excluir o Produto no Banco de Dados.");
-			e.printStackTrace();
-			return false;
-		} finally {
-			dao.closeConnection();
-		}
-	}
+//	public void excluir() {
+//		if (excluir(getDepartamento()))
+//			limpar();
+//	}
+//
+//	public boolean excluir(int iddepartamento) {
+//		DAO<Departamento> dao = new DepartamentoDAO();
+//		try {
+//			dao.delete(iddepartamento);
+//			dao.getConnection().commit();
+//			Util.addMessageInfo("Exclusão realizada com sucesso.");
+//			listaBusca = null;
+//			buscar();
+//			return true;
+//		} catch (SQLException e) {
+//			dao.rollbackConnection();
+//			Util.addMessageInfo("Erro ao excluir departamento.");
+//			e.printStackTrace();
+//			return false;
+//		} finally {
+//			dao.closeConnection();
+//		}
+//	}
 
 	private boolean validarDados() {
 		if (getDepartamento().getNomeDepartamento().isBlank()) {
