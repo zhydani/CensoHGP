@@ -1,109 +1,118 @@
 package br.unitins.censohgp.controller;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import br.unitins.censohgp.dao.ChecklistDAO;
-import br.unitins.censohgp.model.Checklist;
+import br.unitins.censohgp.dao.FatorRiscoDAO;
+import br.unitins.censohgp.dao.IncidenteDAO;
+import br.unitins.censohgp.dao.ProcedimentoDAO;
+import br.unitins.censohgp.model.FatorRisco;
+import br.unitins.censohgp.model.Incidente;
+import br.unitins.censohgp.model.Procedimento;
 
 @Named
 @ViewScoped
 public class ChecklistPacienteController implements Serializable {
 
-	private static final long serialVersionUID = -9042867479794257960L;
-	private String nome;
-	private Checklist checklist;
+	private static final long serialVersionUID = -8186554046373598240L;
+	private boolean fatorRisco = false;
+	private boolean procedimento = false;
+	private boolean incidente = false;
+	private List<Procedimento> listaProcedimento = null;
+	private List<Incidente> listaIncidente = null;
+	private List<FatorRisco> listaFatorRisco = null;
+	private String inputArea = null;
 
-	private List<Checklist> listaChecklist = null;
+	public void getListaChecklist() {
+		if (listaProcedimento == null && listaIncidente == null && listaFatorRisco == null) {
+			ProcedimentoDAO proc = new ProcedimentoDAO();
+			IncidenteDAO inci = new IncidenteDAO();
+			FatorRiscoDAO fator = new FatorRiscoDAO();
+			if (isProcedimento() == true) {
 
-	public Checklist getChecklist() {
-		return checklist;
-	}
+				listaProcedimento = proc.findAll();
+				if (listaProcedimento == null)
+					listaProcedimento = new ArrayList<Procedimento>();
+				proc.closeConnection();
+			}
+			if (isFatorRisco() == true) {
 
-	public void setChecklist(Checklist checklist) {
-		this.checklist = checklist;
-	}
+				listaFatorRisco = fator.findAll();
+				if (listaFatorRisco == null)
+					listaFatorRisco = new ArrayList<FatorRisco>();
+				proc.closeConnection();
+			}
 
-	public String getNome() {
-		return nome;
-	}
+			if (isIncidente() == true) {
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-//	public String buscar(String nome) {
-//		ChecklistDAO dao = new ChecklistDAO();
-//		Checklist checklist = (Checklist) dao.findByNome(nome);
-//		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-//		flash.put("checklistFlash", checklist);
-//
-//		return "listabuscachecklist.xhtml?faces-redirect=true";
-//	}
-
-	public void buscar() {
-		listaChecklist = null;
-		System.out.println("oi");
-	}
-
-
-	public List<Checklist> getListaChecklist() {
-		if (listaChecklist == null) {
-			ChecklistDAO dao = new ChecklistDAO();
-//			listaChecklist = dao.findByNome(getNome());
-			if (listaChecklist == null)
-				listaChecklist = new ArrayList<Checklist>();
-			dao.closeConnection();
+				listaIncidente = inci.findAll();
+				if (listaIncidente == null)
+					listaIncidente = new ArrayList<Incidente>();
+				proc.closeConnection();
+			}
 		}
-		return listaChecklist;
+
+	}
+	public void limpar() {
+		setInputArea(null);
+	}
+	public boolean isFatorRisco() {
+		return fatorRisco;
 	}
 
-//	public String gerarChecklist(int id) {
-//		 
-//		DAO<Checklist> dao = new ChecklistDAO();
-//		try {
-//			dao.create(getCheclist());
-//			dao.getConnection().commit();
-//			Util.addMessageInfo("Inclus�o realizada com sucesso.");
-//			limpar();
-//		} catch (SQLException e) {
-//			dao.rollbackConnection();
-//			dao.closeConnection();
-//			Util.addMessageInfo("Erro ao incluir o Roupa no Banco de Dados.");
-//			e.printStackTrace();
-//		}
-//		
-//		return "gerarchecklist.xhtml?faces-redirect=true";
-//	}
-//
-//	public String visualizarChecklist(int id) {
-//	  //ChecklistDAO dao = new CheckListDAO();
-//	  //Checklist checklist = dao.findById(id);
-//	  //Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-//      //flash.put("ChecklistFlash", checklist);
-//
-//		return "checklist.xhtml?faces-redirect=true";
-//	}
-//	public String visualizarHistoricoChecklist() {
-//		if (listaChecklist == null) {
-//			ChecklistDAO dao = new ChecklistDAO();
-//			listaChecklist = dao.findByNome(getNome());
-//			if (listaChecklist == null)
-//				listaChecklist = new ArrayList<Checklist>();
-//			dao.closeConnection();
-//		}
-//		return "checklist.xhtml?faces-redirect=true";
-//	}
-//
-//	public String baixarChecklist() {
-//		return "true";
-//	}
+	public void setFatorRisco(boolean fatorRisco) {
+		this.fatorRisco = fatorRisco;
+	}
 
+	public boolean isProcedimento() {
+		return procedimento;
+	}
+
+	public void setProcedimento(boolean procedimento) {
+		this.procedimento = procedimento;
+	}
+
+	public boolean isIncidente() {
+		return incidente;
+	}
+
+	public void setIncidente(boolean incidente) {
+		this.incidente = incidente;
+	}
+
+	public List<Procedimento> getListaProcedimento() {
+		return listaProcedimento;
+	}
+
+	public void setListaProcedimento(List<Procedimento> listaProcedimento) {
+		this.listaProcedimento = listaProcedimento;
+	}
+
+	public List<Incidente> getListaIncidente() {
+		return listaIncidente;
+	}
+
+	public void setListaIncidente(List<Incidente> listaIncidente) {
+		this.listaIncidente = listaIncidente;
+	}
+
+	public List<FatorRisco> getListaFatorRisco() {
+		return listaFatorRisco;
+	}
+
+	public void setListaFatorRisco(List<FatorRisco> listaFatorRisco) {
+		this.listaFatorRisco = listaFatorRisco;
+	}
+
+	public String getInputArea() {
+		return inputArea;
+	}
+
+	public void setInputArea(String inputArea) {
+		this.inputArea = inputArea;
+	}
 }
