@@ -1,6 +1,5 @@
 package br.unitins.censohgp.dao;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,18 +9,15 @@ import java.util.List;
 
 import br.unitins.censohgp.model.Tipo;
 
-
 public class TipoDAO extends DAO<Tipo> {
 
 	public TipoDAO(Connection conn) {
 		super(conn);
 	}
 
-
 	public TipoDAO() {
 		super(null);
 	}
-
 
 	@Override
 	public void create(Tipo entity) throws SQLException {
@@ -39,29 +35,25 @@ public class TipoDAO extends DAO<Tipo> {
 	@Override
 	public List<Tipo> findAll() {
 		Connection conn = getConnection();
-		if (conn == null) 
+		if (conn == null)
 			return null;
 
 		try {
-			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " +
-							" idtipo_usuario, " +
-							" nome  " +
-							" FROM " +
-					"  public.tipo_usuario ");
+			PreparedStatement stat = conn
+					.prepareStatement("SELECT " + " idtipo_tipo, " + " nome  " + " FROM " + "  public.tipo_tipo ");
 
 			ResultSet rs = stat.executeQuery();
 
 			List<Tipo> listaTipo = new ArrayList<Tipo>();
 
-			while(rs.next()) {
+			while (rs.next()) {
 				Tipo sexo = new Tipo();
-				sexo.setId(rs.getInt("idtipo_usuario"));
+				sexo.setId(rs.getInt("idtipo_tipo"));
 				sexo.setNome(rs.getString("nome"));
 
 				listaTipo.add(sexo);
 
-			}			 			
+			}
 
 			if (listaTipo.isEmpty())
 				return null;
@@ -70,7 +62,36 @@ public class TipoDAO extends DAO<Tipo> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;	
+		return null;
+	}
+
+	public Tipo findId(Integer id) {
+		Connection conn = getConnection();
+		if (conn == null)
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " + " idtipo_tipo, " + "  nome " + "FROM " + "  public.tipo_tipo " + "WHERE id = ? ");
+
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+
+			Tipo tipo = null;
+
+			if (rs.next()) {
+				tipo = new Tipo();
+				tipo.setId(rs.getInt("idtipo_tipo"));
+				tipo.setNome(rs.getString("nome"));
+			}
+
+			return tipo;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
