@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unitins.censohgp.model.Departamento;
-import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Usuario;
 
 public class UsuarioDAO extends DAO<Usuario> {
@@ -33,8 +31,8 @@ public class UsuarioDAO extends DAO<Usuario> {
 
 		try {
 			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " + "  idusuario, " + "  nome, " + "  senha, " + "  idtipo_usuario, " + "  email "
-							+ "  matricula, " + "FROM " + "  public.usuario " + "WHERE matricula = ? AND senha = ? ");
+					"SELECT " + "  idusuario, " + "  nome, " + "  senha, " + "  idtipo_usuario, " + "  email, "
+							+ "  matricula " + "FROM " + "  public.usuario " + "WHERE matricula = ? AND senha = ?;");
 
 			stat.setString(1, matricula);
 			stat.setString(2, senha);
@@ -49,10 +47,8 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario.setNome(rs.getString("nome"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.getTipo().setId(rs.getInt("idtipo_usuario"));
-//				usuario.setAtivo(rs.getBoolean("ativo"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setMatricula("matricula");
-//				como vou setar o idtipo usuario?
 			}
 
 			return usuario;

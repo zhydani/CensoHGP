@@ -40,7 +40,7 @@ public class TipoDAO extends DAO<Tipo> {
 
 		try {
 			PreparedStatement stat = conn
-					.prepareStatement("SELECT " + " idtipo_tipo, " + " nome  " + " FROM " + "  public.tipo_tipo ");
+					.prepareStatement("SELECT " + " idtipo_usuario, " + " nome  " + " FROM " + "  public.tipo_usuario ");
 
 			ResultSet rs = stat.executeQuery();
 
@@ -48,7 +48,7 @@ public class TipoDAO extends DAO<Tipo> {
 
 			while (rs.next()) {
 				Tipo sexo = new Tipo();
-				sexo.setId(rs.getInt("idtipo_tipo"));
+				sexo.setId(rs.getInt("idtipo_usuario"));
 				sexo.setNome(rs.getString("nome"));
 
 				listaTipo.add(sexo);
@@ -72,7 +72,7 @@ public class TipoDAO extends DAO<Tipo> {
 
 		try {
 			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " + " idtipo_tipo, " + "  nome " + "FROM " + "  public.tipo_tipo " + "WHERE id = ? ");
+					"SELECT " + " idtipo_usuario, " + "  nome " + "FROM " + "  public.tipo_usuario " + "WHERE id = ? ");
 
 			stat.setInt(1, id);
 
@@ -82,7 +82,7 @@ public class TipoDAO extends DAO<Tipo> {
 
 			if (rs.next()) {
 				tipo = new Tipo();
-				tipo.setId(rs.getInt("idtipo_tipo"));
+				tipo.setId(rs.getInt("idtipo_usuario"));
 				tipo.setNome(rs.getString("nome"));
 			}
 

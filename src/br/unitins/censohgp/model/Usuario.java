@@ -14,6 +14,7 @@ public class Usuario implements Cloneable {
 	private String email;
 	@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres")
 	private String senha;
+	@NotEmpty(message = "O campo Matricula não pode ser vazio")
 	private String matricula;
 	private Boolean ativo = Boolean.TRUE;
 	private Tipo tipo;
@@ -91,11 +92,12 @@ public class Usuario implements Cloneable {
 		this.matricula = matricula;
 	}
 
+	
 	public Usuario(Integer id,
 			@NotEmpty(message = "O campo Nome não pode ser vazio") @Size(max = 60, message = "O campo Nome deve conter no máximo 60 caracteres") String nome,
 			@Email String email,
 			@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres") String senha,
-			String matricula, Boolean ativo, Tipo tipo) {
+			@NotEmpty(message = "O campo Matricula não pode ser vazio") String matricula, Boolean ativo, Tipo tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;

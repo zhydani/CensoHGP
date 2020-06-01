@@ -1,7 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
@@ -37,19 +39,19 @@
 					<div class="form-row">
 
 
-						<div class="col-md-12 input-group form-group">
+						<div class="col-md-12 input-group form-group wdi-red">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-laranja"><i
 									class="pi pi-user" style="font-size: 2em; color: #fff;"></i></span>
 							</div>
-							<h:inputText styleClass="form-control form-control-lg"
+							<h:inputText styleClass="form-control form-control-lg" 
 								value="#{loginController.usuario.matricula}">
 								<f:passThroughAttribute name="placeholder" value="Matrícula" />
 							</h:inputText>
 						</div>
 
 
-						<div class="col-md-12 input-group form-group">
+						<div class="col-md-12 input-group form-group wdi-red">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-laranja"><i
 									class="pi pi-key" style="font-size: 2em; color: #fff;"></i></span>
@@ -64,12 +66,15 @@
 						<div class="col-md-12 input-group form-group mt-3">
 							<h:commandButton value="Logar"
 								styleClass="btn btn-lg btn-block btn-login"
-								action="#{loginController.logar()}" />
+								action="#{loginController.logar()}"/>
+								
+								
 						</div>
 
 						<div class="col-md-12 text-center">
 							<p>
-								Esqueceu a senha? <a href="recuperacao.xhtml">Recuperar acesso</a>
+								Esqueceu a senha? <a href="recuperacao.xhtml">Recuperar
+									acesso</a>
 							</p>
 
 						</div>
