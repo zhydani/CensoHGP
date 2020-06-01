@@ -7,7 +7,7 @@ public class Paciente {
 
 	private Integer idpaciente;
 	private String nome;
-	private int cpf;
+	private String cpf;
 	private int rg;
 	private Situacao situacao;
 	private Boolean ativo = Boolean.TRUE;
@@ -24,7 +24,7 @@ public class Paciente {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(Integer idpaciente, String nome, int cpf, int rg, Situacao situacao, Boolean ativo, String nomeMae,
+	public Paciente(Integer idpaciente, String nome, String cpf, int rg, Situacao situacao, Boolean ativo, String nomeMae,
 			Sexo sexo, LocalDate dataNascimento, String observacao, Departamento idlocalTransferencia,
 			int numeroProntuario, List<Precaucao> precaucoes) {
 		super();
@@ -145,12 +145,12 @@ public class Paciente {
 	}
 
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
