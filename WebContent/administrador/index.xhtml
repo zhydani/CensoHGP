@@ -35,29 +35,34 @@
 			</div>
 
 			<ul class="list-unstyled components">
-				<h:panelGrid columns="2">
-					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
-						library="images" name="usu.png" />
-					<h:form>
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+							library="images" name="usu.png" />
+
 						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
 							class="font-weight-bold mb-3" />
+						<!-- <h:commandLink value="Sair"
+							action="#{templateController.encerrarSessao()}"
+							style="color:white" /> -->
 
-					</h:form>
-				</h:panelGrid>
-				<li class="active"><a href="index.xhtml">Início</a></li>
-				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
-				<li><a href="buscarusuario.xhtml" data-toggle="collapse"
-					aria-expanded="false">Buscar Usuário</a></li>
-				<li><a href="cadastrardepartamento.xhtml">Cadastrar
-						Departamento</a></li>
-				<li><a href="consultadepartamento.xhtml">Buscar
-						Departamento</a></li>
-				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
-				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
-				<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
-				<li><h:commandLink value="Sair"
-						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
-
+					</h:panelGrid>
+					<li class="active"><a href="index.xhtml">Início</a></li>
+					<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
+					<li><a href="buscarusuario.xhtml" data-toggle="collapse"
+						aria-expanded="false">Buscar Usuário</a></li>
+					<li><a href="cadastrardepartamento.xhtml">Cadastrar
+							Departamento</a></li>
+					<li><a href="consultadepartamento.xhtml">Buscar
+							Departamento</a></li>
+					<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
+					<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
+					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+					<li><h:commandLink value="Sair"
+							action="#{templateController.encerrarSessao}" class="nav-link">
+							<f:ajax render="@form" execute="@all" />
+						</h:commandLink></li>
+				</h:form>
 			</ul>
 
 
@@ -86,10 +91,10 @@
 									</p:commandLink>
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+										<p:commandLink value="Sair"
+											oncomplete="#{templateController.encerrarSessao()}"
+											class="nav-link" />
 
-										<li><h:commandLink value="Sair"
-												action="#{templateController.encerrarSessao}"
-												class="nav-link" /></li>
 
 									</ul>
 

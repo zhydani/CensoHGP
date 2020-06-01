@@ -32,7 +32,7 @@ public class TemplateController implements Serializable{
 
 	public String encerrarSessao() {
 		Session.getInstance().invalidateSession();
-		return "login.xhtml?faces-redirect=true";
+		return "/login.xhtml?faces-redirect=true";
 	}
 	
 }

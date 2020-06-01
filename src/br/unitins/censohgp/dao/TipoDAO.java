@@ -72,7 +72,7 @@ public class TipoDAO extends DAO<Tipo> {
 
 		try {
 			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " + " idtipo_usuario, " + "  nome " + "FROM " + "  public.tipo_usuario " + "WHERE id = ? ");
+					"SELECT " + " idtipo_usuario, " + "  nome " + "FROM " + "  public.tipo_usuario " + "WHERE idtipo_usuario = ? ");
 
 			stat.setInt(1, id);
 

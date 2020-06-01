@@ -85,18 +85,19 @@ public class UsuarioDAO extends DAO<Usuario> {
 				Statement.RETURN_GENERATED_KEYS);
 		stat.setString(1, usuario.getNome());
 		stat.setString(2, usuario.getSenha());
-		stat.setInt(3, usuario.getTipo().getId());
-//		stat.setBoolean(4, usuario.getAtivo());
+		
+		TipoDAO dao = new TipoDAO(conn);
+		Integer value = usuario.getTipo().getId();
+		Tipo tipo = dao.findId(value);
+		stat.setInt(3, tipo.getId());
+		
 		stat.setString(4, usuario.getEmail());
 		stat.setString(5, usuario.getMatricula());
-
+		
 		stat.execute();
+		
+		
 
-		// obtendo o id gerado pela tabela do banco de dados
-		ResultSet rs = stat.getGeneratedKeys();
-		rs.next();
-
-//		Integer value = rs.getInt("idusuario");
 	}
 
 //	UPDATE public.usuario

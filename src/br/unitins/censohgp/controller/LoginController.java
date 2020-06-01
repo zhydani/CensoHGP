@@ -22,25 +22,32 @@ public class LoginController implements Serializable {
 
 	public String logar() {
 		UsuarioDAO dao = new UsuarioDAO();
-//		TipoDAO daotipo = new TipoDAO();
+		TipoDAO daotipo = new TipoDAO();
 		String hashSenha = Util.hashSHA256(getUsuario().getSenha());
 		Usuario usuario = dao.login(getUsuario().getMatricula(), hashSenha);
+		Integer administrador = daotipo.findId(1).getId();
+		Integer usu = daotipo.findId(2).getId();
 		if (usuario != null) {
 
 			// armazenando um usuario na sessao
-			if (usuario.getTipo().getId().equals(1)) {
+			System.out.println(usuario.getTipo().getId());
+			if (usuario.getTipo().getId().equals(administrador)) {
 				Session.getInstance().setAttribute("usuarioLogado", usuario);
 				System.out.println("oi");
 				return "administrador/index.xhtml?faces-redirect=true";
 
-			} else if (usuario.getTipo().getId().equals(2)) {
+			}
+			else if (usuario.getTipo().getId().equals(usu)) {
 				Session.getInstance().setAttribute("usuarioLogado", usuario);
 				return "usuario/index.xhtml?faces-redirect=true";
 			}
 
 		}
 
-		Util.addMessageError("Usuario ou Senha Invalido.");
+		else{
+			Util.addMessageError("Usuario ou Senha Invalido.");
+			return null;
+		}
 		return null;
 	}
 

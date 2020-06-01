@@ -56,11 +56,14 @@
 								<span class="input-group-text bg-laranja"><i
 									class="pi pi-key" style="font-size: 2em; color: #fff;"></i></span>
 							</div>
-							<h:inputText id="senha" name="senha" type="password"
+							<h:inputSecret id="senha" name="senha" type="password"
 								class="form-control form-control-lg"
-								value="#{loginController.usuario.senha}" placeholder="Senha" />
-							<span id="showPassword" onclick="showPassword()"
-								class="MostrarSenha text-muted">Mostrar</span>
+								value="#{loginController.usuario.senha}" placeholder="Senha">
+								<f:passThroughAttribute name="placeholder" value="Senha" />
+							</h:inputSecret>
+
+							<!-- <span id="showPassword" onclick="showPassword()"
+								class="MostrarSenha text-muted">Mostrar</span> -->
 						</div>
 
 						<div class="col-md-12 input-group form-group mt-3">
