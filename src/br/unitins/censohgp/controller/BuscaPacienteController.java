@@ -12,7 +12,9 @@ import javax.inject.Named;
 
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.dao.DAO;
+import br.unitins.censohgp.dao.DepartamentoDAO;
 import br.unitins.censohgp.dao.PacienteDAO;
+import br.unitins.censohgp.model.Departamento;
 import br.unitins.censohgp.model.Paciente;
 
 
@@ -22,7 +24,7 @@ public class BuscaPacienteController implements Serializable {
 
 	private static final long serialVersionUID = -9042867479794257960L;
 	private String pesquisa = null;
-	private Paciente paciente;
+	private Paciente paciente = null;
 	private List<Paciente> listaPaciente = null;
 	private List<Paciente> listaBusca = null;
 	private Integer console = null;
@@ -67,11 +69,12 @@ public class BuscaPacienteController implements Serializable {
 
 	public boolean excluir(int idpaciente) {
 		DAO<Paciente> dao = new PacienteDAO();
-		// faz a exclusao no banco de dados
 		try {
 			dao.delete(idpaciente);
 			dao.getConnection().commit();
 			Util.addMessageInfo("Exclusao realizada com sucesso.");
+			listaBusca = null;
+			getListaPacienteBusca();
 			return true;
 		} catch (SQLException e) {
 			dao.rollbackConnection();
@@ -79,6 +82,8 @@ public class BuscaPacienteController implements Serializable {
 			e.printStackTrace();
 			return false;
 		} finally {
+			listaBusca = null;
+			getListaPacienteBusca();
 			dao.closeConnection();
 		}
 	}
