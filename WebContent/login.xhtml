@@ -44,7 +44,7 @@
 								<span class="input-group-text bg-laranja"><i
 									class="pi pi-user" style="font-size: 2em; color: #fff;"></i></span>
 							</div>
-							<h:inputText styleClass="form-control form-control-lg" 
+							<h:inputText styleClass="form-control form-control-lg"
 								value="#{loginController.usuario.matricula}">
 								<f:passThroughAttribute name="placeholder" value="Matrícula" />
 							</h:inputText>
@@ -56,7 +56,7 @@
 								<span class="input-group-text bg-laranja"><i
 									class="pi pi-key" style="font-size: 2em; color: #fff;"></i></span>
 							</div>
-							<input id="senha" name="senha" type="password"
+							<h:inputText id="senha" name="senha" type="password"
 								class="form-control form-control-lg"
 								value="#{loginController.usuario.senha}" placeholder="Senha" />
 							<span id="showPassword" onclick="showPassword()"
@@ -66,9 +66,11 @@
 						<div class="col-md-12 input-group form-group mt-3">
 							<h:commandButton value="Logar"
 								styleClass="btn btn-lg btn-block btn-login"
-								action="#{loginController.logar()}"/>
-								
-								
+								action="#{loginController.logar()}">
+								<f:ajax render="@form" execute="@all" />
+							</h:commandButton>
+
+
 						</div>
 
 						<div class="col-md-12 text-center">
