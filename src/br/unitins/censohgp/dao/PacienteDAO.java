@@ -38,7 +38,7 @@ public class PacienteDAO extends DAO<Paciente>{
 						" (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 
 		stat.setString(1, paciente.getNome());
-		stat.setInt(2, paciente.getCpf());
+		stat.setString(2, paciente.getCpf());
 		stat.setInt(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setInt(5, paciente.getSituacao().getIdsituacao());
@@ -103,7 +103,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				" idpaciente = ? ");
 
 		stat.setString(1, paciente.getNome());
-		stat.setInt(2, paciente.getCpf());
+		stat.setString(2, paciente.getCpf());
 		stat.setInt(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setInt(5, paciente.getSituacao().getIdsituacao());
@@ -193,7 +193,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				Paciente paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setCpf(rs.getString("cpf"));
 				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
@@ -252,7 +252,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				Paciente paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setCpf(rs.getString("cpf"));
 				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
@@ -312,7 +312,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				Paciente paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setCpf(rs.getString("cpf"));
 				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
@@ -372,7 +372,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				Paciente paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setCpf(rs.getString("cpf"));
 				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
@@ -429,7 +429,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				Paciente paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setCpf(rs.getString("cpf"));
 				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
@@ -485,7 +485,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente = new Paciente();
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
-				paciente.setCpf(rs.getInt("cpf"));
+				paciente.setCpf(rs.getString("cpf"));
 				paciente.setRg(rs.getInt("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));

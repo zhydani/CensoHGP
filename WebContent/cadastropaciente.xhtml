@@ -35,24 +35,20 @@
 							<h:inputText id="inputNome"
 								value="#{cadastroPacienteController.paciente.nome}" />
 							<h:outputLabel style="font-weight: bold;" value="CPF: " />
-							<h:inputText id="inpuCpf"
-								value="#{cadastroPacienteController.paciente.cpf}"
-								requiredMessage="O campo cpf não pode ser nulo.">
-							</h:inputText>
+							<p:inputMask value="#{cadastroPacienteController.paciente.cpf}" mask="999.999.999-99" />
 							<h:outputLabel style="font-weight: bold;" value="RG: " />
 							<h:inputText value="#{cadastroPacienteController.paciente.rg}" />
 						</h:panelGrid>
 
 						<h:panelGrid columns="2" style="margin-left: 100px;">
 							<h:outputLabel style="font-weight: bold;" value="Nome da Mãe: " />
-							<h:inputText
-								value="#{cadastroPacienteController.paciente.nomeMae}" />
+							<p:inputText value="#{cadastroPacienteController.paciente.nomeMae}"/>
+							
 							<h:outputLabel style="font-weight: bold;"
 								value="Data de Nascimento: " />
-							<h:inputText
-								value="#{cadastroPacienteController.paciente.dataNascimento}">
-								<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
-							</h:inputText>
+							<p:inputMask style="color: black; background: white; " value="#{cadastroPacienteController.paciente.dataNascimento}" mask="99/99/9999">
+								<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" /> 
+							</p:inputMask>
 							<h:outputLabel style="font-weight: bold;"
 								value="Sexo do paciente: " />
 							<h:selectOneMenu class="btn btn-dark"

@@ -58,7 +58,7 @@ body{
  margin: 30px;
  }
 .ui-fieldset .ui-state-default {
-    background:  #1946b4 !important	;
+    background:  #1946b4;
     color: white;
 }
 .ui-fieldset legend {
@@ -67,4 +67,3 @@ body{
 	width: 155px;
 	align-self: center;
 }
-
