@@ -20,6 +20,7 @@ public class TemplateController implements Serializable{
 		if (usuarioLogado == null) {
 			// buscando o usuario da sessao
 			usuarioLogado = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
+			
 			if (usuarioLogado == null)
 				usuarioLogado = new Usuario();
 		}
@@ -34,5 +35,11 @@ public class TemplateController implements Serializable{
 		Session.getInstance().invalidateSession();
 		return "/login.xhtml?faces-redirect=true";
 	}
+	
+	public String autorizacao() {
+		Session.getInstance().invalidateSession();
+		return "/login.xhtml?faces-redirect=true";
+	}
+	
 	
 }
