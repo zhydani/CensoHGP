@@ -8,7 +8,7 @@ public class Paciente {
 	private Integer idpaciente;
 	private String nome;
 	private String cpf;
-	private int rg;
+	private String rg;
 	private Situacao situacao;
 	private Boolean ativo = Boolean.TRUE;
 	private String nomeMae;
@@ -16,7 +16,7 @@ public class Paciente {
 	private LocalDate dataNascimento;
 	private String observacao;
 	private Departamento idlocalTransferencia;
-	private int numeroProntuario;
+	private String numeroProntuario;
 	private List<Precaucao> precaucoes;
 
 	public Paciente() {
@@ -24,9 +24,9 @@ public class Paciente {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(Integer idpaciente, String nome, String cpf, int rg, Situacao situacao, Boolean ativo, String nomeMae,
+	public Paciente(Integer idpaciente, String nome, String cpf, String rg, Situacao situacao, Boolean ativo, String nomeMae,
 			Sexo sexo, LocalDate dataNascimento, String observacao, Departamento idlocalTransferencia,
-			int numeroProntuario, List<Precaucao> precaucoes) {
+			String numeroProntuario, List<Precaucao> precaucoes) {
 		super();
 		this.idpaciente = idpaciente;
 		this.nome = nome;
@@ -155,12 +155,12 @@ public class Paciente {
 	}
 
 
-	public int getRg() {
+	public String getRg() {
 		return rg;
 	}
 
 
-	public void setRg(int rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
 	}
 
@@ -235,12 +235,12 @@ public class Paciente {
 	}
 
 
-	public int getNumeroProntuario() {
+	public String getNumeroProntuario() {
 		return numeroProntuario;
 	}
 
 
-	public void setNumeroProntuario(int numeroProntuario) {
+	public void setNumeroProntuario(String numeroProntuario) {
 		this.numeroProntuario = numeroProntuario;
 	}
 
@@ -253,8 +253,5 @@ public class Paciente {
 	public void setPrecaucoes(List<Precaucao> precaucoes) {
 		this.precaucoes = precaucoes;
 	}
-
-
-
 		
 }

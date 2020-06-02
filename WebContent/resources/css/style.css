@@ -1,69 +1,90 @@
-body{
+body {
 	background: #DD3247;
 	padding-top: 10%;
 }
 
-.wdi-red{
+.wdi-red {
 	color: #DD3247;
 }
 
-.login-box{
+.login-box {
 	background: #fff;
 	padding: 50px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
 }
-.flat-input{
+
+.flat-input {
 	margin-bottom: 50px;
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid #DD3247;
 	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
-	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #DD3247 4%);
-	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #DD3247 4%);
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%,
+		#DD3247 4%);
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%,
+		#DD3247 4%);
 	background-position: -500px 0;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
-.flat-input:focus{
+
+.flat-input:focus {
 	box-shadow: none;
 	outline: none;
 	background-position: 0 0;
 	border-bottom: 0px;
 }
 
-.btn-login{
+.btn-login {
 	border-radius: 0;
 	background: #DD3247;
 	color: #fff;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
 }
-.btn-login:hover{
+
+.btn-login:hover {
 	background: transparent;
 	border: 1px solid #DD3247;
 	color: #DD3247;
 }
 
-
- ul {
-     list-style: none;
-     padding: 0;
- }
- fieldset{
- border:  2px solid black;
- border-radius: 10px;
- margin-left: 70px;
- margin-right: 70px;
- margin: 30px;
- }
-.ui-fieldset .ui-state-default {
-    background:  #1946b4;
-    color: white;
+ul {
+	list-style: none;
+	padding: 0;
 }
+
+fieldset {
+	border: 2px solid black;
+	border-radius: 10px;
+	margin-left: 70px;
+	margin-right: 70px;
+	margin: 30px;
+}
+
+.ui-fieldset .ui-state-default {
+	background: #fff;
+	color: black;
+}
+
 .ui-fieldset legend {
 	font-size: 12px;
 	height: 40px;
 	width: 155px;
 	align-self: center;
+}
+
+.ui-datalist ul {
+	padding: 0px 10px 0 20px;
+	margin: 5px 0;
+}
+
+.ui-datalist {
+	margin-bottom: 10px
+}
+
+.ui-noborder tr.ui-widget-content {
+	background: none;
 }
