@@ -39,7 +39,7 @@ public class PacienteDAO extends DAO<Paciente>{
 
 		stat.setString(1, paciente.getNome());
 		stat.setString(2, paciente.getCpf());
-		stat.setInt(3, paciente.getRg());
+		stat.setString(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setInt(5, paciente.getSituacao().getIdsituacao());
 		stat.setInt(6, paciente.getSexo().getIdsexo());
@@ -47,7 +47,7 @@ public class PacienteDAO extends DAO<Paciente>{
 		Date date = Date.valueOf(paciente.getDataNascimento());
 		stat.setDate(8, date);
 		stat.setString(9, paciente.getObservacao());
-		stat.setInt(10, paciente.getNumeroProntuario());
+		stat.setString(10, paciente.getNumeroProntuario());
 		stat.setInt(11, paciente.getIdlocalTransferencia().getIdlocalTransferencia());
 		stat.execute();
 
@@ -104,7 +104,7 @@ public class PacienteDAO extends DAO<Paciente>{
 
 		stat.setString(1, paciente.getNome());
 		stat.setString(2, paciente.getCpf());
-		stat.setInt(3, paciente.getRg());
+		stat.setString(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setInt(5, paciente.getSituacao().getIdsituacao());
 		stat.setInt(6, paciente.getSexo().getIdsexo());
@@ -112,7 +112,7 @@ public class PacienteDAO extends DAO<Paciente>{
 		Date date = Date.valueOf(paciente.getDataNascimento());
 		stat.setDate(8, date);
 		stat.setString(9, paciente.getObservacao());
-		stat.setInt(10, paciente.getNumeroProntuario());
+		stat.setString(10, paciente.getNumeroProntuario());
 		stat.setInt(11, paciente.getIdlocalTransferencia().getIdlocalTransferencia());
 		stat.setInt(12, paciente.getIdpaciente());
 		stat.execute();
@@ -194,12 +194,12 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
 				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getInt("rg"));
+				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 				
 //				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
 //				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
@@ -253,12 +253,12 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
 				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getInt("rg"));
+				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 				
 //				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
 //				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
@@ -313,12 +313,12 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
 				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getInt("rg"));
+				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 				
 //				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
 //				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
@@ -373,12 +373,12 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
 				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getInt("rg"));
+				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 				
 //				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
 //				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
@@ -430,12 +430,12 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
 				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getInt("rg"));
+				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento") == null ? null : (rs.getDate("data_nascimento").toLocalDate()));
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 
 				listaPaciente.add(paciente);
 
@@ -486,7 +486,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.setIdpaciente(rs.getInt("idpaciente"));
 				paciente.setNome(rs.getString("nome"));
 				paciente.setCpf(rs.getString("cpf"));
-				paciente.setRg(rs.getInt("rg"));
+				paciente.setRg(rs.getString("rg"));
 				paciente.setAtivo(rs.getBoolean("ativo"));
 				paciente.setNomeMae(rs.getString("nome_mae"));
 				paciente.setSituacao(new Situacao());
@@ -495,7 +495,7 @@ public class PacienteDAO extends DAO<Paciente>{
 				paciente.getSexo().setIdsexo(rs.getInt("idgenero"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				paciente.setObservacao(rs.getString("observacao"));
-				paciente.setNumeroProntuario(rs.getInt("numero_prontuario"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 				paciente.setIdlocalTransferencia(new Departamento());
 				paciente.getIdlocalTransferencia().setIdlocalTransferencia(rs.getInt("iddepartamento"));
 			}
