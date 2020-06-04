@@ -78,28 +78,34 @@ public class UsuarioDAO extends DAO<Usuario> {
 	@Override
 	public void create(Usuario usuario) throws SQLException {
 
-		Connection conn = getConnection();
+		Connection  conn = getConnection();
 
-		PreparedStatement stat = conn.prepareStatement("INSERT INTO " + "public.usuario "
-				+ " (nome, senha, idtipo_usuario, email, matricula) " + "VALUES " + " (?, ?, ?, ?, ?) ",
-				Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement stat = conn.prepareStatement(
+				"INSERT INTO " +
+						" usuario " +
+						" (nome, senha, idtipo_usuario, email, matricula) " +
+						" VALUES " +
+						" (?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
+
 		stat.setString(1, usuario.getNome());
 		stat.setString(2, usuario.getSenha());
 		
-		TipoDAO dao = new TipoDAO(conn);
-		Integer value = usuario.getTipo().getId();
-		Tipo tipo = dao.findId(value);
-		stat.setInt(3, tipo.getId());
+		TipoDAO dao = new TipoDAO();
+		Integer id_tipo = usuario.getTipo().getId();
+		System.out.println(id_tipo);
+		Tipo id_tipo_banco = dao.findId(id_tipo);
+		
+		stat.setInt(3, id_tipo_banco.getId());
+		
 		
 		stat.setString(4, usuario.getEmail());
 		stat.setString(5, usuario.getMatricula());
-		
 		stat.execute();
 		
 		
 
 	}
-
+	
 //	UPDATE public.usuario
 //	SET idusuario=?, nome=?, senha=?, idtipo_usuario=?, ativo=?, email=?, matricula=?
 //	WHERE <condition>;

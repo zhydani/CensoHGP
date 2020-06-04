@@ -35,25 +35,29 @@ public class TipoDAO extends DAO<Tipo> {
 	@Override
 	public List<Tipo> findAll() {
 		Connection conn = getConnection();
-		if (conn == null)
+		if (conn == null) 
 			return null;
 
 		try {
-			PreparedStatement stat = conn
-					.prepareStatement("SELECT " + " idtipo_usuario, " + " nome  " + " FROM " + "  public.tipo_usuario ");
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+							" idtipo_usuario, " +
+							" nome  " +
+							" FROM " +
+					"  public.tipo_usuario ");
 
 			ResultSet rs = stat.executeQuery();
 
 			List<Tipo> listaTipo = new ArrayList<Tipo>();
 
-			while (rs.next()) {
-				Tipo sexo = new Tipo();
-				sexo.setId(rs.getInt("idtipo_usuario"));
-				sexo.setNome(rs.getString("nome"));
+			while(rs.next()) {
+				Tipo tipo = new Tipo();
+				tipo.setId(rs.getInt("idtipo_usuario"));
+				tipo.setNome(rs.getString("nome"));
 
-				listaTipo.add(sexo);
+				listaTipo.add(tipo);
 
-			}
+			}			 			
 
 			if (listaTipo.isEmpty())
 				return null;
@@ -62,7 +66,7 @@ public class TipoDAO extends DAO<Tipo> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return null;	
 	}
 
 	public Tipo findId(Integer id) {

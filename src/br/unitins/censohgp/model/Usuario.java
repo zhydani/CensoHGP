@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class Usuario implements Cloneable {
 	private Integer id;
-
+	private Tipo tipo;
 	@NotEmpty(message = "O campo Nome não pode ser vazio")
 	@Size(max = 60, message = "O campo Nome deve conter no máximo 60 caracteres")
 	private String nome;
@@ -17,7 +17,7 @@ public class Usuario implements Cloneable {
 	@NotEmpty(message = "O campo Matricula não pode ser vazio")
 	private String matricula;
 	private Boolean ativo = Boolean.TRUE;
-	private Tipo tipo;
+	
 
 	public Usuario() {
 		super();
@@ -109,6 +109,9 @@ public class Usuario implements Cloneable {
 	}
 
 	public Tipo getTipo() {
+		if (tipo == null) {
+			tipo = new Tipo();
+		}
 		return tipo;
 	}
 

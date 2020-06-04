@@ -176,7 +176,7 @@
 												<h:outputLabel value="Tipo de usuário: " class="mr-5 mt-1" />
 												<h:selectOneMenu converter="omnifaces.SelectItemsConverter"
 													value="#{cadastroUsuarioController.usuario.tipo}">
-													<f:selectItem itemLabel="Selecione o tipo" />
+													<f:selectItem itemLabel="Selecione..." />
 													<f:selectItems
 														value="#{cadastroUsuarioController.listaTipo}" var="obj"
 														itemValue="#{obj}" itemLabel="#{obj.nome}" />

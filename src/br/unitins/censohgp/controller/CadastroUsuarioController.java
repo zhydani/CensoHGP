@@ -11,9 +11,11 @@ import javax.inject.Named;
 
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.dao.DAO;
+import br.unitins.censohgp.dao.PrecaucaoDAO;
 import br.unitins.censohgp.dao.SexoDAO;
 import br.unitins.censohgp.dao.TipoDAO;
 import br.unitins.censohgp.dao.UsuarioDAO;
+import br.unitins.censohgp.model.Precaucao;
 import br.unitins.censohgp.model.Sexo;
 import br.unitins.censohgp.model.Tipo;
 import br.unitins.censohgp.model.Usuario;
@@ -23,7 +25,6 @@ import br.unitins.censohgp.model.Usuario;
 public class CadastroUsuarioController implements Serializable {
 
 	private static final long serialVersionUID = -6998638931332554108L;
-//	TODO: adicionar o atributo TIPO
 	private Usuario usuario;
 	private String nome;
 	private List<Usuario> listaUsuario;
@@ -56,7 +57,7 @@ public class CadastroUsuarioController implements Serializable {
 
 				dao.create(getUsuario());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Inclus�o realizada com sucesso.");
+				Util.addMessageInfo("Inclusao realizada com sucesso.");
 				limpar();
 				listaUsuario = null;
 			} catch (SQLException e) {
@@ -96,7 +97,7 @@ public class CadastroUsuarioController implements Serializable {
 	}
 
 	public boolean excluir(Usuario usuario) {
-		DAO<Usuario> dao = new UsuarioDAO();
+		UsuarioDAO dao = new UsuarioDAO();
 		// faz a exclusao no banco de dados
 		try {
 			dao.delete(usuario.getId());
@@ -158,8 +159,6 @@ public class CadastroUsuarioController implements Serializable {
 		usuario = null;
 	}
 
-	
-
 	public String login() {
 		return "login.xhtml?faces-redirect=true";
 
@@ -174,27 +173,22 @@ public class CadastroUsuarioController implements Serializable {
 	}
 
 	public List<SelectItem> getListaTipo() {
-		if(listaTipo == null) {
+		if (listaTipo == null) {
 			listaTipo = new ArrayList<SelectItem>();
-			
+
 			DAO<Tipo> dao = new TipoDAO();
 			List<Tipo> tipoLista = dao.findAll();
-			
-			if(tipoLista != null && !tipoLista.isEmpty()) {
+
+			if (tipoLista != null && !tipoLista.isEmpty()) {
 				SelectItem item;
-				
+
 				for (Tipo tipo : tipoLista) {
 					item = new SelectItem(tipo, tipo.getNome());
 					listaTipo.add(item);
 				}
 			}
 		}
-		
 		return listaTipo;
-	}
-
-	public void setListaTipo(List<SelectItem> listaTipo) {
-		this.listaTipo = listaTipo;
 	}
 
 }
