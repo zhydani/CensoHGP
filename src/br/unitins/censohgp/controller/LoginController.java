@@ -30,15 +30,17 @@ public class LoginController implements Serializable {
 		if (usuario != null) {
 
 			// armazenando um usuario na sessao
+			
+			if (usuario.getTipo().getId().equals(usu)) {
+				Session.getInstance().setAttribute("usuarioLogado", usuario);
+
+				return "usuario/index.xhtml?faces-redirect=true";
+			}
 			if (usuario.getTipo().getId().equals(administrador)) {
 				Session.getInstance().setAttribute("usuarioLogado", usuario);
 
 				return "administrador/index.xhtml?faces-redirect=true";
 
-			} else if (usuario.getTipo().getId().equals(usu)) {
-				Session.getInstance().setAttribute("usuarioLogado", usuario);
-
-				return "usuario/index.xhtml?faces-redirect=true";
 			}
 
 		}

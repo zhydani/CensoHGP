@@ -71,27 +71,25 @@
 			<tr>
 				<td colspan="2" align="center" class="mar"><ui:insert
 						name="cabecalho">
-						<h:form>
 
-							<div class="navbar navbar-dark bg-navbar navbar-expand">
-								<div class="container collapse navbar-collapse">
-									<p:commandLink oncomplete="PF('sidebar1').show()"
-										styleClass="mx-3 pt-1 button-menu">
-										<span><i class="pi pi-bars"
-											style="font-size: 2.5em; color: #fff;"></i></span>
-									</p:commandLink>
-									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
-									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+						<div class="navbar navbar-dark bg-navbar navbar-expand">
+							<div class="container collapse navbar-collapse">
+								<p:commandLink oncomplete="PF('sidebar1').show()"
+									styleClass="mx-3 pt-1 button-menu">
+									<span><i class="pi pi-bars"
+										style="font-size: 2.5em; color: #fff;"></i></span>
+								</p:commandLink>
+								<div class="navbar-brand font-weight-bold ">CensoHGP</div>
+								<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-										<li><h:commandLink value="Sair"
-												action="#{templateController.encerrarSessao}"
-												class="nav-link" /></li>
+									<li><h:commandLink value="Sair"
+											action="#{templateController.encerrarSessao}"
+											class="nav-link" /></li>
 
-									</ul>
+								</ul>
 
-								</div>
 							</div>
-						</h:form>
+						</div>
 					</ui:insert></td>
 			</tr>
 
