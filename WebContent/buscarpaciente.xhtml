@@ -200,6 +200,16 @@
 															render="formPrincipal:dataTable" />
 													</h:commandLink>
 												</h:column>
+												<h:column>
+													<h:commandLink
+														action="#{buscaPacienteController.checklist(obj.idpaciente)}">
+														<h:graphicImage style="width: 25px" library="images"
+															value="editar" name="botao_checklist.png">
+														</h:graphicImage>
+														<f:ajax execute="formPrincipal"
+															render="formPrincipal:dataTable" />
+													</h:commandLink>
+												</h:column>
 											</tbody>
 										</h:dataTable>
 
