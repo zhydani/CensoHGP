@@ -10,6 +10,7 @@ import java.util.List;
 
 import br.unitins.censohgp.model.Checklist;
 
+
 public class ChecklistDAO extends DAO<Checklist> {
 
 	public ChecklistDAO(Connection conn) {
@@ -49,7 +50,65 @@ public class ChecklistDAO extends DAO<Checklist> {
 		
 	}
 	
+	public void createAuxFatorRisco(int id, List<Checklist> checklists) throws SQLException {
 
+		Connection  conn = getConnection();
+
+		PreparedStatement stat = conn.prepareStatement(
+				"INSERT INTO " + 
+						" checklist_fator_risco " +
+						" ( idchecklist, idfator_risco ) " +
+						" VALUES " +
+						" (? , ?) ", Statement.RETURN_GENERATED_KEYS);
+
+		for (Checklist checklist : checklists) {
+
+			stat.setInt(1, id );
+			stat.setInt(2, checklist.getFatorRisco().getIdfatorRisco());			
+			stat.execute();
+		}
+
+	}
+	
+	public void createAuxIncidente(int id, List<Checklist> checklists) throws SQLException {
+
+		Connection  conn = getConnection();
+
+		PreparedStatement stat = conn.prepareStatement(
+				"INSERT INTO " + 
+						" checklist_incidente " +
+						" ( idchecklist, idincidente ) " +
+						" VALUES " +
+						" (? , ?) ", Statement.RETURN_GENERATED_KEYS);
+
+		for (Checklist checklist : checklists) {
+
+			stat.setInt(1, id );
+			stat.setInt(2, checklist.getIncidente().getIdincidente());			
+			stat.execute();
+		}
+
+	}
+	
+	public void createAuxProcedimento(int id, List<Checklist> checklists) throws SQLException {
+
+		Connection  conn = getConnection();
+
+		PreparedStatement stat = conn.prepareStatement(
+				"INSERT INTO " + 
+						" checklist_ " +
+						" ( idchecklist, idprocedimento ) " +
+						" VALUES " +
+						" (? , ?) ", Statement.RETURN_GENERATED_KEYS);
+
+		for (Checklist checklist : checklists) {
+
+			stat.setInt(1, id );
+			stat.setInt(2, checklist.getProcedimento().getIdprocedimento());			
+			stat.execute();
+		}
+
+	}
 	@Override
 	public List<Checklist> findAll() {
 		return null;

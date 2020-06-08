@@ -57,14 +57,21 @@ public class BuscaPacienteController implements Serializable {
 		listaPaciente = null;
 		getListaPacienteBusca();
 	}
+	public String checklist(int idpaciente) {
+		PacienteDAO dao = new PacienteDAO();
+		paciente = dao.findById(idpaciente);
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.put("pacienteFlash", paciente);
 
+		return "checklistpaciente.xhtml?faces-redirect=true";
+	}
 	public String editar(int idpaciente) {
 		PacienteDAO dao = new PacienteDAO();
 		paciente = dao.findById(idpaciente);
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.put("pacienteFlash", paciente);
 
-		return "cadastropaciente.xhtml?faces-redirect=true";
+		return "alterarpaciente.xhtml?faces-redirect=true";
 	}
 
 	public boolean excluir(int idpaciente) {

@@ -3,81 +3,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-	<title>CensoHGP | Buscar Paciente</title>
+	<title>CensoHGP | Gerar Checklist</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
 	<!-- Bootstrap CSS -->
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
 	<!-- Costumize CSS -->
 	<h:outputStylesheet library="css" name="template.css" />
 	<link rel="shortcut icon" type="image/x-icon"
 		href="#{resource['images/icon.png']}" />
 </h:head>
 <h:body>
+	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
+		class="bg-dark mt-0 text-white wrapper">
+		<div class="bg-dark mt-0 text-white wrapper" id="sidebar">
+			<nav id="sidebar">
+			<div class="sidebar-header ">
+				<h3 class="font-weight-bold">Menu</h3>
+			</div>
+			<ul class="list-unstyled components">
+				<h:panelGrid columns="2">
+					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+						library="images" name="usu.png" />
+					<h:form>
+						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
+							class="font-weight-bold mb-3" />
+					</h:form>
+				</h:panelGrid>
+				<li><a href="templateadministrador.xhtml">Início</a></li>
+				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
+				<li><a href="buscarusuario.xhtml" data-toggle="collapse"
+					aria-expanded="false">Buscar Usuário</a></li>
+				<li><a href="cadastrardepartamento.xhtml">Cadastrar
+						Departamento</a></li>
+				<li class="active"><a href="buscardepartamento.xhtml">Buscar
+						Departamento</a></li>
+				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
+				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
+				<li><a href="transferencia.xhtml">Transferência de Paciente</a></li>
+				<li><h:commandLink value="Sair"
+						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+			</ul>
+			</nav>
+		</div>
+	</p:sidebar>
+
 	<h:form id="form">
 		<table width="100%">
-			<tr>
-
-				<td valign="top" class="bg-dark mt-0 text-white wrapper"
-					id="sidebar"><ui:insert name="menu">
-
-						<nav id="sidebar">
-						<div class="sidebar-header ">
-							<h3 class="font-weight-bold">Menu</h3>
-						</div>
-
-						<ul class="list-unstyled components">
-							<h:panelGrid columns="2">
-								<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
-									library="images" name="usu.png" />
-								<h:form>
-									<h:outputLabel
-										value=" #{templateController.usuarioLogado.nome}"
-										class="font-weight-bold mb-3" />
-
-								</h:form>
-							</h:panelGrid>
-							<li><a href="menu.xhtml">Início</a></li>
-							<li><a href="buscarpaciente.xhtml" data-toggle="collapse"
-								aria-expanded="false">Buscar Paciente</a></li>
-							<li class="active"><a href="cadastrousuario.xhtml">Cadastrar
-									Usuário</a></li>
-							<li><a href="cadastrardepartamento.xhtml">Cadastrar
-									Departamento</a></li>
-							<li><a href="buscardepartamento.xhtml">Buscar
-									Departamento</a></li>
-							<li><h:commandLink value="Sair"
-									action="#{templateController.encerrarSessao}" class="nav-link" /></li>
-
-						</ul>
-
-
-						</nav>
-					</ui:insert></td>
-
-
-			</tr>
-
 			<tr>
 				<td colspan="2" align="center" class="mar"><ui:insert
 						name="cabecalho">
 						<h:form>
 							<div class="navbar navbar-dark bg-navbar navbar-expand">
 								<div class="container collapse navbar-collapse">
-
+									<p:commandLink oncomplete="PF('sidebar1').show()"
+										styleClass="mx-3 pt-1 button-menu">
+										<span><i class="pi pi-bars"
+											style="font-size: 2.5em; color: #fff;"></i></span>
+									</p:commandLink>
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-										<li class="nav-item"><a href="bsucarpaciente.xhtml"
-											class="nav-link">Buscar Paciente</a></li>
+										<li class="nav-item"><a href="checklistpaciente.xhtml"
+											class="nav-link">Gerar Checklist</a></li>
 									</ul>
-
-
 								</div>
 							</div>
 						</h:form>
@@ -85,34 +81,75 @@
 			</tr>
 
 			<tr>
-				<td valign="top" class="pt-5  content active mar"><ui:insert
-						name="conteudo">
-						<div class="container">
-							<h:form id="formPrincipal">
-
-								<h:panelGrid columns="1" class="mx-3">
-
-									<h:inputTextarea rows="5" cols="60">
-									</h:inputTextarea>
-
+				<td><ui:insert name="conteudo">
+						<h:form id="formPrincipal" class="container d-block">
+							<h:panelGrid columns="1">
+								<h:outputLabel  value="Gerar Checklist" />
+								<h:panelGrid >
+									<h:outputText  value="#{buscarPacienteController.paciente.nome}" />
+									<h:outputLabel  id="outputNumPront" value="#{buscarPacienteController.paciente.numeroProntuario}" />
 								</h:panelGrid>
-								<h:panelGrid columns="1" class="mx-2">
-									<h:commandButton value="Limpar"
-										action="#{checklistPacienteController.limpar()}"
-										class="btn btn-warning mr-3">
-										<f:ajax render="@all" execute="@this" />
-									</h:commandButton>
+								<h:panelGrid id="listaocorrencias">
+									<h:outputLabel value="Lista de ocorrências" />
+									<h:panelGrid>
+										<p:accordionPanel>
+											<p:tab title="Fatores de risco">
+												<h:panelGrid columns="1" cellpadding="10">
+													<p:selectManyCheckbox id="basic"
+														value="#{ChecklistPaciente.selectedConsoles}">
+														<f:selectItem
+															itemLabel="Paciente com acesso venoso central"
+															itemValue="1" />
+														<f:selectItem
+															itemLabel="Paciente com acesso venoso periférico"
+															itemValue="2" />
+														<f:selectItem itemLabel="paciente com dreno de tórax"
+															itemValue="3" />
+														<f:selectItem itemLabel="paciente com ferida operatória"
+															itemValue="4" />
+														<f:selectItem itemLabel="paciente com ferida operatória"
+															itemValue="4" />
+														<f:selectItem itemLabel="paciente com ferida operatória"
+															itemValue="4" />
+														<f:selectItem itemLabel="paciente com ferida operatória"
+															itemValue="4" />
+														<f:selectItem itemLabel="paciente com ferida operatória"
+															itemValue="4" />
+													</p:selectManyCheckbox>
+												</h:panelGrid>
+											</p:tab>
+											<p:tab title="Incidentes">
+												<h:panelGrid columns="2" cellpadding="10">
+													<h:outputText value="Mostra lista aqui" />
+												</h:panelGrid>
+											</p:tab>
+											<p:tab title="Procedimentos">
+												<h:panelGrid columns="2" cellpadding="10">
+													<h:outputText value="Mostra lista aqui" />
+												</h:panelGrid>
+											</p:tab>
+										</p:accordionPanel>
+									</h:panelGrid>
 								</h:panelGrid>
-								<h:messages id="messages" infoStyle="color:green"
-									warnStyle="color:orange" errorStyle="color:red"
-									globalOnly="false" />
 
-							</h:form>
-						</div>
+								<h:panelGrid id="observações" columns="1" width="100%">
+									<p style="color: #404040;">
+										<strong>Observações:</strong>
+									</p>
+									<p:inputTextarea rows="6" cols="33" autoResize="false"
+										width="400px" />
+								</h:panelGrid>
+							</h:panelGrid>
+						</h:form>
 					</ui:insert></td>
 			</tr>
 		</table>
 	</h:form>
+
+	<div class="box footer pt-4 font-weight-lighter "
+		style="text-align: center;">
+		<h:outputText value="2020 - Todos os direitos reservados." />
+	</div>
 
 	<script>
 		function goBack() {
