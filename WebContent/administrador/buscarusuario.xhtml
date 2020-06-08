@@ -32,181 +32,179 @@
 				<h3 class="font-weight-bold">Menu</h3>
 			</div>
 			<ul class="list-unstyled components">
-				<h:panelGrid columns="2">
-					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
-						library="images" name="usu.png" />
-					<h:form>
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+							library="images" name="usu.png" />
+
 						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
 							class="font-weight-bold mb-3" />
-					</h:form>
-				</h:panelGrid>
-				<li><a href="index.xhtml">Início</a></li>
-				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
-				<li class="active"><a href="buscarusuario.xhtml"
-					data-toggle="collapse" aria-expanded="false">Usuários</a></li>
-				<li><a href="cadastrardepartamento.xhtml">Cadastrar
-						Departamento</a></li>
-				<li><a href="consultadepartamento.xhtml">Buscar
-						Departamento</a></li>
-				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
-				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
-				<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
-				<li><h:commandLink value="Sair"
-						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+
+					</h:panelGrid>
+					<li><a href="index.xhtml">Início</a></li>
+					<li class="active"><a href="buscarusuario.xhtml"
+						data-toggle="collapse" aria-expanded="false">Gerenciar
+							Usuários</a></li>
+					<li><a href="consultadepartamento.xhtml">Gerenciar
+							Departamentos</a></li>
+					<li><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
+					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+					<li><h:commandLink value="Sair"
+							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+				</h:form>
 			</ul>
 			</nav>
 		</div>
 	</p:sidebar>
 
-	<h:form id="form">
-		<table width="100%">
-			<tr>
-				<td colspan="2" align="center" class="mar"><ui:insert
-						name="cabecalho">
-						<h:form>
-							<div class="navbar navbar-dark bg-navbar navbar-expand">
-								<div class="container collapse navbar-collapse">
-									<p:commandLink oncomplete="PF('sidebar1').show()"
-										styleClass="mx-3 pt-1 button-menu">
-										<span><i class="pi pi-bars"
-											style="font-size: 2.5em; color: #fff;"></i></span>
-									</p:commandLink>
-									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
-									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-										<li class="nav-item"><a href="cadastrousuario.xhtml"
-											class="nav-link">Cadastrar Usuário </a></li>
-									</ul>
+
+	<table width="100%">
+		<tr>
+			<td colspan="2" align="center" class="mar"><ui:insert
+					name="cabecalho">
+					<h:form>
+						<div class="navbar navbar-dark bg-navbar navbar-expand">
+							<div class="container collapse navbar-collapse">
+								<p:commandLink oncomplete="PF('sidebar1').show()"
+									styleClass="mx-3 pt-1 button-menu">
+									<span><i class="pi pi-bars"
+										style="font-size: 2.5em; color: #fff;"></i></span>
+								</p:commandLink>
+								<div class="navbar-brand font-weight-bold ">CensoHGP</div>
+								<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+									<li class="nav-item"><a href="cadastrousuario.xhtml"
+										class="nav-link">Cadastrar Usuário </a></li>
+								</ul>
+							</div>
+						</div>
+					</h:form>
+				</ui:insert></td>
+		</tr>
+		<tr>
+
+			<td valign="top"
+				class="pt-5  content active mar d-flex justify-content-center">
+
+				<ui:insert name="conteudo">
+					<h:form id="formPrincipal">
+						<div class="border-left mb-4 ml-3">
+							<h4 class="ml-3 py-2 font-weight-bold">Consultar Usuários</h4>
+						</div>
+						<h:panelGrid columns="1"
+							class="container d-flex justify-content-center">
+							<h:panelGrid columns="10" class="mb-2">
+								<div>
+									<h:inputText value="#{buscarUsuarioController.nome}"
+										styleClass="form-control d-flex" size="40">
+										<f:passThroughAttribute name="placeholder"
+											value="Digite o nome do usuário" />
+									</h:inputText>
 								</div>
-							</div>
-						</h:form>
-					</ui:insert></td>
-			</tr>
-			<tr>
 
-				<td valign="top"
-					class="pt-5  content active mar d-flex justify-content-center">
+								<div class="pl-2">
+									<h:inputText value="#{buscarUsuarioController.matricula}"
+										styleClass="form-control pr-3 d-flex " size="40"
+										marin-left="10">
+										<f:passThroughAttribute name="placeholder"
+											value="Digite o número da matrícula " />
+									</h:inputText>
+								</div>
 
-					<ui:insert name="conteudo">
-						<h:form id="formPrincipal">
-							<div class="border-left mb-4 ml-3">
-								<h4 class="ml-3 py-2 font-weight-bold">Consultar Usuários</h4>
-							</div>
-							<h:panelGrid columns="1"
-								class="container d-flex justify-content-center">
-								<h:panelGrid columns="10" class="mb-2">
-									<div>
-										<h:inputText value="#{buscarUsuarioController.nome}"
-											styleClass="form-control d-flex" size="40">
-											<f:passThroughAttribute name="placeholder"
-												value="Digite o nome do usuário" />
-										</h:inputText>
-									</div>
+								<div>
+									<h:commandButton value="Buscar"
+										actionListener="#{buscarUsuarioController.buscar()}"
+										class="btn btn-azul mr-2 ml-2">
+										<f:ajax render="@all" execute="@form" resetValues="true" />
+									</h:commandButton>
+								</div>
 
-									<div class="pl-2">
-										<h:inputText value="#{buscarUsuarioController.matricula}"
-											styleClass="form-control pr-3 d-flex " size="40"
-											marin-left="10">
-											<f:passThroughAttribute name="placeholder"
-												value="Digite o número da matrícula " />
-										</h:inputText>
-									</div>
+								<div>
+									<h:commandButton value="Limpar"
+										action="#{buscarUsuarioController.limpar()}"
+										class="btn btn-amarelo ">
+										<f:ajax render="@form" execute="@this" />
+									</h:commandButton>
+								</div>
 
-									<div>
-										<h:commandButton value="Buscar"
-											actionListener="#{buscarUsuarioController.buscar()}"
-											class="btn btn-azul mr-2 ml-2">
-											<f:ajax render="@all" execute="@form" resetValues="true" />
-										</h:commandButton>
-									</div>
-
-									<div>
-										<h:commandButton value="Limpar"
-											action="#{buscarUsuarioController.limpar()}"
-											class="btn btn-amarelo ">
-											<f:ajax render="@form" execute="@this" />
-										</h:commandButton>
-									</div>
-
-									<div>
-										<p:commandLink action="cadastrousuario.xhtml"
-											styleClass="ml-3 button-menu">
-											<span><i class="pi pi-plus"
-												style="font-size: 1.6em; color: #1946b4;"></i></span>Cadastrar
+								<div>
+									<p:commandLink action="cadastrousuario.xhtml"
+										styleClass="ml-3 button-menu">
+										<span><i class="pi pi-plus"
+											style="font-size: 1.6em; color: #1946b4;"></i></span>Cadastrar
 										</p:commandLink>
-									</div>
+								</div>
 
-
-								</h:panelGrid>
-
-								<h:panelGrid columns="7">
-									<p:dataTable value="#{buscarUsuarioController.listaUsuario}"
-										var="obj" rows="5" styleClass="table" paginator="true"
-										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
-										rowsPerPageTemplate="5,10,15">
-
-										<p:column width="100px">
-											<f:facet name="header">Nome</f:facet>
-											<h:outputText value="#{obj.nome}">
-											</h:outputText>
-										</p:column>
-
-										<p:column>
-											<f:facet name="header">Matrícula</f:facet>
-											<h:outputText value="#{obj.matricula}">
-											</h:outputText>
-										</p:column>
-
-										<p:column>
-											<f:facet name="header">E-mail</f:facet>
-											<h:outputText value="#{obj.email}" />
-										</p:column>
-										
-										<p:column>
-											<f:facet name="header">Status</f:facet>
-											<h:outputText value="#{obj.ativo}" />
-										</p:column>
-
-
-										<p:column>
-											<f:facet name="header">Editar</f:facet>
-											<h:commandLink
-												action="#{buscarUsuarioController.editar(obj.id)}">
-												<h:graphicImage style="width: 25px" library="images"
-													value="editar" name="botao_editar.png" />
-												<f:ajax execute="formPrincipal:dataTable"
-													render="formPrincipal" />
-											</h:commandLink>
-										</p:column>
-
-										<p:column>
-											<f:facet name="header">Excluir</f:facet>
-											<h:commandLink
-												action="#{buscarUsuarioController.excluir(obj.id)}">
-												<h:graphicImage style="width: 25px" library="images"
-													value="editar" name="botao_excluir.png" />
-												<f:ajax execute="formPrincipal:dataTable"
-													render="formPrincipal" />
-											</h:commandLink>
-
-										</p:column>
-
-
-									</p:dataTable>
-
-
-								</h:panelGrid>
 
 							</h:panelGrid>
-							<h:messages id="messages" infoStyle="color:green"
-								warnStyle="color:orange" errorStyle="color:red"
-								globalOnly="false" />
-						</h:form>
-					</ui:insert>
-				</td>
-			</tr>
-		</table>
-	</h:form>
+
+							<h:panelGrid columns="7">
+								<p:dataTable value="#{buscarUsuarioController.listaUsuario}"
+									var="obj" rows="5" styleClass="table" paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
+									rowsPerPageTemplate="5,10,15">
+
+									<p:column width="100px">
+										<f:facet name="header">Nome</f:facet>
+										<h:outputText value="#{obj.nome}">
+										</h:outputText>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Matrícula</f:facet>
+										<h:outputText value="#{obj.matricula}">
+										</h:outputText>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">E-mail</f:facet>
+										<h:outputText value="#{obj.email}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Status</f:facet>
+										<h:outputText value="#{obj.ativo}" />
+									</p:column>
+
+
+									<p:column>
+										<f:facet name="header">Editar</f:facet>
+										<h:commandLink
+											action="#{buscarUsuarioController.editar(obj.id)}">
+											<h:graphicImage style="width: 25px" library="images"
+												value="editar" name="botao_editar.png" />
+											<f:ajax execute="formPrincipal:dataTable"
+												render="formPrincipal" />
+										</h:commandLink>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">Excluir</f:facet>
+										<h:commandLink
+											action="#{buscarUsuarioController.excluir(obj.id)}">
+											<h:graphicImage style="width: 25px" library="images"
+												value="editar" name="botao_excluir.png" />
+											<f:ajax execute="formPrincipal:dataTable"
+												render="formPrincipal" />
+										</h:commandLink>
+
+									</p:column>
+
+
+								</p:dataTable>
+
+
+							</h:panelGrid>
+
+						</h:panelGrid>
+						<h:messages id="messages" infoStyle="color:green"
+							warnStyle="color:orange" errorStyle="color:red"
+							globalOnly="false" />
+					</h:form>
+				</ui:insert>
+			</td>
+		</tr>
+	</table>
 
 	<div class="box footer pt-4 font-weight-lighter "
 		style="text-align: center;">
