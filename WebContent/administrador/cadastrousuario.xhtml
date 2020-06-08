@@ -187,16 +187,7 @@
 												</h:selectOneMenu>
 											</h:panelGrid>
 
-											<!-- <h:outputLabel value="Tipo usuário: " />
-											<h:selectOneMenu
-												value="#{cadastroUsuarioController.usuario.tipousuario}">
-												<f:selectItem itemLabel="Selecione ..." />
-												<f:selectItems
-													value="#{cadastroUsuarioController.listaTipoUsuario} " var="tipousuario"
-													itemLabel="#{tipousuario.label} " itemValue="#{tipousuario}" />
-											</h:selectOneMenu> -->
-
-											<h:panelGrid>
+											<h:panelGrid columns="2" class="mx-2 form-group">
 												<h:outputLabel value="Usuario ativo: " />
 												<h:selectBooleanCheckbox id="checkAtivo"
 													value="#{cadastroUsuarioController.usuario.ativo}" />

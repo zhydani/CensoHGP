@@ -92,11 +92,10 @@ public class UsuarioDAO extends DAO<Usuario> {
 
 			stat.setString(2, usuario.getSenha1());
 
-		}
-		else {
+		} else {
 			Util.addMessageError("O campo confirmar senha é diferente da senha digitada.");
 		}
-		
+
 		stat.setInt(3, id_tipo_banco.getId());
 		stat.setBoolean(4, usuario.getAtivo());
 		stat.setString(5, usuario.getEmail());
@@ -117,20 +116,18 @@ public class UsuarioDAO extends DAO<Usuario> {
 				"UPDATE public.usuario SET " + " nome = ?, " + " senha = ?, " + " idtipo_usuario = ?, " + " ativo = ?, "
 						+ " email = ?, " + " matricula = ?, " + "WHERE " + " idusuario = ? ");
 		stat.setString(1, usuario.getNome());
-		
+
 		String senha1 = usuario.getSenha1();
 		String senha2 = usuario.getSenha2();
-		
+
 		if (senha1.equals(senha2)) {
 
 			stat.setString(2, usuario.getSenha1());
 
-		}
-		else {
+		} else {
 			Util.addMessageError("O campo confirmar senha é diferente da senha digitada.");
 		}
-		
-		
+
 		stat.setInt(3, usuario.getTipo().getId());
 		stat.setBoolean(4, usuario.getAtivo());
 		stat.setString(5, usuario.getEmail());
@@ -199,19 +196,19 @@ public class UsuarioDAO extends DAO<Usuario> {
 
 			if (nome.isEmpty()) {
 				if (matricula.isEmpty()) {
-					tipoBusca = "Select idusuario, nome, matricula, email from public.usuario";
+					tipoBusca = "Select idusuario, nome, matricula, ativo, email from public.usuario";
 				} else {
-					tipoBusca = "Select idusuario, nome, matricula, email from public.usuario where matricula = "
-							+ quote(matricula);
+					tipoBusca = "Select idusuario, nome, matricula, ativo, email from public.usuario where matricula ilike "
+							+ quote("%" + matricula + "%");
 				}
 
 			} else {
 				if (matricula.isEmpty()) {
-					tipoBusca = "Select idusuario, nome, matricula, email from public.usuario where nome = "
-							+ quote(nome);
+					tipoBusca = "Select idusuario, nome, matricula, ativo, email from public.usuario where nome ilike "
+							+ quote("%" + nome + "%");
 				} else {
-					tipoBusca = "Select idusuario, nome, matricula, email from public.usuario where matricula = "
-							+ quote(matricula) + " and nome = " + quote(nome);
+					tipoBusca = "Select idusuario, nome, matricula, ativo, email from public.usuario where matricula ilike "
+							+ quote("%" + matricula + "%") + " and nome ilike " + quote("%" + nome + "%");
 				}
 			}
 			PreparedStatement stat = conn.prepareStatement(tipoBusca);
