@@ -10,8 +10,9 @@
 ## Tutorial para clonar, dar Pull e Push neste projeto no Eclipse
 
 1. Copie este link https://github.com/zhydani/CensoHGP.git. No Eclipse, abra uma nova perspectiva git. Ao abrir a nova perspectiva, irá abrir uma área no canto esquerdo chamada **Git Repositories**. Com o click direito do mouse, escolha a opção **Clone a Git Repository**. 
-2. Para quem for fazer novas alterações no projeto, é necessário que antes de tudo, faça um pull dos arquivos para receber novas atualizações. O pull poderá ser feito clicando em cima da pasta **CensoHGP [MASTER]** com o click direito do mouse. Opção **Pull...**.
-3. Para fazer o Push das suas alterações, com o mesmo click da dica número 2 acima, escolha **Push**. Irá aparecer uma aba na janela abaixo do código (**Git Staging**), na parte **Unstaged Changes**, clique no sinal de + para adicionar as alterações. Depois na parte **Commit Message**, informe o que foi alterado e em seguida clique em **Commit and Push**. Não esqueça de colocar seu usuário. Caso seu usuário não esteja adicionado no git, falar com a Acadêmica Zhydani.
+2. Para quem for fazer novas alterações no projeto, é necessário que antes de tudo, faça um pull dos arquivos para receber novas atualizações. O pull poderá ser feito clicando em cima da pasta **CensoHGP [MASTER]** com o click direito do mouse. Opção **Pull...**, caso não funcione, dê um commit local antes, na parte **Unstaged Changes**, clique no sinal de + para adicionar as alterações. Depois na parte **Commit Message**, informe o que foi alterado e em seguida clique em **Commit**.
+
+3. Para fazer o Push das suas alterações, com o mesmo click da dica número 2 acima, escolha **Push**. Irá aparecer uma aba na janela abaixo do código (**Git Staging**), na parte **Unstaged Changes**, clique no sinal de + para adicionar as alterações. Depois na parte **Commit Message**, informe o que foi alterado e em seguida clique em **Commit and push** para commit local. Não esqueça de colocar seu usuário. Caso seu usuário não esteja adicionado no git, falar com a Acadêmica Zhydani.
 
 ## Introdução
   No estado do Tocantins, o Hospital Geral de Palmas (HGP) apresentou a necessidade
