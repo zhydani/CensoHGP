@@ -7,15 +7,12 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
-import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.dao.DAO;
 import br.unitins.censohgp.dao.UsuarioDAO;
-import br.unitins.censohgp.dao.UsuarioDAO;
-import br.unitins.censohgp.model.Usuario;
 import br.unitins.censohgp.model.Usuario;
 
 @Named
@@ -25,6 +22,7 @@ public class BuscarUsuarioController implements Serializable {
 	private static final long serialVersionUID = -9042867479794257960L;
 	private String nome = null;
 	private String matricula = null;
+	private Usuario usuario = null;
 	private List<Usuario> listaBusca = null;
 	private List<Usuario> listaUsuario = null;
 	
@@ -42,24 +40,33 @@ public class BuscarUsuarioController implements Serializable {
 		return listaBusca = listaUsuario;
 	}
 	
+	public String editar(int id) {
+		UsuarioDAO dao = new UsuarioDAO();
+		usuario = dao.findId(id);
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.put("usuarioFlash", usuario);
+
+		return "cadastrousuario.xhtml?faces-redirect=true";
+	}
 	
-	public boolean excluir(int idusuario) {
+	
+	public boolean excluir(int id) {
 		DAO<Usuario> dao = new UsuarioDAO();
 		try {
-			dao.delete(idusuario);
+			dao.delete(id);
 			dao.getConnection().commit();
-			Util.addMessageInfo("Exclusão realizada com sucesso.");
+			Util.addMessageInfo("Exclusao realizada com sucesso.");
 			listaBusca = null;
-			buscar();
+			getListaUsuarioBusca();
 			return true;
 		} catch (SQLException e) {
 			dao.rollbackConnection();
-			Util.addMessageInfo("Erro ao excluir usuario.");
+			Util.addMessageInfo("Erro ao excluir o Produto no Banco de Dados.");
 			e.printStackTrace();
 			return false;
 		} finally {
 			listaBusca = null;
-			buscar();
+			getListaUsuarioBusca();
 			dao.closeConnection();
 		}
 	}
@@ -99,5 +106,7 @@ public class BuscarUsuarioController implements Serializable {
 		nome = null;
 		matricula = null;
 	}
+	
+	
 
 }

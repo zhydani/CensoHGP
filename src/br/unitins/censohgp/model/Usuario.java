@@ -7,16 +7,16 @@ import javax.validation.constraints.Size;
 public class Usuario implements Cloneable {
 	private Integer id;
 	private Tipo tipo;
-	@NotEmpty(message = "O campo Nome não pode ser vazio")
-	@Size(max = 60, message = "O campo Nome deve conter no máximo 60 caracteres")
+	@NotEmpty(message = "O campo Nome nao pode ser vazio")
+	@Size(max = 60, message = "O campo Nome deve conter no maximo 60 caracteres")
 	private String nome;
 	@Email
 	private String email;
 	@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres")
 	private String senha;
-	@NotEmpty(message = "O campo Matricula não pode ser vazio")
+	@NotEmpty(message = "O campo Matricula nao pode ser vazio")
 	private String matricula;
-	private Boolean ativo = Boolean.TRUE;
+//	private Boolean ativo = Boolean.TRUE;
 	
 
 	public Usuario() {
@@ -34,6 +34,26 @@ public class Usuario implements Cloneable {
 		return null;
 	}
 
+
+	@Override
+	public String toString() {
+	    return String.format("id", getId());
+	}
+
+	public Usuario(Integer id, Tipo tipo,
+			@NotEmpty(message = "O campo Nome nao pode ser vazio") @Size(max = 60, message = "O campo Nome deve conter no maximo 60 caracteres") String nome,
+			@Email String email,
+			@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres") String senha,
+			@NotEmpty(message = "O campo Matricula nao pode ser vazio") String matricula) {
+		super();
+		this.id = id;
+		this.tipo = tipo;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.matricula = matricula;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -43,10 +63,35 @@ public class Usuario implements Cloneable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (matricula == null) {
+			if (other.matricula != null)
+				return false;
+		} else if (!matricula.equals(other.matricula))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
 	}
@@ -67,7 +112,6 @@ public class Usuario implements Cloneable {
 		this.nome = nome;
 	}
 
-// TODO: nao esquecer de adicionar os validator no xhtml
 	public String getEmail() {
 		return email;
 	}
@@ -92,22 +136,6 @@ public class Usuario implements Cloneable {
 		this.matricula = matricula;
 	}
 
-	
-	public Usuario(Integer id,
-			@NotEmpty(message = "O campo Nome não pode ser vazio") @Size(max = 60, message = "O campo Nome deve conter no máximo 60 caracteres") String nome,
-			@Email String email,
-			@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres") String senha,
-			@NotEmpty(message = "O campo Matricula não pode ser vazio") String matricula, Boolean ativo, Tipo tipo) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
-		this.matricula = matricula;
-		this.ativo = ativo;
-		this.tipo = tipo;
-	}
-
 	public Tipo getTipo() {
 		if (tipo == null) {
 			tipo = new Tipo();
@@ -119,12 +147,6 @@ public class Usuario implements Cloneable {
 		this.tipo = tipo;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
-	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
 
 }

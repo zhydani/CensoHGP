@@ -21,7 +21,7 @@
 	<h:outputStylesheet library="css" name="consulta.css" />
 	<h:outputStylesheet library="css" name="datatable.css" />
 	<link rel="shortcut icon" type="image/x-icon"
-		href="#{resource['images/icon.png']}" />
+		href="#{resource['images/favicon.ico']}" />
 </h:head>
 <h:body>
 	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
@@ -43,7 +43,7 @@
 				<li><a href="index.xhtml">Início</a></li>
 				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
 				<li class="active"><a href="buscarusuario.xhtml"
-					data-toggle="collapse" aria-expanded="false">Buscar Usuário</a></li>
+					data-toggle="collapse" aria-expanded="false">Usuários</a></li>
 				<li><a href="cadastrardepartamento.xhtml">Cadastrar
 						Departamento</a></li>
 				<li><a href="consultadepartamento.xhtml">Buscar
@@ -88,33 +88,53 @@
 
 					<ui:insert name="conteudo">
 						<h:form id="formPrincipal">
+							<div class="border-left mb-4 ml-3">
+								<h4 class="ml-3 py-2 font-weight-bold">Consultar Usuários</h4>
+							</div>
 							<h:panelGrid columns="1"
 								class="container d-flex justify-content-center">
-								<h:panelGrid columns="4" class="mb-2">
+								<h:panelGrid columns="10" class="mb-2">
+									<div>
+										<h:inputText value="#{buscarUsuarioController.nome}"
+											styleClass="form-control d-flex" size="40">
+											<f:passThroughAttribute name="placeholder"
+												value="Digite o nome do usuário" />
+										</h:inputText>
+									</div>
 
-									<h:inputText value="#{buscarUsuarioController.nome}"
-										styleClass="form-control pr-3 d-flex" size="40">
-										<f:passThroughAttribute name="placeholder"
-											value="Digite o nome do usuário" />
-									</h:inputText>
+									<div class="pl-2">
+										<h:inputText value="#{buscarUsuarioController.matricula}"
+											styleClass="form-control pr-3 d-flex " size="40"
+											marin-left="10">
+											<f:passThroughAttribute name="placeholder"
+												value="Digite o número da matrícula " />
+										</h:inputText>
+									</div>
 
-									<h:inputText value="#{buscarUsuarioController.matricula}"
-										styleClass="form-control pr-3 d-flex " size="40"
-										marin-left="10">
-										<f:passThroughAttribute name="placeholder"
-											value="Digite o número da matrícula " />
-									</h:inputText>
-									<h:commandButton value="Buscar"
-										actionListener="#{buscarUsuarioController.buscar()}"
-										class="btn btn-primary mr-2 ml-3">
-										<f:ajax render="@all" execute="@form" resetValues="true" />
-									</h:commandButton>
+									<div>
+										<h:commandButton value="Buscar"
+											actionListener="#{buscarUsuarioController.buscar()}"
+											class="btn btn-azul mr-2 ml-2">
+											<f:ajax render="@all" execute="@form" resetValues="true" />
+										</h:commandButton>
+									</div>
 
-									<h:commandButton value="Limpar"
-										action="#{buscarUsuarioController.limpar()}"
-										class="btn btn-warning mr-3">
-										<f:ajax render="@form" execute="@this" />
-									</h:commandButton>
+									<div>
+										<h:commandButton value="Limpar"
+											action="#{buscarUsuarioController.limpar()}"
+											class="btn btn-amarelo ">
+											<f:ajax render="@form" execute="@this" />
+										</h:commandButton>
+									</div>
+
+									<div>
+										<p:commandLink action="cadastrousuario.xhtml"
+											styleClass="ml-3 button-menu">
+											<span><i class="pi pi-plus"
+												style="font-size: 1.6em; color: #1946b4;"></i></span>Cadastrar
+										</p:commandLink>
+									</div>
+
 
 								</h:panelGrid>
 
@@ -144,6 +164,7 @@
 
 
 										<p:column>
+											<f:facet name="header">Editar</f:facet>
 											<h:commandLink
 												action="#{buscarUsuarioController.editar(obj.id)}">
 												<h:graphicImage style="width: 25px" library="images"
@@ -154,6 +175,7 @@
 										</p:column>
 
 										<p:column>
+											<f:facet name="header">Excluir</f:facet>
 											<h:commandLink
 												action="#{buscarUsuarioController.excluir(obj.id)}">
 												<h:graphicImage style="width: 25px" library="images"
