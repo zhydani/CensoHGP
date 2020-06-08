@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import br.unitins.censohgp.application.Session;
 import br.unitins.censohgp.model.Usuario;
 
-@WebFilter(filterName = "SecurityFilter", urlPatterns = {"/faces/administrador/*", "/faces/usuario/*"})
+@WebFilter(filterName = "SecurityFilter", urlPatterns = { "/faces/administrador/*", "/faces/usuario/*" })
 public class SecurityFilter implements Filter {
 
 	@Override
@@ -44,9 +44,7 @@ public class SecurityFilter implements Filter {
 			return;
 		} else {
 			// nesse local podemos trabalhar as permissoes por pagina
-			System.out.println(usuario.getTipo().getId());
 			if (usuario.getTipo().getId().equals(1)) {
-				System.out.println("entrou aqui");
 
 				if (endereco.equals("/CensoHGP/faces/usuario/index.xhtml")
 						|| endereco.equals("/CensoHGP/faces/usuario/alterarpaciente.xhtml")
@@ -57,7 +55,6 @@ public class SecurityFilter implements Filter {
 						|| endereco.equals("/CensoHGP/faces/usuario/listabuscapaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/usuario/transferencia.xhtml")) {
 
-					System.out.println("a aqui");
 					// segue o fluxo
 					((HttpServletResponse) response).sendRedirect("/CensoHGP/faces/login.xhtml");
 					return;
@@ -79,7 +76,6 @@ public class SecurityFilter implements Filter {
 						|| endereco.equals("/CensoHGP/faces/administrador/listabuscapaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/transferencia.xhtml")) {
 
-					System.out.println("a aqui");
 					// segue o fluxo
 					((HttpServletResponse) response).sendRedirect("/CensoHGP/faces/login.xhtml");
 					return;

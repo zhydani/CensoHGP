@@ -25,9 +25,10 @@ public class LoginController implements Serializable {
 		TipoDAO daotipo = new TipoDAO();
 		String hashSenha = Util.hashSHA256(getUsuario().getSenha1());
 		Usuario usuario = dao.login(getUsuario().getMatricula(), hashSenha);
+		Boolean status = usuario.getAtivo();
 		Integer administrador = daotipo.findId(1).getId();
 		Integer usu = daotipo.findId(2).getId();
-		if (usuario != null) {
+		if (usuario != null && status == true) {
 
 			// armazenando um usuario na sessao
 			

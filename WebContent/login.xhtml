@@ -28,10 +28,8 @@
 	<div class="container d-flex justify-content-center mt-5 ">
 		<div class="row justify-content-md-center">
 			<div class="col-md-6 col-md-auto login-box">
-				<h:messages styleClass="alert alert-danger hmessages" />
-				<!-- <div class="logo-box">
-					<h4 class="text-center pt-5 wdi-red font-weight-bold">LOGO</h4>
-				</div> -->
+
+
 				<div class="d-flex justify-content-center mb-4">
 					<h:graphicImage class="ml-2 pb-3 mr-2" width="250px"
 						library="images" name="logo_censohgp_colorido_700px.png" />
@@ -39,7 +37,9 @@
 
 				<h:form>
 					<div class="form-row">
-
+						<h:messages id="messages" infoStyle="color:green"
+							warnStyle="color:orange" errorStyle="color:red"
+							globalOnly="false" />
 
 						<div class="col-md-12 input-group form-group wdi-red">
 							<div class="input-group-prepend">
