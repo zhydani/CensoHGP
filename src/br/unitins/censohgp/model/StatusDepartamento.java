@@ -31,7 +31,18 @@ public enum StatusDepartamento {
 			return null;
 		}
 
-
+		public static StatusDepartamento valueOf(boolean ativo) {
+			int var =0 ;
+			if(ativo == true)
+				var =1;
+			else
+				var=2;
+			for (StatusDepartamento status : StatusDepartamento.values()) {
+				if (status.getValue() == var) 
+					return status;
+			}
+			return null;
+		}
 
 
 }

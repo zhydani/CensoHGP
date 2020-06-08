@@ -159,31 +159,48 @@
 												<h:panelGrid columns="1" class="mr-4">
 													<h:outputLabel value="Senha " />
 													<h:inputSecret
-														value="#{cadastroUsuarioController.usuario.senha}"
+														value="#{cadastroUsuarioController.usuario.senha1}"
 														styleClass="form-control" size="33" />
 												</h:panelGrid>
 
 
-												<!-- <h:panelGrid columns="1">
+
+
+												<h:panelGrid columns="1">
 													<h:outputLabel value="Confirmar senha " />
 													<h:inputSecret
-														value="#{cadastroUsuarioController.usuario.senha}"
+														value="#{cadastroUsuarioController.usuario.senha2}"
 														styleClass="form-control" size="32" />
-												</h:panelGrid> -->
+												</h:panelGrid>
 
 											</h:panelGrid>
 
 											<h:panelGrid columns="2" class="mx-2 form-group">
 												<h:outputLabel value="Tipo de usuário: " class="mr-5 mt-1" />
 												<h:selectOneMenu converter="omnifaces.SelectItemsConverter"
-													value="#{cadastroUsuarioController.usuario.tipo}">
+													value="#{cadastroUsuarioController.usuario.tipousuario}">
 													<f:selectItem itemLabel="Selecione o tipo" />
 													<f:selectItems
-														value="#{cadastroUsuarioController.listaTipo}" var="obj"
-														itemValue="#{obj}" itemLabel="#{obj.nome}" />
+														value="#{cadastroUsuarioController.listaTipoUsuario}"
+														var="tipousuario" itemValue="#{tipousuario}"
+														itemLabel="#{tipousuario.label}" />
 												</h:selectOneMenu>
 											</h:panelGrid>
 
+											<!-- <h:outputLabel value="Tipo usuário: " />
+											<h:selectOneMenu
+												value="#{cadastroUsuarioController.usuario.tipousuario}">
+												<f:selectItem itemLabel="Selecione ..." />
+												<f:selectItems
+													value="#{cadastroUsuarioController.listaTipoUsuario} " var="tipousuario"
+													itemLabel="#{tipousuario.label} " itemValue="#{tipousuario}" />
+											</h:selectOneMenu> -->
+
+											<h:panelGrid>
+												<h:outputLabel value="Usuario ativo: " />
+												<h:selectBooleanCheckbox id="checkAtivo"
+													value="#{cadastroUsuarioController.usuario.ativo}" />
+											</h:panelGrid>
 										</h:panelGrid>
 										<div class="mt-2 d-flex justify-content-end">
 											<h:panelGrid id="panelBotoes" columns="4">

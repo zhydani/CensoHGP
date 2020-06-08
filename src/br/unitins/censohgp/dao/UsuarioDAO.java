@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.model.Tipo;
 import br.unitins.censohgp.model.Usuario;
 
@@ -31,9 +32,9 @@ public class UsuarioDAO extends DAO<Usuario> {
 		Connection conn = getConnection();
 
 		try {
-			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " + "  idusuario, " + "  nome, " + "  senha, " + "  idtipo_usuario, " + "  email, "
-							+ "  matricula " + "FROM " + "  public.usuario " + "WHERE matricula = ? AND senha = ?");
+			PreparedStatement stat = conn.prepareStatement("SELECT " + "  idusuario, " + "  nome, " + "  senha, "
+					+ "  idtipo_usuario, " + "  ativo, " + "  email, " + "  matricula " + "FROM " + "  public.usuario "
+					+ "WHERE matricula = ? AND senha = ?");
 
 			stat.setString(1, matricula);
 			stat.setString(2, senha);
@@ -47,9 +48,10 @@ public class UsuarioDAO extends DAO<Usuario> {
 
 				usuario.setId(rs.getInt("idusuario"));
 				usuario.setNome(rs.getString("nome"));
-				usuario.setSenha(rs.getString("senha"));
+				usuario.setSenha1(rs.getString("senha"));
 				usuario.setTipo(new Tipo());
 				usuario.getTipo().setId(rs.getInt("idtipo_usuario"));
+				usuario.setAtivo(rs.getBoolean("ativo"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setMatricula("matricula");
 			}
@@ -73,21 +75,32 @@ public class UsuarioDAO extends DAO<Usuario> {
 		Connection conn = getConnection();
 
 		PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " usuario "
-				+ " (nome, senha, idtipo_usuario, email, matricula) " + " VALUES " + " (?, ?, ?, ?, ?) ",
+				+ " (nome, senha, idtipo_usuario, ativo, email, matricula) " + " VALUES " + " (?, ?, ?, ?, ?, ?) ",
 				Statement.RETURN_GENERATED_KEYS);
 
-		stat.setString(1, usuario.getNome());
-		stat.setString(2, usuario.getSenha());
+		String senha1 = usuario.getSenha1();
+		String senha2 = usuario.getSenha2();
+
+		Integer valor = usuario.getTipousuario().getValue();
 
 		TipoDAO dao = new TipoDAO();
-		Integer id_tipo = usuario.getTipo().getId();
-		System.out.println(id_tipo);
-		Tipo id_tipo_banco = dao.findId(id_tipo);
+//		Integer id_tipo = usuario.getTipo().getId();
+		System.out.println(valor);
+		Tipo id_tipo_banco = dao.findId(valor);
+		stat.setString(1, usuario.getNome());
+		if (senha1.equals(senha2)) {
 
+			stat.setString(2, usuario.getSenha1());
+
+		}
+		else {
+			Util.addMessageError("O campo confirmar senha é diferente da senha digitada.");
+		}
+		
 		stat.setInt(3, id_tipo_banco.getId());
-
-		stat.setString(4, usuario.getEmail());
-		stat.setString(5, usuario.getMatricula());
+		stat.setBoolean(4, usuario.getAtivo());
+		stat.setString(5, usuario.getEmail());
+		stat.setString(6, usuario.getMatricula());
 		stat.execute();
 
 	}
@@ -101,15 +114,27 @@ public class UsuarioDAO extends DAO<Usuario> {
 		Connection conn = getConnection();
 
 		PreparedStatement stat = conn.prepareStatement(
-				"UPDATE public.usuario SET " + " nome = ?, " + " senha = ?, " + " idtipo_usuario = ?, " +
-//			    " ativo = ?, " +
-						" email = ?, " + " matricula = ?, " + "WHERE " + " idusuario = ? ");
+				"UPDATE public.usuario SET " + " nome = ?, " + " senha = ?, " + " idtipo_usuario = ?, " + " ativo = ?, "
+						+ " email = ?, " + " matricula = ?, " + "WHERE " + " idusuario = ? ");
 		stat.setString(1, usuario.getNome());
-		stat.setString(2, usuario.getSenha());
+		
+		String senha1 = usuario.getSenha1();
+		String senha2 = usuario.getSenha2();
+		
+		if (senha1.equals(senha2)) {
+
+			stat.setString(2, usuario.getSenha1());
+
+		}
+		else {
+			Util.addMessageError("O campo confirmar senha é diferente da senha digitada.");
+		}
+		
+		
 		stat.setInt(3, usuario.getTipo().getId());
-//		stat.setBoolean(4, usuario.getAtivo());
-		stat.setString(4, usuario.getEmail());
-		stat.setString(5, usuario.getMatricula());
+		stat.setBoolean(4, usuario.getAtivo());
+		stat.setString(5, usuario.getEmail());
+		stat.setString(6, usuario.getMatricula());
 
 		stat.execute();
 
@@ -135,7 +160,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 
 		try {
 			PreparedStatement stat = conn.prepareStatement("SELECT " + "  u.idusuario, " + "  u.nome, " + "  u.senha, "
-					+ "  u.idtipo_usuario, " + "  u.email" + "  u.matricula" + "FROM " + " usuario u ");
+					+ "  u.idtipo_usuario, " + "  u.ativo," + "  u.email" + "  u.matricula" + "FROM " + " usuario u ");
 			ResultSet rs = stat.executeQuery();
 
 			List<Usuario> listaUsuario = new ArrayList<Usuario>();
@@ -144,8 +169,9 @@ public class UsuarioDAO extends DAO<Usuario> {
 				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("idusuario"));
 				usuario.setNome(rs.getString("nome"));
-				usuario.setSenha(rs.getString("senha"));
+				usuario.setSenha1(rs.getString("senha"));
 				usuario.getTipo().setId(rs.getInt("idtipo_usuario"));
+				usuario.setAtivo(rs.getBoolean("ativo"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setMatricula(rs.getString("matricula"));
 				listaUsuario.add(usuario);
@@ -198,6 +224,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario.setNome(rs.getString("nome"));
 				usuario.setMatricula(rs.getString("matricula"));
 				usuario.setEmail(rs.getString("email"));
+				usuario.setAtivo(rs.getBoolean("ativo"));
 
 				listaUsuario.add(usuario);
 			}
@@ -217,9 +244,9 @@ public class UsuarioDAO extends DAO<Usuario> {
 			return null;
 
 		try {
-			PreparedStatement stat = conn
-					.prepareStatement("SELECT " + "  idusuario, " + "  matricula, " + "  nome, " + "  senha, "
-							+ "  idtipo_usuario, " + "  email " + "FROM " + "  public.usuario " + "WHERE idusuario = ? ");
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " + "  idusuario, " + "  matricula, " + "  nome, " + "  senha, " + "  idtipo_usuario, "
+							+ "  ativo, " + "  email " + "FROM " + "  public.usuario " + "WHERE idusuario = ? ");
 
 			stat.setInt(1, id);
 
@@ -232,9 +259,9 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario.setId(rs.getInt("idusuario"));
 				usuario.setMatricula("matricula");
 				usuario.setNome(rs.getString("nome"));
-				usuario.setSenha(rs.getString("senha"));
+				usuario.setSenha1(rs.getString("senha"));
 				usuario.getTipo().setId(rs.getInt("idtipo_usuario"));
-//				usuario.setAtivo(rs.getBoolean("ativo"));
+				usuario.setAtivo(rs.getBoolean("ativo"));
 				usuario.setEmail(rs.getString("email"));
 
 			}

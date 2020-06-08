@@ -224,6 +224,71 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			}
 			return null;
 		}
+		
+		public List<Departamento> findAllTransferencia() {
+			Connection conn = getConnection();
+			if (conn == null) 
+				return null;
+			
+			try {
+				PreparedStatement stat = conn.prepareStatement(
+						"SELECT " +
+						"  iddepartamento, " +
+						"  nome_hospital, " +
+						"  numero_leitos, " +
+						"  nome_departamento, " +
+						"  ativo, " +
+						"  idcidade_estado" +
+						" FROM " +
+						"  public.departamento ");
+				ResultSet rs = stat.executeQuery();
+				
+				List<Departamento> listaDepartamento = new ArrayList<Departamento>();
+				
+				while(rs.next()) {
+					Integer var = 0;
+					Departamento departamento = new Departamento();
+					departamento.setIdlocalTransferencia(rs.getInt("iddepartamento"));
+					departamento.setNomeHospital(rs.getString("nome_hospital"));
+					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
+					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
+					if(departamento.getNomeDepartamento() == null) {
+						departamento.setNomeDepartamento(new String());
+					}
+					//observação
+					departamento.setAtivo(StatusDepartamento.valueOf((rs.getBoolean("ativo"))));
+					var = rs.getInt("idcidade_estado");
+					
+					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);
+					departamento.setCidade(dep.findByIdParaTransferencia(var));
+					if (departamento.getCidade() == null) {
+						departamento.setCidade(new CidadeDepartamento());
+					}
+					//fazer captura por classe
+					if(!(departamento.getCidade().getIdcidade() == null)) {
+						EstadoDepartamentoDAO depa = new EstadoDepartamentoDAO(conn);
+						EstadoDepartamento estaux = departamento.getCidade().getEstado();
+						departamento.setEstado(depa.findByIdParaTransferencia(estaux.getIdestado()));
+						if (departamento.getEstado() == null) {
+							System.out.println("passo aq porque estado está nullo");
+							departamento.setEstado(new EstadoDepartamento());
+						}
+					}
+					listaDepartamento.add(departamento);
+				}
+				if (listaDepartamento.isEmpty()) {
+					System.out.println("passa aq pq lista de departamento ta nula");
+					return null;
+				}
+				return listaDepartamento;
+			
+			} catch (SQLException e) {
+				System.out.println("problma de sql");
+				e.printStackTrace();
+			}
+			System.out.println("ta chegando aq e retornando null");
+			return null;
+		}
 
 	}
 

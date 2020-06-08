@@ -7,96 +7,108 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.unitins.censohgp.model.CidadeDepartamento;
+import br.unitins.censohgp.model.EstadoDepartamento;
 
-public class CidadeDepartamentoDAO extends DAO<CidadeDepartamento>{
+public class CidadeDepartamentoDAO extends DAO<CidadeDepartamento> {
 
-	
-		
+	public CidadeDepartamentoDAO(Connection conn) {
+		super(conn);
+	}
 
+	public CidadeDepartamentoDAO() {
+		super(null);
+	}
 
-			public CidadeDepartamentoDAO(Connection conn) {
-				super(conn);
-			}
-			
+	@Override
+	public void create(CidadeDepartamento entity) throws SQLException {
+		Connection conn = getConnection();
 
-			public CidadeDepartamentoDAO() {
-				super(null);
-			}
-			
+		PreparedStatement stat = conn.prepareStatement(
+				"INSERT INTO " + " public.cidade " + " ( idcidade, cidade ) " + "VALUES " + " ( ?, ? ) ");
+		stat.setInt(1, entity.getIdcidade());
+		stat.setString(2, entity.getCidade());
 
-			@Override
-			public void create(CidadeDepartamento entity) throws SQLException {
-				Connection conn = getConnection();
+		stat.execute();
+		stat.close();
 
-				PreparedStatement stat = conn.prepareStatement(
-						"INSERT INTO " + " public.cidade " + " ( idcidade, cidade ) " + "VALUES " + " ( ?, ? ) ");
-				stat.setInt(1, entity.getIdcidade());
-				stat.setString(2, entity.getCidade());
+	}
 
-				stat.execute();
-				stat.close();
+	@Override
+	public void update(CidadeDepartamento entity) throws SQLException {
+		// TODO Auto-generated method stub
+	}
 
-			}
+	@Override
+	public void delete(int id) throws SQLException {
+		Connection conn = getConnection();
 
-			@Override
-			public void update(CidadeDepartamento entity) throws SQLException {
-				// TODO Auto-generated method stub
-			}
+		PreparedStatement stat = conn.prepareStatement("DELETE FROM public.cidade WHERE idcidade =  ?");
+		stat.setInt(1, id);
 
-			@Override
-			public void delete(int id) throws SQLException {
-				Connection conn = getConnection();
+		stat.execute();
+		stat.close();
+	}
 
-				PreparedStatement stat = conn.prepareStatement(
-						"DELETE FROM public.cidade WHERE idcidade =  ?");
-				stat.setInt(1, id);
+	@Override
+	public List<CidadeDepartamento> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-				stat.execute();
-				stat.close();
-			}
+	public CidadeDepartamento findById(Integer id) {
+		Connection conn = getConnection();
 
-			@Override
-			public List<CidadeDepartamento> findAll() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			public CidadeDepartamento findById(Integer id) {
-				Connection conn = getConnection();
-				
-				try {
-					PreparedStatement stat = conn.prepareStatement(
-							"SELECT " +
-							"  idcidade, " +
-							"  cidade  " +
-							"FROM " +
-							"  public.cidade" +
-							"WHERE idcidade = ? ");
-					
-					stat.setInt(1, id);
-					
-					ResultSet rs = stat.executeQuery();
-					
-					CidadeDepartamento cidade = null;
-					
-					if(rs.next()) {
-						cidade = new CidadeDepartamento();
-						cidade.setIdcidade(rs.getInt("idcidade"));
-						cidade.setCidade(rs.getString("cidade"));
-					}
-					
-					return cidade;
-				
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				return null;
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " + "  idcidade, " + "  cidade  " + "FROM " + "  public.cidade" + "WHERE idcidade = ? ");
+
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+
+			CidadeDepartamento cidade = null;
+
+			if (rs.next()) {
+				cidade = new CidadeDepartamento();
+				cidade.setIdcidade(rs.getInt("idcidade"));
+				cidade.setCidade(rs.getString("cidade"));
 			}
 
+			return cidade;
 
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return null;
+	}
 
+	public CidadeDepartamento findByIdParaTransferencia(Integer id) {
+		Connection conn = getConnection();
 
+		try {
+			PreparedStatement stat = conn.prepareStatement("SELECT " + "  idcidade, " + "  cidade, " + " idestado  "
+					+ "FROM " + "  public.cidade " + "WHERE idcidade = ? ");
 
+			stat.setInt(1, id);
+			ResultSet rs = stat.executeQuery();
 
+			CidadeDepartamento cidade = new CidadeDepartamento();
 
+			if (rs.next()) {
+				EstadoDepartamento estaux = new EstadoDepartamento();
+				estaux.setIdestado(rs.getInt("idestado"));
+				cidade.setIdcidade(rs.getInt("idcidade"));
+				cidade.setCidade(rs.getString("cidade"));
+				cidade.setEstado(estaux);
+				// cidade.setIdestado(rs.getInt("idestado"));
+			}
+
+			return cidade;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

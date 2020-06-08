@@ -18,6 +18,7 @@ import br.unitins.censohgp.dao.UsuarioDAO;
 import br.unitins.censohgp.model.Precaucao;
 import br.unitins.censohgp.model.Sexo;
 import br.unitins.censohgp.model.Tipo;
+import br.unitins.censohgp.model.TipoUsuario;
 import br.unitins.censohgp.model.Usuario;
 
 @Named
@@ -53,7 +54,8 @@ public class CadastroUsuarioController implements Serializable {
 //				String hashSenha = Util.hashSHA256(getUsuario().getSenha());
 //				getUsuario().setSenha(hashSenha);
 
-				getUsuario().setSenha(Util.hashSHA256(getUsuario().getSenha()));
+				getUsuario().setSenha1(Util.hashSHA256(getUsuario().getSenha1()));
+				getUsuario().setSenha2(Util.hashSHA256(getUsuario().getSenha2()));
 
 				dao.create(getUsuario());
 				dao.getConnection().commit();
@@ -63,7 +65,7 @@ public class CadastroUsuarioController implements Serializable {
 			} catch (SQLException e) {
 				dao.rollbackConnection();
 				dao.closeConnection();
-				Util.addMessageInfo("Erro ao incluir o Usuario no Banco de Dados.");
+				Util.addMessageError("Erro ao incluir o Usuario no Banco de Dados.");
 				e.printStackTrace();
 			}
 		}
@@ -75,7 +77,8 @@ public class CadastroUsuarioController implements Serializable {
 			// faz a alteracao no banco de dados
 			try {
 				// gerando um hash da senha
-				getUsuario().setSenha(Util.hashSHA256(getUsuario().getSenha()));
+				getUsuario().setSenha1(Util.hashSHA256(getUsuario().getSenha1()));
+				getUsuario().setSenha2(Util.hashSHA256(getUsuario().getSenha2()));
 				dao.update(getUsuario());
 				dao.getConnection().commit();
 				Util.addMessageInfo("Alteracao realizada com sucesso.");
@@ -120,7 +123,7 @@ public class CadastroUsuarioController implements Serializable {
 //			Util.addMessageWarn("O campo senha deve ser informado.");
 //			return false;
 //		}
-		if (getUsuario().getSenha() == null || getUsuario().getSenha().trim().equals("")) {
+		if (getUsuario().getSenha1() == null || getUsuario().getSenha1().trim().equals("")) {
 			Util.addMessageError("O campo senha deve ser informado.");
 			return false;
 		}
@@ -189,6 +192,10 @@ public class CadastroUsuarioController implements Serializable {
 			}
 		}
 		return listaTipo;
+	}
+	
+	public TipoUsuario[] getListaTipoUsuario() {
+		return TipoUsuario.values();
 	}
 
 }

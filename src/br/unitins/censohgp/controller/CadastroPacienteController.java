@@ -148,6 +148,7 @@ public class CadastroPacienteController implements Serializable {
 		public Paciente getPaciente() {
 			if (paciente == null) {
 				paciente = new Paciente();
+				paciente.setSituacao(new Situacao());
 			}
 			return paciente;
 		}
