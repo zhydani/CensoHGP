@@ -140,37 +140,45 @@
 							<h:panelGrid columns="7">
 								<p:dataTable value="#{buscarUsuarioController.listaUsuario}"
 									var="obj" rows="5" styleClass="table" paginator="true"
+									resizableColumns="true"
+									style="margin-bottom:20px; font-size:15px;"
+									emptyMessage="Nenhum registro." paginatorAlwaysVisible="false"
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
 									rowsPerPageTemplate="5,10,15">
 
 									<p:column width="100px">
 										<f:facet name="header">Nome</f:facet>
-										<h:outputText value="#{obj.nome}">
+										<h:outputText value="#{obj.nome}"
+											class="d-flex justify-content-center">
 										</h:outputText>
 									</p:column>
 
 									<p:column>
 										<f:facet name="header">Matrícula</f:facet>
-										<h:outputText value="#{obj.matricula}">
+										<h:outputText value="#{obj.matricula}"
+											class="d-flex justify-content-center">
 										</h:outputText>
 									</p:column>
 
 									<p:column>
 										<f:facet name="header">E-mail</f:facet>
-										<h:outputText value="#{obj.email}" />
+										<h:outputText value="#{obj.email}"
+											class="d-flex justify-content-center" />
 									</p:column>
 
 									<p:column>
 										<f:facet name="header">Status</f:facet>
-										<h:outputText value="#{obj.ativo ? 'Ativo': 'Inativo'}" />
+										<h:outputText value="#{obj.ativo ? 'Ativo': 'Inativo'}"
+											class="d-flex justify-content-center" />
 									</p:column>
 
 
-									<p:column>
+									<p:column style="width:50px">
 										<f:facet name="header">Editar</f:facet>
 										<h:commandLink
-											action="#{buscarUsuarioController.editar(obj.id)}">
+											action="#{buscarUsuarioController.editar(obj.id)}"
+											class="d-flex justify-content-center">
 											<h:graphicImage style="width: 25px" library="images"
 												value="editar" name="botao_editar.png" />
 											<f:ajax execute="formPrincipal:dataTable"
@@ -178,10 +186,11 @@
 										</h:commandLink>
 									</p:column>
 
-									<p:column>
+									<p:column style="width:50px">
 										<f:facet name="header">Excluir</f:facet>
 										<h:commandLink
-											action="#{buscarUsuarioController.excluir(obj.id)}">
+											action="#{buscarUsuarioController.excluir(obj.id)}"
+											class="d-flex justify-content-center">
 											<h:graphicImage style="width: 25px" library="images"
 												value="editar" name="botao_excluir.png" />
 											<f:ajax execute="formPrincipal:dataTable"

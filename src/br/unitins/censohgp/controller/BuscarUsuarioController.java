@@ -25,21 +25,18 @@ public class BuscarUsuarioController implements Serializable {
 	private Usuario usuario = null;
 	private List<Usuario> listaBusca = null;
 	private List<Usuario> listaUsuario = null;
-	
-	
-	public List<Usuario> getListaUsuarioBusca() {
-		if (listaUsuario == null) {
-			UsuarioDAO dao = new UsuarioDAO();
-			listaUsuario = dao.findByName(getNome(), getMatricula());
-			if (listaUsuario == null) {
-				listaUsuario = new ArrayList<Usuario>();
-				dao.closeConnection();
-			}
-			dao.closeConnection();
+
+	public Usuario getUsuario() {
+		if (usuario == null) {
+			return usuario;
 		}
-		return listaBusca = listaUsuario;
+		return usuario;
 	}
-	
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public String editar(int id) {
 		UsuarioDAO dao = new UsuarioDAO();
 		usuario = dao.findId(id);
@@ -48,10 +45,9 @@ public class BuscarUsuarioController implements Serializable {
 
 		return "cadastrousuario.xhtml?faces-redirect=true";
 	}
-	
-	
+
 	public boolean excluir(int id) {
-		DAO<Usuario> dao = new UsuarioDAO();
+		UsuarioDAO dao = new UsuarioDAO();
 		try {
 			dao.delete(id);
 			dao.getConnection().commit();
@@ -70,43 +66,52 @@ public class BuscarUsuarioController implements Serializable {
 			dao.closeConnection();
 		}
 	}
-	
+
 	public List<Usuario> getListaUsuario() {
 		if (listaBusca == null) {
 			return listaUsuario;
 		}
 		return listaBusca;
 	}
+
+	public List<Usuario> getListaUsuarioBusca() {
+		if (listaUsuario == null) {
+			UsuarioDAO dao = new UsuarioDAO();
+			listaUsuario = dao.findByName(getNome(), getMatricula());
+			if (listaUsuario == null) {
+				listaUsuario = new ArrayList<Usuario>();
+//				dao.closeConnection();
+			}
+			dao.closeConnection();
+		}
+		return listaBusca = listaUsuario;
+	}
+
 	public void buscar() {
 		listaUsuario = null;
 		getListaUsuarioBusca();
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
 	public String getMatricula() {
 		return matricula;
 	}
-
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 
-
 	public void limpar() {
 		nome = null;
 		matricula = null;
+		listaUsuario = null;
 	}
-	
-	
 
 }

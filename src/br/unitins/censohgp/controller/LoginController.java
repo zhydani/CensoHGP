@@ -28,28 +28,30 @@ public class LoginController implements Serializable {
 		Boolean status = usuario.getAtivo();
 		Integer administrador = daotipo.findId(1).getId();
 		Integer usu = daotipo.findId(2).getId();
-		if (usuario != null && status == true) {
+		if (usuario != null) {
 
 			// armazenando um usuario na sessao
-			
-			if (usuario.getTipo().getId().equals(usu)) {
+
+			if (usuario.getTipo().getId().equals(usu) && status == true) {
 				Session.getInstance().setAttribute("usuarioLogado", usuario);
 
 				return "usuario/index.xhtml?faces-redirect=true";
 			}
-			if (usuario.getTipo().getId().equals(administrador)) {
+			if (usuario.getTipo().getId().equals(administrador) && status == true) {
 				Session.getInstance().setAttribute("usuarioLogado", usuario);
 
 				return "administrador/index.xhtml?faces-redirect=true";
 
 			}
+			else {
+				Util.addMessageError("Usuário inativo.");
+			}
 
 		}
+		
+		
+		Util.addMessageError("Usuario ou Senha Invalido.");
 
-		else {
-			Util.addMessageError("Usuario ou Senha Invalido.");
-			return null;
-		}
 		return null;
 	}
 

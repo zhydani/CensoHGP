@@ -217,7 +217,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			while (rs.next()) {
 				Usuario usuario = new Usuario();
 				usuario = new Usuario();
-
+				usuario.setId(rs.getInt("idusuario"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setMatricula(rs.getString("matricula"));
 				usuario.setEmail(rs.getString("email"));
