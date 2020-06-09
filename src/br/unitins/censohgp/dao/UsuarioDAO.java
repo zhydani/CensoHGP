@@ -142,8 +142,9 @@ public class UsuarioDAO extends DAO<Usuario> {
 
 		Connection conn = getConnection();
 
-		PreparedStatement stat = conn.prepareStatement("DELETE FROM public.usuario WHERE idusuario = ?");
-		stat.setInt(1, id);
+		PreparedStatement stat = conn.prepareStatement("UPDATE public.usuario SET " + "ativo = ?" + "WHERE " + " idusuario = ?");
+		stat.setBoolean(1, false);
+		stat.setInt(2, id);
 
 		stat.execute();
 

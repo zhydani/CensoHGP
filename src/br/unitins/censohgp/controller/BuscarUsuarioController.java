@@ -51,13 +51,13 @@ public class BuscarUsuarioController implements Serializable {
 		try {
 			dao.delete(id);
 			dao.getConnection().commit();
-			Util.addMessageInfo("Exclusao realizada com sucesso.");
+			Util.addMessageInfo("Usuário desativado com sucesso.");
 			listaBusca = null;
 			getListaUsuarioBusca();
 			return true;
 		} catch (SQLException e) {
 			dao.rollbackConnection();
-			Util.addMessageInfo("Erro ao excluir o Produto no Banco de Dados.");
+			Util.addMessageInfo("Erro ao desativar usuario no Banco de Dados.");
 			e.printStackTrace();
 			return false;
 		} finally {

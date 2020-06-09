@@ -169,7 +169,7 @@
 
 									<p:column>
 										<f:facet name="header">Status</f:facet>
-										<h:outputText value="#{obj.ativo ? 'Ativo': 'Inativo'}"
+										<h:outputText value="#{obj.ativo ? 'Ativo' : 'Inativo'}"
 											class="d-flex justify-content-center" />
 									</p:column>
 
@@ -186,13 +186,13 @@
 										</h:commandLink>
 									</p:column>
 
-									<p:column style="width:50px">
-										<f:facet name="header">Excluir</f:facet>
+									<p:column style="width:70px">
+										<f:facet name="header">Desativar</f:facet>
 										<h:commandLink
 											action="#{buscarUsuarioController.excluir(obj.id)}"
 											class="d-flex justify-content-center">
 											<h:graphicImage style="width: 25px" library="images"
-												value="editar" name="botao_excluir.png" />
+												value="desativar" name="shutdown.png" />
 											<f:ajax execute="formPrincipal:dataTable"
 												render="formPrincipal" />
 										</h:commandLink>
