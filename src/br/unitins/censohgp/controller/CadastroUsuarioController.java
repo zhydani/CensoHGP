@@ -73,7 +73,7 @@ public class CadastroUsuarioController implements Serializable {
 
 	public void alterar() {
 		if (validarDados()) {
-			DAO<Usuario> dao = new UsuarioDAO();
+			UsuarioDAO dao = new UsuarioDAO();
 			// faz a alteracao no banco de dados
 			try {
 				// gerando um hash da senha
@@ -110,7 +110,7 @@ public class CadastroUsuarioController implements Serializable {
 			return true;
 		} catch (SQLException e) {
 			dao.rollbackConnection();
-			Util.addMessageInfo("Erro ao excluir o Produto no Banco de Dados.");
+			Util.addMessageInfo("Erro ao excluir o usuario no Banco de Dados.");
 			e.printStackTrace();
 			return false;
 		} finally {

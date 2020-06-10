@@ -94,13 +94,13 @@ public class CadastroPacienteController implements Serializable {
 //					getUsuario().setSenha(Util.hashSHA256(getUsuario().getSenha()));
 					dao.update(getPaciente());
 					dao.getConnection().commit();
-					Util.addMessageInfo("Alteração realizada com sucesso.");
+					Util.addMessageInfo("Alteracao realizada com sucesso.");
 					limpar();
 					listaPaciente = null;
 				} catch (SQLException e) {
 					dao.rollbackConnection();
 					dao.closeConnection();
-					Util.addMessageInfo("Erro ao alterar o Usuário no Banco de Dados.");
+					Util.addMessageInfo("Erro ao alterar o paciente no Banco de Dados.");
 					e.printStackTrace();
 				}
 					
@@ -118,11 +118,11 @@ public class CadastroPacienteController implements Serializable {
 			try {
 				dao.delete(getPaciente().getIdpaciente());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Exclusão realizada com sucesso.");
+				Util.addMessageInfo("Exclusao realizada com sucesso.");
 				return true;
 			} catch (SQLException e) {
 				dao.rollbackConnection();
-				Util.addMessageInfo("Erro ao excluir o Produto no Banco de Dados.");
+				Util.addMessageInfo("Erro ao excluir o paciente no Banco de Dados.");
 				e.printStackTrace();
 				return false;
 			} finally {
