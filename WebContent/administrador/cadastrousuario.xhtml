@@ -185,11 +185,9 @@
 										<div class="mt-2 d-flex justify-content-end">
 											<h:panelGrid id="panelBotoes" columns="4">
 
-												<h:commandButton value="Excluir"
-													disabled="#{cadastroUsuarioController.usuario.id == null}"
-													actionListener="#{cadastroUsuarioController.excluir()}"
-													class="btn btn-amarelo mr-3">
-													<f:ajax render="@all" execute="@this" />
+												<h:commandButton value="Voltar" class="btn btn-amarelo mr-3"
+													onclick="history.go(-1); return true;">
+													<f:ajax execute="@this"></f:ajax>
 												</h:commandButton>
 
 												<h:commandButton value="Incluir"

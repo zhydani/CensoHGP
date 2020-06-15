@@ -19,7 +19,9 @@
 	<!-- Costumize CSS -->
 	<h:outputStylesheet library="css" name="template.css" />
 	<h:outputStylesheet library="css" name="consulta.css" />
+	
 	<h:outputStylesheet library="css" name="datatable.css" />
+	<h:outputStylesheet library="css" name="componentes.css" />
 	<link rel="shortcut icon" type="image/x-icon"
 		href="#{resource['images/icon.png']}" />
 </h:head>
@@ -90,86 +92,203 @@
 						<h:form id="formPrincipal">
 							<h:panelGrid columns="1"
 								class="container d-flex justify-content-center">
-								<h:panelGrid columns="4" class="mb-2">
 
-									<h:inputText value="#{buscarUsuarioController.nome}"
-										styleClass="form-control pr-3 d-flex" size="40">
-										<f:passThroughAttribute name="placeholder"
-											value="Digite o nome do usuário" />
-									</h:inputText>
-
-									<h:inputText value="#{buscarUsuarioController.matricula}"
-										styleClass="form-control pr-3 d-flex " size="40"
-										marin-left="10">
-										<f:passThroughAttribute name="placeholder"
-											value="Digite o número da matrícula " />
-									</h:inputText>
-									<h:commandButton value="Buscar"
-										actionListener="#{buscarUsuarioController.buscar()}"
-										class="btn btn-primary mr-2 ml-3">
-										<f:ajax render="@all" execute="@form" resetValues="true" />
-									</h:commandButton>
-
-									<h:commandButton value="Limpar"
-										action="#{buscarUsuarioController.limpar()}"
-										class="btn btn-warning mr-3">
-										<f:ajax render="@form" execute="@this" />
-									</h:commandButton>
-
-								</h:panelGrid>
-
-								<h:panelGrid columns="7">
-									<p:dataTable value="#{buscarUsuarioController.listaUsuario}"
-										var="obj" rows="5" styleClass="table" paginator="true"
-										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
-										rowsPerPageTemplate="5,10,15">
-
-										<p:column width="100px">
-											<f:facet name="header">Nome</f:facet>
-											<h:outputText value="#{obj.nome}">
-											</h:outputText>
-										</p:column>
-
-										<p:column>
-											<f:facet name="header">Matrícula</f:facet>
-											<h:outputText value="#{obj.matricula}">
-											</h:outputText>
-										</p:column>
-
-										<p:column>
-											<f:facet name="header">E-mail</f:facet>
-											<h:outputText value="#{obj.email}" />
-										</p:column>
-
-
-										<p:column>
-											<h:commandLink
-												action="#{buscarUsuarioController.editar(obj.id)}">
-												<h:graphicImage style="width: 25px" library="images"
-													value="editar" name="botao_editar.png" />
-												<f:ajax execute="formPrincipal:dataTable"
-													render="formPrincipal" />
-											</h:commandLink>
-										</p:column>
-
-										<p:column>
-											<h:commandLink
-												action="#{buscarUsuarioController.excluir(obj.id)}">
-												<h:graphicImage style="width: 25px" library="images"
-													value="editar" name="botao_excluir.png" />
-												<f:ajax execute="formPrincipal:dataTable"
-													render="formPrincipal" />
-											</h:commandLink>
-
-										</p:column>
-
-
-									</p:dataTable>
-
-
-								</h:panelGrid>
-
+								<div id="j_idt726:j_idt727" class="ui-datatable ui-widget">
+									<div id="j_idt726:j_idt727_paginator_top"
+										class="ui-paginator ui-paginator-top ui-widget-header ui-corner-top"
+										role="navigation" aria-label="Pagination">
+										<div class="ui-paginator-top-left-content">
+											<button id="j_idt726:j_idt727:j_idt736"
+												name="j_idt726:j_idt727:j_idt736"
+												class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
+												type="button" role="button" aria-disabled="false">
+												<span class="ui-button-icon-left ui-icon ui-c pi pi-refresh"></span><span
+													class="ui-button-text ui-c">ui-button</span>
+											</button>
+										</div>
+										<span class="ui-paginator-current">1-10 of 50 records</span><a
+											href="#"
+											class="ui-paginator-first ui-state-default ui-corner-all ui-state-disabled"
+											aria-label="First Page" tabindex="-1"><span
+											class="ui-icon ui-icon-seek-first">F</span></a><a href="#"
+											class="ui-paginator-prev ui-state-default ui-corner-all ui-state-disabled"
+											aria-label="Previous Page" tabindex="-1"><span
+											class="ui-icon ui-icon-seek-prev">P</span></a><span
+											class="ui-paginator-pages"><a
+											class="ui-paginator-page ui-state-default ui-state-active ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 1">1</a><a
+											class="ui-paginator-page ui-state-default ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 2">2</a><a
+											class="ui-paginator-page ui-state-default ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 3">3</a><a
+											class="ui-paginator-page ui-state-default ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 4">4</a><a
+											class="ui-paginator-page ui-state-default ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 5">5</a></span><a href="#"
+											class="ui-paginator-next ui-state-default ui-corner-all"
+											aria-label="Next Page" tabindex="0"><span
+											class="ui-icon ui-icon-seek-next">N</span></a><a href="#"
+											class="ui-paginator-last ui-state-default ui-corner-all"
+											aria-label="Last Page" tabindex="0"><span
+											class="ui-icon ui-icon-seek-end">E</span></a><label
+											id="j_idt726:j_idt727:j_id2_rppLabel"
+											for="j_idt726:j_idt727:j_id2"
+											class="ui-paginator-rpp-label ui-helper-hidden">Rows
+											Per Page</label><select id="j_idt726:j_idt727:j_id2"
+											name="j_idt726:j_idt727_rppDD"
+											aria-labelledby="j_idt726:j_idt727:j_id2_rppLabel"
+											class="ui-paginator-rpp-options ui-widget ui-state-default ui-corner-left"
+											autocomplete="off"><option value="5">5</option>
+											<option value="10" selected="selected">10</option>
+											<option value="15">15</option></select>
+									</div>
+									<div class="ui-datatable-tablewrapper">
+										<table role="grid">
+											<thead id="j_idt726:j_idt727_head">
+												<tr role="row">
+													<th id="j_idt726:j_idt727:j_idt728"
+														class="ui-state-default" role="columnheader"
+														aria-label="Id" scope="col"><span
+														class="ui-column-title">Id</span></th>
+													<th id="j_idt726:j_idt727:j_idt730"
+														class="ui-state-default" role="columnheader"
+														aria-label="Year" scope="col"><span
+														class="ui-column-title">Year</span></th>
+													<th id="j_idt726:j_idt727:j_idt732"
+														class="ui-state-default" role="columnheader"
+														aria-label="Brand" scope="col"><span
+														class="ui-column-title">Brand</span></th>
+													<th id="j_idt726:j_idt727:j_idt734"
+														class="ui-state-default" role="columnheader"
+														aria-label="Color" scope="col"><span
+														class="ui-column-title">Color</span></th>
+												</tr>
+											</thead>
+											<tbody id="j_idt726:j_idt727_data"
+												class="ui-datatable-data ui-widget-content">
+												<tr data-ri="0" class="ui-widget-content ui-datatable-even"
+													role="row">
+													<td role="gridcell">d86f20fc</td>
+													<td role="gridcell">1973</td>
+													<td role="gridcell">BMW</td>
+													<td role="gridcell">Red</td>
+												</tr>
+												<tr data-ri="1" class="ui-widget-content ui-datatable-odd"
+													role="row">
+													<td role="gridcell">d8454623</td>
+													<td role="gridcell">1982</td>
+													<td role="gridcell">Volkswagen</td>
+													<td role="gridcell">Yellow</td>
+												</tr>
+												<tr data-ri="2" class="ui-widget-content ui-datatable-even"
+													role="row">
+													<td role="gridcell">f595712a</td>
+													<td role="gridcell">2005</td>
+													<td role="gridcell">BMW</td>
+													<td role="gridcell">Brown</td>
+												</tr>
+												<tr data-ri="3" class="ui-widget-content ui-datatable-odd"
+													role="row">
+													<td role="gridcell">a0870378</td>
+													<td role="gridcell">1986</td>
+													<td role="gridcell">Audi</td>
+													<td role="gridcell">Silver</td>
+												</tr>
+												<tr data-ri="4" class="ui-widget-content ui-datatable-even"
+													role="row">
+													<td role="gridcell">0b0a119b</td>
+													<td role="gridcell">1970</td>
+													<td role="gridcell">Honda</td>
+													<td role="gridcell">Blue</td>
+												</tr>
+												<tr data-ri="5" class="ui-widget-content ui-datatable-odd"
+													role="row">
+													<td role="gridcell">0a90b9a5</td>
+													<td role="gridcell">1975</td>
+													<td role="gridcell">Volkswagen</td>
+													<td role="gridcell">Brown</td>
+												</tr>
+												<tr data-ri="6" class="ui-widget-content ui-datatable-even"
+													role="row">
+													<td role="gridcell">bd03ca01</td>
+													<td role="gridcell">1977</td>
+													<td role="gridcell">Volkswagen</td>
+													<td role="gridcell">Blue</td>
+												</tr>
+												<tr data-ri="7" class="ui-widget-content ui-datatable-odd"
+													role="row">
+													<td role="gridcell">5bd0578e</td>
+													<td role="gridcell">1965</td>
+													<td role="gridcell">BMW</td>
+													<td role="gridcell">Black</td>
+												</tr>
+												<tr data-ri="8" class="ui-widget-content ui-datatable-even"
+													role="row">
+													<td role="gridcell">7af61ae3</td>
+													<td role="gridcell">1985</td>
+													<td role="gridcell">Jaguar</td>
+													<td role="gridcell">Blue</td>
+												</tr>
+												<tr data-ri="9" class="ui-widget-content ui-datatable-odd"
+													role="row">
+													<td role="gridcell">dfb00cdc</td>
+													<td role="gridcell">1978</td>
+													<td role="gridcell">Audi</td>
+													<td role="gridcell">Black</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div id="j_idt726:j_idt727_paginator_bottom"
+										class="ui-paginator ui-paginator-bottom ui-widget-header ui-corner-bottom"
+										role="navigation" aria-label="Pagination">
+										<span class="ui-paginator-current">1-10 of 50 records</span><a
+											href="#"
+											class="ui-paginator-first ui-state-default ui-corner-all ui-state-disabled"
+											aria-label="First Page" tabindex="-1"><span
+											class="ui-icon ui-icon-seek-first">F</span></a><a href="#"
+											class="ui-paginator-prev ui-state-default ui-corner-all ui-state-disabled"
+											aria-label="Previous Page" tabindex="-1"><span
+											class="ui-icon ui-icon-seek-prev">P</span></a><span
+											class="ui-paginator-pages"><a
+											class="ui-paginator-page ui-state-default ui-state-active ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 1">1</a><a
+											class="ui-paginator-page ui-state-default ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 2">2</a><a
+											class="ui-paginator-page ui-state-default ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 3">3</a><a
+											class="ui-paginator-page ui-state-default ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 4">4</a><a
+											class="ui-paginator-page ui-state-default ui-corner-all"
+											tabindex="0" href="#" aria-label="Page 5">5</a></span><a href="#"
+											class="ui-paginator-next ui-state-default ui-corner-all"
+											aria-label="Next Page" tabindex="0"><span
+											class="ui-icon ui-icon-seek-next">N</span></a><a href="#"
+											class="ui-paginator-last ui-state-default ui-corner-all"
+											aria-label="Last Page" tabindex="0"><span
+											class="ui-icon ui-icon-seek-end">E</span></a><label
+											id="j_idt726:j_idt727:j_id3_rppLabel"
+											for="j_idt726:j_idt727:j_id3"
+											class="ui-paginator-rpp-label ui-helper-hidden">Rows
+											Per Page</label><select id="j_idt726:j_idt727:j_id3"
+											name="j_idt726:j_idt727_rppDD"
+											aria-labelledby="j_idt726:j_idt727:j_id3_rppLabel"
+											class="ui-paginator-rpp-options ui-widget ui-state-default ui-corner-left"
+											autocomplete="off"><option value="5">5</option>
+											<option value="10" selected="selected">10</option>
+											<option value="15">15</option></select>
+										<div class="ui-paginator-bottom-right-content">
+											<button id="j_idt726:j_idt727:j_idt737"
+												name="j_idt726:j_idt727:j_idt737"
+												class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
+												type="button" role="button" aria-disabled="false">
+												<span
+													class="ui-button-icon-left ui-icon ui-c pi pi-cloud-upload"></span><span
+													class="ui-button-text ui-c">ui-button</span>
+											</button>
+										</div>
+									</div>
+								</div>
 							</h:panelGrid>
 							<h:messages id="messages" infoStyle="color:green"
 								warnStyle="color:orange" errorStyle="color:red"

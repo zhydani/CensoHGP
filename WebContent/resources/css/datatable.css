@@ -1,7 +1,7 @@
 @charset "UTF-8"; 
 
 @import
-	url("/showcase/javax.faces.resource/primeicons/primeicons.css.xhtml?ln=primefaces&v=8.0")
+	url("/showcase/javax.faces.resource/primeicons/primeicons.css.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
 	;
 
 :root { -
@@ -10,6 +10,62 @@
 	-input-focus-border-color: #007ad9
 }
 
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 300;
+	src:
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-300.eot.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT");
+	src: local("Open Sans Light"), local("OpenSans-Light"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-300.eot.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT#iefix")
+		format("embedded-opentype"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-300.woff2.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("woff2"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-300.woff.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("woff"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-300.ttf.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("truetype"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-300.svg.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT#OpenSans")
+		format("svg")
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-regular.eot.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT");
+	src: local("Open Sans"), local("OpenSans"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-regular.eot.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT#iefix")
+		format("embedded-opentype"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-regular.woff2.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("woff2"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-regular.woff.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("woff"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-regular.ttf.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("truetype"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-regular.svg.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT#OpenSans")
+		format("svg")
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-700.eot.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT");
+	src: local("Open Sans Bold"), local("OpenSans-Bold"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-700.eot.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT#iefix")
+		format("embedded-opentype"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-700.woff2.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("woff2"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-700.woff.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("woff"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-700.ttf.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT")
+		format("truetype"),
+		url("/showcase/javax.faces.resource/fonts/open-sans-v13-latin-700.svg.xhtml?ln=primefaces&v=8.0.2-SNAPSHOT#OpenSans")
+		format("svg")
+}
 
 * {
 	-moz-box-sizing: border-box;
@@ -21,6 +77,10 @@ body .ui-widget, body .ui-widget .ui-widget {
 	text-decoration: none
 }
 
+body .ui-widget:not (.pi ), body .ui-widget .ui-widget:not (.pi ){
+	font-family: "Open Sans", "Helvetica Neue", sans-serif;
+	font-size: 14px
+}
 
 body .ui-icon {
 	height: 1em;
@@ -1714,14 +1774,18 @@ body .ui-calendar .ui-button.ui-button-icon-only {
 	-moz-border-radius-bottomleft: 0;
 	-webkit-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
-	margin: 0;
-	overflow: hidden
+	margin: 0
 }
 
 body .ui-calendar .ui-button.ui-button-icon-only .ui-button-text {
 	text-indent: 0;
 	white-space: nowrap;
-	visibility: hidden
+	visibility: hidden;
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-o-transform: scale(0);
+	-ms-transform: scale(0);
+	transform: scale(0)
 }
 
 body .ui-calendar .ui-button.ui-button-icon-only .ui-icon-calendar {
@@ -2426,8 +2490,34 @@ body .ui-texteditor .ql-snow.ql-toolbar button:hover .ql-stroke, body .ui-texted
 	stroke: #333
 }
 
+body .ui-button {
+	background-color: #007ad9;
+	color: #fff;
+	border: 1px solid #007ad9;
+	font-size: 14px;
+	margin: 0;
+	margin-right: .1em;
+	outline: 0 none;
+	-moz-transition: background-color .3s;
+	-o-transition: background-color .3s;
+	-webkit-transition: background-color .3s;
+	transition: background-color .3s
+}
 
+body .ui-button.ui-state-focus {
+	outline: 1px solid #666;
+	outline-offset: 1px;
+	background-color: #0088f3;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none
+}
 
+body .ui-button.ui-state-hover {
+	background-color: #116fbf;
+	border-color: #116fbf;
+	color: #fff
+}
 
 body .ui-button.ui-state-active, body .ui-button.ui-state-down {
 	background-color: #005b9f;
@@ -2464,15 +2554,19 @@ body .ui-button.ui-button-text-icon-right .ui-icon {
 }
 
 body .ui-button.ui-button-icon-only {
-	width: 2.143em;
-	overflow: hidden
+	width: 2.143em
 }
 
 body .ui-button.ui-button-icon-only .ui-button-text {
 	padding: .429em;
 	text-indent: 0;
 	white-space: nowrap;
-	visibility: hidden
+	visibility: hidden;
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-o-transform: scale(0);
+	-ms-transform: scale(0);
+	transform: scale(0)
 }
 
 body .ui-button.ui-button-icon-only .ui-icon {
@@ -8507,4 +8601,3 @@ body .ui-terminal .ui-terminal-input {
 body .ui-separator {
 	border: 1px solid #c8c8c8
 }
-
