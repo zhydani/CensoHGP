@@ -74,13 +74,13 @@ public class DepartamentoController implements Serializable {
 			try {
 				dao.create(getDepartamento());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Inclus√£o realizada com sucesso.");
+				Util.addMessageInfo("Inclus„o realizada com sucesso.");
 				limpar();
 				listaDepartamento = null;
 			} catch (SQLException e) {
 				dao.rollbackConnection();
 				dao.closeConnection();
-				Util.addMessageInfo("Erro ao incluir o Usu√°rio no Banco de Dados.");
+				Util.addMessageInfo("Erro ao incluir o Departamento no Banco de Dados.");
 				e.printStackTrace();
 			}
 		}
@@ -95,13 +95,13 @@ public class DepartamentoController implements Serializable {
 				//						getUsuario().setSenha(Util.hashSHA256(getUsuario().getSenha()));
 				dao.update(getDepartamento());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Altera√ß√£o realizada com sucesso.");
+				Util.addMessageInfo("AlteraÁ„o realizada com sucesso.");
 				limpar();
 				listaDepartamento = null;
 			} catch (SQLException e) {
 				dao.rollbackConnection();
 				dao.closeConnection();
-				Util.addMessageInfo("Erro ao alterar o Usu√°rio no Banco de Dados.");
+				Util.addMessageInfo("Erro ao alterar o Departamento no Banco de Dados.");
 				e.printStackTrace();
 			}
 

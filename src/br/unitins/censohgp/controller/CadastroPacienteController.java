@@ -73,13 +73,13 @@ public class CadastroPacienteController implements Serializable {
 				try {
 					dao.create(getPaciente());
 					dao.getConnection().commit();
-					Util.addMessageInfo("Inclus√£o realizada com sucesso.");
+					Util.addMessageInfo("Inclus„o realizada com sucesso.");
 					limpar();
 					listaPaciente = null;
 				} catch (SQLException e) {
 					dao.rollbackConnection();
 					dao.closeConnection();
-					Util.addMessageInfo("Erro ao incluir o Usu√°rio no Banco de Dados.");
+					Util.addMessageInfo("Erro ao incluir o Paciente no Banco de Dados.");
 					e.printStackTrace();
 				}
 			}
@@ -94,13 +94,13 @@ public class CadastroPacienteController implements Serializable {
 //					getUsuario().setSenha(Util.hashSHA256(getUsuario().getSenha()));
 					dao.update(getPaciente());
 					dao.getConnection().commit();
-					Util.addMessageInfo("Alteracao realizada com sucesso.");
+					Util.addMessageInfo("AlteraÁ„o realizada com sucesso.");
 					limpar();
 					listaPaciente = null;
 				} catch (SQLException e) {
 					dao.rollbackConnection();
 					dao.closeConnection();
-					Util.addMessageInfo("Erro ao alterar o paciente no Banco de Dados.");
+					Util.addMessageInfo("Erro ao alterar o Paciente no Banco de Dados.");
 					e.printStackTrace();
 				}
 					
@@ -118,11 +118,11 @@ public class CadastroPacienteController implements Serializable {
 			try {
 				dao.delete(getPaciente().getIdpaciente());
 				dao.getConnection().commit();
-				Util.addMessageInfo("Exclusao realizada com sucesso.");
+				Util.addMessageInfo("Exclus„o realizada com sucesso.");
 				return true;
 			} catch (SQLException e) {
 				dao.rollbackConnection();
-				Util.addMessageInfo("Erro ao excluir o paciente no Banco de Dados.");
+				Util.addMessageInfo("Erro ao excluir o Paciente no Banco de Dados.");
 				e.printStackTrace();
 				return false;
 			} finally {
@@ -132,7 +132,7 @@ public class CadastroPacienteController implements Serializable {
 
 		private boolean validarDados() {
 		if (getPaciente().getNome().isBlank()) {
-				Util.addMessageWarn("O campo senha deve ser informado.");
+				Util.addMessageWarn("O campo Nome deve ser informado.");
 				return false;
 			}
 //			if (getUsuario().getSenha() == null || 

@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.unitins.censohgp.model.CidadeDepartamento;
 import br.unitins.censohgp.model.EstadoDepartamento;
+import br.unitins.censohgp.model.Tipo;
 
 public class CidadeDepartamentoDAO extends DAO<CidadeDepartamento> {
 
@@ -51,7 +53,40 @@ public class CidadeDepartamentoDAO extends DAO<CidadeDepartamento> {
 
 	@Override
 	public List<CidadeDepartamento> findAll() {
-		// TODO Auto-generated method stub
+//		Connection conn = getConnection();
+//		if (conn == null) 
+//			return null;
+//
+//		try {
+//			PreparedStatement stat = conn.prepareStatement(
+//					"SELECT " +
+//							" idcidade, " +
+//							" cidade,  " +
+//							" idestado  " +
+//							" FROM " +
+//					"  public.cidade ");
+//
+//			ResultSet rs = stat.executeQuery();
+//
+//			List<CidadeDepartamento> listaTipo = new ArrayList<Tipo>();
+//
+//			while(rs.next()) {
+//				Tipo tipo = new Tipo();
+//				tipo.setId(rs.getInt("idcidade"));
+//				tipo.setNome(rs.getString("cidade"));
+//
+//				listaTipo.add(tipo);
+//
+//			}			 			
+//
+//			if (listaTipo.isEmpty())
+//				return null;
+//			return listaTipo;
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return null;	
 		return null;
 	}
 

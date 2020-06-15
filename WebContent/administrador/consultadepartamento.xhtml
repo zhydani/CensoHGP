@@ -87,94 +87,118 @@
 						<h:form id="formPrincipal">
 							<h:panelGrid columns="1"
 								class="container d-flex justify-content-center">
-								<h:panelGrid columns="4" class="mb-2">
+								<h:panelGrid columns="5" class="mb-2">
 
 									<h:inputText
-										value="#{consultaDepartamentoController.nomeHospital}"
-										styleClass="form-control pr-3 d-flex" size="40">
+										value="#{buscaDepartamentoController.nomeHospital}"
+										styleClass="form-control pr-3 d-flex" size="45">
 										<f:passThroughAttribute name="placeholder"
 											value="Digite o nome do hospital" />
 									</h:inputText>
 
 									<h:inputText
-										value="#{consultaDepartamentoController.nomeDepartamento}"
-										styleClass="form-control pr-3 d-flex " size="40"
+										value="#{buscaDepartamentoController.nomeDepartamento}"
+										styleClass="form-control pr-3 d-flex " size="45"
 										marin-left="10">
 										<f:passThroughAttribute name="placeholder"
 											value="Digite o nome do departamento" />
 									</h:inputText>
 									<h:commandButton value="Buscar"
-										actionListener="#{consultaDepartamentoController.buscar()}"
-										class="btn btn-primary mr-2 ml-3">
+										actionListener="#{buscaDepartamentoController.buscar()}"
+										class="btn btn-primary mr-4 ml-5">
 										<f:ajax render="@all" execute="@form" resetValues="true" />
 									</h:commandButton>
-
 									<h:commandButton value="Limpar"
-										action="#{consultaDepartamentoController.limpar()}"
-										class="btn btn-warning mr-3">
+										action="#{buscaDepartamentoController.limpar()}"
+										class="btn btn-warning mr-4">
 										<f:ajax render="@form" execute="@this" />
+									</h:commandButton>
+									<h:commandButton value="Cadastrar"
+										action="#{buscarDepartamentoController.cadastrar()}"
+										class="btn btn-success mr-3 ">
+										<f:ajax render="@form" execute="@this" />
+
 									</h:commandButton>
 
 								</h:panelGrid>
 
-								<h:panelGrid columns="7">
+
+								<p:spacer width="100" height="30" />
+								<div class="container d-flex justify-content-center">
+									<p:growl id="msgs" showDetail="true"
+										skipDetailIfEqualsSummary="true" />
+
 									<p:dataTable
-										value="#{consultaDepartamentoController.listaDepartamento}"
+										value="#{buscaDepartamentoController.listaDepartamento}"
 										var="obj" rows="5" styleClass="table" paginator="true"
+										resizableColumns="true"
+										style="margin-bottom:20px; font-size:15px;"
+										emptyMessage="Nenhum registro." paginatorAlwaysVisible="false"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
 										rowsPerPageTemplate="5,10,15">
 
-										<p:column width="100px">
-											<f:facet name="header">Hospital</f:facet>
-											<h:outputText value="#{obj.nomeHospital}">
-											</h:outputText>
-										</p:column>
+										<f:facet name="header">
+            						Resultado da Busca
+       							</f:facet>
+										<tbody>
+											<td>
+												<td><p:column style="width:150px; font-size:15px;">
+														<f:facet name="header">Hospital</f:facet>
+														<h:outputText value="#{obj.nomeHospital}">
+														</h:outputText>
+													</p:column></td>
 
-										<p:column>
-											<f:facet name="header">Departamento</f:facet>
-											<h:outputText value="#{obj.nomeDepartamento}">
-											</h:outputText>
-										</p:column>
+											</td>
 
-										<p:column>
-											<f:facet name="header">Nº Leitos</f:facet>
-											<h:outputText value="#{obj.numeroLeitos}" />
-										</p:column>
+											<p:column style="width:172px; font-size:15px;">
+												<f:facet name="header">Departamento</f:facet>
+												<h:outputText value="#{obj.nomeDepartamento}">
+												</h:outputText>
+											</p:column>
 
-										<p:column>
-											<f:facet name="header">Cidade</f:facet>
-										</p:column>
-										<p:column>
-											<f:facet name="header">Estado</f:facet>
-										</p:column>
+											<p:column style="width:85px; font-size:15px;">
+												<f:facet name="header">Nº Leitos</f:facet>
+												<h:outputText value="#{obj.numeroLeitos}">
+												</h:outputText>
+											</p:column>
 
-										<p:column>
-											<h:commandLink
-												action="#{consultaDepartamentoController.editar(obj.idlocalTransferencia)}">
-												<h:graphicImage style="width: 25px" library="images"
-													value="editar" name="botao_editar.png" />
-												<f:ajax execute="formPrincipal:dataTable"
-													render="formPrincipal" />
-											</h:commandLink>
-										</p:column>
+											<p:column style="width:60px; font-size:15px;">
+												<f:facet name="header">Estado</f:facet>
 
-										<p:column>
-											<h:commandLink
-												action="#{consultaDepartamentoController.excluir(obj.idlocalTransferencia)}">
-												<h:graphicImage style="width: 25px" library="images"
-													value="editar" name="botao_excluir.png" />
-												<f:ajax execute="formPrincipal:dataTable"
-													render="formPrincipal" />
-											</h:commandLink>
 
-										</p:column>
+											</p:column>
+
+											<p:column style="width:130px; font-size:15px;">
+												<f:facet name="header">Cidate</f:facet>
+
+
+											</p:column>
+
+											<p:column style="width:105px; font-size:15px;">
+												<f:facet name="header">Status</f:facet>
+
+
+											</p:column>
+
+
+											<p:column style="width:20px">
+												<h:commandLink
+													action="#{buscarDepartamentoController.editar(obj.idlocalTransferencia)}">
+													<h:graphicImage style="width: 25px" library="images"
+														value="editar" name="botao_editar.png">
+													</h:graphicImage>
+													<f:ajax execute="formPrincipal:dataTable"
+														render="formPrincipal" />
+												</h:commandLink>
+											</p:column>
+
+										</tbody>
 
 
 									</p:dataTable>
 
-
-								</h:panelGrid>
+								</div>
 
 							</h:panelGrid>
 							<h:messages id="messages" infoStyle="color:green"

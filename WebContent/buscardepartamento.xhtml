@@ -21,7 +21,7 @@
 	<h:outputStylesheet library="css" name="consultadepartamento.css" />
 	<h:outputStylesheet library="css" name="datatable.css" />
 	<link rel="shortcut icon" type="image/x-icon"
-		href="#{resource['images/favicon.ico']}" />
+		href="#{resource['images/icon.png']}" />
 </h:head>
 <h:body>
 	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
@@ -32,25 +32,27 @@
 				<h3 class="font-weight-bold">Menu</h3>
 			</div>
 			<ul class="list-unstyled components">
-				<h:form>
-					<h:panelGrid columns="2">
-						<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
-							library="images" name="usu.png" />
-
+				<h:panelGrid columns="2">
+					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+						library="images" name="usu.png" />
+					<h:form>
 						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
 							class="font-weight-bold mb-3" />
-
-
-					</h:panelGrid>
-					<li><a href="index.xhtml">Início</a></li>
-					<li><a href="checklistpaciente.xhtml">Gerar Checklist</a></li>
-					<li><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
-					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
-					<li class="active"><a href="consultadepartamento.xhtml">Gerenciar
-							Departamentos</a></li>
-					<li><h:commandLink value="Sair"
-							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
-				</h:form>
+					</h:form>
+				</h:panelGrid>
+				<li><a href="templateadministrador.xhtml">Início</a></li>
+				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
+				<li><a href="buscarusuario.xhtml"
+					data-toggle="collapse" aria-expanded="false">Buscar Usuário</a></li>
+				<li><a href="cadastrardepartamento.xhtml">Cadastrar
+						Departamento</a></li>
+				<li class="active"><a href="consultadepartamento.xhtml">Buscar
+						Departamento</a></li>
+				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
+				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
+				<li><a href="transferencia.xhtml">Transferência de Paciente</a></li>
+				<li><h:commandLink value="Sair"
+						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 			</ul>
 			</nav>
 		</div>
@@ -62,6 +64,7 @@
 				<td colspan="2" align="center" class="mar"><ui:insert
 						name="cabecalho">
 						<h:form>
+
 							<div class="navbar navbar-dark bg-navbar navbar-expand">
 								<div class="container collapse navbar-collapse">
 									<p:commandLink oncomplete="PF('sidebar1').show()"
@@ -71,10 +74,12 @@
 									</p:commandLink>
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-										<li class="nav-item"><a
-											href="cadastrardepartamento.xhtml" class="nav-link">Cadastrar
-												departamento</a></li>
+
+										<li class="nav-item"><a href="consultausuario.xhtml"
+											class="nav-link">Busca de Departamento</a></li>
+
 									</ul>
+
 								</div>
 							</div>
 						</h:form>
@@ -119,86 +124,87 @@
 										action="#{buscarDepartamentoController.cadastrar()}"
 										class="btn btn-success mr-3 ">
 										<f:ajax render="@form" execute="@this" />
-
+										
 									</h:commandButton>
 
 								</h:panelGrid>
 
-
+								
 								<p:spacer width="100" height="30" />
 								<div class="container d-flex justify-content-center">
-									<p:growl id="msgs" showDetail="true"
-										skipDetailIfEqualsSummary="true" />
-
-									<p:dataTable
-										value="#{buscaDepartamentoController.listaDepartamento}"
+								<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+								
+										<p:dataTable value="#{buscaDepartamentoController.listaDepartamento}" 										
 										var="obj" rows="5" styleClass="table" paginator="true"
-										resizableColumns="true"
-										style="margin-bottom:20px; font-size:15px;"
-										emptyMessage="Nenhum registro." paginatorAlwaysVisible="false"
+										resizableColumns="true" style="margin-bottom:20px; font-size:15px;"
+										emptyMessage="Nenhum registro."
+										paginatorAlwaysVisible="false"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
-										rowsPerPageTemplate="5,10,15">
-
-										<f:facet name="header">
+										rowsPerPageTemplate="5,10,15"
+											>
+										
+								<f:facet name="header">
             						Resultado da Busca
        							</f:facet>
-										<tbody>
-											<td>
-												<td><p:column style="width:150px; font-size:15px;">
-														<f:facet name="header">Hospital</f:facet>
-														<h:outputText value="#{obj.nomeHospital}">
-														</h:outputText>
+											<tbody>
+												<td>
+													<td>
+													
+													<p:column style="width:150px; font-size:15px;" >
+															<f:facet name="header" >Hospital</f:facet>
+															<h:outputText value="#{obj.nomeHospital}">
+															</h:outputText>
 													</p:column></td>
+													
+												</td>
+												
+												<p:column style="width:172px; font-size:15px;" >
+													<f:facet name="header">Departamento</f:facet>
+													<h:outputText value="#{obj.nomeDepartamento}">
+													</h:outputText>
+												</p:column>
 
-											</td>
+												<p:column style="width:85px; font-size:15px;">
+													<f:facet name="header">Nº Leitos</f:facet>
+													<h:outputText value="#{obj.numeroLeitos}">
+													</h:outputText>
+												</p:column>
 
-											<p:column style="width:172px; font-size:15px;">
-												<f:facet name="header">Departamento</f:facet>
-												<h:outputText value="#{obj.nomeDepartamento}">
-												</h:outputText>
-											</p:column>
+												<p:column style="width:60px; font-size:15px;">
+													<f:facet name="header">Estado</f:facet>
+													
+													
+												</p:column>
 
-											<p:column style="width:85px; font-size:15px;">
-												<f:facet name="header">Nº Leitos</f:facet>
-												<h:outputText value="#{obj.numeroLeitos}">
-												</h:outputText>
-											</p:column>
+												<p:column style="width:130px; font-size:15px;">
+													<f:facet name="header">Cidate</f:facet>
+													
+													
+												</p:column>
 
-											<p:column style="width:60px; font-size:15px;">
-												<f:facet name="header">Estado</f:facet>
+												<p:column style="width:105px; font-size:15px;">
+													<f:facet name="header">Status</f:facet>
+													
+													
+												</p:column>
+												
+											
+												<p:column style="width:20px">
+													<h:commandLink
+														action="#{buscarDepartamentoController.editar(obj.idlocalTransferencia)}">
+														<h:graphicImage style="width: 25px" library="images"
+															value="editar" name="botao_editar.png">
+														</h:graphicImage>
+														<f:ajax execute="formPrincipal:dataTable"
+															render="formPrincipal" />
+													</h:commandLink>
+												</p:column>
 
-
-											</p:column>
-
-											<p:column style="width:130px; font-size:15px;">
-												<f:facet name="header">Cidate</f:facet>
-
-
-											</p:column>
-
-											<p:column style="width:105px; font-size:15px;">
-												<f:facet name="header">Status</f:facet>
-
-
-											</p:column>
-
-
-											<p:column style="width:20px">
-												<h:commandLink
-													action="#{buscarDepartamentoController.editar(obj.idlocalTransferencia)}">
-													<h:graphicImage style="width: 25px" library="images"
-														value="editar" name="botao_editar.png">
-													</h:graphicImage>
-													<f:ajax execute="formPrincipal:dataTable"
-														render="formPrincipal" />
-												</h:commandLink>
-											</p:column>
-
-										</tbody>
-
-
-									</p:dataTable>
+											</tbody>
+											
+										
+										</p:dataTable>
 
 								</div>
 

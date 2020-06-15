@@ -97,5 +97,6 @@ public class TipoDAO extends DAO<Tipo> {
 		}
 		return null;
 	}
-
+	
+	
 }

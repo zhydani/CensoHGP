@@ -24,7 +24,7 @@ import br.unitins.censohgp.model.Usuario;
 
 @Named
 @ViewScoped
-public class ConsultaDepartamentoController implements Serializable {
+public class BuscaDepartamentoController implements Serializable {
 
 	private static final long serialVersionUID = -9042867479794257960L;
 	private String nomehospital = null;
@@ -46,6 +46,18 @@ public class ConsultaDepartamentoController implements Serializable {
 		return listaBusca = listaDepartamento;
 	}
 	
+	public String editar(int iddepartamento) {
+		DepartamentoDAO dao = new DepartamentoDAO();
+		Departamento departamento = dao.findById(iddepartamento);
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.put("departamentoFlash", departamento);
+
+		return "editardepartamento.xhtml?faces-redirect=true";
+	}
+	
+	public String cadastrar() {
+		return "cadastrardepartamento.xhtml?faces-redirect=true";
+	}
 	
 	public boolean excluir(int iddepartamento) {
 		DAO<Departamento> dao = new DepartamentoDAO();
