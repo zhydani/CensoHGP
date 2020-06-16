@@ -111,24 +111,24 @@
 									<div class="mt-3 ml-4">
 										<h:panelGrid columns="1" id="panelPrincipal"
 											class="d-flex justify-content-start">
-											<h:outputLabel value="Paciente " for="themePojo" />
-											<p:autoComplete id="themePojo"
-												value="#{transferenciaController.paciente}"
-												completeMethod="#{transferenciaController.completeTheme}"
-												var="paciente" itemLabel="#{paciente.nome}"
-												itemValue="#{paciente}" converter="#{pacientesConverter}"
-												forceSelection="true" size="55">
-												<f:facet name="itemtip">
-													<h:panelGrid columns="2" cellpadding="35">
-														<h:outputText value="Nome:" />
-														<h:outputText value="#{paciente.nome}" />
+												<h:outputLabel value="Paciente " for="themePojo" />
+												<p:autoComplete id="themePojo"
+													value="#{transferenciaController.paciente}"
+													completeMethod="#{transferenciaController.completeTheme}"
+													var="paciente" itemLabel="#{paciente.nome}"
+													itemValue="#{paciente}" converter="#{pacientesConverter}"
+													forceSelection="true" size="55">
+													<f:facet name="itemtip">
+														<h:panelGrid columns="2" cellpadding="35">
+															<h:outputText value="Nome:" />
+															<h:outputText value="#{paciente.nome}" />
 
-														<h:outputText value="Prontuario" />
-														<h:outputText value="#{paciente.numeroProntuario}" />
-													</h:panelGrid>
-												</f:facet>
-											</p:autoComplete>
-
+															<h:outputText value="Prontuario" />
+															<h:outputText value="#{paciente.numeroProntuario}" />
+														</h:panelGrid>
+													</f:facet>
+												</p:autoComplete>
+	
 											<h:outputLabel value="Numero prontuario "
 												for="ItNumeroProntuario" />
 											<p:inputText id="ItNumeroProntuario"

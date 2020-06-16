@@ -163,6 +163,13 @@ a.article, a.article:hover {
 	width: 120px;
 }
 
+.btn-verde {
+	background: #40c045;
+	color: #fff;
+	width: 120px;
+}
+
+
 .footer {
 	grid-area: footer;
 	background: #ff9600;

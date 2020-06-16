@@ -112,9 +112,7 @@
 								<div>
 									<div class="border-left mb-4 ml-3">
 										<h:panelGrid columns="2">
-											<h:graphicImage
-												style="width:50px; padding: 10px 0px 10px 20px;"
-												library="images" name="icone.png"></h:graphicImage>
+											
 											<h4 class="ml-3 py-2 font-weight-bold">Cadastrar
 												Departamento</h4>
 										</h:panelGrid>
@@ -125,29 +123,29 @@
 
 
 												<h:panelGrid>
-													<h:outputLabel value="Nome Do Departamento: " />
+													<h:outputLabel value="Nome do departamento: " />
 													<h:inputText id="nameDep"
 														value="#{departamentoController.departamento.nomeDepartamento}"
 														styleClass="form-control pr-3 d-flex justify-content-start"
 														size="97" />
-													<h:outputLabel value="Nome Do Hospital: " />
+													<h:outputLabel class="mt-3" value="Nome do hospital: " />
 													<h:inputText id="nameHos"
 														value="#{departamentoController.departamento.nomeHospital}"
 														styleClass="form-control pr-3 d-flex justify-content-start"
 														size="97" />
 												</h:panelGrid>
 
-												<h:panelGrid columns="3" class="text-left mb-4">
+												<h:panelGrid columns="4" class="text-left mb-4 mt-3">
 													<h:panelGrid columns="1" class="mr-4">
 														<h:outputLabel value="Numero de Leitos: " />
 														<h:inputText
 															value="#{departamentoController.departamento.numeroLeitos}"
 															styleClass="form-control pr-3 d-flex justify-content-start"
-															size="24" />
+															size="13" />
 													</h:panelGrid>
 													<h:panelGrid columns="1" class="mr-4">
-														<h:outputLabel style="font-weight: bold;" value="Status: " />
-														<h:selectOneMenu class="btn btn-secondary"
+														<h:outputLabel value="Status: " />
+														<h:selectOneMenu class="form-control"
 															value="#{departamentoController.departamento.ativo}">
 															<f:selectItem noSelectionOption="true"
 																itemLabel="Selecione ...." />
@@ -157,13 +155,10 @@
 																itemValue="#{status}" />
 														</h:selectOneMenu>
 													</h:panelGrid>
-												</h:panelGrid>
-											</h:panelGrid>
-
-											<h:panelGrid columns="2" class="text-left mb-4">
-												<h:panelGrid columns="1" class="mr-4">
-													<h:outputLabel style="font-weight: bold;" value="Cidades: " />
-													<h:selectOneMenu class="btn btn-secondary"
+													
+													<h:panelGrid columns="1" class="mr-4">
+													<h:outputLabel value="Cidades: " />
+													<h:selectOneMenu class="form-control"
 														value="#{departamentoController.departamento.cidade}">
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione a Cidade" />
@@ -173,8 +168,8 @@
 													</h:selectOneMenu>
 												</h:panelGrid>
 												<h:panelGrid columns="1" class="mr-4">
-													<h:outputLabel style="font-weight: bold;" value="Estados: " />
-													<h:selectOneMenu class="btn btn-secondary"
+													<h:outputLabel value="Estados: " />
+													<h:selectOneMenu class="form-control"
 														value="#{departamentoController.departamento.estado}">
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione o Estado" />
@@ -183,7 +178,12 @@
 															itemValue="#{obj}" itemLabel="#{obj.label}" />
 													</h:selectOneMenu>
 												</h:panelGrid>
+												</h:panelGrid>
+												
+												
 											</h:panelGrid>
+
+											
 										</h:panelGrid>
 										<br />
 										<div class="mt-2 d-flex justify-content-end">

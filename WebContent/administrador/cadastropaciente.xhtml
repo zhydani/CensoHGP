@@ -112,9 +112,7 @@
 								<div>
 									<div class="border-left mb-4 ml-3">
 										<h:panelGrid columns="2">
-											<h:graphicImage
-												style="width:50px; padding: 10px 0px 10px 20px;"
-												library="images" name="icone.png"></h:graphicImage>
+											
 											<h4 class="ml-3 py-2 font-weight-bold">Cadastro de
 												Paciente</h4>
 										</h:panelGrid>
@@ -171,7 +169,7 @@
 													</h:panelGrid>
 													<h:panelGrid columns="1" class="mr-4">
 														<h:outputLabel value="Sexo do paciente: " />
-														<h:selectOneMenu class="btn btn-outline-dark"
+														<h:selectOneMenu class="form-control"
 															value="#{cadastroPacienteController.paciente.sexo}"
 															converter="omnifaces.SelectItemsConverter">
 															<f:selectItem noSelectionOption="true"
@@ -213,7 +211,7 @@
 											<h:panelGrid columns="2" class="text-left mb-4">
 												<h:panelGrid columns="1" class="mr-4">
 													<h:outputLabel value="Situação do paciente: " />
-													<h:selectOneMenu class="btn btn-outline-dark"
+													<h:selectOneMenu class="form-control"
 														converter="omnifaces.SelectItemsConverter"
 														value="#{cadastroPacienteController.paciente.situacao}">
 														<f:selectItem noSelectionOption="true"
@@ -225,7 +223,7 @@
 												</h:panelGrid>
 												<h:panelGrid columns="1" class="mr-4">
 													<h:outputLabel value="Departamento: " />
-													<h:selectOneMenu class="btn btn-outline-dark"
+													<h:selectOneMenu class="form-control"
 														converter="omnifaces.SelectItemsConverter"
 														value="#{cadastroPacienteController.paciente.idlocalTransferencia}">
 														<f:selectItem noSelectionOption="true"

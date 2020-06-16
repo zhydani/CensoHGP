@@ -85,40 +85,56 @@
 
 					<ui:insert name="conteudo">
 						<h:form id="formPrincipal">
+							<div class="border-left mb-4 ml-3">
+								<h4 class="ml-3 py-2 font-weight-bold">Consultar Departamentos</h4>
+							</div>
 							<h:panelGrid columns="1"
 								class="container d-flex justify-content-center">
-								<h:panelGrid columns="5" class="mb-2">
+								<h:panelGrid columns="10" class="mb-2">
+									<div>
+										<h:inputText
+											value="#{buscaDepartamentoController.nomeHospital}"
+											styleClass="form-control pr-3 d-flex" size="45">
+											<f:passThroughAttribute name="placeholder"
+												value="Digite o nome do hospital" />
+										</h:inputText>
+									</div>
 
-									<h:inputText
-										value="#{buscaDepartamentoController.nomeHospital}"
-										styleClass="form-control pr-3 d-flex" size="45">
-										<f:passThroughAttribute name="placeholder"
-											value="Digite o nome do hospital" />
-									</h:inputText>
+									<div class="pl-2">
+										<h:inputText
+											value="#{buscaDepartamentoController.nomeDepartamento}"
+											styleClass="form-control pr-3 d-flex " size="45"
+											marin-left="10">
+											<f:passThroughAttribute name="placeholder"
+												value="Digite o nome do departamento" />
+										</h:inputText>
+									</div>
 
-									<h:inputText
-										value="#{buscaDepartamentoController.nomeDepartamento}"
-										styleClass="form-control pr-3 d-flex " size="45"
-										marin-left="10">
-										<f:passThroughAttribute name="placeholder"
-											value="Digite o nome do departamento" />
-									</h:inputText>
-									<h:commandButton value="Buscar"
-										actionListener="#{buscaDepartamentoController.buscar()}"
-										class="btn btn-primary mr-4 ml-5">
-										<f:ajax render="@all" execute="@form" resetValues="true" />
-									</h:commandButton>
-									<h:commandButton value="Limpar"
-										action="#{buscaDepartamentoController.limpar()}"
-										class="btn btn-warning mr-4">
-										<f:ajax render="@form" execute="@this" />
-									</h:commandButton>
-									<h:commandButton value="Cadastrar"
-										action="#{buscarDepartamentoController.cadastrar()}"
-										class="btn btn-success mr-3 ">
-										<f:ajax render="@form" execute="@this" />
+									<div>
+										<h:commandButton value="Buscar"
+											actionListener="#{buscaDepartamentoController.buscar()}"
+											class="btn btn-azul mr-2 ml-2">
+											<f:ajax render="@all" execute="@form" resetValues="true" />
+										</h:commandButton>
+									</div>
 
-									</h:commandButton>
+									<div>
+										<h:commandButton value="Limpar"
+											action="#{buscaDepartamentoController.limpar()}"
+											class="btn btn-amarelo mr-2">
+											<f:ajax render="@form" execute="@this" />
+										</h:commandButton>
+									</div>
+
+									<div>
+										<h:commandButton value="Cadastrar"
+											action="#{buscarDepartamentoController.cadastrar()}"
+											class="btn btn-verde mr-3 ">
+											<f:ajax render="@form" execute="@this" />
+
+										</h:commandButton>
+									</div>
+
 
 								</h:panelGrid>
 

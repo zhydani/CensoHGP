@@ -127,11 +127,12 @@
 								</div>
 
 								<div>
-									<p:commandLink action="cadastrousuario.xhtml"
-										styleClass="ml-3 button-menu">
-										<span><i class="pi pi-plus"
-											style="font-size: 1.6em; color: #1946b4;"></i></span>Cadastrar
-										</p:commandLink>
+									<h:commandButton value="Cadastrar"
+											action="cadastrousuario.xhtml"
+											class="ml-2 btn btn-verde">
+											<f:ajax render="@form" execute="@this" />
+
+										</h:commandButton>
 								</div>
 
 
