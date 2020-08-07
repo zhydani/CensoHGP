@@ -53,40 +53,40 @@ public class CidadeDepartamentoDAO extends DAO<CidadeDepartamento> {
 
 	@Override
 	public List<CidadeDepartamento> findAll() {
-//		Connection conn = getConnection();
-//		if (conn == null) 
-//			return null;
-//
-//		try {
-//			PreparedStatement stat = conn.prepareStatement(
-//					"SELECT " +
-//							" idcidade, " +
-//							" cidade,  " +
-//							" idestado  " +
-//							" FROM " +
-//					"  public.cidade ");
-//
-//			ResultSet rs = stat.executeQuery();
-//
-//			List<CidadeDepartamento> listaTipo = new ArrayList<Tipo>();
-//
-//			while(rs.next()) {
-//				Tipo tipo = new Tipo();
-//				tipo.setId(rs.getInt("idcidade"));
-//				tipo.setNome(rs.getString("cidade"));
-//
-//				listaTipo.add(tipo);
-//
-//			}			 			
-//
-//			if (listaTipo.isEmpty())
-//				return null;
-//			return listaTipo;
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return null;	
+ 		Connection conn = getConnection();
+		if (conn == null) 
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " +
+							" idcidade, " +
+							" cidade,  " +
+							" idestado  " +
+							" FROM " +
+					"  public.cidade ");
+
+			ResultSet rs = stat.executeQuery();
+
+			List<CidadeDepartamento> listaCidades = new ArrayList<CidadeDepartamento>();
+
+			while(rs.next()) {
+				CidadeDepartamento cidade = new CidadeDepartamento();
+				cidade.setIdcidade(rs.getInt("idcidade"));
+				cidade.setCidade(rs.getString("cidade"));
+
+				listaCidades.add(cidade);
+
+			}			 			
+
+			if (listaCidades.isEmpty())
+				return null;
+			return listaCidades;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
 		return null;
 	}
 
@@ -143,6 +143,39 @@ public class CidadeDepartamentoDAO extends DAO<CidadeDepartamento> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	public List<CidadeDepartamento> findByEstado(Integer id) {
+		Connection conn = getConnection();
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " + "  idcidade, " + "  cidade  " + "FROM " + "  public.cidade" + "WHERE idestado = ? ");
+
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+
+			List<CidadeDepartamento> listaCidades = new ArrayList<CidadeDepartamento>();
+
+			while(rs.next()) {
+				CidadeDepartamento cidade = new CidadeDepartamento();
+				cidade.setIdcidade(rs.getInt("idcidade"));
+				cidade.setCidade(rs.getString("cidade"));
+
+				listaCidades.add(cidade);
+
+			}			 			
+
+			if (listaCidades.isEmpty())
+				return null;
+			return listaCidades;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
 		return null;
 	}
 

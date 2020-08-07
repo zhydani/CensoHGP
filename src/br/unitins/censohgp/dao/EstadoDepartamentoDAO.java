@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import br.unitins.censohgp.model.EstadoDepartamento;
 import br.unitins.censohgp.model.EstadoDepartamento;
 
 public class EstadoDepartamentoDAO extends DAO<EstadoDepartamento> {
@@ -50,7 +52,33 @@ public class EstadoDepartamentoDAO extends DAO<EstadoDepartamento> {
 
 	@Override
 	public List<EstadoDepartamento> findAll() {
-		// TODO Auto-generated method stub
+		
+		Connection conn = getConnection();
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " + "  idestado, " + "  estado  " + "FROM " + "  public.estado");
+
+			ResultSet rs = stat.executeQuery();
+
+			List<EstadoDepartamento> listaEstados = new ArrayList<EstadoDepartamento>();
+
+			while(rs.next()) {
+				EstadoDepartamento cidade = new EstadoDepartamento();
+				cidade.setIdestado(rs.getInt("idestado"));
+				cidade.setEstado(rs.getString("estado"));
+
+				listaEstados.add(cidade);
+
+			}			 			
+
+			if (listaEstados.isEmpty())
+				return null;
+			return listaEstados;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

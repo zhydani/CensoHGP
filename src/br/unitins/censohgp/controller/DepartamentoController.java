@@ -177,6 +177,9 @@ public class DepartamentoController implements Serializable {
 	}
 
 	public EstadoDepartamento getEstadoSelecionado() {
+		
+		if(estadoSelecionado == null)
+			estadoSelecionado = new EstadoDepartamento();
 		return estadoSelecionado;
 	}
 
@@ -191,11 +194,10 @@ public class DepartamentoController implements Serializable {
 	
 
 	public List<SelectItem> getListaCidades() {
-		if(listaCidades == null) {
+		if(estadoSelecionado != null) {
 			listaCidades = new ArrayList<SelectItem>();
-			
-			DAO<CidadeDepartamento> dao = new CidadeDepartamentoDAO();
-			List<CidadeDepartamento> listaCidade = dao.findAll();
+			CidadeDepartamentoDAO dao = new CidadeDepartamentoDAO();
+			List<CidadeDepartamento> listaCidade = dao.findByEstado(estadoSelecionado.getIdestado());
 			
 			if(listaCidade != null && !listaCidade.isEmpty()) {
 				SelectItem item;
@@ -211,6 +213,8 @@ public class DepartamentoController implements Serializable {
 	}
 
 	public CidadeDepartamento getCidadeSelecionado() {
+		if(cidadeSelecionado == null)
+			cidadeSelecionado = new CidadeDepartamento();
 		return cidadeSelecionado;
 	}
 

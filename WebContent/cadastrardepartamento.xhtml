@@ -171,22 +171,24 @@
 										<h:panelGrid columns="2" class="text-left mb-4">
 											<h:panelGrid columns="1" class="mr-4">
 												<h:outputLabel style="font-weight: bold;" value="Cidades: " />
-												<h:selectOneMenu class="btn btn-secondary"
+												<h:selectOneMenu id="cidade" class="btn btn-secondary"
 													value="#{departamentoController.departamento.cidade}">
 													<f:selectItem noSelectionOption="true" itemLabel="Selecione a Cidade" />
 													<f:selectItems
 														value="#{departamentoController.listaCidades}" var="obj"
 														itemValue="#{obj}" itemLabel="#{obj.label}" />
+													<p:ajax listener="#{departamentoController.listaCidades}" update="cidade" process="estado"></p:ajax>
 												</h:selectOneMenu>
 											</h:panelGrid>
 											<h:panelGrid columns="1" class="mr-4">
 												<h:outputLabel style="font-weight: bold;" value="Estados: " />
-												<h:selectOneMenu class="btn btn-secondary"
-													value="#{departamentoController.departamento.estado}">
+												<h:selectOneMenu id="estado" class="btn btn-secondary"
+													value="#{departamentoController.estadoSelecionado}" >
 													<f:selectItem noSelectionOption="true" itemLabel="Selecione o Estado" />
-													<f:selectItems
+													<f:selectItems 
 														value="#{departamentoController.listaEstados}" var="obj"
 														itemValue="#{obj}" itemLabel="#{obj.label}" />
+													<p:ajax listener="#{departamentoController.listaCidades}" update="cidade" process="estado"></p:ajax>
 												</h:selectOneMenu>
 											</h:panelGrid>
 										</h:panelGrid>
