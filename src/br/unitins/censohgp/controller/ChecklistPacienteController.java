@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -24,7 +26,11 @@ public class ChecklistPacienteController implements Serializable {
 	private List<SelectItem> listaIncidente = null;
 
 	private String inputArea = null;
-
+	public ChecklistPacienteController() {
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.keep("pacienteFlash");
+		paciente = (Paciente) flash.get("pacienteFlash");
+	}
 	public Paciente getPaciente() {
 		return paciente;
 	}

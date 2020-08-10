@@ -16,19 +16,6 @@ public class Checklist {
 		super();
 	}
 
-	public Checklist(Integer idchecklist, String observacao, Paciente paciente, Usuario usuario, LocalDate dataHora,
-			Incidente incidente, FatorRisco fatorRisco, Procedimento procedimento) {
-		super();
-		this.idchecklist = idchecklist;
-		this.observacao = observacao;
-		this.paciente = paciente;
-		this.usuario = usuario;
-		this.dataHora = dataHora;
-		this.incidente = incidente;
-		this.fatorRisco = fatorRisco;
-		this.procedimento = procedimento;
-	}
-
 	public Integer getIdchecklist() {
 		return idchecklist;
 	}
