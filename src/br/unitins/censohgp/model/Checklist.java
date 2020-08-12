@@ -8,8 +8,8 @@ public class Checklist {
 	private Paciente paciente;
 	private Usuario usuario;
 	private LocalDate dataHora;
-	private Incidente incidente;
-	private FatorRisco fatorRisco;
+//	private Incidente incidente;
+//		private FatorRisco fatorRisco;
 	private Procedimento procedimento;
 
 	public Checklist() {
@@ -56,21 +56,21 @@ public class Checklist {
 		this.dataHora = dataHora;
 	}
 
-	public Incidente getIncidente() {
-		return incidente;
-	}
-
-	public void setIncidente(Incidente incidente) {
-		this.incidente = incidente;
-	}
-
-	public FatorRisco getFatorRisco() {
-		return fatorRisco;
-	}
-
-	public void setFatorRisco(FatorRisco fatorRisco) {
-		this.fatorRisco = fatorRisco;
-	}
+//	public Incidente getIncidente() {
+//		return incidente;
+//	}
+//
+//	public void setIncidente(Incidente incidente) {
+//		this.incidente = incidente;
+//	}
+//
+//	public FatorRisco getFatorRisco() {
+//		return fatorRisco;
+//	}
+//
+//	public void setFatorRisco(FatorRisco fatorRisco) {
+//		this.fatorRisco = fatorRisco;
+//	}
 
 	public Procedimento getProcedimento() {
 		return procedimento;
