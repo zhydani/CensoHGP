@@ -194,19 +194,11 @@ public class DepartamentoController implements Serializable {
 	
 
 	public List<SelectItem> getListaCidades() {
+		
 		if(estadoSelecionado != null) {
-			listaCidades = new ArrayList<SelectItem>();
-			CidadeDepartamentoDAO dao = new CidadeDepartamentoDAO();
-			List<CidadeDepartamento> listaCidade = dao.findByEstado(estadoSelecionado.getIdestado());
 			
-			if(listaCidade != null && !listaCidade.isEmpty()) {
-				SelectItem item;
-				  
-				for (CidadeDepartamento cidade : listaCidade) {
-					item = new SelectItem(cidade, cidade.getCidade());
-					listaCidades.add(item);
-				}
-			}
+			listaCidades = new ArrayList<SelectItem>();
+			
 		}
 		
 		return listaCidades;
@@ -223,6 +215,19 @@ public class DepartamentoController implements Serializable {
 	}
 
 
-
+	public void onChangeEstado() {
+		CidadeDepartamentoDAO dao = new CidadeDepartamentoDAO();
+		List<CidadeDepartamento> cidadeLista = (List<CidadeDepartamento>) dao.findByEstado(this.estadoSelecionado.getIdestado());
+		
+		if(cidadeLista != null && !cidadeLista.isEmpty()) {
+			SelectItem item;
+			  
+			for (CidadeDepartamento cidade : cidadeLista) {
+				item = new SelectItem(cidade, cidade.getCidade());
+				listaCidades.add(item);
+			}
+		}
+		
+	}
 
 }
