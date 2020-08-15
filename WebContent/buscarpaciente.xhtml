@@ -231,14 +231,14 @@
 													</p:commandLink>
 												</p:column>
 												<p:column style="width:20px">
-													<p:commandLink
+													<h:commandLink
 														action="#{buscaPacienteController.checklist(obj.idpaciente)}">
 														<h:graphicImage style="width: 25px" library="images"
 															value="editar" name="botao_checklist.png">
 														</h:graphicImage>
 														<f:ajax execute="formPrincipal"
 															render="formPrincipal:dataTable" />
-													</p:commandLink>
+													</h:commandLink>
 												</p:column>
 											</tbody>
 											
