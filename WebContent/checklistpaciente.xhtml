@@ -149,7 +149,7 @@
 										<h:outputLabel value="Procedimentos: " />
 										<p:selectManyCheckbox id="grid"
 											converter="omnifaces.SelectItemsConverter"
-											value="#{checklistPacienteController.paciente.procedimento.nome}"
+											value="#{checklistPacienteController.checklist.procedimento}"
 											layout="grid" columns="1">
 											<f:selectItems style="text-align: center;"
 												value="#{checklistPacienteController.listaProcedimento}"
@@ -157,28 +157,6 @@
 										</p:selectManyCheckbox>
 									</h:panelGrid>
 
-									<h:panelGrid columns="1" class="mr-4">
-										<h:outputLabel value="Fatores de risco: " />
-										<p:selectManyCheckbox id="fatorrisco"
-											converter="omnifaces.SelectItemsConverter"
-											value="#{checklistPacienteController.paciente.fatorRisco.nome}"
-											layout="grid" columns="1">
-											<f:selectItems style="text-align: center;"
-												value="#{checklistPacienteController.listaFatorRisco}"
-												var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
-										</p:selectManyCheckbox>
-									</h:panelGrid>
-									<h:panelGrid columns="1" class="mr-4">
-										<h:outputLabel value="Incidentes: " />
-										<p:selectManyCheckbox id="incidente"
-											converter="omnifaces.SelectItemsConverter"
-											value="#{checklistPacienteController.paciente.incidente.nome}"
-											layout="grid" columns="1">
-											<f:selectItems style="text-align: center;"
-												value="#{checklistPacienteController.listaIncidente}"
-												var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
-										</p:selectManyCheckbox>
-									</h:panelGrid>
 
 
 									<h:panelGrid id="observações" columns="1" width="100%">

@@ -151,7 +151,7 @@ public class CidadeDepartamentoDAO extends DAO<CidadeDepartamento> {
 
 		try {
 			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " + "  idcidade, " + "  cidade  " + "FROM " + "  public.cidade" + "WHERE idestado = ? ");
+					" SELECT " + "  idcidade, " + "  cidade  " + " FROM " + "  public.cidade " + " WHERE idestado = ? ");
 
 			stat.setInt(1, id);
 
