@@ -48,8 +48,7 @@
 						</h:form>
 					</h:panelGrid>
 					<li><a href="templateadministrador.xhtml">Início</a></li>
-					<li ><a href="cadastrousuario.xhtml">Cadastrar
-							Usuário</a></li>
+					<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
 					<li><a href="buscarusuario.xhtml" data-toggle="collapse"
 						aria-expanded="false">Buscar Usuário</a></li>
 					<li class="active"><a href="cadastrardepartamento.xhtml">Cadastrar
@@ -129,87 +128,90 @@
 									</div>
 									<div class="mt-3 ml-4">
 										<h:panelGrid id="panelPrincipal">
-										<h:panelGrid columns="1"
-											class="d-flex justify-content-start">
+											<h:panelGrid columns="1" class="d-flex justify-content-start">
 
 
-											<h:panelGrid>
-												<h:outputLabel value="Nome Do Departamento: " />
-												<h:inputText id="nameDep"
-													value="#{departamentoController.departamento.nomeDepartamento}"
-													styleClass="form-control pr-3 d-flex justify-content-start"
-													size="97" />
-												<h:outputLabel value="Nome Do Hospital: " />
-												<h:inputText id="nameHos"
-													value="#{departamentoController.departamento.nomeHospital}"
-													styleClass="form-control pr-3 d-flex justify-content-start"
-													size="97" />
+												<h:panelGrid>
+													<h:outputLabel value="Nome Do Departamento: " />
+													<h:inputText id="nameDep"
+														value="#{departamentoController.departamento.nomeDepartamento}"
+														styleClass="form-control pr-3 d-flex justify-content-start"
+														size="97" />
+													<h:outputLabel value="Nome Do Hospital: " />
+													<h:inputText id="nameHos"
+														value="#{departamentoController.departamento.nomeHospital}"
+														styleClass="form-control pr-3 d-flex justify-content-start"
+														size="97" />
+												</h:panelGrid>
+
+												<h:panelGrid columns="3" class="text-left mb-4">
+													<h:panelGrid columns="1" class="mr-4">
+														<h:outputLabel value="Numero de Leitos: " />
+														<h:inputText
+															value="#{departamentoController.departamento.numeroLeitos}"
+															styleClass="form-control pr-3 d-flex justify-content-start"
+															size="24" />
+													</h:panelGrid>
+													<h:panelGrid columns="1" class="mr-4">
+														<h:outputLabel style="font-weight: bold;" value="Status: " />
+														<h:selectOneMenu class="btn btn-secondary"
+															value="#{departamentoController.departamento.ativo}">
+															<f:selectItem noSelectionOption="true"
+																itemLabel="Selecione ...." />
+															<f:selectItems
+																value="#{departamentoController.listaStatusDepartamento}"
+																var="status" itemLabel="#{status.label}"
+																itemValue="#{status}" />
+														</h:selectOneMenu>
+													</h:panelGrid>
+												</h:panelGrid>
 											</h:panelGrid>
 
-											<h:panelGrid columns="3" class="text-left mb-4">
-												<h:panelGrid columns="1" class="mr-4">
-													<h:outputLabel value="Numero de Leitos: " />
-													<h:inputText
-														value="#{departamentoController.departamento.numeroLeitos}"
-														styleClass="form-control pr-3 d-flex justify-content-start"
-														size="24" />
-												</h:panelGrid>
-												<h:panelGrid columns="1" class="mr-4">
-													<h:outputLabel style="font-weight: bold;" value="Status: " />
-													<h:selectOneMenu class="btn btn-secondary"
-														value="#{departamentoController.departamento.ativo}">
-														<f:selectItem noSelectionOption="true" itemLabel="Selecione ...." />
+											<h:panelGrid columns="2" class="text-left mb-4">
+												<h:panelGrid id="estado" columns="1" class="mr-4">
+													<h:outputLabel style="font-weight: bold;" value="Estados: " />
+													<h:selectOneMenu  class="btn btn-secondary"
+														value="#{departamentoController.estadoSelecionado}"
+														converter="omnifaces.SelectItemsConverter">
+														<f:selectItem noSelectionOption="true"
+															itemLabel="Selecione o Estado" />
 														<f:selectItems
-															value="#{departamentoController.listaStatusDepartamento}"
-															var="status" itemLabel="#{status.label}"
-															itemValue="#{status}" />
+															value="#{departamentoController.listaEstados}" var="obj"
+															itemValue="#{obj}" itemLabel="#{obj.label}" />
+														<p:ajax update="cidade" process="estado"
+															listener="#{departamentoController.onChangeEstado}"
+															event="change" />
 													</h:selectOneMenu>
 												</h:panelGrid>
-											</h:panelGrid>
-										</h:panelGrid>
 
-										<h:panelGrid columns="2" class="text-left mb-4">
-											<h:panelGrid columns="1" class="mr-4">
-												<h:outputLabel style="font-weight: bold;" value="Estados: " />
-												<h:selectOneMenu id="estado" class="btn btn-secondary"
-													value="#{departamentoController.estadoSelecionado}"
-													converter="#{estadoConverter}" >
-													<f:selectItem noSelectionOption="true" itemLabel="Selecione o Estado" />
-													<f:selectItems 
-														value="#{departamentoController.listaEstados}" var="obj"
-														itemValue="#{obj.idestado}" itemLabel="#{obj.label}" />
-													<p:ajax update="cidade" event="change" process="estado"
-    														listener="#{departamentoController.onChangeEstado}" />
-												</h:selectOneMenu>
+												<h:panelGrid id="cidade" columns="1" class="mr-4">
+													<h:outputLabel style="font-weight: bold;" value="Cidades: " />
+													<h:selectOneMenu  class="btn btn-secondary"
+														value="#{departamentoController.departamento.cidade}"
+														converter="omnifaces.SelectItemsConverter">
+														<f:selectItem noSelectionOption="true"
+															itemLabel="Selecione a Cidade" />
+														<f:selectItems
+															value="#{departamentoController.listaCidades}" var="obj"
+															itemValue="#{obj}" itemLabel="#{obj.label}" />
+													</h:selectOneMenu>
+												</h:panelGrid>
+
 											</h:panelGrid>
-											
-											<h:panelGrid columns="1" class="mr-4">
-												<h:outputLabel style="font-weight: bold;" value="Cidades: " />
-												<h:selectOneMenu id="cidade" class="btn btn-secondary"
-													value="#{departamentoController.departamento.cidade}"
-													converter="omnifaces.SelectItemsConverter">
-													<f:selectItem noSelectionOption="true" itemLabel="Selecione a Cidade" />
-													<f:selectItems
-														value="#{departamentoController.listaCidades}" var="obj"
-														itemValue="#{obj}" itemLabel="#{obj.label}" />
-												</h:selectOneMenu>
-											</h:panelGrid>
-											
-										</h:panelGrid>
 										</h:panelGrid>
 										<br />
 										<div class="mt-2 d-flex justify-content-end">
 											<h:panelGrid>
 												<h:commandButton value="Incluir" class="btn btn-azul mr-3"
-												disabled="#{departamentoController.departamento.idlocalTransferencia != null}"
+													disabled="#{departamentoController.departamento.idlocalTransferencia != null}"
 													action="#{departamentoController.incluir()}">
 													<f:ajax render="formPrincipal" execute="panelPrincipal"
-											resetValues="true" />
+														resetValues="true" />
 												</h:commandButton>
 											</h:panelGrid>
 											<h:panelGrid>
 												<h:commandButton value="alterar " class="btn btn-amarelo"
-												disabled="#{departamentoController.departamento.idlocalTransferencia == null}"
+													disabled="#{departamentoController.departamento.idlocalTransferencia == null}"
 													action="#{departamentoController.alterar()}">
 													<f:ajax render="formPrincipal messages"
 														execute="formPrincipal" />

@@ -33,13 +33,13 @@ public class DepartamentoController implements Serializable {
 	private static final long serialVersionUID = 2938919235906464048L;
 
 
-	private EstadoDepartamento estadoSelecionado;
-	private CidadeDepartamento cidadeSelecionado;
+	private EstadoDepartamento estadoSelecionado = null;
+	private CidadeDepartamento cidadeSelecionado = null;
 	private Departamento departamento;
 
 	private List<Departamento> listaDepartamento;
-	private List<SelectItem> listaEstados;
-	private List<SelectItem> listaCidades;
+	private List<SelectItem> listaEstados = null;
+	private List<SelectItem> listaCidades = null;
 
 	public DepartamentoController() {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -195,13 +195,13 @@ public class DepartamentoController implements Serializable {
 
 	public List<SelectItem> getListaCidades() {
 		
-		if(estadoSelecionado != null) {
-			
-			listaCidades = new ArrayList<SelectItem>();
-			
+		
+		if(listaCidades == null) {
+			listaCidades = new ArrayList<SelectItem>(); 
 		}
 		
 		return listaCidades;
+		
 	}
 
 	public CidadeDepartamento getCidadeSelecionado() {
@@ -217,11 +217,17 @@ public class DepartamentoController implements Serializable {
 
 	public void onChangeEstado() {
 		CidadeDepartamentoDAO dao = new CidadeDepartamentoDAO();
-		List<CidadeDepartamento> cidadeLista = (List<CidadeDepartamento>) dao.findByEstado(this.estadoSelecionado.getIdestado());
+		
+		if(true) {
+			
+			listaCidades.clear();
+			
+		}
+		
+		List<CidadeDepartamento> cidadeLista = dao.findByEstado(this.estadoSelecionado.getIdestado());
 		
 		if(cidadeLista != null && !cidadeLista.isEmpty()) {
 			SelectItem item;
-			  
 			for (CidadeDepartamento cidade : cidadeLista) {
 				item = new SelectItem(cidade, cidade.getCidade());
 				listaCidades.add(item);

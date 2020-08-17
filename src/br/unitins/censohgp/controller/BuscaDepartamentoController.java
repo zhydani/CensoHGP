@@ -31,7 +31,7 @@ public class BuscaDepartamentoController implements Serializable {
 	private String nomedepartamento = null;
 	private List<Departamento> listaBusca = null;
 	private List<Departamento> listaDepartamento = null;
-	
+	private Departamento departamento;
 	
 	public List<Departamento> getListaDepartamentoBusca() {
 		if (listaDepartamento == null) {
@@ -45,20 +45,28 @@ public class BuscaDepartamentoController implements Serializable {
 		}
 		return listaBusca = listaDepartamento;
 	}
+	public Departamento getDepartamento() {
+		if (departamento == null) {
+			departamento = new Departamento();
+		}
+		return departamento;
+	}
 	
 	public String editar(int iddepartamento) {
 		DepartamentoDAO dao = new DepartamentoDAO();
-		Departamento departamento = dao.findById(iddepartamento);
+		Departamento departamento = dao.findById2(iddepartamento);
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.put("departamentoFlash", departamento);
-
-		return "editardepartamento.xhtml?faces-redirect=true";
+		return "alterardepartamento.xhtml?faces-redirect=true";
 	}
+
 	
 	public String cadastrar() {
 		return "cadastrardepartamento.xhtml?faces-redirect=true";
 	}
-	
+	public String cancelar() {
+		return "buscardepartamento.xhtml?faces-redirect=true";
+	}
 	public boolean excluir(int iddepartamento) {
 		DAO<Departamento> dao = new DepartamentoDAO();
 		try {
