@@ -47,11 +47,8 @@ public class TransferenciaDAO extends DAO<HistoricoTransferencia> {
 			stat.setInt(2, entity.getIdTipoDeTransferencia());
 			stat.setInt(3, entity.getIdLocalOrigem());
 			stat.setInt(4, entity.getIdLocalDestino());
-			
-			
 			stat.setInt(5, entity.getIdPaciente());
 			stat.setInt(6, entity.getIdUsuario());
-			System.out.println(entity.getObservasao());
 			if(entity.getObservasao().equals("null") || entity.getObservasao().isEmpty()) {
 				entity.setObservasao(" ");
 			}
@@ -64,6 +61,33 @@ public class TransferenciaDAO extends DAO<HistoricoTransferencia> {
 		}
 	}
 
+	public void createSemOrigem(HistoricoTransferencia entity) throws SQLException {
+		Connection conn = getConnection();
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"INSERT INTO " +
+					" public.historico_transferencia" +
+					" (data_hora, idtipo_transferencia, idlocal_destino, idpaciente, idusuario, observacao)" +
+					" VALUES " +
+				    " (?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
+			LocalDate dat1 = LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth());
+			Date dat = Date.valueOf(dat1);
+			stat.setDate(1, dat);
+			stat.setInt(2, entity.getIdTipoDeTransferencia());
+			stat.setInt(3, entity.getIdLocalDestino());
+			stat.setInt(4, entity.getIdPaciente());
+			stat.setInt(5, entity.getIdUsuario());
+			if(entity.getObservasao().equals("null") || entity.getObservasao().isEmpty()) {
+				entity.setObservasao(" ");
+			}
+			stat.setString(6, entity.getObservasao());
+			stat.execute();
+		} catch (SQLException e) {
+			System.out.println(e);
+			Util.addMessageError("erro banco de dados não foi possivel");
+			// TODO: handle exception
+		}
+	}
 	@Override
 	public void update(HistoricoTransferencia entity) throws SQLException {
 		//não é necessario essa funcionalidade para o programa
