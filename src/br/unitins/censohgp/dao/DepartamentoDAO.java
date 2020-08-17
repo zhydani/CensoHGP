@@ -44,7 +44,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			stat.execute();
 				
 		}
-
+		/*Comentado por Iury em 16/08/2020, pois precisa corrigir a parte de Status Departamento
 		@Override
 		public void update(Departamento dep) throws SQLException {
 			Connection  conn = getConnection();
@@ -66,7 +66,7 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			stat.execute();
 				
 		}
-
+	*/
 		@Override
 		public void delete(int iddepartamento) throws SQLException {
 
@@ -99,14 +99,14 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					if(nomehospital.isEmpty()) {
 						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento"; 
 					}else {
-						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where nome_hospital = " + quote(nomehospital);
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where UPPER(nome_hospital) LIKE  UPPER(" + quote(nomehospital) +")";
 					}
 					
 				}else {
 					if(nomehospital.isEmpty()) {
-						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where nome_departamento = " + quote(nomedepartamento);
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where UPPER(nome_departamento) LIKE  UPPER(" + quote(nomedepartamento)+")";
 					}else {
-						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where nome_hospital = "+quote(nomehospital)+" and nome_departamento = "+quote(nomedepartamento);
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where UPPER(nome_hospital) LIKE  UPPER("+quote(nomehospital)+") and UPPER(nome_departamento) LIKE UPPER("+quote(nomedepartamento)+")";
 					}		
 				}
 				PreparedStatement stat = conn.prepareStatement(tipoBusca);
@@ -224,6 +224,82 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			}
 			return null;
 		}
+		
+		//TRECHO FINDBYID(COPIA) e UPDATE(COPIA) ADICIONADO POR IURY EM 16/08/2020, POIS O OUTRO MÉTODO AINDA ESTÁ EM CORREÇÃO
+		public Departamento findById2(Integer id) {
+			Connection conn = getConnection();
+			if (conn == null) 
+				return null;
+			
+			try {
+				PreparedStatement stat = conn.prepareStatement(
+						"SELECT " +
+								"  iddepartamento, " +
+								"  nome_hospital, " +
+								"  numero_leitos, " +
+								"  nome_departamento, " +
+								"  ativo " +
+								"FROM " +
+								"  public.departamento " +
+						"WHERE iddepartamento = ? ");
+				
+				stat.setInt(1, id);
+				
+				ResultSet rs = stat.executeQuery();
+				
+				Departamento departamento = null;
+				
+				if(rs.next()) {
+					departamento = new Departamento();
+					departamento.setIdlocalTransferencia(rs.getInt("iddepartamento"));
+					departamento.setNomeHospital(rs.getString("nome_hospital"));
+					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
+					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
+					//departamento.setAtivo(StatusDepartamento.valueOf((rs.getInt("ativo"))));
+					/*
+					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);
+					departamento.setCidade(dep.findById(departamento.getIdlocalTransferencia()));
+					if (departamento.getCidade() == null)
+						departamento.setCidade(new CidadeDepartamento());
+
+					EstadoDepartamentoDAO depa = new EstadoDepartamentoDAO(conn);
+					departamento.setEstado(depa.findById(departamento.getIdlocalTransferencia()));
+					if (departamento.getEstado() == null)
+						departamento.setEstado(new EstadoDepartamento());
+					*/
+				}
+				
+				return departamento;
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		
+		//sem o status aqui(para teste)
+		@Override
+		public void update(Departamento dep) throws SQLException {
+			Connection  conn = getConnection();
+			
+			PreparedStatement stat = conn.prepareStatement(
+					"UPDATE public.departamento SET " +
+				    " nome_hospital = ?, " +
+				    " numero_leitos = ?, " +
+				    " nome_departamento = ? " +
+					"WHERE " +
+				    " iddepartamento = ? ");
+			stat.setString(1, dep.getNomeHospital());
+			stat.setInt(2, dep.getNumeroLeitos());
+			stat.setString(3, dep.getNomeDepartamento());
+			//stat.setInt(4, dep.getAtivo().getValue());
+			stat.setInt(4, dep.getIdlocalTransferencia());
+				
+			stat.execute();
+				
+		}
+		//FIM TRECHO FINDBYID(COPIA) ADICIONADO POR IURY EM 16/08/2020, POIS O OUTRO MÉTODO AINDA ESTÁ EM CORREÇÃO
 		
 		public List<Departamento> findAllTransferencia() {
 			Connection conn = getConnection();

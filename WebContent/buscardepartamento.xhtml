@@ -7,25 +7,21 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-	<title>CensoHGP | Consulta Departamento</title>
+	<title>CensoHGP | Buscar Departamento</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!-- Bootstrap CSS -->
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet name="primeicons/primeicons.css"
-		library="primefaces" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 	<!-- Costumize CSS -->
 	<h:outputStylesheet library="css" name="template.css" />
 	<h:outputStylesheet library="css" name="consultadepartamento.css" />
 	<h:outputStylesheet library="css" name="datatable.css" />
-	<link rel="shortcut icon" type="image/x-icon"
-		href="#{resource['images/icon.png']}" />
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/icon.png']}" />
 </h:head>
 <h:body>
-	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
-		class="bg-dark mt-0 text-white wrapper">
+	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar" class="bg-dark mt-0 text-white wrapper">
 		<div class="bg-dark mt-0 text-white wrapper" id="sidebar">
 			<nav id="sidebar">
 			<div class="sidebar-header ">
@@ -33,26 +29,20 @@
 			</div>
 			<ul class="list-unstyled components">
 				<h:panelGrid columns="2">
-					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
-						library="images" name="usu.png" />
+					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px" library="images" name="usu.png" />
 					<h:form>
-						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
-							class="font-weight-bold mb-3" />
+						<h:outputLabel value=" #{templateController.usuarioLogado.nome}" class="font-weight-bold mb-3" />
 					</h:form>
 				</h:panelGrid>
 				<li><a href="templateadministrador.xhtml">Início</a></li>
 				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
-				<li><a href="buscarusuario.xhtml"
-					data-toggle="collapse" aria-expanded="false">Buscar Usuário</a></li>
-				<li><a href="cadastrardepartamento.xhtml">Cadastrar
-						Departamento</a></li>
-				<li class="active"><a href="consultadepartamento.xhtml">Buscar
-						Departamento</a></li>
+				<li><a href="buscarusuario.xhtml" data-toggle="collapse" aria-expanded="false">Buscar Usuário</a></li>
+				<li><a href="cadastrardepartamento.xhtml">Cadastrar Departamento</a></li>
+				<li class="active"><a href="consultadepartamento.xhtml">Buscar Departamento</a></li>
 				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
 				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
 				<li><a href="transferencia.xhtml">Transferência de Paciente</a></li>
-				<li><h:commandLink value="Sair"
-						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+				<li><h:commandLink value="Sair" action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 			</ul>
 			</nav>
 		</div>
@@ -61,56 +51,50 @@
 	<h:form id="form">
 		<table width="100%">
 			<tr>
-				<td colspan="2" align="center" class="mar"><ui:insert
-						name="cabecalho">
+				<td colspan="2" align="center" class="mar">
+					<ui:insert name="cabecalho">
 						<h:form>
-
 							<div class="navbar navbar-dark bg-navbar navbar-expand">
 								<div class="container collapse navbar-collapse">
-									<p:commandLink oncomplete="PF('sidebar1').show()"
-										styleClass="mx-3 pt-1 button-menu">
-										<span><i class="pi pi-bars"
-											style="font-size: 2.5em; color: #fff;"></i></span>
+									<p:commandLink oncomplete="PF('sidebar1').show()" styleClass="mx-3 pt-1 button-menu">
+										<span><i class="pi pi-bars" style="font-size: 2.5em; color: #fff;"></i></span>
 									</p:commandLink>
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-										<li class="nav-item"><a href="consultausuario.xhtml"
-											class="nav-link">Busca de Departamento</a></li>
-
+										<li class="nav-item"><a href="buscardepartamento.xhtml" class="nav-link">Busca de Departamento</a></li>
 									</ul>
-
 								</div>
 							</div>
 						</h:form>
-					</ui:insert></td>
+					</ui:insert>
+				</td>
 			</tr>
+			
 			<tr>
-
-				<td valign="top"
-					class="pt-5  content active mar d-flex justify-content-center">
-
+				<td valign="top" class="pt-5  content active mar d-flex justify-content-center">
 					<ui:insert name="conteudo">
 						<h:form id="formPrincipal">
-							<h:panelGrid columns="1"
-								class="container d-flex justify-content-center">
+							<h:panelGrid columns="1" class="container d-flex justify-content-center">
 								<h:panelGrid columns="5" class="mb-2">
-
-									<h:inputText
-										value="#{buscaDepartamentoController.nomeHospital}"
-										styleClass="form-control pr-3 d-flex" size="45">
-										<f:passThroughAttribute name="placeholder"
+									<h:inputText 
+										value="#{buscaDepartamentoController.nomeHospital}" 
+										styleClass="form-control pr-3 d-flex" 
+										size="45">
+										<f:passThroughAttribute 
+											name="placeholder" 
 											value="Digite o nome do hospital" />
 									</h:inputText>
-
 									<h:inputText
 										value="#{buscaDepartamentoController.nomeDepartamento}"
-										styleClass="form-control pr-3 d-flex " size="45"
+										styleClass="form-control pr-3 d-flex "
+										size="45"
 										marin-left="10">
-										<f:passThroughAttribute name="placeholder"
+										<f:passThroughAttribute 
+											name="placeholder"
 											value="Digite o nome do departamento" />
 									</h:inputText>
-									<h:commandButton value="Buscar"
+									<h:commandButton 
+										value="Buscar"
 										actionListener="#{buscaDepartamentoController.buscar()}"
 										class="btn btn-primary mr-4 ml-5">
 										<f:ajax render="@all" execute="@form" resetValues="true" />
@@ -121,42 +105,38 @@
 										<f:ajax render="@form" execute="@this" />
 									</h:commandButton>
 									<h:commandButton value="Cadastrar"
-										action="#{buscarDepartamentoController.cadastrar()}"
+										action="#{buscaDepartamentoController.cadastrar()}"
 										class="btn btn-success mr-3 ">
 										<f:ajax render="@form" execute="@this" />
-										
 									</h:commandButton>
-
 								</h:panelGrid>
 
-								
 								<p:spacer width="100" height="30" />
 								<div class="container d-flex justify-content-center">
 								<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
 								
-										<p:dataTable value="#{buscaDepartamentoController.listaDepartamento}" 										
-										var="obj" rows="5" styleClass="table" paginator="true"
-										resizableColumns="true" style="margin-bottom:20px; font-size:15px;"
-										emptyMessage="Nenhum registro."
-										paginatorAlwaysVisible="false"
-										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
-										rowsPerPageTemplate="5,10,15"
-											>
-										
+										<p:dataTable 
+											value="#{buscaDepartamentoController.listaDepartamento}" 										
+											var="obj" rows="5" styleClass="table" paginator="true"
+											resizableColumns="true" style="margin-bottom:20px; font-size:15px;"
+											emptyMessage="Nenhum registro."
+											paginatorAlwaysVisible="false"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
+											rowsPerPageTemplate="5,10,15"
+										>
+									
 								<f:facet name="header">
             						Resultado da Busca
        							</f:facet>
 											<tbody>
 												<td>
 													<td>
-													
 													<p:column style="width:150px; font-size:15px;" >
 															<f:facet name="header" >Hospital</f:facet>
 															<h:outputText value="#{obj.nomeHospital}">
 															</h:outputText>
 													</p:column></td>
-													
 												</td>
 												
 												<p:column style="width:172px; font-size:15px;" >
@@ -173,26 +153,19 @@
 
 												<p:column style="width:60px; font-size:15px;">
 													<f:facet name="header">Estado</f:facet>
-													
-													
 												</p:column>
 
 												<p:column style="width:130px; font-size:15px;">
 													<f:facet name="header">Cidate</f:facet>
-													
-													
 												</p:column>
 
 												<p:column style="width:105px; font-size:15px;">
 													<f:facet name="header">Status</f:facet>
-													
-													
 												</p:column>
 												
-											
 												<p:column style="width:20px">
 													<h:commandLink
-														action="#{buscarDepartamentoController.editar(obj.idlocalTransferencia)}">
+														action="#{buscaDepartamentoController.editar(obj.idlocalTransferencia)}">
 														<h:graphicImage style="width: 25px" library="images"
 															value="editar" name="botao_editar.png">
 														</h:graphicImage>
@@ -200,14 +173,9 @@
 															render="formPrincipal" />
 													</h:commandLink>
 												</p:column>
-
 											</tbody>
-											
-										
 										</p:dataTable>
-
 								</div>
-
 							</h:panelGrid>
 							<h:messages id="messages" infoStyle="color:green"
 								warnStyle="color:orange" errorStyle="color:red"
