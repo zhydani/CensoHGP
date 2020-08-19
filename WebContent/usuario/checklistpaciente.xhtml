@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>CensoHGP | Cadastro de Paciente</title>
+	<title>CensoHGP | Gerar Checklist de Paciente</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport"
@@ -53,11 +53,11 @@
 						aria-expanded="false">Buscar Usuário</a></li>
 					<li><a href="cadastrardepartamento.xhtml">Cadastrar
 							Departamento</a></li>
-					<li><a href="consultadepartamento.xhtml">Buscar
+					<li><a href="buscardepartamento.xhtml">Buscar
 							Departamento</a></li>
-					<li class="active"><a href="cadastropaciente.xhtml">Cadastrar
+					<li><a href="cadastropaciente.xhtml">Cadastrar
 							Paciente</a></li>
-					<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
+					<li class="active"><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
 					<li><a href="transferencia.xhtml">Transferência de
 							Paciente</a></li>
 
@@ -92,8 +92,8 @@
 									</p:commandLink>
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-										<li class="nav-item"><a href="buscarusuario.xhtml"
-											class="nav-link">Consultar Usuários</a></li>
+										<li class="nav-item"><a href="buscarpaciente.xhtml"
+											class="nav-link">Buscar Paciente</a></li>
 									</ul>
 
 								</div>
@@ -122,7 +122,7 @@
 									<h:graphicImage
 										style="width:50px; padding: 10px 0px 10px 20px;"
 										library="images" name="icone.png"></h:graphicImage>
-									<h4 class="ml-3 py-2 font-weight-bold">Checklist Paciente</h4>
+									<h4 class="ml-3 py-2 font-weight-bold">Gerar Checklist de Paciente</h4>
 								</h:panelGrid>
 							</div>
 							<div class="mt-3 ml-4">
@@ -132,7 +132,6 @@
 										
 										<h:panelGrid columns="2" class="mr-5">
 											<h:outputLabel value="Nome Paciente: #{checklistPacienteController.paciente.nome}" />
-											<h:outputLabel value="ID: #{checklistPacienteController.paciente.idpaciente}" />
 										</h:panelGrid>
 										
 										<h:panelGrid columns="2" class="mr-5">
@@ -140,7 +139,7 @@
 										</h:panelGrid>
 										
 									</h:panelGrid>
-
+									<br />
 									<h:panelGrid columns="1" class="mr-4">
 										<h:outputLabel value="Procedimentos: " />
 										
@@ -155,8 +154,33 @@
 										</p:selectManyCheckbox>						
 										
 									</h:panelGrid>
+									<br />
+									<h:panelGrid columns="1" class="mr-4">
+										
+										<h:outputLabel value="Fatores de Risco: " />
+										<p:selectManyCheckbox id="grid2"
+											converter="omnifaces.SelectItemsConverter"
+											value="#{checklistPacienteController.checklist.fatoresRisco}"
+											layout="grid" columns="1">
+											<f:selectItems style="text-align: center;"
+												value="#{checklistPacienteController.listaFatorRisco}"
+												var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
+										</p:selectManyCheckbox>
+									</h:panelGrid>
+									<br />
 									
-								
+									<h:panelGrid columns="1" class="mr-4">
+										<h:outputLabel value="Incidentes: " />
+										<p:selectManyCheckbox id="grid3"
+											converter="omnifaces.SelectItemsConverter"
+											value="#{checklistPacienteController.checklist.incidentes}"
+											layout="grid" columns="1">
+											<f:selectItems style="text-align: center;"
+												value="#{checklistPacienteController.listaIncidente}"
+												var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
+										</p:selectManyCheckbox>
+									</h:panelGrid>
+								<br />
 									
 									<h:outputLabel value="Observações: " />
 										<h:inputTextarea rows="3" cols="22"
@@ -169,7 +193,7 @@
 									<h:panelGrid>
 										
 										<h:commandButton value="Incluir" class="btn btn-azul mr-3"
-													
+													disabled="#{checklistPacienteController.paciente.idpaciente == null}"
 													action="#{checklistPacienteController.incluir()}">
 													<f:ajax render="formPrincipal" execute="panelPrincipal"
 														resetValues="true" />
@@ -177,6 +201,7 @@
 									</h:panelGrid>
 
 								</div>
+								
 								<br /> <br /> <br />
 							</div>
 						</div>

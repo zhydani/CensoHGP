@@ -15,8 +15,12 @@ import br.unitins.censohgp.application.Session;
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.dao.ChecklistDAO;
 import br.unitins.censohgp.dao.DAO;
+import br.unitins.censohgp.dao.FatorRiscoDAO;
+import br.unitins.censohgp.dao.IncidenteDAO;
 import br.unitins.censohgp.dao.ProcedimentoDAO;
 import br.unitins.censohgp.model.Checklist;
+import br.unitins.censohgp.model.FatorRisco;
+import br.unitins.censohgp.model.Incidente;
 import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Procedimento;
 import br.unitins.censohgp.model.Usuario;
@@ -29,6 +33,8 @@ public class ChecklistPacienteController implements Serializable {
 	private Paciente paciente;
 	private Checklist checklist;
 	private List<SelectItem> listaProcedimento;
+	private List<SelectItem> listaFatorRisco;
+	private List<SelectItem> listaIncidente;
 	
 
 	public ChecklistPacienteController() {
@@ -43,11 +49,11 @@ public class ChecklistPacienteController implements Serializable {
 				dao.create(getChecklist());
 				dao.getConnection().commit();
 		
-				Util.addMessageInfo("Inclusao realizada com sucesso.");
+				Util.addMessageInfo("Checklist gerado com sucesso!");
 			} catch (SQLException e) {
 				dao.rollbackConnection();
 				dao.closeConnection();
-				Util.addMessageError("Erro ao incluir o Usuario no Banco de Dados.");
+				Util.addMessageError("Erro ao gerar Checklist!");
 				e.printStackTrace();
 			}
 	}
@@ -72,7 +78,43 @@ public class ChecklistPacienteController implements Serializable {
 		return listaProcedimento;
 	}
 
-	
+	public List<SelectItem> getListaIncidente() {
+		if (listaIncidente == null) {
+			listaIncidente = new ArrayList<SelectItem>();
+
+			DAO<Incidente> dao = new IncidenteDAO();
+			List<Incidente> incidenteLista = dao.findAll();
+
+			if (incidenteLista != null && !incidenteLista.isEmpty()) {
+				SelectItem item;
+
+				for (Incidente incidente : incidenteLista) {
+					item = new SelectItem(incidente, incidente.getNome());
+					listaIncidente.add(item);
+				}
+			}
+		}
+		return listaIncidente;
+	}
+	public List<SelectItem> getlistaFatorRisco() {
+		if (listaFatorRisco == null) {
+			listaFatorRisco = new ArrayList<SelectItem>();
+
+			DAO<FatorRisco> dao = new FatorRiscoDAO();
+			List<FatorRisco> fatorriscoLista = dao.findAll();
+
+		if (fatorriscoLista != null && !fatorriscoLista.isEmpty()) {
+				SelectItem item;
+
+				for (FatorRisco fatorRisco : fatorriscoLista) {
+				item = new SelectItem(fatorRisco, fatorRisco.getNome());
+					listaFatorRisco.add(item);
+				}
+			}
+		}
+
+		return listaFatorRisco;
+	}
 	public Checklist getChecklist() {
 		if (checklist == null) {
 			checklist = new Checklist();
@@ -88,7 +130,6 @@ public class ChecklistPacienteController implements Serializable {
 			paciente = new Paciente();
 			
 		}
-		System.out.println("id do paciente aqui: "+paciente.getIdpaciente());
 		return paciente;
 	}
 	

@@ -125,14 +125,7 @@
 										</h:commandButton>
 									</div>
 
-									<div>
-										<h:commandButton value="Cadastrar"
-											action="#{buscarDepartamentoController.cadastrar()}"
-											class="btn btn-verde mr-3 ">
-											<f:ajax render="@form" execute="@this" />
-
-										</h:commandButton>
-									</div>
+									
 
 
 								</h:panelGrid>
@@ -188,16 +181,7 @@
 												<f:facet name="header">Status</f:facet>
 											</p:column>
 
-											<p:column style="width:20px">
-												<h:commandLink
-													action="#{buscaDepartamentoController.editar(obj.idlocalTransferencia)}">
-													<h:graphicImage style="width: 25px" library="images"
-														value="editar" name="botao_editar.png">
-													</h:graphicImage>
-													<f:ajax execute="formPrincipal:dataTable"
-														render="formPrincipal" />
-												</h:commandLink>
-											</p:column>
+							
 										</tbody>
 									</p:dataTable>
 								</div>

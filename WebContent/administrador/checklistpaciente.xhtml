@@ -53,7 +53,7 @@
 						aria-expanded="false">Buscar Usuário</a></li>
 					<li><a href="cadastrardepartamento.xhtml">Cadastrar
 							Departamento</a></li>
-					<li><a href="consultadepartamento.xhtml">Buscar
+					<li><a href="buscardepartamento.xhtml">Buscar
 							Departamento</a></li>
 					<li class="active"><a href="cadastropaciente.xhtml">Cadastrar
 							Paciente</a></li>
@@ -132,7 +132,6 @@
 										
 										<h:panelGrid columns="2" class="mr-5">
 											<h:outputLabel value="Nome Paciente: #{checklistPacienteController.paciente.nome}" />
-											<h:outputLabel value="ID: #{checklistPacienteController.paciente.idpaciente}" />
 										</h:panelGrid>
 										
 										<h:panelGrid columns="2" class="mr-5">
@@ -140,7 +139,7 @@
 										</h:panelGrid>
 										
 									</h:panelGrid>
-
+									<br />
 									<h:panelGrid columns="1" class="mr-4">
 										<h:outputLabel value="Procedimentos: " />
 										
@@ -155,7 +154,32 @@
 										</p:selectManyCheckbox>						
 										
 									</h:panelGrid>
+									<br />
+									<h:panelGrid columns="1" class="mr-4">
+										
+										<h:outputLabel value="Fatores de Risco: " />
+										<p:selectManyCheckbox id="grid2"
+											converter="omnifaces.SelectItemsConverter"
+											value="#{checklistPacienteController.checklist.fatoresRisco}"
+											layout="grid" columns="1">
+											<f:selectItems style="text-align: center;"
+												value="#{checklistPacienteController.listaFatorRisco}"
+												var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
+										</p:selectManyCheckbox>
+									</h:panelGrid>
+									<br />
 									
+									<h:panelGrid columns="1" class="mr-4">
+										<h:outputLabel value="Incidentes: " />
+										<p:selectManyCheckbox id="grid3"
+											converter="omnifaces.SelectItemsConverter"
+											value="#{checklistPacienteController.checklist.incidentes}"
+											layout="grid" columns="1">
+											<f:selectItems style="text-align: center;"
+												value="#{checklistPacienteController.listaIncidente}"
+												var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
+										</p:selectManyCheckbox>
+									</h:panelGrid>
 								
 									
 									<h:outputLabel value="Observações: " />
