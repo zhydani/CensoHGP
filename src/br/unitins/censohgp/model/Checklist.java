@@ -1,19 +1,34 @@
 package br.unitins.censohgp.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Checklist {
 	private Integer idchecklist;
 	private String observacao;
 	private Paciente paciente;
 	private Usuario usuario;
-	private LocalDate dataHora;
-//	private Incidente incidente;
-//		private FatorRisco fatorRisco;
-	private Procedimento procedimento;
+	private List<Procedimento> procedimentos;
 
-	public Checklist() {
-		super();
+	@Override
+	public Checklist clone() {
+
+		try {
+			return (Checklist) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			System.out.println("Erro ao clonar.");
+		}
+		return null;
+
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Integer getIdchecklist() {
@@ -40,44 +55,18 @@ public class Checklist {
 		this.paciente = paciente;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public List<Procedimento> getProcedimentos() {
+		return procedimentos;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setProcedimentos(List<Procedimento> procedimentos) {
+		this.procedimentos = procedimentos;
 	}
 
-	public LocalDate getDataHora() {
-		return dataHora;
-	}
 
-	public void setDataHora(LocalDate dataHora) {
-		this.dataHora = dataHora;
-	}
-
-//	public Incidente getIncidente() {
-//		return incidente;
-//	}
-//
-//	public void setIncidente(Incidente incidente) {
-//		this.incidente = incidente;
-//	}
-//
-//	public FatorRisco getFatorRisco() {
-//		return fatorRisco;
-//	}
-//
-//	public void setFatorRisco(FatorRisco fatorRisco) {
-//		this.fatorRisco = fatorRisco;
-//	}
-
-	public Procedimento getProcedimento() {
-		return procedimento;
-	}
-
-	public void setProcedimento(Procedimento procedimento) {
-		this.procedimento = procedimento;
+	@Override
+	public String toString() {
+		return "Checklist [idchecklist=" + idchecklist + ",  observacao=" + observacao + ", paciente=" + paciente + "]";
 	}
 
 }

@@ -129,51 +129,50 @@
 
 								<h:panelGrid id="panelPrincipal">
 									<h:panelGrid columns="1" class="d-flex justify-content-start">
-
-										<h:panelGrid>
-											<h:outputLabel  id="outputnome" value="#{buscaPacienteController.paciente.nome}" />
-											<h:outputLabel  id="outputNumPront" value="#{buscaPacienteController.paciente.numeroProntuario}" />
+										
+										<h:panelGrid columns="2" class="mr-5">
+											<h:outputLabel value="Nome Paciente: #{checklistPacienteController.paciente.nome}" />
+											<h:outputLabel value="ID: #{checklistPacienteController.paciente.idpaciente}" />
 										</h:panelGrid>
-
-										<h:panelGrid columns="1" class="mr-4">
-											<h:outputLabel value="Número do Prontuário: " />
-											<h:inputText
-												value="#{checklistPacienteController.paciente.numeroProntuario}"
-												styleClass="form-control pr-3 d-flex justify-content-start"
-												size="64" />
+										
+										<h:panelGrid columns="2" class="mr-5">
+											<h:outputLabel value="Número do Prontuário:  #{checklistPacienteController.paciente.numeroProntuario}" />
 										</h:panelGrid>
-
+										
 									</h:panelGrid>
 
 									<h:panelGrid columns="1" class="mr-4">
 										<h:outputLabel value="Procedimentos: " />
-										<p:selectManyCheckbox id="grid"
-											converter="omnifaces.SelectItemsConverter"
-											value="#{checklistPacienteController.checklist.procedimento}"
+										
+										<p:selectManyCheckbox id="grid" converter="omnifaces.SelectItemsConverter"
+											value="#{checklistPacienteController.checklist.procedimentos}"
 											layout="grid" columns="1">
+											
 											<f:selectItems style="text-align: center;"
 												value="#{checklistPacienteController.listaProcedimento}"
 												var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
-										</p:selectManyCheckbox>
+												
+										</p:selectManyCheckbox>						
+										
 									</h:panelGrid>
-
-
-
-									<h:panelGrid id="observações" columns="1" width="100%">
-										<p style="color: #404040;">
-											<strong>Observações:</strong>
-										</p>
-										<p:inputTextarea rows="6" cols="33" autoResize="false"
-											width="400px" />
-									</h:panelGrid>
+									
+								
+									
+									<h:outputLabel value="Observações: " />
+										<h:inputTextarea rows="3" cols="22"
+														value="#{checklistPacienteController.checklist.observacao}"
+														styleClass="form-control pr-3 d-flex justify-content-start"
+														size="64" />
 								</h:panelGrid>
 								<br />
 								<div class="mt-2 d-flex justify-content-end">
 									<h:panelGrid>
-										<h:commandButton value="Alterar" class="btn btn-azul mr-3"
-											action="#{checklistPacienteController.alterar()}">
-											<f:ajax render="formPrincipal" execute="panelPrincipal"
-												resetValues="true" />
+										
+										<h:commandButton value="Incluir" class="btn btn-azul mr-3"
+													
+													action="#{checklistPacienteController.incluir()}">
+													<f:ajax render="formPrincipal" execute="panelPrincipal"
+														resetValues="true" />
 										</h:commandButton>
 									</h:panelGrid>
 

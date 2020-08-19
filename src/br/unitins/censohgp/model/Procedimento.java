@@ -6,17 +6,6 @@ public class Procedimento {
 	private String descricao;
 	private boolean ativo;
 
-	public Procedimento() {
-		super();
-	}
-
-	public Procedimento(Integer idprocedimento, String nome, String descricao, boolean ativo) {
-		super();
-		this.idprocedimento = idprocedimento;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.ativo = ativo;
-	}
 
 	public Integer getIdprocedimento() {
 		return idprocedimento;
