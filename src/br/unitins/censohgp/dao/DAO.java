@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
+import br.unitins.censohgp.model.Checklist;
+import br.unitins.censohgp.model.Usuario;
+
 public abstract class DAO<T>{
 
 	// CRUD
@@ -67,7 +70,6 @@ public abstract class DAO<T>{
 			e.printStackTrace();
 		}
 	}
-
-
+	
 
 }

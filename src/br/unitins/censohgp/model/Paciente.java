@@ -18,6 +18,7 @@ public class Paciente {
 	private Departamento idlocalTransferencia;
 	private String numeroProntuario;
 	private List<Precaucao> precaucoes;
+	private TipoSexo tipoSexo;
 
 	public Paciente() {
 		super();
@@ -71,7 +72,10 @@ public class Paciente {
 				return false;
 		} else if (!ativo.equals(other.ativo))
 			return false;
-		if (cpf != other.cpf)
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
 			return false;
 		if (dataNascimento == null) {
 			if (other.dataNascimento != null)
@@ -98,7 +102,10 @@ public class Paciente {
 				return false;
 		} else if (!nomeMae.equals(other.nomeMae))
 			return false;
-		if (numeroProntuario != other.numeroProntuario)
+		if (numeroProntuario == null) {
+			if (other.numeroProntuario != null)
+				return false;
+		} else if (!numeroProntuario.equals(other.numeroProntuario))
 			return false;
 		if (observacao == null) {
 			if (other.observacao != null)
@@ -110,7 +117,10 @@ public class Paciente {
 				return false;
 		} else if (!precaucoes.equals(other.precaucoes))
 			return false;
-		if (rg != other.rg)
+		if (rg == null) {
+			if (other.rg != null)
+				return false;
+		} else if (!rg.equals(other.rg))
 			return false;
 		if (sexo == null) {
 			if (other.sexo != null)
@@ -121,6 +131,8 @@ public class Paciente {
 			if (other.situacao != null)
 				return false;
 		} else if (!situacao.equals(other.situacao))
+			return false;
+		if (tipoSexo != other.tipoSexo)
 			return false;
 		return true;
 	}
@@ -252,6 +264,14 @@ public class Paciente {
 
 	public void setPrecaucoes(List<Precaucao> precaucoes) {
 		this.precaucoes = precaucoes;
+	}
+
+	public TipoSexo getTipoSexo() {
+		return tipoSexo;
+	}
+
+	public void setTipoSexo(TipoSexo tipoSexo) {
+		this.tipoSexo = tipoSexo;
 	}
 		
 }

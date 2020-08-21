@@ -148,5 +148,9 @@ public class BuscaPacienteController implements Serializable {
 	public void limpar() {
 		pesquisa = null;
 	}
+	
+	public void fazerCadastro() {
+		Util.redirect("cadastropaciente.xhtml");
+	}
 
 }

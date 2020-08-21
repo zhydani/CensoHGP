@@ -1,19 +1,36 @@
 package br.unitins.censohgp.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Checklist {
 	private Integer idchecklist;
 	private String observacao;
 	private Paciente paciente;
 	private Usuario usuario;
-	private LocalDate dataHora;
-//	private Incidente incidente;
-//		private FatorRisco fatorRisco;
-	private Procedimento procedimento;
+	private List<Procedimento> procedimentos;
+	private List<FatorRisco> fatoresderisco;
+	private List<Incidente> incidentes;
 
-	public Checklist() {
-		super();
+	@Override
+	public Checklist clone() {
+
+		try {
+			return (Checklist) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			System.out.println("Erro ao clonar.");
+		}
+		return null;
+
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Integer getIdchecklist() {
@@ -40,44 +57,30 @@ public class Checklist {
 		this.paciente = paciente;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public List<Procedimento> getProcedimentos() {
+		return procedimentos;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setProcedimentos(List<Procedimento> procedimentos) {
+		this.procedimentos = procedimentos;
 	}
-
-	public LocalDate getDataHora() {
-		return dataHora;
+	
+	public List<FatorRisco> getFatoresRisco() {
+		return fatoresderisco;
 	}
-
-	public void setDataHora(LocalDate dataHora) {
-		this.dataHora = dataHora;
+	
+	public void setFatoresRisco(List<FatorRisco> fatoresderisco) {
+		this.fatoresderisco = fatoresderisco;
 	}
-
-//	public Incidente getIncidente() {
-//		return incidente;
-//	}
-//
-//	public void setIncidente(Incidente incidente) {
-//		this.incidente = incidente;
-//	}
-//
-//	public FatorRisco getFatorRisco() {
-//		return fatorRisco;
-//	}
-//
-//	public void setFatorRisco(FatorRisco fatorRisco) {
-//		this.fatorRisco = fatorRisco;
-//	}
-
-	public Procedimento getProcedimento() {
-		return procedimento;
+	public List<Incidente> getIncidentes() {
+		return incidentes;
 	}
-
-	public void setProcedimento(Procedimento procedimento) {
-		this.procedimento = procedimento;
+	public void setIncidentes(List<Incidente> incidentes) {
+		this.incidentes = incidentes;
+	}
+	@Override
+	public String toString() {
+		return "Checklist [idchecklist=" + idchecklist + ",  observacao=" + observacao + ", paciente=" + paciente + "]";
 	}
 
 }

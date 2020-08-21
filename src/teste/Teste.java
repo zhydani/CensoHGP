@@ -56,8 +56,8 @@ public class Teste {
 			procList = proc.findAll();
 			procedimento = procList.get(0);
 			check.setPaciente(paci);
-			check.setProcedimento(procedimento);
-			check.setUsuario(usu);
+//			check.setProcedimento(procedimento);
+//			check.setUsuario(usu);
 			dao.create(check);
 			System.out.println("Feito.");
 		} catch (SQLException e) {

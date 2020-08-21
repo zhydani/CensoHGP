@@ -167,18 +167,18 @@
 															styleClass="form-control pr-3 d-flex justify-content-start"
 															size="64" />
 													</h:panelGrid>
-													<h:panelGrid columns="1" class="mr-4">
-														<h:outputLabel value="Sexo do paciente: " />
-														<h:selectOneMenu class="form-control"
-															value="#{cadastroPacienteController.paciente.sexo}"
-															converter="omnifaces.SelectItemsConverter">
-															<f:selectItem noSelectionOption="true"
-																itemLabel="Selecione o sexo..." />
-															<f:selectItems
-																value="#{cadastroPacienteController.listaSexo}"
-																var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
-														</h:selectOneMenu>
-													</h:panelGrid>
+													<h:panelGrid columns="1" class="mt-4 mb-4">
+													<h:outputLabel value="Gênero: " />
+													<h:selectOneMenu class="form-control"
+														value="#{cadastroPacienteController.paciente.tipoSexo}"
+														style="width: 600px;">
+														<f:selectItem itemLabel="Selecione o tipo" />
+														<f:selectItems
+															value="#{cadastroPacienteController.listaTipoSexo}"
+															var="tipoSexo" itemValue="#{tipoSexo}"
+															itemLabel="#{tipoSexo.label}" />
+													</h:selectOneMenu>
+												</h:panelGrid>
 												</h:panelGrid>
 											</h:panelGrid>
 

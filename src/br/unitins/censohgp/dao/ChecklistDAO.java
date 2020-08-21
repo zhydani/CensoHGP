@@ -6,10 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.unitins.censohgp.model.Checklist;
+import br.unitins.censohgp.model.FatorRisco;
+import br.unitins.censohgp.model.Incidente;
+import br.unitins.censohgp.model.Precaucao;
+import br.unitins.censohgp.model.Procedimento;
 
 public class ChecklistDAO extends DAO<Checklist> {
 
@@ -18,80 +23,92 @@ public class ChecklistDAO extends DAO<Checklist> {
 	}
 
 	public ChecklistDAO() {
+
 		super(null);
 	}
 
 	@Override
+
 	public void create(Checklist checklist) throws SQLException {
+		int key = 0;
 		Connection conn = getConnection();
+		conn.setAutoCommit(false);//não pode dar commit enquanto não finalizar todas as inserções
+		try {
 
-		PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " checklist " + " (observacao, "
-				+ " idpaciente, " + " idusuario, " + " data_hora, " + " VALUES " + " (?, ?, ?, ?) ",
-				Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " public.checklist "
+					+ " ( observacao, idpaciente, idusuario, data_hora) " + " VALUES " + " (?,?,?,?) ",
+					Statement.RETURN_GENERATED_KEYS);
 
-		stat.setString(1, checklist.getObservacao());
-		stat.setInt(2, checklist.getPaciente().getIdpaciente());
-		stat.setInt(3, checklist.getUsuario().getId());
-		Date date = Date.valueOf(checklist.getDataHora());
-		stat.setDate(4, date);
-		stat.execute();
-
-		ResultSet rs = stat.getGeneratedKeys();
-		Integer value = rs.getInt("id");
-		rs.next();
-
+			stat.setString(1, checklist.getObservacao());
+			stat.setInt(2, checklist.getPaciente().getIdpaciente());
+			stat.setInt(3, checklist.getUsuario().getId());
+			LocalDate dateNow = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonthValue(),
+					LocalDate.now().getDayOfMonth());
+			Date date = Date.valueOf(dateNow);
+			stat.setDate(4, date);
+			stat.execute();
+			ResultSet rs = stat.getGeneratedKeys();
+			if (rs.next()) {
+				key = rs.getInt(1);
+			}
+			createAuxProcedimento(key, checklist.getProcedimentos());
+			createAuxIncidente(key, checklist.getIncidentes());
+			createAuxFatoresRisco(key, checklist.getFatoresRisco());
+			conn.commit();
+		} catch (SQLException e) {
+			conn.rollback();
+		}finally {
+			conn.close();
+		}
+		
 	}
 
-//	public void createAuxFatorRisco(int id, List<Checklist> checklists) throws SQLException {
-//
-//		Connection conn = getConnection();
-//
-//		PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " checklist_fator_risco "
-//				+ " ( idchecklist, idfator_risco ) " + " VALUES " + " (? , ?) ", Statement.RETURN_GENERATED_KEYS);
-//
-//		for (Checklist checklist : checklists) {
-//
-//			stat.setInt(1, id);
-//			stat.setInt(2, checklist.getFatorRisco().getIdfatorRisco());
-//			stat.execute();
-//		}
-//
-//	}
-//
-//	public void createAuxIncidente(int id, List<Checklist> checklists) throws SQLException {
-//
-//		Connection conn = getConnection();
-//
-//		PreparedStatement stat = conn.prepareStatement(
-//				"INSERT INTO " + " checklist_incidente " + " ( idchecklist, idincidente ) " + " VALUES " + " (? , ?) ",
-//				Statement.RETURN_GENERATED_KEYS);
-//
-//		for (Checklist checklist : checklists) {
-//
-//			stat.setInt(1, id);
-//			stat.setInt(2, checklist.getIncidente().getIdincidente());
-//			stat.execute();
-//		}
-//
-//	}
-
-	public void createAuxProcedimento(int id, List<Checklist> checklists) throws SQLException {
+	public void createAuxProcedimento(int id, List<Procedimento> procedimentos) throws SQLException {
 
 		Connection conn = getConnection();
 
-		PreparedStatement stat = conn.prepareStatement(
-				"INSERT INTO " + " checklist_ " + " ( idchecklist, idprocedimento ) " + " VALUES " + " (? , ?) ",
-				Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " checklist_procedimento "
+				+ " ( idchecklist, idprocedimento ) " + " VALUES " + " (? , ?) ", Statement.RETURN_GENERATED_KEYS);
 
-		for (Checklist checklist : checklists) {
+		for (Procedimento procedimento : procedimentos) {
 
 			stat.setInt(1, id);
-			stat.setInt(2, checklist.getProcedimento().getIdprocedimento());
+			stat.setInt(2, procedimento.getIdprocedimento());
 			stat.execute();
 		}
 
 	}
+	public void createAuxIncidente(int id, List<Incidente> incidentes) throws SQLException {
 
+		Connection conn = getConnection();
+
+		PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " checklist_incidente "
+				+ " ( idchecklist, idincidente ) " + " VALUES " + " (? , ?) ", Statement.RETURN_GENERATED_KEYS);
+
+		for (Incidente incidente : incidentes) {
+
+			stat.setInt(1, id);
+			stat.setInt(2, incidente.getIdincidente());
+			stat.execute();
+		}
+
+	}
+	public void createAuxFatoresRisco(int id, List<FatorRisco> fatoresrisco) throws SQLException {
+
+		Connection conn = getConnection();
+
+		PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " checklist_fator_risco "
+				+ " ( idchecklist, idfator_risco ) " + " VALUES " + " (? , ?) ", Statement.RETURN_GENERATED_KEYS);
+
+		for (FatorRisco fatorrisco : fatoresrisco) {
+
+			stat.setInt(1, id);
+			stat.setInt(2, fatorrisco.getIdfatorRisco());
+			stat.execute();
+		}
+
+	}
+	
 	@Override
 	public List<Checklist> findAll() {
 		Connection conn = getConnection();
@@ -110,9 +127,8 @@ public class ChecklistDAO extends DAO<Checklist> {
 				Checklist checklist = new Checklist();
 				checklist.getPaciente().setIdpaciente(rs.getInt("idpaciente"));
 				checklist.setObservacao(rs.getString("observacao"));
-				checklist.getUsuario().setId(rs.getInt("idusuario"));
 				checklist.setIdchecklist(rs.getInt("idchecklist"));
-				checklist.setDataHora(rs.getDate("data_hora") == null ? null : (rs.getDate("data_hora").toLocalDate()));
+
 				listaChecklist.add(checklist);
 
 			}

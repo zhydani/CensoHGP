@@ -6,14 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +20,7 @@ public class TransferenciaDAO extends DAO<HistoricoTransferencia> {
 	}
 	
 	public TransferenciaDAO() {
-		// tchê papai ... cria uma nova conexao
+		// tchï¿½ papai ... cria uma nova conexao
 		super(null);
 	}
 
@@ -56,7 +49,7 @@ public class TransferenciaDAO extends DAO<HistoricoTransferencia> {
 			stat.execute();
 		} catch (SQLException e) {
 			System.out.println(e);
-			Util.addMessageError("erro banco de dados não foi possivel");
+			Util.addMessageError("erro banco de dados nï¿½o foi possivel");
 			// TODO: handle exception
 		}
 	}
@@ -84,18 +77,18 @@ public class TransferenciaDAO extends DAO<HistoricoTransferencia> {
 			stat.execute();
 		} catch (SQLException e) {
 			System.out.println(e);
-			Util.addMessageError("erro banco de dados não foi possivel");
+			Util.addMessageError("erro banco de dados nï¿½o foi possivel");
 			// TODO: handle exception
 		}
 	}
 	@Override
 	public void update(HistoricoTransferencia entity) throws SQLException {
-		//não é necessario essa funcionalidade para o programa
+		//nï¿½o ï¿½ necessario essa funcionalidade para o programa
 	}
 
 	@Override
 	public void delete(int id) throws SQLException {
-		//não é necessario essa funcionalidade para o programa
+		//nï¿½o ï¿½ necessario essa funcionalidade para o programa
 	}
 
 	@Override
