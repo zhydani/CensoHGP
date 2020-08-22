@@ -170,13 +170,13 @@
 													<h:panelGrid id="gridSexo" columns="1" class="mr-4">
 														<h:outputLabel value="Gênero do paciente: " />
 														<h:selectOneMenu class="btn btn-outline-dark"
-															value="#{cadastroPacienteController.paciente.sexo}"
+															value="#{cadastroPacienteController.paciente.tipoSexo}"
 															converter="omnifaces.SelectItemsConverter">
 															<f:selectItem noSelectionOption="true"
 																itemLabel="Selecione o sexo..." />
 															<f:selectItems
-																value="#{cadastroPacienteController.listaSexo}"
-																var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
+																value="#{cadastroPacienteController.listaTipoSexo}"
+																var="tipoSexo" itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.label}" />
 														</h:selectOneMenu>
 													</h:panelGrid>
 												</h:panelGrid>

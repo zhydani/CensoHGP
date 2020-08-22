@@ -16,6 +16,7 @@ import br.unitins.censohgp.model.Precaucao;
 import br.unitins.censohgp.model.Sexo;
 import br.unitins.censohgp.model.Situacao;
 import br.unitins.censohgp.model.Tipo;
+import br.unitins.censohgp.model.TipoSexo;
 
 public class PacienteDAO extends DAO<Paciente> {
 
