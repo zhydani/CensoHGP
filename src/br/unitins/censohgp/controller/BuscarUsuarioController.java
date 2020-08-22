@@ -12,7 +12,9 @@ import javax.inject.Named;
 
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.dao.DAO;
+import br.unitins.censohgp.dao.PacienteDAO;
 import br.unitins.censohgp.dao.UsuarioDAO;
+import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Usuario;
 
 @Named
@@ -26,6 +28,12 @@ public class BuscarUsuarioController implements Serializable {
 	private List<Usuario> listaBusca = null;
 	private List<Usuario> listaUsuario = null;
 
+	public BuscarUsuarioController() {
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.keep("usuarioFlash");
+		usuario = (Usuario) flash.get("usuarioFlash");
+	}
+
 	public Usuario getUsuario() {
 		if (usuario == null) {
 			return usuario;
@@ -37,13 +45,14 @@ public class BuscarUsuarioController implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public String editar(int id) {
+	public String editar(Integer id) {
 		UsuarioDAO dao = new UsuarioDAO();
-		usuario = dao.findId(id);
+		Usuario usuario = dao.findId(id);
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		System.out.println(usuario.getNome());
 		flash.put("usuarioFlash", usuario);
 
-		return "cadastrousuario.xhtml?faces-redirect=true";
+		return "alterarusuario.xhtml?faces-redirect=true";
 	}
 
 	public boolean excluir(int id) {

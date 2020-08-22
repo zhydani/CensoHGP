@@ -8,19 +8,13 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
-import javax.faces.event.ActionEvent;
-import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.dao.DAO;
 import br.unitins.censohgp.dao.DepartamentoDAO;
-import br.unitins.censohgp.dao.PacienteDAO;
-import br.unitins.censohgp.dao.UsuarioDAO;
 import br.unitins.censohgp.model.Departamento;
-import br.unitins.censohgp.model.Paciente;
-import br.unitins.censohgp.model.Usuario;
 
 @Named
 @ViewScoped

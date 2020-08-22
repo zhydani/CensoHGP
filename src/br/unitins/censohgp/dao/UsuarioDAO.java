@@ -10,6 +10,7 @@ import java.util.List;
 
 import br.unitins.censohgp.application.Util;
 import br.unitins.censohgp.model.Tipo;
+import br.unitins.censohgp.model.TipoUsuario;
 import br.unitins.censohgp.model.Usuario;
 
 public class UsuarioDAO extends DAO<Usuario> {
@@ -115,11 +116,19 @@ public class UsuarioDAO extends DAO<Usuario> {
 		PreparedStatement stat = conn.prepareStatement(
 				"UPDATE public.usuario SET " + " nome = ?, " + " senha = ?, " + " idtipo_usuario = ?, " + " ativo = ?, "
 						+ " email = ?, " + " matricula = ? " + "WHERE " + " idusuario = ? ");
+		
 		stat.setString(1, usuario.getNome());
 
 		String senha1 = usuario.getSenha1();
 		String senha2 = usuario.getSenha2();
 
+		Integer valor = usuario.getTipousuario().getValue();
+
+		TipoDAO dao = new TipoDAO();
+//		Integer id_tipo = usuario.getTipo().getId();
+		System.out.println(valor);
+		Tipo id_tipo_banco = dao.findId(valor);
+		stat.setString(1, usuario.getNome());
 		if (senha1.equals(senha2)) {
 
 			stat.setString(2, usuario.getSenha1());
@@ -128,11 +137,11 @@ public class UsuarioDAO extends DAO<Usuario> {
 			Util.addMessageError("O campo confirmar senha é diferente da senha digitada.");
 		}
 
-		stat.setInt(3, usuario.getTipo().getId());
+		stat.setInt(3, id_tipo_banco.getId());
 		stat.setBoolean(4, usuario.getAtivo());
 		stat.setString(5, usuario.getEmail());
 		stat.setString(6, usuario.getMatricula());
-
+		stat.setInt(7, usuario.getId());
 		stat.execute();
 
 	}
@@ -259,7 +268,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 
 		try {
 			PreparedStatement stat = conn.prepareStatement(
-					"SELECT " + "  idusuario, " + "  matricula, " + "  nome, " + "  senha, " + "  idtipo_usuario, "
+					"SELECT " + "  idusuario, " + "  matricula, " + "  nome, " + "  idtipo_usuario, "
 							+ "  ativo, " + "  email " + "FROM " + "  public.usuario " + "WHERE idusuario = ? ");
 
 			stat.setInt(1, id);
@@ -273,8 +282,14 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario.setId(rs.getInt("idusuario"));
 				usuario.setMatricula("matricula");
 				usuario.setNome(rs.getString("nome"));
-				usuario.setSenha1(rs.getString("senha"));
+				
+				usuario.setTipo(new Tipo());
+				
+				
 				usuario.getTipo().setId(rs.getInt("idtipo_usuario"));
+				
+				usuario.setTipousuario(TipoUsuario.valueOf(rs.getInt("idtipo_usuario")));
+				
 				usuario.setAtivo(rs.getBoolean("ativo"));
 				usuario.setEmail(rs.getString("email"));
 

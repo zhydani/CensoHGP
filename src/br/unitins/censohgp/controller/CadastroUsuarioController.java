@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -31,6 +33,12 @@ public class CadastroUsuarioController implements Serializable {
 	private List<Usuario> listaUsuario;
 	private List<SelectItem> listaTipo;
 
+	public CadastroUsuarioController() {
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.keep("usuarioFlash");
+		usuario = (Usuario) flash.get("usuarioFlash");
+	}
+	
 	public void pesquisar() {
 		listaUsuario = null;
 
@@ -139,13 +147,16 @@ public class CadastroUsuarioController implements Serializable {
 		return maior;
 	}
 
-	public void editar(Usuario usuario) {
+	public String editar(Integer id) {
 		UsuarioDAO dao = new UsuarioDAO();
-		// buscando um usuario pelo id
-		Usuario usu = dao.findId(usuario.getId());
-		setUsuario(usu);
-//		setUsuario(dao.findId(usuario.getId()));
+		Usuario usuario = dao.findId(id);
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		System.out.println(usuario.getNome());
+		flash.put("usuarioFlash", usuario);
+
+		return "alterarusuario.xhtml?faces-redirect=true";
 	}
+
 
 	public Usuario getUsuario() {
 		if (usuario == null) {

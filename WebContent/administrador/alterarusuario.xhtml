@@ -167,7 +167,7 @@
 													<h:selectOneMenu class="form-control"
 														value="#{cadastroUsuarioController.usuario.tipousuario}"
 														style="width: 600px;">
-														<f:selectItem itemLabel="Selecione o tipo" />
+														<f:selectItem noSelectionOption="true" itemLabel="Selecione o tipo" />
 														<f:selectItems
 															value="#{cadastroUsuarioController.listaTipoUsuario}"
 															var="tipousuario" itemValue="#{tipousuario}"
@@ -186,15 +186,15 @@
 											<h:panelGrid id="panelBotoes" columns="4">
 
 												<h:commandButton value="Excluir"
-													disabled="#{cadastroUsuarioController.usuario.id == null}"
+													disabled="#{cadastroUsuarioController.usuario.id != null}"
 													actionListener="#{cadastroUsuarioController.excluir()}"
 													class="btn btn-amarelo mr-3">
 													<f:ajax render="@all" execute="@this" />
 												</h:commandButton>
 
-												<h:commandButton value="Incluir"
-													disabled="#{cadastroUsuarioController.usuario.id != null}"
-													actionListener="#{cadastroUsuarioController.incluir()}"
+												<h:commandButton value="Alterar"
+													disabled="#{cadastroUsuarioController.usuario.id == null}"
+													actionListener="#{cadastroUsuarioController.alterar()}"
 													class="btn btn-azul ">
 													<f:ajax render="formPrincipal" execute="panelPrincipal"
 														resetValues="true" />
