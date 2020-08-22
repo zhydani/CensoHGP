@@ -88,6 +88,7 @@
 
 				<ui:insert name="conteudo">
 					<h:form id="formPrincipal">
+					
 						<div class="border-left mb-4 ml-3">
 							<h4 class="ml-3 py-2 font-weight-bold">Consultar Usuários</h4>
 						</div>
@@ -195,8 +196,8 @@
 											class="d-flex justify-content-center">
 											<h:graphicImage style="width: 25px" library="images"
 												value="desativar" name="shutdown.png" />
-											<f:ajax execute="formPrincipal:dataTable"
-												render="formPrincipal" />
+											<f:ajax render="formPrincipal" execute="panelPrincipal"
+														resetValues="true" />
 										</h:commandLink>
 
 									</p:column>
@@ -208,9 +209,7 @@
 							</h:panelGrid>
 
 						</h:panelGrid>
-						<h:messages id="messages" infoStyle="color:green"
-							warnStyle="color:orange" errorStyle="color:red"
-							globalOnly="false" />
+						<p:growl id="growl" showDetail="true" life="5000" />
 					</h:form>
 				</ui:insert>
 			</td>

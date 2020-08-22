@@ -58,24 +58,27 @@ public class CadastroUsuarioController implements Serializable {
 		if (validarDados()) {
 			DAO<Usuario> dao = new UsuarioDAO();
 			// faz a inclusao no banco de dados
-			try {
-//				String hashSenha = Util.hashSHA256(getUsuario().getSenha());
-//				getUsuario().setSenha(hashSenha);
+			if(validarMatricula(getUsuario().getMatricula())) {
+				try {
+//					String hashSenha = Util.hashSHA256(getUsuario().getSenha());
+//					getUsuario().setSenha(hashSenha);
 
-				getUsuario().setSenha1(Util.hashSHA256(getUsuario().getSenha1()));
-				getUsuario().setSenha2(Util.hashSHA256(getUsuario().getSenha2()));
+					getUsuario().setSenha1(Util.hashSHA256(getUsuario().getSenha1()));
+					getUsuario().setSenha2(Util.hashSHA256(getUsuario().getSenha2()));
 
-				dao.create(getUsuario());
-				dao.getConnection().commit();
-				Util.addMessageInfo("Inclusao realizada com sucesso.");
-				limpar();
-				listaUsuario = null;
-			} catch (SQLException e) {
-				dao.rollbackConnection();
-				dao.closeConnection();
-				Util.addMessageError("Erro ao incluir o Usuario no Banco de Dados.");
-				e.printStackTrace();
+					dao.create(getUsuario());
+					dao.getConnection().commit();
+					Util.addMessageInfo("Inclusao realizada com sucesso.");
+					limpar();
+					listaUsuario = null;
+				} catch (SQLException e) {
+					dao.rollbackConnection();
+					dao.closeConnection();
+					Util.addMessageError("Erro ao incluir o Usuario no Banco de Dados.");
+					e.printStackTrace();
+				}
 			}
+			
 		}
 	}
 
@@ -133,6 +136,15 @@ public class CadastroUsuarioController implements Serializable {
 //		}
 		if (getUsuario().getSenha1() == null || getUsuario().getSenha1().trim().equals("")) {
 			Util.addMessageError("O campo senha deve ser informado.");
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean validarMatricula(String matricula) {
+		UsuarioDAO dao = new UsuarioDAO();
+		if (dao.findMatricula(matricula)) {
+			Util.addMessageError("Já existe um usuário com esta matrícula.");
 			return false;
 		}
 		return true;

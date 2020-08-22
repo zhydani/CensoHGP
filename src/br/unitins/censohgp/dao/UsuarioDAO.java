@@ -280,7 +280,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 			if (rs.next()) {
 				usuario = new Usuario();
 				usuario.setId(rs.getInt("idusuario"));
-				usuario.setMatricula("matricula");
+				usuario.setMatricula(rs.getString("matricula"));
 				usuario.setNome(rs.getString("nome"));
 				
 				usuario.setTipo(new Tipo());
@@ -301,6 +301,48 @@ public class UsuarioDAO extends DAO<Usuario> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public Boolean findMatricula(String matricula) {
+		Connection conn = getConnection();
+		if (conn == null)
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " + "  idusuario, " + "  matricula, " + "  nome, " + "  idtipo_usuario, "
+							+ "  ativo, " + "  email " + "FROM " + "  public.usuario " + "WHERE matricula = ? ");
+
+			stat.setString(1, matricula);
+
+			ResultSet rs = stat.executeQuery();
+
+			Usuario usuario = null;
+
+			if (rs.next()) {
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("idusuario"));
+				usuario.setMatricula(rs.getString("matricula"));
+				usuario.setNome(rs.getString("nome"));
+				
+				usuario.setTipo(new Tipo());
+				
+				
+				usuario.getTipo().setId(rs.getInt("idtipo_usuario"));
+				
+				usuario.setTipousuario(TipoUsuario.valueOf(rs.getInt("idtipo_usuario")));
+				
+				usuario.setAtivo(rs.getBoolean("ativo"));
+				usuario.setEmail(rs.getString("email"));
+
+			}
+
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

@@ -49,7 +49,8 @@ public class BuscarUsuarioController implements Serializable {
 		UsuarioDAO dao = new UsuarioDAO();
 		Usuario usuario = dao.findId(id);
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-		System.out.println(usuario.getNome());
+//		System.out.println(usuario.getNome());
+		System.out.println(usuario.getMatricula());
 		flash.put("usuarioFlash", usuario);
 
 		return "alterarusuario.xhtml?faces-redirect=true";
