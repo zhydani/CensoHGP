@@ -9,22 +9,6 @@ public class Departamento {
 	private String nomeDepartamento;
 	private EstadoDepartamento estado;
 	private CidadeDepartamento cidade;
-	public Departamento() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Departamento(Integer idlocalTransferencia, String nomeHospital, int numeroLeitos, StatusDepartamento ativo,
-			String nomeDepartamento, EstadoDepartamento estado, CidadeDepartamento cidade) {
-		super();
-		this.idlocalTransferencia = idlocalTransferencia;
-		this.nomeHospital = nomeHospital;
-		this.numeroLeitos = numeroLeitos;
-		this.ativo = ativo;
-		this.nomeDepartamento = nomeDepartamento;
-		this.estado = estado;
-		this.cidade = cidade;
-	}
 
 	@Override
 	public Departamento clone() {

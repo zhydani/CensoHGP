@@ -11,31 +11,32 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.unitins.censohgp.model.EstadoDepartamento;
-import br.unitins.censohgp.model.Estados;
+import br.unitins.censohgp.model.Departamento;
+import br.unitins.censohgp.model.Situacao;
+import br.unitins.censohgp.model.Situacoes;
 
 @Named
-@FacesConverter(value = "EstadoConverter", managed = true)
-public class EstadoConverter implements Converter<Object>{
+@FacesConverter(value = "SituacaoConverter", managed = true)
+public class SituacaoConverter implements Converter<Object>{
 	
 	@Inject
-	private Estados estados;
+	private Situacoes situacoes;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		// TODO Auto-generated method stub
 		// se o numero for nulo eu tenho que criar uma instancia e não deixar ele ir atoa
-		List<EstadoDepartamento> auxestados = estados.getEstados();
+		List<Situacao> auxsituacao = situacoes.getSituacoes();
 		if(!(value.equals("null")) && value.trim().length() > 0) {
 			try {
 				Integer aux = Integer.parseInt(value);
-				for (EstadoDepartamento aux2 : auxestados) {
-					if(aux2.getIdestado().equals(aux)) {
-						Integer aux3 = auxestados.indexOf(aux2);
-						return auxestados.get(aux3);
+				for (Situacao aux2 : auxsituacao) {
+					if(aux2.getIdsituacao().equals(aux)) {
+						Integer aux3 = auxsituacao.indexOf(aux2);
+						return auxsituacao.get(aux3);
 					}
 				}
-				
+				//return pacientes.getPacientes().get(aux);
 			} catch(NumberFormatException e) {
                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid theme."));
             }
@@ -47,10 +48,9 @@ public class EstadoConverter implements Converter<Object>{
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		// TODO Auto-generated method stub
 		if(value != null) {
-			return String.valueOf(((EstadoDepartamento) value).getIdestado());
+			return String.valueOf(((Situacao) value).getIdsituacao());
 		}
 		return null;
 	}
 	
-
 }

@@ -163,13 +163,13 @@
 												<h:panelGrid id="estado" columns="1" class="mr-4">
 													<h:outputLabel style="font-weight: bold;" value="Estados: " />
 													<h:selectOneMenu class="btn btn-secondary"
-														value="#{departamentoController.estadoSelecionado}"
-														converter="omnifaces.SelectItemsConverter">
+														value="#{departamentoController.departamento.estado}">
+														<f:converter converterId="EstadoConverter" />
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione o Estado" />
 														<f:selectItems
 															value="#{departamentoController.listaEstados}" var="obj"
-															itemValue="#{obj}" itemLabel="#{obj.label}" />
+															itemValue="#{obj}" itemLabel="#{obj.estado}" />
 														<p:ajax update="cidade" process="estado"
 															listener="#{departamentoController.onChangeEstado}"
 															event="change" />
@@ -179,13 +179,13 @@
 												<h:panelGrid id="cidade" columns="1" class="mr-4">
 													<h:outputLabel style="font-weight: bold;" value="Cidades: " />
 													<h:selectOneMenu class="btn btn-secondary"
-														value="#{departamentoController.departamento.cidade}"
-														converter="omnifaces.SelectItemsConverter">
+														value="#{departamentoController.departamento.cidade}">
+														<f:converter converterId="CidadeConverter"/>
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione a Cidade" />
 														<f:selectItems
 															value="#{departamentoController.listaCidades}" var="obj"
-															itemValue="#{obj}" itemLabel="#{obj.label}" />
+															itemValue="#{obj}" itemLabel="#{obj.cidade}" />
 													</h:selectOneMenu>
 												</h:panelGrid>
 
