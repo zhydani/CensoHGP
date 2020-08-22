@@ -6,7 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>CensoHGP | Alterar Usuário</title>
+	<title>CensoHGP | Cadastro de Usuário</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport"
@@ -45,14 +45,12 @@
 
 					</h:panelGrid>
 					<li><a href="index.xhtml">Início</a></li>
-					<li class="active"><a href="buscarusuario.xhtml"
-						data-toggle="collapse" aria-expanded="false">Gerenciar
-							Usuários</a></li>
-					<li><a href="buscardepartamento.xhtml">Gerenciar
-							Departamentos</a></li>
+					<li><a href="checklistpaciente.xhtml">Gerar Checklist</a></li>
 					<li><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
 					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
-					<li><a href="perfil.xhtml">Alterar Senha</a></li>
+					<li><a href="buscardepartamento.xhtml">Gerenciar
+							Departamentos</a></li>
+					<li class="active"><a href="perfil.xhtml">Alterar Senha</a></li>
 					<li><h:commandLink value="Sair"
 							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 				</h:form>
@@ -108,86 +106,45 @@
 
 								<div>
 									<div class="border-left mb-4 ml-3">
-										<h4 class="ml-3 py-2 font-weight-bold">Alterar Usuário</h4>
+										<h4 class="ml-3 py-2 font-weight-bold">Alterar a Senha</h4>
 									</div>
 									<div class="mt-3 ml-4">
 										<h:panelGrid id="panelPrincipal" columns="1"
 											class="d-flex justify-content-start">
 
-											<h:panelGrid columns="1" class="text-left mb-4">
-												<h:outputLabel value="Nome " />
-												<h:inputText id="name"
-													value="#{cadastroUsuarioController.usuario.nome}"
-													styleClass="form-control pr-3 d-flex justify-content-start"
-													size="77" />
-											</h:panelGrid>
-
-											<h:panelGrid columns="2" class="text-left mb-4">
-												<h:panelGrid columns="1" class="mr-4">
-													<h:outputLabel value="Matrícula " />
-													<h:inputText
-														value="#{cadastroUsuarioController.usuario.matricula}"
-														styleClass="form-control" size="33" />
-												</h:panelGrid>
+											<h:panelGrid columns="1" class="text-left">
 
 												<h:panelGrid columns="1">
-													<h:outputLabel value="E-mail " />
-													<h:inputText
-														value="#{cadastroUsuarioController.usuario.email}"
-														requiredMessage="O campo e-mail não pode ser nulo."
-														styleClass="form-control" size="32">
-														<f:passThroughAttribute name="placeholder"
-															value="nome@exemplo.com" />
-													</h:inputText>
-												</h:panelGrid>
-
-
-											</h:panelGrid>
-
-											<h:panelGrid columns="2" class="text-left">
-
-												<h:panelGrid columns="1" class="mr-4">
 													<h:outputLabel value="Senha " />
-													<h:inputSecret
-														value="#{cadastroUsuarioController.usuario.senha1}"
-														styleClass="form-control" size="33" />
+													<h:inputSecret value="#{perfilController.senha}"
+														styleClass="form-control" size="77" />
 												</h:panelGrid>
 
-												<h:panelGrid columns="1">
-													<h:outputLabel value="Confirmar senha " />
-													<h:inputSecret
-														value="#{cadastroUsuarioController.usuario.senha2}"
-														styleClass="form-control" size="32" />
+												<h:panelGrid columns="1" class="mt-3">
+													<h:outputLabel value="Nova senha " />
+													<h:inputSecret value="#{perfilController.senhanova}"
+														styleClass="form-control" size="77" />
+												</h:panelGrid>
+
+												<h:panelGrid columns="1" class="mt-3">
+													<h:outputLabel value="Confirmar nova senha " />
+													<h:inputSecret value="#{perfilController.confirmar}"
+														styleClass="form-control" size="77" />
 												</h:panelGrid>
 
 											</h:panelGrid>
-											<h:panelGrid columns="1" class="mb-4">
-												<h:panelGrid columns="1" class="mt-4 mb-4">
-													<h:outputLabel value="Tipo de usuário: " />
-													<h:selectOneMenu class="form-control"
-														value="#{cadastroUsuarioController.usuario.tipousuario}"
-														style="width: 600px;">
-														<f:selectItem noSelectionOption="true" itemLabel="Selecione o tipo" />
-														<f:selectItems
-															value="#{cadastroUsuarioController.listaTipoUsuario}"
-															var="tipousuario" itemValue="#{tipousuario}"
-															itemLabel="#{tipousuario.label}" />
-													</h:selectOneMenu>
-												</h:panelGrid>
 
-												<h:panelGrid columns="2">
-													<h:outputLabel value="Usuário ativo: " class="mr-2 mt-1" />
-													<h:selectBooleanCheckbox id="checkAtivo"
-														value="#{cadastroUsuarioController.usuario.ativo}" />
-												</h:panelGrid>
-											</h:panelGrid>
 										</h:panelGrid>
-										<div class="mt-2 d-flex justify-content-end">
+										<div class="mt-3 d-flex justify-content-end">
 											<h:panelGrid id="panelBotoes" columns="4">
 
+												<h:commandButton value="Voltar" class="btn btn-amarelo mr-3"
+													onclick="history.go(-1); return true;">
+													<f:ajax execute="@this"></f:ajax>
+												</h:commandButton>
+
 												<h:commandButton value="Alterar"
-													disabled="#{cadastroUsuarioController.usuario.id == null}"
-													actionListener="#{cadastroUsuarioController.alterar()}"
+													actionListener="#{perfilController.alterar()}"
 													class="btn btn-azul ">
 													<f:ajax render="formPrincipal" execute="panelPrincipal"
 														resetValues="true" />
