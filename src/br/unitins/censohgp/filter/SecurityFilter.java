@@ -53,7 +53,8 @@ public class SecurityFilter implements Filter {
 						|| endereco.equals("/CensoHGP/faces/usuario/checklistpaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/usuario/consultadepartamento.xhtml")
 						|| endereco.equals("/CensoHGP/faces/usuario/listabuscapaciente.xhtml")
-						|| endereco.equals("/CensoHGP/faces/usuario/transferencia.xhtml")) {
+						|| endereco.equals("/CensoHGP/faces/usuario/transferencia.xhtml")
+						|| endereco.equals("/CensoHGP/faces/usuario/perfil.xhtml")) {
 
 					// segue o fluxo
 					((HttpServletResponse) response).sendRedirect("/CensoHGP/faces/login.xhtml");
@@ -73,7 +74,8 @@ public class SecurityFilter implements Filter {
 						|| endereco.equals("/CensoHGP/faces/administrador/cadastropaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/consultadepartamento.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/listabuscapaciente.xhtml")
-						|| endereco.equals("/CensoHGP/faces/administrador/transferencia.xhtml")) {
+						|| endereco.equals("/CensoHGP/faces/administrador/transferencia.xhtml")
+						|| endereco.equals("/CensoHGP/faces/administrador/perfil.xhtml")) {
 
 					// segue o fluxo
 					((HttpServletResponse) response).sendRedirect("/CensoHGP/faces/login.xhtml");
