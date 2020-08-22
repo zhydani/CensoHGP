@@ -64,7 +64,6 @@ public class SecurityFilter implements Filter {
 
 			}
 			if (usuario.getTipo().getId().equals(2)) {
-				System.out.println("entrou aqui");
 				if (endereco.equals("/CensoHGP/faces/administrador/index.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/alterarpaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/buscarpaciente.xhtml")

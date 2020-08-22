@@ -70,7 +70,8 @@
 									</p:commandLink>
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
+										<li class="nav-item"><a href="index.xhtml"
+											class="nav-link">Início</a></li>
 									</ul>
 								</div>
 							</div>
@@ -88,7 +89,7 @@
 							</div>
 							<h:panelGrid columns="1"
 								class="container d-flex justify-content-center">
-								<h:panelGrid columns="10" class="mb-2">
+								<h:panelGrid columns="10">
 									<div>
 										<h:inputText
 											value="#{buscaDepartamentoController.nomeHospital}"
@@ -124,13 +125,19 @@
 										</h:commandButton>
 									</div>
 
-									
+									<div>
+										<h:commandButton value="Cadastrar"
+											action="#{buscaDepartamentoController.cadastrar()}"
+											class="btn btn-verde mr-3 ">
+											<f:ajax render="@form" execute="@this" />
+
+										</h:commandButton>
+									</div>
 
 
 								</h:panelGrid>
 
-								<p:spacer width="100" height="30" />
-								<div class="container d-flex justify-content-center">
+								<div class="container d-flex justify-content-center mt-2">
 									<p:growl id="msgs" showDetail="true"
 										skipDetailIfEqualsSummary="true" />
 
@@ -167,11 +174,12 @@
 												<h:outputText value="#{obj.numeroLeitos}">
 												</h:outputText>
 											</p:column>
+
 											<p:column style="width:130px; font-size:15px;">
 												<f:facet name="header">Cidade</f:facet>
 												<h:outputText value="#{obj.nomeCidade}"
 													class="d-flex justify-content-center" />
-												
+
 											</p:column>
 
 											<p:column>
@@ -180,7 +188,16 @@
 													class="d-flex justify-content-center" />
 											</p:column>
 
-							
+											<p:column style="width:20px">
+												<h:commandLink
+													action="#{buscaDepartamentoController.editar(obj.idlocalTransferencia)}">
+													<h:graphicImage style="width: 25px" library="images"
+														value="editar" name="botao_editar.png">
+													</h:graphicImage>
+													<f:ajax execute="formPrincipal:dataTable"
+														render="formPrincipal" />
+												</h:commandLink>
+											</p:column>
 										</tbody>
 									</p:dataTable>
 								</div>
