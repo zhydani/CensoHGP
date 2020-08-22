@@ -3,8 +3,8 @@ package br.unitins.censohgp.model;
 public enum StatusDepartamento {
 
 
-		ATIVO(1, "ATIVO"), 
-		DESATIVADO(2, "DESATIVADO");
+		ATIVO(0, "ATIVO"), 
+		DESATIVADO(1, "DESATIVADO");
 
 		private int value;
 		private String label;
@@ -34,9 +34,9 @@ public enum StatusDepartamento {
 		public static StatusDepartamento valueOf(boolean ativo) {
 			int var =0 ;
 			if(ativo == true)
-				var =1;
+				var =0;
 			else
-				var=2;
+				var=1;
 			for (StatusDepartamento status : StatusDepartamento.values()) {
 				if (status.getValue() == var) 
 					return status;

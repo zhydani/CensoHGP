@@ -11,31 +11,31 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.unitins.censohgp.model.EstadoDepartamento;
-import br.unitins.censohgp.model.Estados;
+import br.unitins.censohgp.model.CidadeDepartamento;
+import br.unitins.censohgp.model.Cidades;
 
 @Named
-@FacesConverter(value = "EstadoConverter", managed = true)
-public class EstadoConverter implements Converter<Object>{
+@FacesConverter(value = "CidadeConverter", managed = true)
+public class CidadeConverter implements Converter<Object>{
 	
 	@Inject
-	private Estados estados;
+	private Cidades cidades;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		// TODO Auto-generated method stub
 		// se o numero for nulo eu tenho que criar uma instancia e não deixar ele ir atoa
-		List<EstadoDepartamento> auxestados = estados.getEstados();
+		List<CidadeDepartamento> auxcidades = cidades.getCidades();
 		if(!(value.equals("null")) && value.trim().length() > 0) {
 			try {
 				Integer aux = Integer.parseInt(value);
-				for (EstadoDepartamento aux2 : auxestados) {
-					if(aux2.getIdestado().equals(aux)) {
-						Integer aux3 = auxestados.indexOf(aux2);
-						return auxestados.get(aux3);
+				for (CidadeDepartamento aux2 : auxcidades) {
+					if(aux2.getIdcidade().equals(aux)) {
+						Integer aux3 = auxcidades.indexOf(aux2);
+						return auxcidades.get(aux3);
 					}
 				}
-				
+				//return pacientes.getPacientes().get(aux);
 			} catch(NumberFormatException e) {
                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid theme."));
             }
@@ -47,7 +47,7 @@ public class EstadoConverter implements Converter<Object>{
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		// TODO Auto-generated method stub
 		if(value != null) {
-			return String.valueOf(((EstadoDepartamento) value).getIdestado());
+			return String.valueOf(((CidadeDepartamento) value).getIdcidade());
 		}
 		return null;
 	}

@@ -32,9 +32,6 @@ public class DepartamentoController implements Serializable {
 	 */
 	private static final long serialVersionUID = 2938919235906464048L;
 
-
-	private EstadoDepartamento estadoSelecionado = null;
-	private CidadeDepartamento cidadeSelecionado = null;
 	private Departamento departamento;
 
 	private List<Departamento> listaDepartamento;
@@ -108,30 +105,6 @@ public class DepartamentoController implements Serializable {
 		}
 	}
 
-//	public void excluir() {
-//		if (excluir(getDepartamento()))
-//			limpar();
-//	}
-//
-//	public boolean excluir(int iddepartamento) {
-//		DAO<Departamento> dao = new DepartamentoDAO();
-//		try {
-//			dao.delete(iddepartamento);
-//			dao.getConnection().commit();
-//			Util.addMessageInfo("Exclusão realizada com sucesso.");
-//			listaBusca = null;
-//			buscar();
-//			return true;
-//		} catch (SQLException e) {
-//			dao.rollbackConnection();
-//			Util.addMessageInfo("Erro ao excluir departamento.");
-//			e.printStackTrace();
-//			return false;
-//		} finally {
-//			dao.closeConnection();
-//		}
-//	}
-
 	private boolean validarDados() {
 		if (getDepartamento().getNomeDepartamento().isBlank()) {
 			Util.addMessageWarn("O campo nome do departamento deve ser informado.");
@@ -160,12 +133,12 @@ public class DepartamentoController implements Serializable {
 			listaEstados = new ArrayList<SelectItem>();
 			
 			DAO<EstadoDepartamento> dao = new EstadoDepartamentoDAO();
-			List<EstadoDepartamento> listaEstado = dao.findAll();
+			List<EstadoDepartamento> estadoLista = dao.findAll();
 			
-			if(listaEstado != null && !listaEstado.isEmpty()) {
+			if(estadoLista != null && !estadoLista.isEmpty()) {
 				SelectItem item;
 				  
-				for (EstadoDepartamento estado : listaEstado) {
+				for (EstadoDepartamento estado : estadoLista) {
 					item = new SelectItem(estado, estado.getEstado());
 					listaEstados.add(item);
 				}
@@ -175,18 +148,8 @@ public class DepartamentoController implements Serializable {
 		
 		return listaEstados;
 	}
-
-	public EstadoDepartamento getEstadoSelecionado() {
-		
-		if(estadoSelecionado == null)
-			estadoSelecionado = new EstadoDepartamento();
-		return estadoSelecionado;
-	}
-
-	public void setEstadoSelecionado(EstadoDepartamento estadoSelecionado) {
-		this.estadoSelecionado = estadoSelecionado;
-	}
 	
+	// Para puxar o Enum
 	public StatusDepartamento[] getListaStatusDepartamento() {
 		return StatusDepartamento.values();
 	}
@@ -204,27 +167,15 @@ public class DepartamentoController implements Serializable {
 		
 	}
 
-	public CidadeDepartamento getCidadeSelecionado() {
-		if(cidadeSelecionado == null)
-			cidadeSelecionado = new CidadeDepartamento();
-		return cidadeSelecionado;
-	}
-
-	public void setCidadeSelecionado(CidadeDepartamento cidadeSelecionado) {
-		this.cidadeSelecionado = cidadeSelecionado;
-	}
-
-
 	public void onChangeEstado() {
 		CidadeDepartamentoDAO dao = new CidadeDepartamentoDAO();
 		
-		if(true) {
+		System.out.println("teste 1");
 			
-			listaCidades.clear();
+		listaCidades.clear();
 			
-		}
 		
-		List<CidadeDepartamento> cidadeLista = dao.findByEstado(this.estadoSelecionado.getIdestado());
+		List<CidadeDepartamento> cidadeLista = dao.findByEstado(this.departamento.getEstado().getIdestado());
 		
 		if(cidadeLista != null && !cidadeLista.isEmpty()) {
 			SelectItem item;

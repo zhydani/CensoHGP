@@ -33,13 +33,20 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			PreparedStatement stat = conn.prepareStatement(
 					"INSERT INTO " +
 				    " public.departamento " +
-				    " (nome_hospital, numero_leitos, nome_departamento, ativo) " +
+				    " (nome_hospital, numero_leitos, nome_departamento, ativo, idcidade_estado) " +
 					"VALUES " +
 				    " (?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);
 			stat.setString(1, dep.getNomeHospital());
 			stat.setInt(2, dep.getNumeroLeitos());
 			stat.setString(3, dep.getNomeDepartamento());
-			stat.setInt(4, dep.getAtivo().getValue());
+			
+			if(dep.getAtivo().getValue() == 0) {
+				stat.setBoolean(4, true);
+			}else {
+				stat.setBoolean(4, false);
+			}
+			
+			stat.setInt(5, dep.getCidade().getIdcidade());
 			
 			stat.execute();
 				
