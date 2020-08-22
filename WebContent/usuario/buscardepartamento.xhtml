@@ -43,7 +43,6 @@
 
 					</h:panelGrid>
 					<li ><a href="index.xhtml">Início</a></li>
-					<li><a href="checklistpaciente.xhtml">Gerar Checklist</a></li>
 					<li><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
 					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
 					<li class="active"><a href="buscardepartamento.xhtml">Gerenciar
@@ -168,17 +167,17 @@
 												<h:outputText value="#{obj.numeroLeitos}">
 												</h:outputText>
 											</p:column>
-
-											<p:column style="width:60px; font-size:15px;">
-												<f:facet name="header">Estado</f:facet>
-											</p:column>
-
 											<p:column style="width:130px; font-size:15px;">
-												<f:facet name="header">Cidate</f:facet>
+												<f:facet name="header">Cidade</f:facet>
+												<h:outputText value="#{obj.nomeCidade}"
+													class="d-flex justify-content-center" />
+												
 											</p:column>
 
-											<p:column style="width:105px; font-size:15px;">
+											<p:column>
 												<f:facet name="header">Status</f:facet>
+												<h:outputText value="#{obj.ativo}"
+													class="d-flex justify-content-center" />
 											</p:column>
 
 							

@@ -6,10 +6,13 @@ public class Departamento {
 	private String nomeHospital;
 	private int numeroLeitos;
 	private StatusDepartamento ativo;
+	private Boolean ativo2 = Boolean.TRUE;
 	private String nomeDepartamento;
 	private EstadoDepartamento estado;
 	private CidadeDepartamento cidade;
-
+	private String nomeCidade;
+	private String nomeEstado;
+	
 	@Override
 	public Departamento clone() {
 		
@@ -36,6 +39,8 @@ public class Departamento {
 		if (getClass() != obj.getClass())
 			return false;
 		Departamento other = (Departamento) obj;
+		if (ativo2 != other.ativo2)
+			return false;
 		if (ativo != other.ativo)
 			return false;
 		if (cidade == null) {
@@ -83,7 +88,7 @@ public class Departamento {
 	public void setNomeHospital(String nomeHospital) {
 		this.nomeHospital = nomeHospital;
 	}
-
+	
 	public int getNumeroLeitos() {
 		return numeroLeitos;
 	}
@@ -99,11 +104,18 @@ public class Departamento {
 	public void setAtivo(StatusDepartamento ativo) {
 		this.ativo = ativo;
 	}
+	public Boolean getAtivo2() {
+		return ativo2;
+	}
 
+	public void setAtivo2(Boolean ativo2) {
+		this.ativo2 = ativo2;
+	}
 	public String getNomeDepartamento() {
 		return nomeDepartamento;
 	}
 
+	
 	public void setNomeDepartamento(String nomeDepartamento) {
 		this.nomeDepartamento = nomeDepartamento;
 	}
@@ -122,6 +134,21 @@ public class Departamento {
 
 	public void setCidade(CidadeDepartamento cidade) {
 		this.cidade = cidade;
+	}
+	public void setNomeCidade(String nomeCidade) {
+		this.nomeCidade = nomeCidade;
+	}
+	
+	public String getNomeCidade() {
+		return nomeCidade;
+	}
+	
+	public void setNomeEstado(String nomeEstado) {
+		this.nomeEstado = nomeEstado;
+	}
+	
+	public String getNomeEstado() {
+		return nomeEstado;
 	}
 	
 }

@@ -104,16 +104,16 @@ public class DepartamentoDAO extends DAO<Departamento> {
 				
 				if(nomedepartamento.isEmpty()) {
 					if(nomehospital.isEmpty()) {
-						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento"; 
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento, ativo, idcidade_estado from public.departamento"; 
 					}else {
-						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where UPPER(nome_hospital) LIKE  UPPER(" + quote(nomehospital) +")";
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento, ativo, idcidade_estado from public.departamento where UPPER(nome_hospital) ilike  UPPER(" + quote(nomehospital) +")";
 					}
 					
 				}else {
 					if(nomehospital.isEmpty()) {
-						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where UPPER(nome_departamento) LIKE  UPPER(" + quote(nomedepartamento)+")";
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento, ativo, idcidade_estado from public.departamento where UPPER(nome_departamento) ilike  UPPER(" + quote(nomedepartamento)+")";
 					}else {
-						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento from public.departamento where UPPER(nome_hospital) LIKE  UPPER("+quote(nomehospital)+") and UPPER(nome_departamento) LIKE UPPER("+quote(nomedepartamento)+")";
+						tipoBusca = "Select iddepartamento, nome_hospital, numero_leitos, nome_departamento, ativo, idcidade_estado from public.departamento where UPPER(nome_hospital) ilike  UPPER("+quote(nomehospital)+") and UPPER(nome_departamento) ilike UPPER("+quote(nomedepartamento)+")";
 					}		
 				}
 				PreparedStatement stat = conn.prepareStatement(tipoBusca);
@@ -127,7 +127,11 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					departamento.setNomeHospital(rs.getString("nome_hospital"));
 					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
 					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
+					departamento.setAtivo(departamento.getAtivo().valueOf(rs.getBoolean("ativo")));
 					
+					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);	
+					departamento.setNomeCidade(dep.findById(rs.getInt("idcidade_estado")).getCidade());
+					//falta pegar o estado
 					listaDepartamento.add(departamento);
 				}
 				if (listaDepartamento.isEmpty())
@@ -262,18 +266,9 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					departamento.setNomeHospital(rs.getString("nome_hospital"));
 					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
 					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
-					//departamento.setAtivo(StatusDepartamento.valueOf((rs.getInt("ativo"))));
-					/*
-					CidadeDepartamentoDAO dep = new CidadeDepartamentoDAO(conn);
-					departamento.setCidade(dep.findById(departamento.getIdlocalTransferencia()));
-					if (departamento.getCidade() == null)
-						departamento.setCidade(new CidadeDepartamento());
-
-					EstadoDepartamentoDAO depa = new EstadoDepartamentoDAO(conn);
-					departamento.setEstado(depa.findById(departamento.getIdlocalTransferencia()));
-					if (departamento.getEstado() == null)
-						departamento.setEstado(new EstadoDepartamento());
-					*/
+					departamento.setAtivo2(rs.getBoolean("ativo"));
+					System.out.println("Valor: "+ rs.getBoolean("ativo"));
+					
 				}
 				
 				return departamento;
@@ -294,14 +289,22 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					"UPDATE public.departamento SET " +
 				    " nome_hospital = ?, " +
 				    " numero_leitos = ?, " +
-				    " nome_departamento = ? " +
+				    " nome_departamento = ?," +
+				    "ativo = ?," +
+				    "idcidade_estado= ?"+
 					"WHERE " +
 				    " iddepartamento = ? ");
 			stat.setString(1, dep.getNomeHospital());
 			stat.setInt(2, dep.getNumeroLeitos());
 			stat.setString(3, dep.getNomeDepartamento());
-			//stat.setInt(4, dep.getAtivo().getValue());
-			stat.setInt(4, dep.getIdlocalTransferencia());
+			
+			if(dep.getAtivo().getValue() == 0) {
+				stat.setBoolean(4, true);
+			}else {
+				stat.setBoolean(4, false);
+			}
+			stat.setInt(5, dep.getCidade().getIdcidade());
+			stat.setInt(6, dep.getIdlocalTransferencia());
 				
 			stat.execute();
 				

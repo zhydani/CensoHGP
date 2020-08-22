@@ -36,17 +36,16 @@
 					<h:panelGrid columns="2">
 						<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
 							library="images" name="usu.png" />
-
 						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
 							class="font-weight-bold mb-3" />
 					</h:panelGrid>
 					<li><a href="index.xhtml">Início</a></li>
 					<li><a href="buscarusuario.xhtml" data-toggle="collapse"
 						aria-expanded="false">Gerenciar Usuários</a></li>
-					<li  class="active"><a href="buscardepartamento.xhtml">Gerenciar Departamentos</a></li>
+					<li class="active"><a href="buscardepartamento.xhtml">Gerenciar
+							Departamentos</a></li>
 					<li><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
 					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
-					<li><a href="perfil.xhtml">Alterar Senha</a></li>
 					<li><h:commandLink value="Sair"
 							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 				</h:form>
@@ -79,6 +78,7 @@
 						</h:form>
 					</ui:insert></td>
 			</tr>
+			
 			<tr>
 				<td valign="top"
 					class="pt-5  content active mar d-flex justify-content-center">
@@ -177,16 +177,17 @@
 												</h:outputText>
 											</p:column>
 
-											<p:column style="width:60px; font-size:15px;">
-												<f:facet name="header">Estado</f:facet>
-											</p:column>
-
 											<p:column style="width:130px; font-size:15px;">
-												<f:facet name="header">Cidate</f:facet>
+												<f:facet name="header">Cidade</f:facet>
+												<h:outputText value="#{obj.nomeCidade}"
+													class="d-flex justify-content-center" />
+												
 											</p:column>
 
-											<p:column style="width:105px; font-size:15px;">
+											<p:column>
 												<f:facet name="header">Status</f:facet>
+												<h:outputText value="#{obj.ativo}"
+													class="d-flex justify-content-center" />
 											</p:column>
 
 											<p:column style="width:20px">
