@@ -51,10 +51,11 @@ public class SecurityFilter implements Filter {
 						|| endereco.equals("/CensoHGP/faces/usuario/buscarpaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/usuario/cadastropaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/usuario/checklistpaciente.xhtml")
-						|| endereco.equals("/CensoHGP/faces/usuario/consultadepartamento.xhtml")
+						|| endereco.equals("/CensoHGP/faces/usuario/buscardepartamento.xhtml")
 						|| endereco.equals("/CensoHGP/faces/usuario/listabuscapaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/usuario/transferencia.xhtml")
-						|| endereco.equals("/CensoHGP/faces/usuario/perfil.xhtml")) {
+						|| endereco.equals("/CensoHGP/faces/usuario/perfil.xhtml")
+						|| endereco.equals("/CensoHGP/faces/usuario/index.xhtml")) {
 
 					// segue o fluxo
 					((HttpServletResponse) response).sendRedirect("/CensoHGP/faces/login.xhtml");
@@ -72,10 +73,13 @@ public class SecurityFilter implements Filter {
 						|| endereco.equals("/CensoHGP/faces/administrador/cadastrardepartamento.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/cadastrousuario.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/cadastropaciente.xhtml")
-						|| endereco.equals("/CensoHGP/faces/administrador/consultadepartamento.xhtml")
+						|| endereco.equals("/CensoHGP/faces/administrador/buscardepartamento.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/listabuscapaciente.xhtml")
 						|| endereco.equals("/CensoHGP/faces/administrador/transferencia.xhtml")
-						|| endereco.equals("/CensoHGP/faces/administrador/perfil.xhtml")) {
+						|| endereco.equals("/CensoHGP/faces/administrador/perfil.xhtml")
+						|| endereco.equals("/CensoHGP/faces/administrador/alterarusuario.xhtml")
+						|| endereco.equals("/CensoHGP/faces/administrador/alterdepartamento.xhtml")
+						|| endereco.equals("/CensoHGP/faces/administrador/index.xhtml")) {
 
 					// segue o fluxo
 					((HttpServletResponse) response).sendRedirect("/CensoHGP/faces/login.xhtml");
