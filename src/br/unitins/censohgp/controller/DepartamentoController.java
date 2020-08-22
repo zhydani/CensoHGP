@@ -106,7 +106,7 @@ public class DepartamentoController implements Serializable {
 	}
 
 	private boolean validarDados() {
-		if (getDepartamento().getNomeDepartamento().isBlank()) {
+		if (getDepartamento().getNomeHospital().isBlank()) {
 			Util.addMessageWarn("O campo nome do departamento deve ser informado.");
 			return false;
 		}
