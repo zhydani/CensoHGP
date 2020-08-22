@@ -375,6 +375,46 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			System.out.println("ta chegando aq e retornando null");
 			return null;
 		}
+		
+		public List<Departamento> findDepartamentoPaciente() {
+			Connection conn = getConnection();
+			if (conn == null) 
+				return null;
+			
+			try {
+				PreparedStatement stat = conn.prepareStatement(
+						"SELECT " +
+						"  iddepartamento, " +
+						"  nome_hospital, " +
+						"  numero_leitos, " +
+						"  nome_departamento " +
+						"FROM " +
+						"  public.departamento " +
+						" WHERE nome_departamento not like '' AND ativo = 'true' ");
+				ResultSet rs = stat.executeQuery();
+				
+				List<Departamento> listaDepartamento = new ArrayList<Departamento>();
+				
+				while(rs.next()) {
+					Departamento departamento = new Departamento();
+					departamento.setIdlocalTransferencia(rs.getInt("iddepartamento"));
+					departamento.setNomeHospital(rs.getString("nome_hospital"));
+					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
+					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
+					
+					
+					listaDepartamento.add(departamento);
+				}
+				
+				if (listaDepartamento.isEmpty())
+					return null;
+				return listaDepartamento;
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 
 	}
 

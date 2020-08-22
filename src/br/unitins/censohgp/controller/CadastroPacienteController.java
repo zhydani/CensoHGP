@@ -207,8 +207,8 @@ public class CadastroPacienteController implements Serializable {
 			if(listadepartamento == null) {
 				listadepartamento = new ArrayList<SelectItem>();
 				
-				DAO<Departamento> dao = new DepartamentoDAO();
-				List<Departamento> departamentoLista = dao.findAll();
+				DepartamentoDAO dao = new DepartamentoDAO();
+				List<Departamento> departamentoLista = dao.findDepartamentoPaciente();
 				
 				if(departamentoLista != null && !departamentoLista.isEmpty()) {
 					SelectItem item;

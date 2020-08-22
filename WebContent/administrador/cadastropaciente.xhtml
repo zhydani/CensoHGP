@@ -123,7 +123,7 @@
 											<h:panelGrid columns="1" class="d-flex justify-content-start">
 
 
-												<h:panelGrid>
+												<h:panelGrid id="gridNome">
 													<h:outputLabel value="Nome: " />
 													<h:inputText id="name"
 														value="#{cadastroPacienteController.paciente.nome}"
@@ -131,7 +131,7 @@
 														size="97" />
 												</h:panelGrid>
 
-												<h:panelGrid columns="3" class="text-left mb-4">
+												<h:panelGrid id="gridCPF" columns="3" class="text-left mb-4">
 													<h:panelGrid columns="1" class="mr-4">
 														<h:outputLabel value="CPF: " />
 														<p:inputMask
@@ -140,14 +140,14 @@
 															styleClass="form-control pr-3 d-flex justify-content-start"
 															size="24" />
 													</h:panelGrid>
-													<h:panelGrid columns="1" class="mr-4">
+													<h:panelGrid id="gridRG" columns="1" class="mr-4">
 														<h:outputLabel value="RG: " />
 														<h:inputText
 															value="#{cadastroPacienteController.paciente.rg}"
 															styleClass="form-control pr-3 d-flex justify-content-start"
 															size="24" />
 													</h:panelGrid>
-													<h:panelGrid columns="1" class="mr-4">
+													<h:panelGrid id="gridData" columns="1" class="mr-4">
 														<h:outputLabel value="Data de Nascimento: " />
 														<p:inputMask style="color: black; background: white; "
 															value="#{cadastroPacienteController.paciente.dataNascimento}"
@@ -159,7 +159,7 @@
 													</h:panelGrid>
 												</h:panelGrid>
 
-												<h:panelGrid columns="2" class="text-left mb-4">
+												<h:panelGrid id="gridMae" columns="2" class="text-left mb-4">
 													<h:panelGrid columns="1" class="mr-4">
 														<h:outputLabel value="Nome da Mãe: " />
 														<h:inputText
@@ -167,22 +167,22 @@
 															styleClass="form-control pr-3 d-flex justify-content-start"
 															size="64" />
 													</h:panelGrid>
-													<h:panelGrid columns="1" class="mt-4 mb-4">
-														<h:outputLabel value="Gênero: " />
-														<h:selectOneMenu class="form-control"
-															value="#{cadastroPacienteController.paciente.tipoSexo}"
-															style="width: 600px;">
-															<f:selectItem itemLabel="Selecione o tipo" />
+													<h:panelGrid id="gridSexo" columns="1" class="mr-4">
+														<h:outputLabel value="Gênero do paciente: " />
+														<h:selectOneMenu class="btn btn-outline-dark"
+															value="#{cadastroPacienteController.paciente.sexo}"
+															converter="omnifaces.SelectItemsConverter">
+															<f:selectItem noSelectionOption="true"
+																itemLabel="Selecione o sexo..." />
 															<f:selectItems
-																value="#{cadastroPacienteController.listaTipoSexo}"
-																var="tipoSexo" itemValue="#{tipoSexo}"
-																itemLabel="#{tipoSexo.label}" />
+																value="#{cadastroPacienteController.listaSexo}"
+																var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
 														</h:selectOneMenu>
 													</h:panelGrid>
 												</h:panelGrid>
 											</h:panelGrid>
 
-											<h:panelGrid columns="2" class="text-left mb-4">
+											<h:panelGrid id="gridPront" columns="2" class="text-left mb-4">
 												<h:panelGrid columns="1" class="mr-4">
 													<h:outputLabel value="Número do Prontuário: " />
 													<h:inputText
@@ -196,7 +196,7 @@
 														size="64" />
 
 												</h:panelGrid>
-												<h:panelGrid columns="1" class="mr-4">
+												<h:panelGrid id="gridPrec" columns="1" class="mr-4">
 													<h:outputLabel value="Precauções: " />
 													<p:selectManyCheckbox id="grid"
 														converter="omnifaces.SelectItemsConverter"
@@ -208,12 +208,12 @@
 													</p:selectManyCheckbox>
 												</h:panelGrid>
 											</h:panelGrid>
-											<h:panelGrid columns="2" class="text-left mb-4">
+											<h:panelGrid id="gridSitu" columns="2" class="text-left mb-4">
 												<h:panelGrid columns="1" class="mr-4">
 													<h:outputLabel value="Situação do paciente: " />
-													<h:selectOneMenu class="form-control"
+													<h:selectOneMenu class="btn btn-outline-dark"
+														converter="omnifaces.SelectItemsConverter"
 														value="#{cadastroPacienteController.paciente.situacao}">
-														<f:converter converterId="SituacaoConverter" />
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione a Situação do Paciente ..." />
 														<f:selectItems
@@ -221,11 +221,11 @@
 															var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
 													</h:selectOneMenu>
 												</h:panelGrid>
-												<h:panelGrid columns="1" class="mr-4">
+												<h:panelGrid id="gridDep" columns="1" class="mr-4">
 													<h:outputLabel value="Departamento: " />
-													<h:selectOneMenu class="form-control"
+													<h:selectOneMenu class="btn btn-outline-dark"
+														converter="omnifaces.SelectItemsConverter"
 														value="#{cadastroPacienteController.paciente.idlocalTransferencia}">
-														<f:converter converterId="DepartamentoConverter" />
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione o Departamento do Paciente ..." />
 														<f:selectItems
@@ -246,11 +246,10 @@
 												</h:commandButton>
 											</h:panelGrid>
 											<h:panelGrid>
-												<h:commandButton value="Excluir " class="btn btn-amarelo"
-													disabled="#{cadastroPacienteController.paciente.idpaciente == null}"
-													action="#{cadastroPacienteController.excluir()}">
-													<f:ajax render="formPrincipal messages"
-														execute="formPrincipal" />
+												<h:commandButton value="Limpar " class="btn btn-amarelo"
+													action="#{cadastroPacienteController.limpar()}">
+													<f:ajax render="gridNome gridCPF gridRG gridData gridMae gridSexo gridPront gridPrec gridSitu gridDep"
+														execute="@none" />
 												</h:commandButton>
 											</h:panelGrid>
 										</div>
