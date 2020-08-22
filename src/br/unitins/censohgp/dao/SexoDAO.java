@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.unitins.censohgp.model.Sexo;
-import br.unitins.censohgp.model.Situacao;
+import br.unitins.censohgp.model.Tipo;
 
 public class SexoDAO extends DAO<Sexo> {
 
@@ -71,6 +71,36 @@ public class SexoDAO extends DAO<Sexo> {
 			e.printStackTrace();
 		}
 		return null;	
+	}
+	
+	
+	public Tipo findId(Integer id) {
+		Connection conn = getConnection();
+		if (conn == null)
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " + " idgenero, " + "  nome " + "FROM " + "  public.genero " + "WHERE idgenero = ? ");
+
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+
+			Tipo tipo = null;
+
+			if (rs.next()) {
+				tipo = new Tipo();
+				tipo.setId(rs.getInt("idgenero"));
+				tipo.setNome(rs.getString("nome"));
+			}
+
+			return tipo;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

@@ -15,6 +15,7 @@ import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Precaucao;
 import br.unitins.censohgp.model.Sexo;
 import br.unitins.censohgp.model.Situacao;
+import br.unitins.censohgp.model.Tipo;
 
 public class PacienteDAO extends DAO<Paciente> {
 
@@ -40,7 +41,14 @@ public class PacienteDAO extends DAO<Paciente> {
 		stat.setString(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setInt(5, paciente.getSituacao().getIdsituacao());
-		stat.setInt(6, paciente.getSexo().getIdsexo());
+		
+		Integer valor = paciente.getTipoSexo().getValue();
+
+		SexoDAO dao = new SexoDAO();
+		System.out.println(valor);
+		Tipo id_tipo_banco = dao.findId(valor);
+		stat.setInt(6, id_tipo_banco.getId());
+		
 		stat.setString(7, paciente.getNomeMae());
 		Date date = Date.valueOf(paciente.getDataNascimento());
 		stat.setDate(8, date);

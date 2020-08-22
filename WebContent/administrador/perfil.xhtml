@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>CensoHGP | Início</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<!-- Bootstrap CSS -->
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+	<!-- Costumize CSS -->
+	<h:outputStylesheet library="css" name="template.css" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{resource['images/favicon.ico']}" />
+</h:head>
+<h:body>
+	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
+		class="bg-dark mt-0 text-white wrapper">
+
+
+		<div class="bg-dark mt-0 text-white wrapper" id="sidebar">
+
+			<nav id="sidebar">
+			<div class="sidebar-header ">
+				<h3 class="font-weight-bold">Menu</h3>
+			</div>
+
+			<ul class="list-unstyled components">
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+							library="images" name="usu.png" />
+
+						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
+							class="font-weight-bold mb-3" />
+					</h:panelGrid>
+					<li class="active"><a href="index.xhtml">Início</a></li>
+					<li><a href="buscarusuario.xhtml" data-toggle="collapse"
+						aria-expanded="false">Gerenciar Usuários</a></li>
+					<li><a href="buscardepartamento.xhtml">Gerenciar Departamentos</a></li>
+					<li><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
+					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+					<li><h:commandLink value="Sair"
+							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+				</h:form>
+			</ul>
+
+
+			</nav>
+		</div>
+
+
+
+	</p:sidebar>
+
+	<h:form id="form">
+		<table width="100%">
+
+
+			<tr>
+				<td colspan="2" align="center" class="mar"><ui:insert
+						name="cabecalho">
+
+						<div class="navbar navbar-dark bg-navbar navbar-expand">
+							<div class="container collapse navbar-collapse">
+								<p:commandLink oncomplete="PF('sidebar1').show()"
+									styleClass="mx-3 pt-1 button-menu">
+									<span><i class="pi pi-bars"
+										style="font-size: 2.5em; color: #fff;"></i></span>
+								</p:commandLink>
+								<div class="navbar-brand font-weight-bold ">CensoHGP</div>
+								<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+									<li><h:commandLink value="Sair"
+											action="#{templateController.encerrarSessao}"
+											class="nav-link" /></li>
+
+
+								</ul>
+
+							</div>
+						</div>
+					</ui:insert></td>
+			</tr>
+
+			<tr>
+				<td valign="top"
+					class="pt-5  content active mar d-flex justify-content-start"><ui:insert
+						name="conteudo">
+						<div class="container d-flex justify-content-start">
+							<h:form id="formPrincipal" class="">
+								<h:messages id="messages" infoStyle="color:green"
+									warnStyle="color:orange" errorStyle="color:red"
+									globalOnly="false" />
+
+								<div>
+									<div class="border-left mb-4 ml-3">
+										<h4 class="ml-3 py-2 font-weight-bold">Seja bem-vindo(a)
+											ao CensoHGP</h4>
+									</div>
+									<div class="mt-3 ml-4">
+										<h:panelGrid id="panelPrincipal" columns="1"
+											class="d-flex justify-content-start">
+
+											<p>O CensoHGP é um sistema criado pelos acadêmicos do
+												quarto período do Curso de Sistemas de Informação da
+												Universidade Estadual do Tocantins com auxílio dos
+												professores Fredson Vieira Costa e Frederico Pires Pinto,
+												com o objetivo de automatizar os processos de controle de
+												entrada, saída e incidentes dos pacientes dentro do Hospital
+												Geral de Palmas no Tocantins.</p>
+
+
+										</h:panelGrid>
+
+									</div>
+
+								</div>
+
+
+							</h:form>
+						</div>
+
+
+
+
+					</ui:insert></td>
+			</tr>
+		</table>
+	</h:form>
+
+	<div class="box footer pt-4 font-weight-lighter "
+		style="text-align: center;">
+		<h:outputText value="2020 - Todos os direitos reservados." />
+	</div>
+
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+</h:body>
+</html>

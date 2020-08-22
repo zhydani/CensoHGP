@@ -100,6 +100,9 @@
 						name="conteudo">
 
 						<h:form id="formPrincipal">
+						<div class="border-left mb-4 ml-3">
+								<h4 class="ml-3 py-2 font-weight-bold">Buscar Paciente</h4>
+							</div>
 							<h:panelGrid columns="1"
 								class="container d-flex justify-content-center">
 								<h:outputLabel value="Tipo de Busca: " class=" d-flex" />
@@ -117,22 +120,29 @@
 										<f:selectItem itemLabel="Nome da Mãe" itemValue="4" />
 									</h:selectOneMenu>
 
-									<h:inputText value="#{buscaPacienteController.pesquisa}"
-										styleClass="form-control pr-3 d-flex ml-4 mr-3" size="55" />
+
+										<h:inputText
+											value="#{buscaPacienteController.pesquisa}"
+											styleClass="form-control pr-3 d-flex " size="55"
+											marin-left="10">
+											<f:passThroughAttribute name="placeholder"
+												value="Digite o nome do paciente" />
+										</h:inputText>
+
 
 									<h:commandButton value="Buscar"
 										actionListener="#{buscaPacienteController.buscar()}"
-										class="btn btn-primary mr-4 ml-5">
+										class="btn btn-azul mr-2 ml-2">
 										<f:ajax render="@all" execute="@form" resetValues="true" />
 									</h:commandButton>
 									<h:commandButton value="Limpar"
 										action="#{buscaPacienteController.limpar()}"
-										class="btn btn-warning mr-4">
+										class="btn btn-amarelo mr-2">
 										<f:ajax render="@form" execute="@this" />
 									</h:commandButton>
 									<h:commandButton value="Cadastrar"
-										href="cadastropaciente.xhtml"
-										class="btn btn-info mr-2 ">
+										action="#{buscaPacienteController.fazerCadastro}"
+										class="btn btn-verde mr-2 ">
 										<f:ajax render="@form" execute="@this" />
 									</h:commandButton>
 								</h:panelGrid>

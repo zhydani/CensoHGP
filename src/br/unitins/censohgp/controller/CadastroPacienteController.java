@@ -21,6 +21,8 @@ import br.unitins.censohgp.model.Departamento;
 import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Precaucao;
 import br.unitins.censohgp.model.Situacao;
+import br.unitins.censohgp.model.TipoSexo;
+import br.unitins.censohgp.model.TipoUsuario;
 import br.unitins.censohgp.model.Sexo;
 
 @Named
@@ -239,6 +241,10 @@ public class CadastroPacienteController implements Serializable {
 			}
 			
 			return listaprecaucao;
+		}
+		
+		public TipoSexo[] getListaTipoSexo() {
+			return TipoSexo.values();
 		}
 
 	}
