@@ -4,10 +4,9 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>CensoHGP | Início</title>
+	<title>CensoHGP | Cadastro de Usuário</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport"
@@ -42,13 +41,18 @@
 
 						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
 							class="font-weight-bold mb-3" />
+
+
 					</h:panelGrid>
-					<li class="active"><a href="index.xhtml">Início</a></li>
-					<li><a href="buscarusuario.xhtml" data-toggle="collapse"
-						aria-expanded="false">Gerenciar Usuários</a></li>
-					<li><a href="buscardepartamento.xhtml">Gerenciar Departamentos</a></li>
+					<li><a href="index.xhtml">Início</a></li>
+					<li class="active"><a href="buscarusuario.xhtml"
+						data-toggle="collapse" aria-expanded="false">Gerenciar
+							Usuários</a></li>
+					<li><a href="buscardepartamento.xhtml">Gerenciar
+							Departamentos</a></li>
 					<li><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
 					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+					<li><a href="perfil.xhtml">Alterar Senha</a></li>
 					<li><h:commandLink value="Sair"
 							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 				</h:form>
@@ -69,26 +73,26 @@
 			<tr>
 				<td colspan="2" align="center" class="mar"><ui:insert
 						name="cabecalho">
+						<h:form>
 
-						<div class="navbar navbar-dark bg-navbar navbar-expand">
-							<div class="container collapse navbar-collapse">
-								<p:commandLink oncomplete="PF('sidebar1').show()"
-									styleClass="mx-3 pt-1 button-menu">
-									<span><i class="pi pi-bars"
-										style="font-size: 2.5em; color: #fff;"></i></span>
-								</p:commandLink>
-								<div class="navbar-brand font-weight-bold ">CensoHGP</div>
-								<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+							<div class="navbar navbar-dark bg-navbar navbar-expand">
+								<div class="container collapse navbar-collapse">
+									<p:commandLink oncomplete="PF('sidebar1').show()"
+										styleClass="mx-3 pt-1 button-menu">
+										<span><i class="pi pi-bars"
+											style="font-size: 2.5em; color: #fff;"></i></span>
+									</p:commandLink>
+									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
+									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-									<li><h:commandLink value="Sair"
-											action="#{templateController.encerrarSessao}"
-											class="nav-link" /></li>
+										<li class="nav-item"><a href="buscarusuario.xhtml"
+											class="nav-link">Consultar Usuários</a></li>
 
+									</ul>
 
-								</ul>
-
+								</div>
 							</div>
-						</div>
+						</h:form>
 					</ui:insert></td>
 			</tr>
 
@@ -104,24 +108,56 @@
 
 								<div>
 									<div class="border-left mb-4 ml-3">
-										<h4 class="ml-3 py-2 font-weight-bold">Seja bem-vindo(a)
-											ao CensoHGP</h4>
+										<h4 class="ml-3 py-2 font-weight-bold">Alterar a Senha</h4>
 									</div>
 									<div class="mt-3 ml-4">
 										<h:panelGrid id="panelPrincipal" columns="1"
 											class="d-flex justify-content-start">
 
-											<p>O CensoHGP é um sistema criado pelos acadêmicos do
-												quarto período do Curso de Sistemas de Informação da
-												Universidade Estadual do Tocantins com auxílio dos
-												professores Fredson Vieira Costa e Frederico Pires Pinto,
-												com o objetivo de automatizar os processos de controle de
-												entrada, saída e incidentes dos pacientes dentro do Hospital
-												Geral de Palmas no Tocantins.</p>
+											<h:panelGrid columns="1" class="text-left">
 
+												<h:panelGrid columns="1" >
+													<h:outputLabel value="Senha " />
+													<h:inputSecret
+														value="#{perfilController.senha}"
+														styleClass="form-control" size="77" />
+												</h:panelGrid>
+
+												<h:panelGrid columns="1" class="mt-3">
+													<h:outputLabel value="Nova senha " />
+													<h:inputSecret
+														value="#{perfilController.senhanova}"
+														styleClass="form-control" size="77" />
+												</h:panelGrid>
+												
+												<h:panelGrid columns="1" class="mt-3">
+													<h:outputLabel value="Confirmar nova senha " />
+													<h:inputSecret
+														value="#{perfilController.confirmar}"
+														styleClass="form-control" size="77" />
+												</h:panelGrid>
+
+											</h:panelGrid>
 
 										</h:panelGrid>
+										<div class="mt-3 d-flex justify-content-end">
+											<h:panelGrid id="panelBotoes" columns="4">
 
+												<h:commandButton value="Voltar" class="btn btn-amarelo mr-3"
+													onclick="history.go(-1); return true;">
+													<f:ajax execute="@this"></f:ajax>
+												</h:commandButton>
+
+												<h:commandButton value="Alterar"
+													actionListener="#{perfilController.alterar()}"
+													class="btn btn-azul ">
+													<f:ajax render="formPrincipal" execute="panelPrincipal"
+														resetValues="true" />
+
+												</h:commandButton>
+
+											</h:panelGrid>
+										</div>
 									</div>
 
 								</div>
@@ -129,10 +165,6 @@
 
 							</h:form>
 						</div>
-
-
-
-
 					</ui:insert></td>
 			</tr>
 		</table>

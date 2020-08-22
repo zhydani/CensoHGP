@@ -138,30 +138,16 @@ public class UsuarioDAO extends DAO<Usuario> {
 	}
 	
 	// TODO: trocar a senha
-	public void updateSenha(Usuario usuario) throws SQLException {
+	public void updateSenha(String email, String senha, String senhanova) throws SQLException {
 		Connection conn = getConnection();
-
-		
 		
 		PreparedStatement stat = conn.prepareStatement(
 				"UPDATE public.usuario SET " + " senha = ? " + "WHERE " + "email = ? " + "AND" + " senha = ? ");
-		stat.setString(1, usuario.getNome());
+		
+		stat.setString(1, senhanova);
+		stat.setString(2, email);
+		stat.setString(3, senha);
 
-		String senha1 = usuario.getSenha1();
-		String senha2 = usuario.getSenha2();
-
-		if (senha1.equals(senha2)) {
-
-			stat.setString(2, usuario.getSenha1());
-
-		} else {
-			Util.addMessageError("O campo confirmar senha é diferente da senha digitada.");
-		}
-
-		stat.setInt(3, usuario.getTipo().getId());
-		stat.setBoolean(4, usuario.getAtivo());
-		stat.setString(5, usuario.getEmail());
-		stat.setString(6, usuario.getMatricula());
 
 		stat.execute();
 
