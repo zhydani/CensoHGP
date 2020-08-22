@@ -42,7 +42,6 @@
 
 						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
 							class="font-weight-bold mb-3" />
-
 					</h:panelGrid>
 					<li><a href="index.xhtml">Início</a></li>
 					<li><a href="buscarusuario.xhtml" data-toggle="collapse"
@@ -52,6 +51,7 @@
 					<li class="active"><a href="buscarpaciente.xhtml">Gerenciar
 							Pacientes</a></li>
 					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+					<li><a href="perfil.xhtml">Alterar Senha</a></li>
 					<li><h:commandLink value="Sair"
 							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 				</h:form>
@@ -112,7 +112,7 @@
 								<div>
 									<div class="border-left mb-4 ml-3">
 										<h:panelGrid columns="2">
-											
+
 											<h4 class="ml-3 py-2 font-weight-bold">Cadastro de
 												Paciente</h4>
 										</h:panelGrid>
@@ -168,17 +168,17 @@
 															size="64" />
 													</h:panelGrid>
 													<h:panelGrid columns="1" class="mt-4 mb-4">
-													<h:outputLabel value="Gênero: " />
-													<h:selectOneMenu class="form-control"
-														value="#{cadastroPacienteController.paciente.tipoSexo}"
-														style="width: 600px;">
-														<f:selectItem itemLabel="Selecione o tipo" />
-														<f:selectItems
-															value="#{cadastroPacienteController.listaTipoSexo}"
-															var="tipoSexo" itemValue="#{tipoSexo}"
-															itemLabel="#{tipoSexo.label}" />
-													</h:selectOneMenu>
-												</h:panelGrid>
+														<h:outputLabel value="Gênero: " />
+														<h:selectOneMenu class="form-control"
+															value="#{cadastroPacienteController.paciente.tipoSexo}"
+															style="width: 600px;">
+															<f:selectItem itemLabel="Selecione o tipo" />
+															<f:selectItems
+																value="#{cadastroPacienteController.listaTipoSexo}"
+																var="tipoSexo" itemValue="#{tipoSexo}"
+																itemLabel="#{tipoSexo.label}" />
+														</h:selectOneMenu>
+													</h:panelGrid>
 												</h:panelGrid>
 											</h:panelGrid>
 
@@ -213,7 +213,7 @@
 													<h:outputLabel value="Situação do paciente: " />
 													<h:selectOneMenu class="form-control"
 														value="#{cadastroPacienteController.paciente.situacao}">
-														<f:converter converterId="SituacaoConverter"/>
+														<f:converter converterId="SituacaoConverter" />
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione a Situação do Paciente ..." />
 														<f:selectItems
@@ -225,7 +225,7 @@
 													<h:outputLabel value="Departamento: " />
 													<h:selectOneMenu class="form-control"
 														value="#{cadastroPacienteController.paciente.idlocalTransferencia}">
-														<f:converter converterId="DepartamentoConverter"/>
+														<f:converter converterId="DepartamentoConverter" />
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione o Departamento do Paciente ..." />
 														<f:selectItems

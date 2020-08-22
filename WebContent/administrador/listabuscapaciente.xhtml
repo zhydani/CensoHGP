@@ -30,30 +30,27 @@
 						<div class="sidebar-header ">
 							<h3 class="font-weight-bold">Menu</h3>
 						</div>
-
 						<ul class="list-unstyled components">
-							<h:panelGrid columns="2">
-								<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
-									library="images" name="usu.png" />
-								<h:form>
+							<h:form>
+								<h:panelGrid columns="2">
+									<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+										library="images" name="usu.png" />
+
 									<h:outputLabel
 										value=" #{templateController.usuarioLogado.nome}"
 										class="font-weight-bold mb-3" />
-
-								</h:form>
-							</h:panelGrid>
-							<li><a href="menu.xhtml">Início</a></li>
-							<li><a href="buscarpaciente.xhtml" data-toggle="collapse"
-								aria-expanded="false">Buscar Paciente</a></li>
-							<li class="active"><a href="cadastrousuario.xhtml">Cadastrar
-									Usuário</a></li>
-							<li><a href="cadastrardepartamento.xhtml">Cadastrar
-									Departamento</a></li>
-							<li><a href="buscardepartamento.xhtml">Buscar
-									Departamento</a></li>
-							<li><h:commandLink value="Sair"
-									action="#{templateController.encerrarSessao}" class="nav-link" /></li>
-
+								</h:panelGrid>
+								<li ><a href="index.xhtml">Início</a></li>
+								<li><a href="buscarusuario.xhtml" data-toggle="collapse"
+									aria-expanded="false">Gerenciar Usuários</a></li>
+								<li><a href="buscardepartamento.xhtml">Gerenciar
+										Departamentos</a></li>
+								<li class="active"><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
+								<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+								<li><a href="perfil.xhtml">Alterar Senha</a></li>
+								<li><h:commandLink value="Sair"
+										action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+							</h:form>
 						</ul>
 
 
@@ -98,7 +95,7 @@
 												actionListener="#{listaBuscaController.editar}"
 												styleClass="form-control pr-5 mr-5" />
 										</h:panelGrid>
-										
+
 									</h:panelGrid>
 								</h:panelGrid>
 								<h:messages id="messages" infoStyle="color:green"

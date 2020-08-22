@@ -45,14 +45,13 @@
 
 					</h:panelGrid>
 					<li><a href="index.xhtml">Início</a></li>
-					<li class="active"><a href="buscarusuario.xhtml"
-						data-toggle="collapse" aria-expanded="false">Gerenciar
-							Usuários</a></li>
+					<li><a href="buscarusuario.xhtml" data-toggle="collapse"
+						aria-expanded="false">Gerenciar Usuários</a></li>
 					<li><a href="buscardepartamento.xhtml">Gerenciar
 							Departamentos</a></li>
 					<li><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
 					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
-					<li><a href="perfil.xhtml">Alterar Senha</a></li>
+					<li class="active"><a href="perfil.xhtml">Alterar Senha</a></li>
 					<li><h:commandLink value="Sair"
 							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
 				</h:form>
@@ -116,24 +115,21 @@
 
 											<h:panelGrid columns="1" class="text-left">
 
-												<h:panelGrid columns="1" >
+												<h:panelGrid columns="1">
 													<h:outputLabel value="Senha " />
-													<h:inputSecret
-														value="#{perfilController.senha}"
+													<h:inputSecret value="#{perfilController.senha}"
 														styleClass="form-control" size="77" />
 												</h:panelGrid>
 
 												<h:panelGrid columns="1" class="mt-3">
 													<h:outputLabel value="Nova senha " />
-													<h:inputSecret
-														value="#{perfilController.senhanova}"
+													<h:inputSecret value="#{perfilController.senhanova}"
 														styleClass="form-control" size="77" />
 												</h:panelGrid>
-												
+
 												<h:panelGrid columns="1" class="mt-3">
 													<h:outputLabel value="Confirmar nova senha " />
-													<h:inputSecret
-														value="#{perfilController.confirmar}"
+													<h:inputSecret value="#{perfilController.confirmar}"
 														styleClass="form-control" size="77" />
 												</h:panelGrid>
 
