@@ -38,29 +38,25 @@
 				<h3 class="font-weight-bold">Menu</h3>
 			</div>
 
-			<ul class="list-unstyled components">
-				<h:panelGrid columns="2">
-					<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
-						library="images" name="usu.png" />
-					<h:form>
+		<ul class="list-unstyled components">
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+							library="images" name="usu.png" />
+
 						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
 							class="font-weight-bold mb-3" />
-
-					</h:form>
-				</h:panelGrid>
-				<li><a href="templateadministrador.xhtml">Início</a></li>
-				<li><a href="cadastrousuario.xhtml">Cadastrar Usuário</a></li>
-				<li class="active"><a href="buscarusuario.xhtml"
-					data-toggle="collapse" aria-expanded="false">Buscar Usuário</a></li>
-				<li><a href="cadastrardepartamento.xhtml">Cadastrar
-						Departamento</a></li>
-				<li><a href="consultadepartamento.xhtml">Buscar
-						Departamento</a></li>
-				<li><a href="cadastropaciente.xhtml">Cadastrar Paciente</a></li>
-				<li><a href="buscarpaciente.xhtml">Buscar Paciente</a></li>
-				<li><a href="transferencia.xhtml">Transferência de Paciente</a></li>
-				<li><h:commandLink value="Sair"
-						action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+					</h:panelGrid>
+					<li><a href="index.xhtml">Início</a></li>
+					<li><a href="buscarusuario.xhtml" data-toggle="collapse"
+						aria-expanded="false">Gerenciar Usuários</a></li>
+					<li><a href="buscardepartamento.xhtml">Gerenciar Departamentos</a></li>
+					<li class="active"><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
+					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+					<li><a href="perfil.xhtml">Alterar Senha</a></li>
+					<li><h:commandLink value="Sair"
+							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+				</h:form>
 			</ul>
 			</nav>
 		</div>
