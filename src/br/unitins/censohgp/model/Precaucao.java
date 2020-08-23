@@ -65,8 +65,4 @@ public class Precaucao {
 		this.nome = nome;
 	}
 
-	
-	
-	
-
 }
