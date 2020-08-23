@@ -3,16 +3,7 @@ package br.unitins.censohgp.model;
 public class EstadoDepartamento {
 	private Integer idestado;
 	private String estado;
-	public EstadoDepartamento() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public EstadoDepartamento(Integer idestado, String estado) {
-		super();
-		this.idestado = idestado;
-		this.estado = estado;
-	}
-	
+		
 	@Override
 	public String toString() {
 	    return String.format("idestado", getIdestado());

@@ -16,22 +16,6 @@ public class HistoricoTransferencia {
 	//adicionar uma data para armazenamento aq no model para puchar 
 	
 	
-	public HistoricoTransferencia() {
-		super();
-	}
-
-	public HistoricoTransferencia(Integer idTransferencia, Integer idTipoDeTrnasferencia, Integer idLocalOrigem, LocalDate dataHora,Integer idLocalDestino,
-			Integer idPaciente, Integer idUsuario, String observasao) {
-		super();
-		this.idTransferencia = idTransferencia;
-		this.idTipoDeTrnasferencia = idTipoDeTrnasferencia;
-		this.idLocalDestino = idLocalDestino;
-		this.idPaciente = idPaciente;
-		this.idUsuario = idUsuario;
-		this.idLocalOrigem = idLocalOrigem;
-		this.observasao = observasao;
-	}
-
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		try {

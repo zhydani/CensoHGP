@@ -224,14 +224,14 @@
 												</h:commandLink>
 											</p:column>
 											<p:column style="width:20px">
-												<p:commandLink
-													action="#{buscaPacienteController.excluir(obj.idpaciente)}">
+												<h:commandLink
+													action="#{buscaPacienteController.buscarChecklist(obj.idpaciente)}">
 													<h:graphicImage style="width: 25px" library="images"
 														value="editar" name="botao_excluir.png">
 													</h:graphicImage>
 													<f:ajax execute="formPrincipal"
 														render="formPrincipal:dataTable" />
-												</p:commandLink>
+												</h:commandLink>
 											</p:column>
 											<p:column style="width:20px">
 												<h:commandLink

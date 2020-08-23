@@ -1,7 +1,6 @@
 package br.unitins.censohgp.controller;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +10,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.censohgp.application.Util;
-import br.unitins.censohgp.dao.DAO;
-import br.unitins.censohgp.dao.DepartamentoDAO;
 import br.unitins.censohgp.dao.PacienteDAO;
-import br.unitins.censohgp.model.Departamento;
 import br.unitins.censohgp.model.Paciente;
-
 
 @Named
 @ViewScoped
@@ -57,6 +52,7 @@ public class BuscaPacienteController implements Serializable {
 		listaPaciente = null;
 		getListaPacienteBusca();
 	}
+
 	public String checklist(int idpaciente) {
 		PacienteDAO dao = new PacienteDAO();
 		paciente = dao.findById(idpaciente);
@@ -65,6 +61,7 @@ public class BuscaPacienteController implements Serializable {
 
 		return "checklistpaciente.xhtml?faces-redirect=true";
 	}
+
 	public String editar(int idpaciente) {
 		PacienteDAO dao = new PacienteDAO();
 		paciente = dao.findById(idpaciente);
@@ -74,26 +71,25 @@ public class BuscaPacienteController implements Serializable {
 		return "alterarpaciente.xhtml?faces-redirect=true";
 	}
 
-	public boolean excluir(int idpaciente) {
-		DAO<Paciente> dao = new PacienteDAO();
-		try {
-			dao.delete(idpaciente);
-			dao.getConnection().commit();
-			Util.addMessageInfo("Exclusao realizada com sucesso.");
-			listaBusca = null;
-			getListaPacienteBusca();
-			return true;
-		} catch (SQLException e) {
-			dao.rollbackConnection();
-			Util.addMessageInfo("Erro ao excluir o Produto no Banco de Dados.");
-			e.printStackTrace();
-			return false;
-		} finally {
-			listaBusca = null;
-			getListaPacienteBusca();
-			dao.closeConnection();
-		}
+//	public BuscaPacienteController() {
+//
+//		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+//		flash.keep("pacienteFlash");
+//		paciente = (Paciente) flash.get("pacienteFlash");
+//	}
+
+	public String buscarChecklist(int idpaciente) {
+		PacienteDAO dao = new PacienteDAO();
+		paciente = dao.findById(idpaciente);
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.put("pacienteFlash", paciente);
+
+		System.out.println("entreiIIIIIIIIi no buscar checklist");
+		System.out.println("id paciente:" + paciente.toString());
+		return "buscarchecklist.xhtml?faces-redirect=true";
+		
 	}
+
 
 	public List<Paciente> getListaPaciente() {
 		if (listaBusca == null)
@@ -148,7 +144,7 @@ public class BuscaPacienteController implements Serializable {
 	public void limpar() {
 		pesquisa = null;
 	}
-	
+
 	public void fazerCadastro() {
 		Util.redirect("cadastropaciente.xhtml");
 	}

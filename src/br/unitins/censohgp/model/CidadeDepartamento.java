@@ -5,21 +5,6 @@ public class CidadeDepartamento {
 	private String cidade;
 	private Integer idcidadeEstado;
 	private EstadoDepartamento estado;
-	public CidadeDepartamento() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public CidadeDepartamento(Integer idcidade, String cidade, Integer idcidadeEstado, EstadoDepartamento estado) {
-		super();
-		this.idcidade = idcidade;
-		this.cidade = cidade;
-		this.idcidadeEstado = idcidadeEstado;
-		this.estado = estado;
-	}
-
-
 
 	@Override
 	public String toString() {
@@ -38,7 +23,6 @@ public class CidadeDepartamento {
 		return null;
 		
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

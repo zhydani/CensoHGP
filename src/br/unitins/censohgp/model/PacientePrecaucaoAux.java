@@ -1,31 +1,14 @@
 package br.unitins.censohgp.model;
 
 public class PacientePrecaucaoAux {
-	
+
 	private Integer idprecaucaoPaciente;
 	private Precaucao idprecaucao;
 	private Paciente idpaciente;
-	public PacientePrecaucaoAux() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-
-	public PacientePrecaucaoAux(Integer idprecaucaoPaciente, Precaucao idprecaucao, Paciente idpaciente) {
-		super();
-		this.idprecaucaoPaciente = idprecaucaoPaciente;
-		this.idprecaucao = idprecaucao;
-		this.idpaciente = idpaciente;
-	}
-
-
-
 
 	@Override
 	public Precaucao clone() {
-		
+
 		try {
 			return (Precaucao) super.clone();
 		} catch (CloneNotSupportedException e) {
@@ -33,7 +16,7 @@ public class PacientePrecaucaoAux {
 			System.out.println("Erro ao clonar.");
 		}
 		return null;
-		
+
 	}
 
 	@Override
@@ -63,47 +46,28 @@ public class PacientePrecaucaoAux {
 		return true;
 	}
 
-
-
-
 	public Integer getIdprecaucaoPaciente() {
 		return idprecaucaoPaciente;
 	}
-
-
-
 
 	public void setIdprecaucaoPaciente(Integer idprecaucaoPaciente) {
 		this.idprecaucaoPaciente = idprecaucaoPaciente;
 	}
 
-
-
-
 	public Precaucao getIdprecaucao() {
 		return idprecaucao;
 	}
-
-
-
 
 	public void setIdprecaucao(Precaucao idprecaucao) {
 		this.idprecaucao = idprecaucao;
 	}
 
-
-
-
 	public Paciente getIdpaciente() {
 		return idpaciente;
 	}
 
-
-
-
 	public void setIdpaciente(Paciente idpaciente) {
 		this.idpaciente = idpaciente;
 	}
-
 
 }

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Paciente {
-
 	private Integer idpaciente;
 	private String nome;
 	private String cpf;
@@ -19,30 +18,6 @@ public class Paciente {
 	private String numeroProntuario;
 	private List<Precaucao> precaucoes;
 	private TipoSexo tipoSexo;
-
-	public Paciente() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Paciente(Integer idpaciente, String nome, String cpf, String rg, Situacao situacao, Boolean ativo, String nomeMae,
-			Sexo sexo, LocalDate dataNascimento, String observacao, Departamento idlocalTransferencia,
-			String numeroProntuario, List<Precaucao> precaucoes) {
-		super();
-		this.idpaciente = idpaciente;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.rg = rg;
-		this.situacao = situacao;
-		this.ativo = ativo;
-		this.nomeMae = nomeMae;
-		this.sexo = sexo;
-		this.dataNascimento = dataNascimento;
-		this.observacao = observacao;
-		this.idlocalTransferencia = idlocalTransferencia;
-		this.numeroProntuario = numeroProntuario;
-		this.precaucoes = precaucoes;
-	}
 
 
 	@Override

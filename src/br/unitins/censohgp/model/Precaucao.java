@@ -4,16 +4,6 @@ public class Precaucao {
 	
 	private Integer idprecaucao;
 	private String nome ;
-	public Precaucao() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Precaucao(Integer idprecaucao, String nome) {
-		super();
-		this.idprecaucao = idprecaucao;
-		this.nome = nome;
-	}
 
 	@Override
 	public Precaucao clone() {
