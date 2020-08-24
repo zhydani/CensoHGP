@@ -22,11 +22,6 @@ public class BuscaChecklistController implements Serializable {
 	private static final long serialVersionUID = -9042867479794257960L;
 	private List<Checklist> listaChecklist = null;
 	private Paciente paciente;
-	private List<Usuario> listaUsuario = null;
-
-	public void setListaUsuario(List<Usuario> listaUsuario) {
-		this.listaUsuario = listaUsuario;
-	}
 
 	public Paciente getPaciente() {
 
@@ -61,24 +56,14 @@ public class BuscaChecklistController implements Serializable {
 	public List<Checklist> getListaChecklist() {
 		if (listaChecklist == null)
 			listaChecklist = new ArrayList<Checklist>();
-		System.out.println(getPaciente().getIdpaciente());
 		ChecklistDAO dao = new ChecklistDAO();
 		listaChecklist = dao.findByIdPaciente(getPaciente().getIdpaciente());
+		System.out.println(listaChecklist.toString());
 		dao.closeConnection();
-//		System.out.println("imprimindo a lista:");
-//		System.out.println(listaChecklist.toString());
 		return listaChecklist;
 	}
 
-	public List<Usuario> getListaUsuario() {
-		if (listaUsuario == null) {
-			listaUsuario = new ArrayList<Usuario>();
-		}
-		for (Checklist checklist : listaChecklist) {
-			UsuarioDAO dao = new UsuarioDAO();
-			listaUsuario.add(dao.findId(checklist.getUsuario().getId()));
-		}
-
-		return listaUsuario;
+	public String visualizarChecklist(Integer idChecklist) {
+		return null;
 	}
 }

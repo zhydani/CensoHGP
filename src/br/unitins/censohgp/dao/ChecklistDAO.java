@@ -119,9 +119,10 @@ public class ChecklistDAO extends DAO<Checklist> {
 			return null;
 
 		try {
-			PreparedStatement stat = conn.prepareStatement("SELECT " + " idchecklist, " + " observacao," + " idusuario,"
-					+ " data_hora," + " idpaciente" + " FROM " + " checklist" + "  WHERE idpaciente = ? ");
-
+			PreparedStatement stat = conn.prepareStatement("SELECT " + " c.idchecklist, " + " c.observacao,"
+					+ " c.idusuario," + " c.data_hora," + " c.idpaciente," + " u.idusuario as usuario," + " u.nome"
+					+ " FROM " + " public.checklist c," + "  public.usuario u " + "  WHERE c.idpaciente = ?"
+					+ " AND c.idusuario = u.idusuario");
 			stat.setInt(1, idPaciente);
 
 			ResultSet rs = stat.executeQuery();
@@ -139,10 +140,14 @@ public class ChecklistDAO extends DAO<Checklist> {
 				if (checklist.getUsuario() == null)
 					checklist.setUsuario(new Usuario());
 				checklist.getUsuario().setId(rs.getInt("idusuario"));
+				checklist.getUsuario().setNome(rs.getString("nome"));
+				System.out.println(checklist.getUsuario().toString());
+				System.out.println("entrei no checklist dao!!!");
 				listaChecklist.add(checklist);
 			}
 			if (listaChecklist.isEmpty())
 				return null;
+			System.out.println(listaChecklist.toString());
 			return listaChecklist;
 
 		} catch (SQLException e) {
