@@ -6,17 +6,6 @@ public class Incidente {
 	private String descricao;
 	private boolean ativo;
 
-	public Incidente() {
-		super();
-	}
-
-	public Incidente(Integer idincidente, String nome, String descricao, boolean ativo) {
-		super();
-		this.idincidente = idincidente;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.ativo = ativo;
-	}
 
 	public Integer getIdincidente() {
 		return idincidente;

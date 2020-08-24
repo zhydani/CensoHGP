@@ -47,9 +47,10 @@
 						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
 							class="font-weight-bold mb-3" />
 					</h:panelGrid>
-					<li class="active"><a href="index.xhtml">Início</a></li>
+					<li><a href="index.xhtml">Início</a></li>
 					<li><a href="checklistpaciente.xhtml">Gerar Checklist</a></li>
-					<li class="active"><a href="buscarpaciente.xhtml">Gerenciar Pacientes</a></li>
+					<li class="active"><a href="buscarpaciente.xhtml">Gerenciar
+							Pacientes</a></li>
 					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
 					<li><a href="buscardepartamento.xhtml">Gerenciar
 							Departamentos</a></li>
@@ -80,8 +81,8 @@
 									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
 									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-										<li class="nav-item"><a href="consultausuario.xhtml"
-											class="nav-link">Busca de Paciente</a></li>
+										<li class="nav-item"><a href="index.xhtml"
+											class="nav-link">Início</a></li>
 
 									</ul>
 
@@ -96,7 +97,7 @@
 						name="conteudo">
 
 						<h:form id="formPrincipal">
-						<div class="border-left mb-4 ml-3">
+							<div class="border-left mb-4 ml-3">
 								<h4 class="ml-3 py-2 font-weight-bold">Buscar Paciente</h4>
 							</div>
 							<h:panelGrid columns="1"
@@ -106,10 +107,9 @@
 									<h:selectOneMenu id="console"
 										class="form-control pr-3 d-flex  mr-5"
 										value="#{buscaPacienteController.console}"
-										unselectable="false"
-										required="true" 
+										unselectable="false" required="true"
 										requiredMessage="Por favor selecione um tipo de busca!">
-										<f:selectItem  itemLabel="selecione..." itemValue="#{null}" />
+										<f:selectItem itemLabel="selecione..." itemValue="#{null}" />
 										<f:selectItem itemLabel="Nome" itemValue="1" />
 										<f:selectItem itemLabel="CPF" itemValue="2" />
 										<f:selectItem itemLabel="Número do Prontuário" itemValue="3" />
@@ -117,13 +117,12 @@
 									</h:selectOneMenu>
 
 
-										<h:inputText
-											value="#{buscaPacienteController.pesquisa}"
-											styleClass="form-control pr-3 d-flex " size="55"
-											marin-left="10">
-											<f:passThroughAttribute name="placeholder"
-												value="Digite o nome do paciente" />
-										</h:inputText>
+									<h:inputText value="#{buscaPacienteController.pesquisa}"
+										styleClass="form-control pr-3 d-flex " size="55"
+										marin-left="10">
+										<f:passThroughAttribute name="placeholder"
+											value="Digite o nome do paciente" />
+									</h:inputText>
 
 
 									<h:commandButton value="Buscar"
@@ -142,105 +141,112 @@
 										<f:ajax render="@form" execute="@this" />
 									</h:commandButton>
 								</h:panelGrid>
-								
-								
-								<p:spacer width="100" height="30" />
-								<div class="container d-flex justify-content-center">
-								<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
-								
-										<p:dataTable value="#{buscaPacienteController.listaPaciente}" 										
+
+
+								<div class="container mt-2 d-flex justify-content-center">
+									<p:growl id="msgs" showDetail="true"
+										skipDetailIfEqualsSummary="true" />
+
+									<p:dataTable value="#{buscaPacienteController.listaPaciente}"
 										var="obj" rows="5" styleClass="table" paginator="true"
-										resizableColumns="true" style="margin-bottom:20px; font-size:15px;"
-										emptyMessage="Nenhum registro."
-										paginatorAlwaysVisible="false"
+										resizableColumns="true"
+										style="margin-bottom:20px; font-size:15px;"
+										emptyMessage="Nenhum registro." paginatorAlwaysVisible="false"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
-										rowsPerPageTemplate="5,10,15"
-											>
-										
-								<f:facet name="header">
+										rowsPerPageTemplate="5,10,15">
+
+										<f:facet name="header">
             						Resultado da Busca
        							</f:facet>
-											<tbody>
-												<td>
-													<td>
-													
-													<p:column style="width:150px; font-size:15px;" >
-															<f:facet name="header" >Numero Prontuario</f:facet>
-															<h:outputText value="#{obj.numeroProntuario}">
-															</h:outputText>
-														</p:column></td>
-												</td>
-												<p:column style="width:172px; font-size:15px;" >
-													<f:facet name="header">Nome</f:facet>
-													<h:outputText value="#{obj.nome}">
-													</h:outputText>
-												</p:column>
+										<tbody>
+											<td>
+												<td><p:column style="width:80px; font-size:15px;">
+														<f:facet name="header">Prontuário</f:facet>
+														<h:outputText value="#{obj.numeroProntuario}">
+														</h:outputText>
+													</p:column></td>
+											</td>
+											<p:column style="width:172px; font-size:15px;">
+												<f:facet name="header">Nome</f:facet>
+												<h:outputText value="#{obj.nome}">
+												</h:outputText>
+											</p:column>
 
-												<p:column style="width:85px; font-size:15px;">
-													<f:facet name="header">CPF</f:facet>
-													<h:outputText value="#{obj.cpf}">
-													</h:outputText>
-												</p:column>
+											<p:column style="width:85px; font-size:15px;">
+												<f:facet name="header">CPF</f:facet>
+												<h:outputText value="#{obj.cpf}">
+												</h:outputText>
+											</p:column>
 
-												<p:column style="width:60px; font-size:15px;">
-													<f:facet name="header">RG</f:facet>
-													<h:outputText value="#{obj.rg}">
-													</h:outputText>
-												</p:column>
+											<p:column style="width:60px; font-size:15px;">
+												<f:facet name="header">RG</f:facet>
+												<h:outputText value="#{obj.rg}">
+												</h:outputText>
+											</p:column>
 
-												<p:column style="width:130px; font-size:15px;">
-													<f:facet name="header">Data de Nascimento</f:facet>
-													<h:outputText value="#{obj.dataNascimento}">
-													</h:outputText>
-												</p:column>
+											<p:column style="width:130px; font-size:15px;">
+												<f:facet name="header">Data de Nascimento</f:facet>
+												<h:outputText value="#{obj.dataNascimento}">
+												</h:outputText>
+											</p:column>
 
-												<p:column style="width:105px; font-size:15px;">
-													<f:facet name="header">Nome da Mãe</f:facet>
-													<h:outputText value="#{obj.nomeMae}">
+											<p:column style="width:105px; font-size:15px;">
+												<f:facet name="header">Nome da Mãe</f:facet>
+												<h:outputText value="#{obj.nomeMae}">
+												</h:outputText>
+											</p:column>
+
+											<p:column style="width:16px">
+												<p:rowToggler />
+											</p:column>
+
+											<p:rowExpansion>
+												<p:panelGrid columns="1" columnClasses="value">
+													<f:facet name="header">
+														<p:graphicImage style="width: 55px"
+															name="images/observacao.png" />
+													</f:facet>
+													<h:outputText value="#{obj.observacao}">
 													</h:outputText>
-												</p:column>
-												
-												<p:column style="width:16px">
-            									<p:rowToggler />
-       											 </p:column>
-												
-												 <p:rowExpansion>
-           										 <p:panelGrid  columns="1" columnClasses="value">
-              									 <f:facet name="header">
-                  								 <p:graphicImage style="width: 55px" name="images/observacao.png"/> 
-               									 </f:facet>
-               									<h:outputText value="#{obj.observacao}">
-              									 </h:outputText>
-          										  </p:panelGrid>
-       											 </p:rowExpansion>
-												
-												
-												<p:column style="width:20px">
-													<h:commandLink
-														action="#{buscaPacienteController.editar(obj.idpaciente)}">
-														<h:graphicImage style="width: 25px" library="images"
-															value="editar" name="botao_editar.png">
-														</h:graphicImage>
-														<f:ajax execute="formPrincipal:dataTable"
-															render="formPrincipal" />
-													</h:commandLink>
-												</p:column>
-												
-												<p:column style="width:20px">
-													<h:commandLink
-														action="#{buscaPacienteController.checklist(obj.idpaciente)}">
-														<h:graphicImage style="width: 25px" library="images"
-															value="editar" name="botao_checklist.png">
-														</h:graphicImage>
-														<f:ajax execute="formPrincipal"
-															render="formPrincipal:dataTable" />
-													</h:commandLink>
-												</p:column>
-											</tbody>
-											
-										
-										</p:dataTable>
+												</p:panelGrid>
+											</p:rowExpansion>
+
+
+											<p:column style="width:20px">
+												<h:commandLink
+													action="#{buscaPacienteController.editar(obj.idpaciente)}">
+													<h:graphicImage style="width: 25px" library="images"
+														value="editar" name="botao_editar.png">
+													</h:graphicImage>
+													<f:ajax execute="formPrincipal:dataTable"
+														render="formPrincipal" />
+												</h:commandLink>
+											</p:column>
+											<p:column style="width:20px">
+												<h:commandLink
+													action="#{buscaPacienteController.buscarChecklist(obj.idpaciente)}">
+													<h:graphicImage style="width: 25px" library="images"
+														value="editar" name="botao_excluir.png">
+													</h:graphicImage>
+													<f:ajax execute="formPrincipal"
+														render="formPrincipal:dataTable" />
+												</h:commandLink>
+											</p:column>
+											<p:column style="width:20px">
+												<h:commandLink
+													action="#{buscaPacienteController.checklist(obj.idpaciente)}">
+													<h:graphicImage style="width: 25px" library="images"
+														value="editar" name="botao_checklist.png">
+													</h:graphicImage>
+													<f:ajax execute="formPrincipal"
+														render="formPrincipal:dataTable" />
+												</h:commandLink>
+											</p:column>
+										</tbody>
+
+
+									</p:dataTable>
 
 								</div>
 							</h:panelGrid>

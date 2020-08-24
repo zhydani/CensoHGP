@@ -5,21 +5,9 @@ public class Sexo {
 	private Integer idsexo;
 	private String nome;
 
-	public Sexo() {
-
-		super();
-
-	}
-
-	public Sexo(Integer idsexo, String nome) {
-		super();
-		this.idsexo = idsexo;
-		this.nome = nome;
-	}
-	
 	@Override
 	public String toString() {
-	    return String.format("idsexo", getIdsexo());
+		return String.format("idsexo", getIdsexo());
 	}
 
 	@Override
@@ -72,6 +60,5 @@ public class Sexo {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 }

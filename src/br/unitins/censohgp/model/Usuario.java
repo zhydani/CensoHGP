@@ -21,10 +21,6 @@ public class Usuario implements Cloneable {
 	private Boolean ativo = Boolean.TRUE;
 	private TipoUsuario tipousuario;
 
-	public Usuario() {
-		super();
-	}
-
 	@Override
 	public Usuario clone() {
 		try {
@@ -39,25 +35,6 @@ public class Usuario implements Cloneable {
 	@Override
 	public String toString() {
 		return String.format("id", getId());
-	}
-
-	public Usuario(Integer id, Tipo tipo,
-			@NotEmpty(message = "O campo Nome nao pode ser vazio") @Size(max = 60, message = "O campo Nome deve conter no maximo 60 caracteres") String nome,
-			@Email String email,
-			@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres") String senha1,
-			@Size(min = 6, max = 30, message = "A senha deve conter entre 6 e 30 caracteres") String senha2,
-			@NotEmpty(message = "O campo Matricula nao pode ser vazio") String matricula, Boolean ativo,
-			TipoUsuario tipousuario) {
-		super();
-		this.id = id;
-		this.tipo = tipo;
-		this.nome = nome;
-		this.email = email;
-		this.senha1 = senha1;
-		this.senha2 = senha2;
-		this.matricula = matricula;
-		this.ativo = ativo;
-		this.tipousuario = tipousuario;
 	}
 
 	@Override

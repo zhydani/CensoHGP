@@ -21,6 +21,8 @@
 	<h:outputStylesheet library="css" name="template.css" />
 	<link rel="shortcut icon" type="image/x-icon"
 		href="#{resource['images/favicon.ico']}" />
+		
+
 </h:head>
 <h:body>
 	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
@@ -105,10 +107,7 @@
 						name="conteudo">
 						<div class="container d-flex justify-content-center">
 							<h:form id="formPrincipal" class="">
-								<h:messages id="messages" infoStyle="color:green"
-									warnStyle="color:orange" errorStyle="color:red"
-									globalOnly="false" />
-
+								<p:growl id="growl" showDetail="true" life="5000" />
 								<div>
 									<div class="border-left mb-4 ml-3">
 										<h:panelGrid columns="2">
@@ -117,7 +116,7 @@
 												Paciente</h4>
 										</h:panelGrid>
 									</div>
-									<div class="mt-3 ml-4">
+									<div class="mt-3 ml-4 mb-5 pb-5">
 
 										<h:panelGrid id="panelPrincipal">
 											<h:panelGrid columns="1" class="d-flex justify-content-start">
@@ -128,10 +127,10 @@
 													<h:inputText id="name"
 														value="#{cadastroPacienteController.paciente.nome}"
 														styleClass="form-control pr-3 d-flex justify-content-start"
-														size="97" />
+														size="103" />
 												</h:panelGrid>
 
-												<h:panelGrid id="gridCPF" columns="3" class="text-left mb-4">
+												<h:panelGrid id="gridCPF" columns="3" class="text-left mb-4 mt-4">
 													<h:panelGrid columns="1" class="mr-4">
 														<h:outputLabel value="CPF: " />
 														<p:inputMask
@@ -147,7 +146,7 @@
 															styleClass="form-control pr-3 d-flex justify-content-start"
 															size="24" />
 													</h:panelGrid>
-													<h:panelGrid id="gridData" columns="1" class="mr-4">
+													<h:panelGrid id="gridData" columns="1" >
 														<h:outputLabel value="Data de Nascimento: " />
 														<p:inputMask style="color: black; background: white; "
 															value="#{cadastroPacienteController.paciente.dataNascimento}"
@@ -167,13 +166,13 @@
 															styleClass="form-control pr-3 d-flex justify-content-start"
 															size="64" />
 													</h:panelGrid>
-													<h:panelGrid id="gridSexo" columns="1" class="mr-4">
+													<h:panelGrid id="gridSexo" columns="1" >
 														<h:outputLabel value="Gênero do paciente: " />
-														<h:selectOneMenu class="btn btn-outline-dark"
+														<h:selectOneMenu class="form-control"
 															value="#{cadastroPacienteController.paciente.tipoSexo}"
-															converter="omnifaces.SelectItemsConverter">
+															converter="omnifaces.SelectItemsConverter" style="width: 250px;">
 															<f:selectItem noSelectionOption="true"
-																itemLabel="Selecione o sexo..." />
+																itemLabel="Selecione o gênero..." />
 															<f:selectItems
 																value="#{cadastroPacienteController.listaTipoSexo}"
 																var="tipoSexo" itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.label}" />
@@ -183,11 +182,11 @@
 											</h:panelGrid>
 
 											<h:panelGrid id="gridPront" columns="2" class="text-left mb-4">
-												<h:panelGrid columns="1" class="mr-4">
+												<h:panelGrid columns="1" class="mr-4 ">
 													<h:outputLabel value="Número do Prontuário: " />
 													<h:inputText
 														value="#{cadastroPacienteController.paciente.numeroProntuario}"
-														styleClass="form-control pr-3 d-flex justify-content-start"
+														styleClass="form-control pr-3 d-flex justify-content-start mb-4"
 														size="64" />
 													<h:outputLabel value="Observações: " />
 													<h:inputTextarea rows="3" cols="22"
@@ -196,7 +195,7 @@
 														size="64" />
 
 												</h:panelGrid>
-												<h:panelGrid id="gridPrec" columns="1" class="mr-4">
+												<h:panelGrid id="gridPrec" columns="1" >
 													<h:outputLabel value="Precauções: " />
 													<p:selectManyCheckbox id="grid"
 														converter="omnifaces.SelectItemsConverter"
@@ -208,12 +207,19 @@
 													</p:selectManyCheckbox>
 												</h:panelGrid>
 											</h:panelGrid>
+											
 											<h:panelGrid id="gridSitu" columns="2" class="text-left mb-4">
 												<h:panelGrid columns="1" class="mr-4">
 													<h:outputLabel value="Situação do paciente: " />
+<<<<<<< HEAD
 													<h:selectOneMenu class="btn btn-outline-dark"
 														value="#{cadastroPacienteController.paciente.situacao}">
 														<f:converter converterId="SituacaoConverter"/>
+=======
+													<h:selectOneMenu class="form-control"
+														converter="omnifaces.SelectItemsConverter"
+														value="#{cadastroPacienteController.paciente.situacao}" style="width: 380px;">
+>>>>>>> branch 'master' of https://github.com/zhydani/CensoHGP
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione a Situação do Paciente ..." />
 														<f:selectItems
@@ -221,11 +227,17 @@
 															var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
 													</h:selectOneMenu>
 												</h:panelGrid>
-												<h:panelGrid id="gridDep" columns="1" class="mr-4">
+												<h:panelGrid id="gridDep" columns="1" >
 													<h:outputLabel value="Departamento: " />
+<<<<<<< HEAD
 													<h:selectOneMenu class="btn btn-outline-dark"
 														value="#{cadastroPacienteController.paciente.idlocalTransferencia}">
 														<f:converter converterId="DepartamentoConverter"/>
+=======
+													<h:selectOneMenu class="form-control"
+														converter="omnifaces.SelectItemsConverter"
+														value="#{cadastroPacienteController.paciente.idlocalTransferencia}" style="width: 390px;">
+>>>>>>> branch 'master' of https://github.com/zhydani/CensoHGP
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione o Departamento do Paciente ..." />
 														<f:selectItems
@@ -238,22 +250,22 @@
 										<br />
 										<div class="mt-2 d-flex justify-content-end">
 											<h:panelGrid>
-												<h:commandButton value="Incluir" class="btn btn-azul mr-3"
+												<h:commandButton value="Limpar " class="btn btn-amarelo mr-3"
+													action="#{cadastroPacienteController.limpar()}">
+													<f:ajax render="gridNome gridCPF gridRG gridData gridMae gridSexo gridPront gridPrec gridSitu gridDep"
+														execute="@none" />
+												</h:commandButton>
+											</h:panelGrid>
+											<h:panelGrid>
+												<h:commandButton value="Incluir" class="btn btn-azul "
 													disabled="#{cadastroPacienteController.paciente.idpaciente != null}"
 													action="#{cadastroPacienteController.incluir()}">
 													<f:ajax render="formPrincipal" execute="panelPrincipal"
 														resetValues="true" />
 												</h:commandButton>
 											</h:panelGrid>
-											<h:panelGrid>
-												<h:commandButton value="Limpar " class="btn btn-amarelo"
-													action="#{cadastroPacienteController.limpar()}">
-													<f:ajax render="gridNome gridCPF gridRG gridData gridMae gridSexo gridPront gridPrec gridSitu gridDep"
-														execute="@none" />
-												</h:commandButton>
-											</h:panelGrid>
 										</div>
-										<br /> <br /> <br />
+										
 									</div>
 
 								</div>
@@ -275,5 +287,6 @@
 			window.history.back();
 		}
 	</script>
+	
 </h:body>
 </html>
