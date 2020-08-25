@@ -336,13 +336,17 @@ public class UsuarioDAO extends DAO<Usuario> {
 				usuario.setEmail(rs.getString("email"));
 
 			}
+			
+			if(usuario == null ) {
+				return false;
+			}
 
-			return true;
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
 
 }

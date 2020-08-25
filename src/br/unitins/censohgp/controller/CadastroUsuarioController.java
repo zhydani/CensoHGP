@@ -58,7 +58,8 @@ public class CadastroUsuarioController implements Serializable {
 		if (validarDados()) {
 			DAO<Usuario> dao = new UsuarioDAO();
 			// faz a inclusao no banco de dados
-			if(validarMatricula(getUsuario().getMatricula())) {
+			System.out.println("existe matricula 2?" + validarMatricula(getUsuario().getMatricula()));
+			if(validarMatricula(getUsuario().getMatricula()) == true) {
 				try {
 //					String hashSenha = Util.hashSHA256(getUsuario().getSenha());
 //					getUsuario().setSenha(hashSenha);
@@ -143,7 +144,8 @@ public class CadastroUsuarioController implements Serializable {
 	
 	private boolean validarMatricula(String matricula) {
 		UsuarioDAO dao = new UsuarioDAO();
-		if (dao.findMatricula(matricula)) {
+		System.out.println("existe matricula?" + dao.findMatricula(matricula));
+		if (dao.findMatricula(matricula) == true) {
 			Util.addMessageError("Já existe um usuário com esta matrícula.");
 			return false;
 		}
