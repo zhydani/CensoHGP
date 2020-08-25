@@ -4,28 +4,11 @@ public class Tipo {
 	private Integer id;
 	private String nome;
 
-	public Tipo() {
-
-		super();
-
-	}
-
-	
-	
-	public Tipo(Integer id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
-	}
-
-
-
 	@Override
 	public String toString() {
-	    return String.format("id", getId());
+		return String.format("id", getId());
 	}
 
-	
 	@Override
 	public Tipo clone() {
 
@@ -36,7 +19,6 @@ public class Tipo {
 			System.out.println("Erro ao clonar.");
 		}
 		return null;
-
 	}
 
 	@Override
@@ -61,19 +43,13 @@ public class Tipo {
 		return true;
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}
 
-
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 
 	public String getNome() {
 		return nome;

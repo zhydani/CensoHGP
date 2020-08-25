@@ -13,8 +13,9 @@ import java.util.List;
 import br.unitins.censohgp.model.Checklist;
 import br.unitins.censohgp.model.FatorRisco;
 import br.unitins.censohgp.model.Incidente;
-import br.unitins.censohgp.model.Precaucao;
+import br.unitins.censohgp.model.Paciente;
 import br.unitins.censohgp.model.Procedimento;
+import br.unitins.censohgp.model.Usuario;
 
 public class ChecklistDAO extends DAO<Checklist> {
 
@@ -32,7 +33,7 @@ public class ChecklistDAO extends DAO<Checklist> {
 	public void create(Checklist checklist) throws SQLException {
 		int key = 0;
 		Connection conn = getConnection();
-		conn.setAutoCommit(false);//não pode dar commit enquanto não finalizar todas as inserções
+		conn.setAutoCommit(false);// nï¿½o pode dar commit enquanto nï¿½o finalizar todas as inserï¿½ï¿½es
 		try {
 
 			PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " public.checklist "
@@ -44,8 +45,8 @@ public class ChecklistDAO extends DAO<Checklist> {
 			stat.setInt(3, checklist.getUsuario().getId());
 			LocalDate dateNow = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonthValue(),
 					LocalDate.now().getDayOfMonth());
-			Date date = Date.valueOf(dateNow);
-			stat.setDate(4, date);
+			checklist.setData_hora(Date.valueOf(dateNow));
+			stat.setDate(4, checklist.getData_hora());
 			stat.execute();
 			ResultSet rs = stat.getGeneratedKeys();
 			if (rs.next()) {
@@ -57,10 +58,10 @@ public class ChecklistDAO extends DAO<Checklist> {
 			conn.commit();
 		} catch (SQLException e) {
 			conn.rollback();
-		}finally {
+		} finally {
 			conn.close();
 		}
-		
+
 	}
 
 	public void createAuxProcedimento(int id, List<Procedimento> procedimentos) throws SQLException {
@@ -78,12 +79,14 @@ public class ChecklistDAO extends DAO<Checklist> {
 		}
 
 	}
+
 	public void createAuxIncidente(int id, List<Incidente> incidentes) throws SQLException {
 
 		Connection conn = getConnection();
 
-		PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " checklist_incidente "
-				+ " ( idchecklist, idincidente ) " + " VALUES " + " (? , ?) ", Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement stat = conn.prepareStatement(
+				"INSERT INTO " + " checklist_incidente " + " ( idchecklist, idincidente ) " + " VALUES " + " (? , ?) ",
+				Statement.RETURN_GENERATED_KEYS);
 
 		for (Incidente incidente : incidentes) {
 
@@ -93,6 +96,7 @@ public class ChecklistDAO extends DAO<Checklist> {
 		}
 
 	}
+
 	public void createAuxFatoresRisco(int id, List<FatorRisco> fatoresrisco) throws SQLException {
 
 		Connection conn = getConnection();
@@ -108,31 +112,35 @@ public class ChecklistDAO extends DAO<Checklist> {
 		}
 
 	}
-	
-	@Override
-	public List<Checklist> findAll() {
+
+	public List<Checklist> findByIdPaciente(Integer idPaciente) {
 		Connection conn = getConnection();
 		if (conn == null)
 			return null;
 
 		try {
-			PreparedStatement stat = conn.prepareStatement("SELECT " + " idchecklist, " + "observacao," + " idpaciente,"
-					+ " idusuario," + " data_hora " + "FROM " + " checklist ");
+			PreparedStatement stat = conn.prepareStatement("SELECT " + " idchecklist, " + " observacao," + " idusuario,"
+					+ " data_hora," + " idpaciente" + " FROM " + " checklist" + "  WHERE idpaciente = ? ");
+
+			stat.setInt(1, idPaciente);
 
 			ResultSet rs = stat.executeQuery();
 
 			List<Checklist> listaChecklist = new ArrayList<Checklist>();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				Checklist checklist = new Checklist();
-				checklist.getPaciente().setIdpaciente(rs.getInt("idpaciente"));
-				checklist.setObservacao(rs.getString("observacao"));
 				checklist.setIdchecklist(rs.getInt("idchecklist"));
-
+				checklist.setObservacao(rs.getString("observacao"));
+				checklist.setData_hora((rs.getDate("data_hora")));
+				if (checklist.getPaciente() == null)
+					checklist.setPaciente(new Paciente());
+				checklist.getPaciente().setIdpaciente(rs.getInt("idpaciente"));
+				if (checklist.getUsuario() == null)
+					checklist.setUsuario(new Usuario());
+				checklist.getUsuario().setId(rs.getInt("idusuario"));
 				listaChecklist.add(checklist);
-
 			}
-
 			if (listaChecklist.isEmpty())
 				return null;
 			return listaChecklist;
@@ -140,6 +148,11 @@ public class ChecklistDAO extends DAO<Checklist> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public List<Checklist> findAll() {
 		return null;
 	}
 

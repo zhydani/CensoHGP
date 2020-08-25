@@ -6,18 +6,6 @@ public class FatorRisco {
 	private String descricao;
 	private boolean ativo;
 
-	public FatorRisco() {
-		super();
-	}
-
-	public FatorRisco(Integer idfatorRisco, String nome, String descricao, boolean ativo) {
-		super();
-		this.idfatorRisco = idfatorRisco;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.ativo = ativo;
-	}
-
 	public Integer getIdfatorRisco() {
 		return idfatorRisco;
 	}

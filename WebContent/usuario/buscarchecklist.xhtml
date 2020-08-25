@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>CensoHGP | Busca de Paciente</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Bootstrap CSS -->
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+	<!-- Costumize CSS -->
+	<h:outputStylesheet library="css" name="template.css" />
+	<h:outputStylesheet library="css" name="datatable.css" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{resource['images/icon.png']}" />
+</h:head>
+<h:body>
+	<style type="text/css">
+.value {
+	font-weight: bold;
+}
+</style>
+	<p:sidebar widgetVar="sidebar1" baseZIndex="10000" id="sidebar"
+		class="bg-dark mt-0 text-white wrapper">
+
+		<div class="bg-dark mt-0 text-white wrapper" id="sidebar">
+
+			<nav id="sidebar">
+			<div class="sidebar-header ">
+				<h3 class="font-weight-bold">Menu</h3>
+			</div>
+
+			<ul class="list-unstyled components">
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:graphicImage class="ml-2 pb-3 mr-2" width="30px"
+							library="images" name="usu.png" />
+
+						<h:outputLabel value=" #{templateController.usuarioLogado.nome}"
+							class="font-weight-bold mb-3" />
+					</h:panelGrid>
+					<li><a href="index.xhtml">Início</a></li>
+					<li><a href="checklistpaciente.xhtml">Gerar Checklist</a></li>
+					<li class="active"><a href="buscarpaciente.xhtml">Gerenciar
+							Pacientes</a></li>
+					<li><a href="transferencia.xhtml">Transferir Paciente</a></li>
+					<li><a href="buscardepartamento.xhtml">Gerenciar
+							Departamentos</a></li>
+					<li><a href="perfil.xhtml">Alterar Senha</a></li>
+					<li><h:commandLink value="Sair"
+							action="#{templateController.encerrarSessao}" class="nav-link" /></li>
+				</h:form>
+			</ul>
+			</nav>
+		</div>
+	</p:sidebar>
+	<h:form id="form">
+		<table width="100%">
+
+
+			<tr>
+				<td colspan="2" align="center" class="mar"><ui:insert
+						name="cabecalho">
+						<h:form>
+
+							<div class="navbar navbar-dark bg-navbar navbar-expand">
+								<div class="container collapse navbar-collapse">
+									<p:commandLink oncomplete="PF('sidebar1').show()"
+										styleClass="mx-3 pt-1 button-menu">
+										<span><i class="pi pi-bars"
+											style="font-size: 2.5em; color: #fff;"></i></span>
+									</p:commandLink>
+									<div class="navbar-brand font-weight-bold ">CensoHGP</div>
+									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+										<li class="nav-item"><a href="index.xhtml"
+											class="nav-link">Início</a></li>
+
+									</ul>
+
+								</div>
+							</div>
+						</h:form>
+					</ui:insert></td>
+			</tr>
+			<tr>
+				<td valign="top"
+					class="pt-5  content active mar d-flex justify-content-center"><ui:insert
+						name="conteudo">
+
+						<h:form id="formPrincipal">
+							<div class="border-left mb-4 ml-3">
+								<h4 class="ml-3 py-2 font-weight-bold">Checklists</h4>
+							</div>
+
+
+							<div class="container mt-2 d-flex justify-content-center">
+								<p:growl id="msgs" showDetail="true"
+									skipDetailIfEqualsSummary="true" />
+
+								<p:dataTable value="#{buscaChecklistController.listaChecklist}"
+									var="obj" rows="5" styleClass="table" paginator="true"
+									resizableColumns="true"
+									style="margin-bottom:20px; font-size:15px;"
+									emptyMessage="Nenhum registro." paginatorAlwaysVisible="false"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
+									rowsPerPageTemplate="5,10,15">
+
+									<tbody>
+										<p:column>
+											<f:facet name="header">Nome do cadastrante</f:facet>
+											<p:dataTable value="#{buscaChecklistController.listaUsuario}"
+												var="obj">
+												<p:column style="width:80px; font-size:15px;">
+													<h:outputText value="#{obj.nome}">
+													</h:outputText>
+												</p:column>
+											</p:dataTable>
+										</p:column>
+										<td>
+											<td><p:column style="width:80px; font-size:15px;">
+													<f:facet name="header">Data e hora</f:facet>
+													<h:outputText value="#{obj.data_hora}">
+													</h:outputText>
+												</p:column></td>
+										</td>
+										<p:column style="width:20px">
+											<h:commandLink
+												action="#{buscaPacienteController.editar(obj.idpaciente)}">
+												<h:graphicImage style="width:25px" library="images"
+													value="editar" name="botao_visualizar_check.png">
+												</h:graphicImage>
+												<f:ajax execute="formPrincipal:dataTable"
+													render="formPrincipal" />
+											</h:commandLink>
+										</p:column>
+
+									</tbody>
+								</p:dataTable>
+
+							</div>
+							<h:messages id="messages" infoStyle="color:green"
+								warnStyle="color:orange" errorStyle="color:red"
+								globalOnly="false" />
+						</h:form>
+
+
+					</ui:insert></td>
+			</tr>
+		</table>
+	</h:form>
+
+	<div class="box footer pt-4 font-weight-lighter "
+		style="text-align: center;">
+		<h:outputText value="2020 - Todos os direitos reservados." />
+	</div>
+
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+</h:body>
+</html>
