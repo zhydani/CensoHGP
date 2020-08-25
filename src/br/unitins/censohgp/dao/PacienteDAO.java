@@ -16,7 +16,6 @@ import br.unitins.censohgp.model.Precaucao;
 import br.unitins.censohgp.model.Sexo;
 import br.unitins.censohgp.model.Situacao;
 import br.unitins.censohgp.model.Tipo;
-import br.unitins.censohgp.model.TipoSexo;
 
 public class PacienteDAO extends DAO<Paciente> {
 
@@ -179,12 +178,6 @@ public class PacienteDAO extends DAO<Paciente> {
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 
-//				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
-//				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
-//				// caso o retorno do telefone seja nulo, instanciar um telefone
-//				if (paciente.getPrecaucao() == null)
-//					paciente.setPrecaucao(new Precaucao());
-//
 				listaPaciente.add(paciente);
 
 			}
@@ -480,7 +473,7 @@ public class PacienteDAO extends DAO<Paciente> {
 			stat.setInt(2, idPaciente);
 			stat.execute();
 		} catch (SQLException e) {
-			Util.addMessageError("erro banco de dados não foi possivel");
+			Util.addMessageError("erro banco de dados nï¿½o foi possivel");
 			e.printStackTrace();
 		}
 	}

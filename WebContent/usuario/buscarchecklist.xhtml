@@ -100,8 +100,12 @@
 							<div class="border-left mb-4 ml-3">
 								<h4 class="ml-3 py-2 font-weight-bold">Checklists</h4>
 							</div>
-
-
+							<div>
+								<p:outputLabel class="ml-3 py-2 font-weight-bold"
+									value="Paciente:" />
+								<h:outputText value="#{buscaChecklistController.paciente.nome}">
+								</h:outputText>
+							</div>
 							<div class="container mt-2 d-flex justify-content-center">
 								<p:growl id="msgs" showDetail="true"
 									skipDetailIfEqualsSummary="true" />
@@ -116,44 +120,35 @@
 									rowsPerPageTemplate="5,10,15">
 
 									<tbody>
-										<p:column>
-											<f:facet name="header">Nome do cadastrante</f:facet>
-											<p:dataTable value="#{buscaChecklistController.listaUsuario}"
-												var="obj">
-												<p:column style="width:80px; font-size:15px;">
-													<h:outputText value="#{obj.nome}">
-													</h:outputText>
-												</p:column>
-											</p:dataTable>
+
+										<p:column style="width:172px; font-size:15px;">
+											<f:facet name="header">Cadastrante</f:facet>
+											<h:outputText value="#{obj.usuario.nome}">
+											</h:outputText>
 										</p:column>
-										<td>
-											<td><p:column style="width:80px; font-size:15px;">
-													<f:facet name="header">Data e hora</f:facet>
-													<h:outputText value="#{obj.data_hora}">
-													</h:outputText>
-												</p:column></td>
-										</td>
+
+										<p:column style="width:85px; font-size:15px;">
+											<f:facet name="header">Data e Hora</f:facet>
+											<h:outputText value="#{obj.data_hora}">
+											</h:outputText>
+										</p:column>
 										<p:column style="width:20px">
 											<h:commandLink
-												action="#{buscaPacienteController.editar(obj.idpaciente)}">
-												<h:graphicImage style="width:25px" library="images"
-													value="editar" name="botao_visualizar_check.png">
+												action="#{buscaChecklistController.visualizarChecklist(obj.idchecklist)}">
+												<h:graphicImage style="width: 25px" library="images"
+													value="editar" name="botao_editar.png">
 												</h:graphicImage>
 												<f:ajax execute="formPrincipal:dataTable"
 													render="formPrincipal" />
 											</h:commandLink>
 										</p:column>
-
 									</tbody>
 								</p:dataTable>
-
 							</div>
 							<h:messages id="messages" infoStyle="color:green"
 								warnStyle="color:orange" errorStyle="color:red"
 								globalOnly="false" />
 						</h:form>
-
-
 					</ui:insert></td>
 			</tr>
 		</table>

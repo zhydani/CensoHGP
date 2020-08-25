@@ -211,9 +211,10 @@
 											<h:panelGrid id="gridSitu" columns="2" class="text-left mb-4">
 												<h:panelGrid columns="1" class="mr-4">
 													<h:outputLabel value="Situação do paciente: " />
-													<h:selectOneMenu class="form-control"
-														converter="omnifaces.SelectItemsConverter"
-														value="#{cadastroPacienteController.paciente.situacao}" style="width: 380px;">
+													<h:selectOneMenu class="btn btn-outline-dark"
+														value="#{cadastroPacienteController.paciente.situacao}">
+														<f:converter converterId="SituacaoConverter"/>
+
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione a Situação do Paciente ..." />
 														<f:selectItems
@@ -223,9 +224,9 @@
 												</h:panelGrid>
 												<h:panelGrid id="gridDep" columns="1" >
 													<h:outputLabel value="Departamento: " />
-													<h:selectOneMenu class="form-control"
-														converter="omnifaces.SelectItemsConverter"
-														value="#{cadastroPacienteController.paciente.idlocalTransferencia}" style="width: 390px;">
+													<h:selectOneMenu class="btn btn-outline-dark"
+														value="#{cadastroPacienteController.paciente.idlocalTransferencia}">
+														<f:converter converterId="DepartamentoConverter"/>
 														<f:selectItem noSelectionOption="true"
 															itemLabel="Selecione o Departamento do Paciente ..." />
 														<f:selectItems
