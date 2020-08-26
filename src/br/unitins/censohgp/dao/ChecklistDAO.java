@@ -119,27 +119,33 @@ public class ChecklistDAO extends DAO<Checklist> {
 			return null;
 
 		try {
-			PreparedStatement stat = conn.prepareStatement("SELECT " + " c.idchecklist, " + " c.observacao,"
-					+ " c.idusuario," + " c.data_hora," + " c.idpaciente," + " u.idusuario as usuario," + " u.nome"
-					+ " FROM " + " public.checklist c," + "  public.usuario u " + "  WHERE c.idpaciente = ?"
-					+ " AND c.idusuario = u.idusuario");
+			PreparedStatement stat = conn.prepareStatement("SELECT " +
+					" c.idchecklist, " +
+					" c.observacao,"	+
+					" c.idusuario," + 
+					" c.data_hora," +
+					" c.idpaciente," +
+					" u.idusuario as usuario," + 
+					" u.nome,"+ 
+					"p.idpaciente as paciente"+
+					" FROM " + " public.checklist c," + "  public.usuario u, "+"public.paciente p" +
+					"  WHERE c.idpaciente = ?"	+ 
+					" AND c.idusuario = u.idusuario" + " AND c.idpaciente = p.idpaciente ");
 			stat.setInt(1, idPaciente);
-
-			ResultSet rs = stat.executeQuery();
-
 			List<Checklist> listaChecklist = new ArrayList<Checklist>();
-
-			if (rs.next()) {
+			
+			ResultSet rs = stat.executeQuery();
+			while (rs.next()) {
 				Checklist checklist = new Checklist();
 				checklist.setIdchecklist(rs.getInt("idchecklist"));
 				checklist.setObservacao(rs.getString("observacao"));
 				checklist.setData_hora((rs.getDate("data_hora")));
 				if (checklist.getPaciente() == null)
 					checklist.setPaciente(new Paciente());
-				checklist.getPaciente().setIdpaciente(rs.getInt("idpaciente"));
+				checklist.getPaciente().setIdpaciente(rs.getInt("paciente"));
 				if (checklist.getUsuario() == null)
 					checklist.setUsuario(new Usuario());
-				checklist.getUsuario().setId(rs.getInt("idusuario"));
+				checklist.getUsuario().setId(rs.getInt("usuario"));
 				checklist.getUsuario().setNome(rs.getString("nome"));
 				System.out.println(checklist.getUsuario().toString());
 				System.out.println("entrei no checklist dao!!!");
