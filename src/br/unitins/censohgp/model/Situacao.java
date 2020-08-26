@@ -5,9 +5,11 @@ public class Situacao {
 	private Integer idsituacao;
 	private String nome;
 
+
+
 	@Override
 	public String toString() {
-		return String.format("idsituacao", getIdsituacao());
+		return "Situacao [idsituacao=" + idsituacao + ", nome=" + nome + "]";
 	}
 
 	@Override

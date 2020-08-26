@@ -27,6 +27,54 @@ public class PacienteDAO extends DAO<Paciente> {
 		super(null);
 	}
 
+	public Paciente findByIdEsp(Integer id) {
+		Connection conn = getConnection();
+		if (conn == null)
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement("SELECT " + " p.idpaciente, " + " p.nome, " + " p.cpf, "
+					+ " p.rg, " + " p.ativo, " + " p.nome_mae, " + " p.idsituacao, " + " p.idgenero, "
+					+ " p.data_nascimento, " + " p.observacao, " + " p.numero_prontuario, "
+					+ " g.idgenero as idGenero, " + " g.nome as nomeGenero, " + " s.idsituacao as idSituacao, "
+					+ " s.nome as nomeSituacao " + " FROM " + "  public.paciente p, " + "  public.genero g, "
+					+ "  public.situacao_paciente s " + "  WHERE p.idpaciente = ? " + " AND "
+					+ " p.idgenero = g.idgenero " + " AND " + " p.idsituacao = s.idsituacao ");
+
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+
+			Paciente paciente = null;
+
+			if (rs.next()) {
+				paciente = new Paciente();
+				paciente.setIdpaciente(rs.getInt("idpaciente"));
+				paciente.setNome(rs.getString("nome"));
+				paciente.setCpf(rs.getString("cpf"));
+				paciente.setRg(rs.getString("rg"));
+				paciente.setAtivo(rs.getBoolean("ativo"));
+				paciente.setNomeMae(rs.getString("nome_mae"));
+				paciente.setSituacao(new Situacao());
+				paciente.getSituacao().setIdsituacao(rs.getInt("idSituacao"));
+				paciente.getSituacao().setNome(rs.getString("nomeSituacao"));
+				paciente.setSexo(new Sexo());
+				paciente.getSexo().setIdsexo(rs.getInt("idGenero"));
+				paciente.getSexo().setNome(rs.getString("nomeGenero"));
+				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+				paciente.setObservacao(rs.getString("observacao"));
+				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
+
+			}
+			paciente.setPrecaucoes(findPrecaucaoPaciente(id));
+			return paciente;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	@Override
 	public void create(Paciente paciente) throws SQLException {
 		int key = 0;
@@ -41,14 +89,14 @@ public class PacienteDAO extends DAO<Paciente> {
 		stat.setString(3, paciente.getRg());
 		stat.setBoolean(4, paciente.getAtivo());
 		stat.setInt(5, paciente.getSituacao().getIdsituacao());
-		
+
 		Integer valor = paciente.getTipoSexo().getValue();
 
 		SexoDAO dao = new SexoDAO();
 		System.out.println(valor);
 		Tipo id_tipo_banco = dao.findId(valor);
 		stat.setInt(6, id_tipo_banco.getId());
-		
+
 		stat.setString(7, paciente.getNomeMae());
 		Date date = Date.valueOf(paciente.getDataNascimento());
 		stat.setDate(8, date);
@@ -65,6 +113,32 @@ public class PacienteDAO extends DAO<Paciente> {
 
 		createAux(key, paciente.getPrecaucoes());
 
+	}
+
+	public List<Precaucao> findPrecaucaoPaciente(Integer idpaciente) {
+		Connection conn = getConnection();
+		List<Precaucao> listaPrecaucao = new ArrayList<Precaucao>();
+		if (conn == null)
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement("SELECT " + " a.idprecaucao, " + " b.nome " + "  FROM "
+					+ " public.paciente_precaucao a,  " + " public.precaucao b  " + "WHERE " + "  a.idpaciente = ? "
+					+ "AND " + " a.idprecaucao = b.idprecaucao ");
+
+			stat.setInt(1, idpaciente);
+			ResultSet rs = stat.executeQuery();
+			while (rs.next()) {
+				Precaucao precaucao = new Precaucao();
+				precaucao.setIdprecaucao(rs.getInt("idprecaucao"));
+				precaucao.setNome(rs.getString("nome"));
+				listaPrecaucao.add(precaucao);
+			}
+			return listaPrecaucao;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void createAux(int id, List<Precaucao> precaucoes) throws SQLException {
@@ -89,10 +163,9 @@ public class PacienteDAO extends DAO<Paciente> {
 		int key = 0;
 		Connection conn = getConnection();
 
-		PreparedStatement stat = conn.prepareStatement(
-				"UPDATE paciente SET " + "  nome = ?," + " cpf = ?," + " rg = ?," + " ativo = ?," + " idsituacao = ?,"
-						+ " idgenero = ?, " + " nome_mae = ?," + " data_nascimento = ?," + " observacao = ?,"
-						+ " numero_prontuario = ?," + " iddepartamento = ? " + " WHERE " + " idpaciente = ? ");
+		PreparedStatement stat = conn.prepareStatement("UPDATE paciente SET " + "  nome = ?," + " cpf = ?," + " rg = ?,"
+				+ " ativo = ?," + " idsituacao = ?," + " idgenero = ?, " + " nome_mae = ?," + " data_nascimento = ?,"
+				+ " observacao = ?," + " numero_prontuario = ? " + " WHERE " + " idpaciente = ? ");
 
 		stat.setString(1, paciente.getNome());
 		stat.setString(2, paciente.getCpf());
@@ -105,26 +178,20 @@ public class PacienteDAO extends DAO<Paciente> {
 		stat.setDate(8, date);
 		stat.setString(9, paciente.getObservacao());
 		stat.setString(10, paciente.getNumeroProntuario());
-		stat.setInt(11, paciente.getIdlocalTransferencia().getIdlocalTransferencia());
-		stat.setInt(12, paciente.getIdpaciente());
+		stat.setInt(11, paciente.getIdpaciente());
+		updateAux(paciente.getIdpaciente(), paciente.getPrecaucoes());
+
 		stat.execute();
-
-		ResultSet rs = stat.getGeneratedKeys();
-
-		if (rs.next()) {
-			key = rs.getInt(1);
-		}
-
-		updateAux(key, paciente.getPrecaucoes());
 
 	}
 
 	public void updateAux(int id, List<Precaucao> precaucoes) throws SQLException {
 
 		Connection conn = getConnection();
-
+		
+		
 		PreparedStatement stat = conn.prepareStatement(
-				"UPDATE paciente_precaucao SET " + " idprecaucao = ? " + " WHERE " + " idpaciente = ? ",
+				"INSERT INTO " + " paciente_precaucao " + " ( idpaciente, idprecaucao ) " + " VALUES " + " (? , ?) ",
 				Statement.RETURN_GENERATED_KEYS);
 
 		for (Precaucao precaucao : precaucoes) {
@@ -135,6 +202,14 @@ public class PacienteDAO extends DAO<Paciente> {
 		}
 
 	}
+
+//	public void deleteAux(Integer idpaciente) throws SQLException {
+//		Connection conn = getConnection();
+//		PreparedStatement stat = conn.prepareStatement(
+//				"  DELETE   " + " FROM  " + " public.paciente_precaucao " + " WHERE " + " idpaciente = ? " + "AND ");
+//		stat.setInt(1, idpaciente);
+//		System.out.println(" testando metodo");
+//	}
 
 	@Override
 	public void delete(int id) throws SQLException {
@@ -178,6 +253,12 @@ public class PacienteDAO extends DAO<Paciente> {
 				paciente.setObservacao(rs.getString("observacao"));
 				paciente.setNumeroProntuario(rs.getString("numero_prontuario"));
 
+//				PrecaucaoDAO dao = new PrecaucaoDAO(conn);
+//				paciente.setPrecaucao(dao.findId(paciente.getIdpaciente()));
+//				// caso o retorno do telefone seja nulo, instanciar um telefone
+//				if (paciente.getPrecaucao() == null)
+//					paciente.setPrecaucao(new Precaucao());
+//
 				listaPaciente.add(paciente);
 
 			}
@@ -473,7 +554,7 @@ public class PacienteDAO extends DAO<Paciente> {
 			stat.setInt(2, idPaciente);
 			stat.execute();
 		} catch (SQLException e) {
-			Util.addMessageError("erro banco de dados nï¿½o foi possivel");
+			Util.addMessageError("erro banco de dados não foi possivel");
 			e.printStackTrace();
 		}
 	}

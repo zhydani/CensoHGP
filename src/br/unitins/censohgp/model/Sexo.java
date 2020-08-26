@@ -7,7 +7,7 @@ public class Sexo {
 
 	@Override
 	public String toString() {
-		return String.format("idsexo", getIdsexo());
+		return "Sexo [idsexo=" + idsexo + ", nome=" + nome + "]";
 	}
 
 	@Override
@@ -60,5 +60,6 @@ public class Sexo {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 
 }

@@ -19,10 +19,9 @@ public class Paciente {
 	private List<Precaucao> precaucoes;
 	private TipoSexo tipoSexo;
 
-
 	@Override
 	public Paciente clone() {
-		
+
 		try {
 			return (Paciente) super.clone();
 		} catch (CloneNotSupportedException e) {
@@ -30,7 +29,7 @@ public class Paciente {
 			System.out.println("Erro ao clonar.");
 		}
 		return null;
-		
+
 	}
 
 	@Override
@@ -116,126 +115,101 @@ public class Paciente {
 		return idpaciente;
 	}
 
-
 	public void setIdpaciente(Integer idpaciente) {
 		this.idpaciente = idpaciente;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getCpf() {
 		return cpf;
 	}
 
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 
 	public String getRg() {
 		return rg;
 	}
 
-
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-
 
 	public Situacao getSituacao() {
 		return situacao;
 	}
 
-
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
-
 
 	public Boolean getAtivo() {
 		return ativo;
 	}
 
-
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-
 
 	public String getNomeMae() {
 		return nomeMae;
 	}
 
-
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
 	}
-
 
 	public Sexo getSexo() {
 		return sexo;
 	}
 
-
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
-
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
 
 	public String getObservacao() {
 		return observacao;
 	}
 
-
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
 
 	public Departamento getIdlocalTransferencia() {
 		return idlocalTransferencia;
 	}
 
-
 	public void setIdlocalTransferencia(Departamento idlocalTransferencia) {
 		this.idlocalTransferencia = idlocalTransferencia;
 	}
-
 
 	public String getNumeroProntuario() {
 		return numeroProntuario;
 	}
 
-
 	public void setNumeroProntuario(String numeroProntuario) {
 		this.numeroProntuario = numeroProntuario;
 	}
 
-
 	public List<Precaucao> getPrecaucoes() {
 		return precaucoes;
 	}
-
 
 	public void setPrecaucoes(List<Precaucao> precaucoes) {
 		this.precaucoes = precaucoes;
@@ -248,5 +222,14 @@ public class Paciente {
 	public void setTipoSexo(TipoSexo tipoSexo) {
 		this.tipoSexo = tipoSexo;
 	}
-		
+
+	@Override
+	public String toString() {
+		return "Paciente [idpaciente=" + idpaciente + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", situacao="
+				+ situacao + ", ativo=" + ativo + ", nomeMae=" + nomeMae + ", sexo=" + sexo + ", dataNascimento="
+				+ dataNascimento + ", observacao=" + observacao + ", idlocalTransferencia=" + idlocalTransferencia
+				+ ", numeroProntuario=" + numeroProntuario + ", precaucoes=" + precaucoes + ", tipoSexo=" + tipoSexo
+				+ "]";
+	}
+
 }

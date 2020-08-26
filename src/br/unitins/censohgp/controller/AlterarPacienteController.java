@@ -29,8 +29,8 @@ public class AlterarPacienteController implements Serializable {
 	private static final long serialVersionUID = -248709330902702727L;
 	private Paciente paciente;
 	private List<Paciente> listaPaciente;
-	private List<SelectItem> listaSexo;
-	private List<SelectItem> listasituacao;
+	private List<Sexo> listaSexo;
+	private List<Situacao> listasituacao;
 	private List<SelectItem> listaprecaucao;
 
 	public AlterarPacienteController() {
@@ -101,43 +101,19 @@ public class AlterarPacienteController implements Serializable {
 		paciente = null;
 	}
 
-	public List<SelectItem> getListaSexo() {
+	public List<Sexo> getListaSexo() {
 		if (listaSexo == null) {
-			listaSexo = new ArrayList<SelectItem>();
-
-			DAO<Sexo> dao = new SexoDAO();
-			List<Sexo> sexoLista = dao.findAll();
-
-			if (sexoLista != null && !sexoLista.isEmpty()) {
-				SelectItem item;
-
-				for (Sexo sexo : sexoLista) {
-					item = new SelectItem(sexo, sexo.getNome());
-					listaSexo.add(item);
-				}
-			}
+			SexoDAO dao = new SexoDAO();
+			listaSexo = dao.findAll();
 		}
-
 		return listaSexo;
 	}
 
-	public List<SelectItem> getListaSituacao() {
+	public List<Situacao> getListaSituacao() {
 		if (listasituacao == null) {
-			listasituacao = new ArrayList<SelectItem>();
-
-			DAO<Situacao> dao = new SituacaoDAO();
-			List<Situacao> situacaoLista = dao.findAll();
-
-			if (situacaoLista != null && !situacaoLista.isEmpty()) {
-				SelectItem item;
-
-				for (Situacao situacao : situacaoLista) {
-					item = new SelectItem(situacao, situacao.getNome());
-					listasituacao.add(item);
-				}
-			}
+			SituacaoDAO dao = new SituacaoDAO();
+			listasituacao = dao.findAll();
 		}
-
 		return listasituacao;
 	}
 

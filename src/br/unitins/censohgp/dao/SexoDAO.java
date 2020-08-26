@@ -73,6 +73,35 @@ public class SexoDAO extends DAO<Sexo> {
 		return null;	
 	}
 	
+	public Sexo findById(Integer id) {
+		Connection conn = getConnection();
+		if (conn == null)
+			return null;
+
+		try {
+			PreparedStatement stat = conn.prepareStatement(
+					"SELECT " + " idgenero, " + "  nome " + "FROM " + "  public.genero " + "WHERE idgenero = ? ");
+
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+
+			Sexo sexo = null;
+
+			if (rs.next()) {
+				 sexo = new Sexo();
+				sexo.setIdsexo(rs.getInt("idgenero"));
+				sexo.setNome(rs.getString("nome"));
+			}
+
+			return sexo;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	public Tipo findId(Integer id) {
 		Connection conn = getConnection();
