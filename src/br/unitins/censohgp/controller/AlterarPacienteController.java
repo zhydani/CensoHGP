@@ -65,6 +65,9 @@ public class AlterarPacienteController implements Serializable {
 		if (getPaciente().getNome().isBlank()) {
 			Util.addMessageWarn("O campo Nome deve ser informado.");
 			return false;
+		} else if (getPaciente().getNumeroProntuario().isBlank()) {
+			Util.addMessageWarn("O campo Numero de prontuario deve ser informado.");
+			return false;
 		}
 //		if (getUsuario().getSenha() == null || 
 //				getUsuario().getSenha().trim().equals("") ) {

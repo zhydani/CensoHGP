@@ -160,7 +160,7 @@ public class PacienteDAO extends DAO<Paciente> {
 
 	@Override
 	public void update(Paciente paciente) throws SQLException {
-		int key = 0;
+		
 		Connection conn = getConnection();
 
 		PreparedStatement stat = conn.prepareStatement("UPDATE paciente SET " + "  nome = ?," + " cpf = ?," + " rg = ?,"
@@ -179,37 +179,23 @@ public class PacienteDAO extends DAO<Paciente> {
 		stat.setString(9, paciente.getObservacao());
 		stat.setString(10, paciente.getNumeroProntuario());
 		stat.setInt(11, paciente.getIdpaciente());
-		updateAux(paciente.getIdpaciente(), paciente.getPrecaucoes());
+		deleteAux(paciente.getIdpaciente());
+		createAux(paciente.getIdpaciente(), paciente.getPrecaucoes());
 
 		stat.execute();
 
 	}
 
-	public void updateAux(int id, List<Precaucao> precaucoes) throws SQLException {
 
+	public void deleteAux(Integer idpaciente) throws SQLException {
 		Connection conn = getConnection();
-		
-		
 		PreparedStatement stat = conn.prepareStatement(
-				"INSERT INTO " + " paciente_precaucao " + " ( idpaciente, idprecaucao ) " + " VALUES " + " (? , ?) ",
-				Statement.RETURN_GENERATED_KEYS);
+				"  DELETE   " + " FROM  " + " public.paciente_precaucao " + " WHERE " + " idpaciente = ? ");
+		stat.setInt(1, idpaciente);
 
-		for (Precaucao precaucao : precaucoes) {
-
-			stat.setInt(1, precaucao.getIdprecaucao());
-			stat.setInt(2, id);
-			stat.execute();
-		}
-
+		stat.execute();
+		System.out.println(" testando metodo");
 	}
-
-//	public void deleteAux(Integer idpaciente) throws SQLException {
-//		Connection conn = getConnection();
-//		PreparedStatement stat = conn.prepareStatement(
-//				"  DELETE   " + " FROM  " + " public.paciente_precaucao " + " WHERE " + " idpaciente = ? " + "AND ");
-//		stat.setInt(1, idpaciente);
-//		System.out.println(" testando metodo");
-//	}
 
 	@Override
 	public void delete(int id) throws SQLException {
