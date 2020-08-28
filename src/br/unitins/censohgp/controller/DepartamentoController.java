@@ -37,7 +37,6 @@ public class DepartamentoController implements Serializable {
 	private List<Departamento> listaDepartamento;
 	private List<SelectItem> listaEstados = null;
 	private List<SelectItem> listaCidades = null;
-
 	public DepartamentoController() {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.keep("departamentoFlash");
@@ -88,8 +87,7 @@ public class DepartamentoController implements Serializable {
 			DAO<Departamento> dao = new DepartamentoDAO();
 			// faz a alteracao no banco de dados
 			try {
-				// gerando um hash da senha
-				//						getUsuario().setSenha(Util.hashSHA256(getUsuario().getSenha()));
+				
 				dao.update(getDepartamento());
 				dao.getConnection().commit();
 				Util.addMessageInfo("Alteração realizada com sucesso.");
@@ -119,7 +117,9 @@ public class DepartamentoController implements Serializable {
 		}
 		return departamento;
 	}
-
+public void setStatus() {
+	System.out.println("Chamou status");
+}
 	public void setUsuario(Departamento departamento) {
 		this.departamento = departamento;
 	}
@@ -166,6 +166,7 @@ public class DepartamentoController implements Serializable {
 		return listaCidades;
 		
 	}
+	
 
 	public void onChangeEstado() {
 		CidadeDepartamentoDAO dao = new CidadeDepartamentoDAO();

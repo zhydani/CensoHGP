@@ -111,10 +111,8 @@
 
 								<div>
 									<div class="border-left mb-4 ml-3">
-										<h:panelGrid columns="2">
-											<h:graphicImage
-												style="width:50px; padding: 10px 0px 10px 20px;"
-												library="images" name="icone.png"></h:graphicImage>
+										<h:panelGrid columns="1">
+											
 											<h4 class="ml-3 py-2 font-weight-bold">Alterar Departamento</h4>
 										</h:panelGrid>
 									</div>
@@ -123,16 +121,17 @@
 											<h:panelGrid columns="1" class="d-flex justify-content-start">
 
 												<h:panelGrid>
-													<h:outputLabel value="Nome Do Departamento: " />
-													<h:inputText id="nameDep"
-														value="#{departamentoController.departamento.nomeDepartamento}"
-														styleClass="form-control pr-3 d-flex justify-content-start"
-														size="97" />
-													<h:outputLabel value="Nome Do Hospital: " />
+													<h:outputLabel value="Nome do Hospital: " />
 													<h:inputText id="nameHos"
 														value="#{departamentoController.departamento.nomeHospital}"
 														styleClass="form-control pr-3 d-flex justify-content-start"
 														size="97" />
+													<h:outputLabel value="Nome do Departamento: " />
+													<h:inputText id="nameDep"
+														value="#{departamentoController.departamento.nomeDepartamento}"
+														styleClass="form-control pr-3 d-flex justify-content-start"
+														size="97" />
+													
 												</h:panelGrid>
 
 												<h:panelGrid columns="3" class="text-left mb-4">
@@ -145,17 +144,16 @@
 													</h:panelGrid>
 													
 													<h:panelGrid columns="1" class="mr-4">
-														<h:outputLabel style="font-weight: bold;" value="Status: " />
-														<h:selectOneMenu class="btn btn-secondary"
-															value="#{departamentoController.departamento.ativo}">
-															<f:selectItem noSelectionOption="true"
-																itemLabel="Selecione ...." />
-															<f:selectItems
+														<h:outputLabel  value="Status: " />
+														<h:selectOneMenu class="form-control"
+															value="#{departamentoController.departamento.ativo}">	
+															<f:selectItems 
 																value="#{departamentoController.listaStatusDepartamento}"
-																var="status" itemLabel="#{status.label}"
-																itemValue="#{status}" />
+															/>
 														</h:selectOneMenu>
 													</h:panelGrid>
+													
+													
 													
 												</h:panelGrid>
 											</h:panelGrid>
@@ -181,7 +179,7 @@
 												</h:commandButton>
 											</h:panelGrid>
 										</div>
-										<br /> <br /> <br />
+										
 									</div>
 
 								</div>

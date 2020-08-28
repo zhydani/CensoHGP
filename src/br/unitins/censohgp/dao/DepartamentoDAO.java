@@ -266,8 +266,10 @@ public class DepartamentoDAO extends DAO<Departamento> {
 					departamento.setNomeHospital(rs.getString("nome_hospital"));
 					departamento.setNumeroLeitos(rs.getInt("numero_leitos"));
 					departamento.setNomeDepartamento(rs.getString("nome_departamento"));
-					departamento.setAtivo2(rs.getBoolean("ativo"));
-					System.out.println("Valor: "+ rs.getBoolean("ativo"));
+					//departamento.setAtivo2(rs.getBoolean("ativo"));
+					
+					departamento.setAtivo(StatusDepartamento.valueOf(rs.getBoolean("ativo")));
+					
 					
 				}
 				
@@ -287,13 +289,12 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			
 			PreparedStatement stat = conn.prepareStatement(
 					"UPDATE public.departamento SET " +
-				    " nome_hospital = ?, " +
-				    " numero_leitos = ?, " +
-				    " nome_departamento = ?," +
-				    "ativo = ?," +
-				    "idcidade_estado= ?"+
-					"WHERE " +
-				    " iddepartamento = ? ");
+						    " nome_hospital = ?, " +
+						    " numero_leitos = ?, " +
+						    " nome_departamento = ?, " +
+						    " ativo = ? " +
+							" WHERE " +
+						    " iddepartamento = ? ");
 			stat.setString(1, dep.getNomeHospital());
 			stat.setInt(2, dep.getNumeroLeitos());
 			stat.setString(3, dep.getNomeDepartamento());
@@ -303,8 +304,8 @@ public class DepartamentoDAO extends DAO<Departamento> {
 			}else {
 				stat.setBoolean(4, false);
 			}
-			stat.setInt(5, dep.getCidade().getIdcidade());
-			stat.setInt(6, dep.getIdlocalTransferencia());
+			
+			stat.setInt(5, dep.getIdlocalTransferencia());
 				
 			stat.execute();
 				
