@@ -12,7 +12,7 @@ public class Checklist {
 	private List<Procedimento> procedimentos;
 	private List<FatorRisco> fatoresderisco;
 	private List<Incidente> incidentes;
-	private Date data_hora;
+	private String data_hora;
 
 	@Override
 	public Checklist clone() {
@@ -27,11 +27,11 @@ public class Checklist {
 
 	}
 
-	public Date getData_hora() {
+	public String getData_hora() {
 		return data_hora;
 	}
 
-	public void setData_hora(Date data_hora) {
+	public void setData_hora(String data_hora) {
 		this.data_hora = data_hora;
 	}
 

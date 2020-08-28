@@ -1,13 +1,14 @@
 package br.unitins.censohgp.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.unitins.censohgp.model.Checklist;
@@ -36,17 +37,14 @@ public class ChecklistDAO extends DAO<Checklist> {
 		conn.setAutoCommit(false);// n�o pode dar commit enquanto n�o finalizar todas as inser��es
 		try {
 
-			PreparedStatement stat = conn.prepareStatement("INSERT INTO " + " public.checklist "
-					+ " ( observacao, idpaciente, idusuario, data_hora) " + " VALUES " + " (?,?,?,?) ",
+			PreparedStatement stat = conn.prepareStatement(" INSERT INTO public.checklist " + 
+					" (observacao, idpaciente, idusuario, data_hora) " + 
+					"	VALUES ( ? , ? , ? , current_timestamp); ",
 					Statement.RETURN_GENERATED_KEYS);
 
 			stat.setString(1, checklist.getObservacao());
 			stat.setInt(2, checklist.getPaciente().getIdpaciente());
 			stat.setInt(3, checklist.getUsuario().getId());
-			LocalDate dateNow = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonthValue(),
-					LocalDate.now().getDayOfMonth());
-			checklist.setData_hora(Date.valueOf(dateNow));
-			stat.setDate(4, checklist.getData_hora());
 			stat.execute();
 			ResultSet rs = stat.getGeneratedKeys();
 			if (rs.next()) {
@@ -139,7 +137,8 @@ public class ChecklistDAO extends DAO<Checklist> {
 				Checklist checklist = new Checklist();
 				checklist.setIdchecklist(rs.getInt("idchecklist"));
 				checklist.setObservacao(rs.getString("observacao"));
-				checklist.setData_hora((rs.getDate("data_hora")));
+				DateFormat transforma= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
+				checklist.setData_hora(transforma.format(rs.getTimestamp("data_hora")));
 				if (checklist.getPaciente() == null)
 					checklist.setPaciente(new Paciente());
 				checklist.getPaciente().setIdpaciente(rs.getInt("paciente"));
