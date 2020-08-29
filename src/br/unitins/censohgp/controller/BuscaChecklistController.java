@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.censohgp.dao.ChecklistDAO;
+import br.unitins.censohgp.dao.PacienteDAO;
 import br.unitins.censohgp.dao.UsuarioDAO;
 import br.unitins.censohgp.model.Checklist;
 import br.unitins.censohgp.model.Paciente;
@@ -22,35 +23,24 @@ public class BuscaChecklistController implements Serializable {
 	private static final long serialVersionUID = -9042867479794257960L;
 	private List<Checklist> listaChecklist = null;
 	private Paciente paciente;
+	private Checklist checklist;
 
-	public Paciente getPaciente() {
-
-		if (paciente == null) {
-			paciente = new Paciente();
-		}
-
-		return paciente;
+	public BuscaChecklistController() {
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.keep("pacienteFlash");
+		paciente = (Paciente) flash.get("pacienteFlash");
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
-	public void buscar() {
-		listaChecklist = null;
+	public String visualizar(int idPaciente) {
+		ChecklistDAO dao = new ChecklistDAO();
+		checklist = dao.findById(idPaciente);
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.put("checklistFlash", checklist);
+		return "visualizarchecklist.xhtml?faces-redirect=true";
 	}
 
 	public void setListaChecklist(List<Checklist> listaChecklist) {
 		this.listaChecklist = listaChecklist;
-	}
-
-	public BuscaChecklistController() {
-
-		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-		flash.keep("pacienteFlash");
-		paciente = (Paciente) flash.get("pacienteFlash");
-		System.out.println("entrei no buscar checklist");
-		System.out.println("id paciente:" + paciente.toString());
 	}
 
 	public List<Checklist> getListaChecklist() {
@@ -60,11 +50,27 @@ public class BuscaChecklistController implements Serializable {
 		System.out.println(getPaciente().getIdpaciente());
 		listaChecklist = dao.findByIdPaciente(getPaciente().getIdpaciente());
 		dao.closeConnection();
-
 		return listaChecklist;
 	}
 
-	public String visualizarChecklist(Integer idChecklist) {
-		return null;
+	public Paciente getPaciente() {
+		if (paciente == null)
+			paciente = new Paciente();
+		return paciente;
 	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+	public Checklist getChecklist() {
+		if (checklist == null)
+			checklist = new Checklist();
+		return checklist;
+	}
+
+	public void setChecklist(Checklist checklist) {
+		this.checklist = checklist;
+	}
+
 }

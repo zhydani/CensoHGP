@@ -110,41 +110,52 @@
 								<p:growl id="msgs" showDetail="true"
 									skipDetailIfEqualsSummary="true" />
 
-								<p:dataTable value="#{buscaChecklistController.listaChecklist}"
-									var="obj" rows="5" styleClass="table" paginator="true"
-									resizableColumns="true"
+								<p:dataTable
+									value="#{visualizaChecklistController.listaProcedimento}"
+									var="obj1" rows="5" styleClass="table" resizableColumns="true"
 									style="margin-bottom:20px; font-size:15px;"
-									emptyMessage="Nenhum registro." paginatorAlwaysVisible="false"
-									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-									currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
-									rowsPerPageTemplate="5,10,15">
-
+									emptyMessage="Nenhum registro.">
 									<tbody>
+										<p:column style="width:172px; font-size:15px;">
+											<f:facet name="header">procedimento</f:facet>
+											<h:outputText value="#{obj1.nome}">
+											</h:outputText>
+										</p:column>
+									</tbody>
+								</p:dataTable>
 
+								<p:dataTable
+									value="#{visualizaChecklistController.listaIncidente}"
+									var="obj2" rows="5" styleClass="table" resizableColumns="true"
+									style="margin-bottom:20px; font-size:15px;"
+									emptyMessage="Nenhum registro.">
+									<tbody>
+										<p:column style="width:172px; font-size:15px;">
+											<f:facet name="header">incidente</f:facet>
+											<h:outputText value="#{obj2.nome}">
+											</h:outputText>
+										</p:column>
+									</tbody>
+								</p:dataTable>
+								<p:dataTable
+									value="#{visualizaChecklistController.listaFatorRisco}"
+									var="obj3" rows="5" styleClass="table" resizableColumns="true"
+									style="margin-bottom:20px; font-size:15px;"
+									emptyMessage="Nenhum registro.">
+									<tbody>
 										<p:column style="width:172px; font-size:15px;">
 											<f:facet name="header">Cadastrante</f:facet>
-											<h:outputText value="#{obj.usuario.nome}">
+											<h:outputText value="#{obj3.nome}">
 											</h:outputText>
-										</p:column>
-
-										<p:column style="width:85px; font-size:15px;">
-											<f:facet name="header">Data e Hora</f:facet>
-											<h:outputText value="#{obj.data_hora}">
-											</h:outputText>
-										</p:column>
-										<p:column style="width:20px">
-											<h:commandLink
-												action="#{buscaChecklistController.visualizar(obj.paciente.idpaciente)}">
-												<h:graphicImage style="width: 25px" library="images"
-													value="editar" name="botao_editar.png">
-												</h:graphicImage>
-												<f:ajax execute="formPrincipal:dataTable"
-													render="formPrincipal" />
-											</h:commandLink>
 										</p:column>
 									</tbody>
 								</p:dataTable>
 							</div>
+							<h:outputLabel value="Observações: " />
+							<h:outputText
+								value="#{visualizaChecklistController.checklist.observacao}"
+								styleClass="form-control pr-3 d-flex justify-content-start" />
+							
 							<h:messages id="messages" infoStyle="color:green"
 								warnStyle="color:orange" errorStyle="color:red"
 								globalOnly="false" />
