@@ -36,7 +36,6 @@ public class IncidenteDAO extends DAO<Incidente> {
 			}
 			if (listaIncidente.isEmpty())
 				return null;
-			System.out.println(listaIncidente.toString());
 			return listaIncidente;
 		} catch (SQLException e) {
 			e.printStackTrace();

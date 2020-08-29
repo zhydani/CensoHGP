@@ -35,7 +35,6 @@ public class ProcedimentoDAO extends DAO<Procedimento> {
 			}
 			if (listaProcedimento.isEmpty())
 				return null;
-			System.out.println(listaProcedimento.toString());
 			return listaProcedimento;
 		} catch (SQLException e) {
 			e.printStackTrace();

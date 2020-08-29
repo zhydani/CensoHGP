@@ -148,13 +148,13 @@
 										skipDetailIfEqualsSummary="true" />
 
 									<p:dataTable value="#{buscaPacienteController.listaPaciente}"
-										var="obj" rows="5" styleClass="table" paginator="true"
+										var="obj" rows="10" styleClass="table" paginator="true"
 										resizableColumns="true"
 										style="margin-bottom:20px; font-size:15px;"
 										emptyMessage="Nenhum registro." paginatorAlwaysVisible="false"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
-										rowsPerPageTemplate="5,10,15">
+										rowsPerPageTemplate="10,15">
 
 										<f:facet name="header">
             						Resultado da Busca
@@ -227,7 +227,7 @@
 												<h:commandLink
 													action="#{buscaPacienteController.buscarChecklist(obj.idpaciente)}">
 													<h:graphicImage style="width: 25px" library="images"
-														value="editar" name="botao_excluir.png">
+														value="buscar" name="botao_buscar_checklist.png">
 													</h:graphicImage>
 													<f:ajax execute="formPrincipal"
 														render="formPrincipal:dataTable" />
@@ -237,7 +237,7 @@
 												<h:commandLink
 													action="#{buscaPacienteController.checklist(obj.idpaciente)}">
 													<h:graphicImage style="width: 25px" library="images"
-														value="editar" name="botao_checklist.png">
+														value="check" name="botao_gerar_checklist.png">
 													</h:graphicImage>
 													<f:ajax execute="formPrincipal"
 														render="formPrincipal:dataTable" />

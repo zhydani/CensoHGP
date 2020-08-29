@@ -36,7 +36,6 @@ public class FatorRiscoDAO extends DAO<FatorRisco> {
 			}
 			if (listaFatorRisco.isEmpty())
 				return null;
-			System.out.println(listaFatorRisco.toString());
 			return listaFatorRisco;
 		} catch (SQLException e) {
 			e.printStackTrace();

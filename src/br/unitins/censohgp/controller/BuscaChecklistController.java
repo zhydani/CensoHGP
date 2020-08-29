@@ -47,7 +47,6 @@ public class BuscaChecklistController implements Serializable {
 		if (listaChecklist == null)
 			listaChecklist = new ArrayList<Checklist>();
 		ChecklistDAO dao = new ChecklistDAO();
-		System.out.println(getPaciente().getIdpaciente());
 		listaChecklist = dao.findByIdPaciente(getPaciente().getIdpaciente());
 		dao.closeConnection();
 		return listaChecklist;

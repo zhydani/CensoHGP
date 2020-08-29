@@ -148,13 +148,13 @@
 										skipDetailIfEqualsSummary="true" />
 
 									<p:dataTable value="#{buscaPacienteController.listaPaciente}"
-										var="obj" rows="5" styleClass="table" paginator="true"
+										var="obj" rows="10" styleClass="table" paginator="true"
 										resizableColumns="true"
 										style="margin-bottom:20px; font-size:15px;"
 										emptyMessage="Nenhum registro." paginatorAlwaysVisible="false"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} encontrados"
-										rowsPerPageTemplate="5,10,15">
+										rowsPerPageTemplate="10,15">
 
 										<f:facet name="header">
             						Resultado da Busca

@@ -144,7 +144,6 @@ public class ChecklistDAO extends DAO<Checklist> {
 			}
 			if (listaChecklist.isEmpty())
 				return null;
-			System.out.println(listaChecklist.toString());
 			return listaChecklist;
 
 		} catch (SQLException e) {

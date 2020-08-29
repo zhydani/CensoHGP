@@ -34,9 +34,7 @@ public class visualizaChecklistController implements Serializable {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.keep("pacienteFlash");
 		checklist = (Checklist) flash.get("checklistFlash");
-		System.out.println("entrei no visualizar checklist");
-		System.out.println("id checklist:" + checklist.toString());
-	}
+		}
 
 	public List<Procedimento> getListaProcedimento() {
 		if (listaProcedimento == null) 
