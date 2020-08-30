@@ -120,9 +120,7 @@ public class TransferenciaDAO extends DAO<HistoricoTransferencia> {
 				aux.setIdTipoDeTransferencia(rs.getInt("idtipo_transferencia"));
 				aux.setIdLocalOrigem(rs.getInt("idlocal_origem"));
 				aux.setIdLocalDestino(rs.getInt("idlocal_destino"));
-				//tem q ter um campo para a data no objeto principal
-				//aux.setDataHora(rs.getDate("data_hora"));
-				//aux.set
+				aux.setDataHora(rs.getDate("data_hora").toLocalDate());
 				aux.setIdPaciente(rs.getInt("idpaciente"));
 				aux.setIdUsuario(rs.getInt("idusuario"));
 				aux.setObservasao(rs.getString("observacao"));
