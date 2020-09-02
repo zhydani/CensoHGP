@@ -58,7 +58,8 @@ public class HistoricoTransferenciaController implements Serializable  {
 					
 					
 					aux2 =dao1.findById2(historicoTransferencia.getIdLocalDestino());
-					if(aux2.getNomeDepartamento() == null) {
+					System.out.println(aux2.getNomeDepartamento()+" Nome dep");
+					if(aux2.getNomeDepartamento() == null || aux2.getNomeDepartamento().isEmpty()) {
 						aux1.setLocalDeDestino(aux2.getNomeHospital());
 					}else {
 						aux1.setLocalDeDestino(aux2.getNomeDepartamento());
@@ -83,7 +84,8 @@ public class HistoricoTransferenciaController implements Serializable  {
 					
 					
 					aux2 =dao1.findById2(historicoTransferencia.getIdLocalDestino());
-					if(aux2.getNomeDepartamento() == null) {
+					System.out.println(aux2.getNomeDepartamento()+" Nome dep");
+					if(aux2.getNomeDepartamento() == null || aux2.getNomeDepartamento().isEmpty()) {
 						aux1.setLocalDeDestino(aux2.getNomeHospital());
 					}else {
 						aux1.setLocalDeDestino(aux2.getNomeDepartamento());
@@ -92,7 +94,7 @@ public class HistoricoTransferenciaController implements Serializable  {
 					aux2 = new Departamento();
 					
 					aux2 =dao1.findById2(historicoTransferencia.getIdLocalOrigem());
-					if(aux2.getNomeDepartamento() == null) {
+					if(aux2.getNomeDepartamento() == null || aux2.getNomeDepartamento().isEmpty()) {
 						aux1.setLocalDeOrigem(aux2.getNomeHospital());
 					}else {
 						aux1.setLocalDeOrigem(aux2.getNomeDepartamento());

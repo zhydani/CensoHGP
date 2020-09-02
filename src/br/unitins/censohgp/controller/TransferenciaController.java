@@ -160,7 +160,7 @@ public class TransferenciaController implements Serializable {
 			hospitais = new ArrayList<String>();
 			for (Departamento dep : getDepartamento()) {
 				if (!(dep.getNomeDepartamento().isBlank() || dep.getNomeDepartamento().isEmpty())
-						&& dep.getAtivo().getValue() == 1) {
+						&& dep.getAtivo().getValue() == 0) {
 					hospitais.add(dep.getNomeDepartamento());
 				}
 			}
@@ -178,7 +178,7 @@ public class TransferenciaController implements Serializable {
 			getDepartamento();
 			for (Departamento dep : getDepartamento()) {
 				if ((dep.getNomeDepartamento().isBlank() || dep.getNomeDepartamento().isEmpty())
-						&& dep.getAtivo().getValue() == 1) {
+						&& dep.getAtivo().getValue() == 0) {
 					hospitais.add(dep.getNomeHospital());
 				}
 			}

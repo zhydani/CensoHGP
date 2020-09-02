@@ -87,7 +87,14 @@ public class BuscaPacienteController implements Serializable {
 		return "buscarchecklist.xhtml?faces-redirect=true";
 
 	}
-
+	public String historicoTransferencia(int idpaciente) {
+		PacienteDAO dao = new PacienteDAO();
+		paciente = dao.findById(idpaciente);
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.put("pacienteFlash", paciente);
+		
+		return "historicotransferencia.xhtml?faces-redirect=true";
+	}
 	public List<Paciente> getListaPaciente() {
 		if (listaBusca == null)
 			return listaPaciente;

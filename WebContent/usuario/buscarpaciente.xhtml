@@ -243,6 +243,17 @@
 														render="formPrincipal:dataTable" />
 												</h:commandLink>
 											</p:column>
+											
+											<p:column style="width:20px">
+												<h:commandLink
+													action="#{buscaPacienteController.historicoTransferencia(obj.idpaciente)}">
+													<h:graphicImage style="width: 25px" library="images"
+														value="editar" name="historicotransferencia.png">
+													</h:graphicImage>
+													<f:ajax execute="formPrincipal"
+														render="formPrincipal:dataTable" />
+												</h:commandLink>
+											</p:column>
 										</tbody>
 
 

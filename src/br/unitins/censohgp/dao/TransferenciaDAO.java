@@ -49,7 +49,7 @@ public class TransferenciaDAO extends DAO<HistoricoTransferencia> {
 			stat.execute();
 		} catch (SQLException e) {
 			System.out.println(e);
-			Util.addMessageError("erro banco de dados n�o foi possivel");
+			Util.addMessageError("Erro de banco de dados...");
 			// TODO: handle exception
 		}
 	}
@@ -77,7 +77,7 @@ public class TransferenciaDAO extends DAO<HistoricoTransferencia> {
 			stat.execute();
 		} catch (SQLException e) {
 			System.out.println(e);
-			Util.addMessageError("erro banco de dados n�o foi possivel");
+			Util.addMessageError("Erro de banco de dados...");
 			// TODO: handle exception
 		}
 	}

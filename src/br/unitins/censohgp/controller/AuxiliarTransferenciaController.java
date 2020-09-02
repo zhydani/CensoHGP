@@ -28,17 +28,17 @@ public class AuxiliarTransferenciaController {
 				dao.getConnection().commit();
 				dao2.updateTrasnferencia(idLocalDestino, idPaciente);
 				dao2.getConnection().commit();
-				Util.addMessageInfo("Operaï¿½ï¿½o realizada com sucesso.");
+				Util.addMessageInfo("Transferência realizada com sucesso.");
 			}else {
 			dao.create(trans);
 			dao.getConnection().commit();
 			dao2.updateTrasnferencia(idLocalDestino, idPaciente);
 			dao2.getConnection().commit();
-			Util.addMessageInfo("Operaï¿½ï¿½o realizada com sucesso.");
+			Util.addMessageInfo("Transferência realizada com sucesso.");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Util.addMessageError("nï¿½o foi possivel inserir");
+			Util.addMessageError("Erro ao realizar transferência.");
 			e.printStackTrace();
 		}
 	}
